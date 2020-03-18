@@ -325,10 +325,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 236b2b2635b687a428e485abb18a3361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 33
-  rows: 15
-  gridSizeX: 110
-  gridSizeZ: 80
+  columns: 25
+  rows: 25
+  gridSizeX: 100
+  gridSizeZ: 100
 --- !u!4 &755509486
 Transform:
   m_ObjectHideFlags: 0

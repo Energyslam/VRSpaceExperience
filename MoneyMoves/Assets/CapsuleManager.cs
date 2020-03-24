@@ -26,26 +26,35 @@ public class CapsuleManager : MonoBehaviour, IObserver
     }
     #endregion
 
+    [HideInInspector]
     public List<GameObject> capsules = new List<GameObject>();
+    [HideInInspector]
     public List<GameObject> dockingPlaces = new List<GameObject>();
+
+    [SerializeField]
+    private List<GameObject> idleCapsules = new List<GameObject>();
 
     private void Start()
     {
-        int newCapsule = Random.Range(0, capsules.Count);
+        for (int i = 0; i < dockingPlaces.Count; i++)
+        {
+            int newCapsule = Random.Range(0, idleCapsules.Count);
 
-        SendToPlayer(capsules[newCapsule], 0);
+            SendToPlayer(idleCapsules[newCapsule], i);
+        }
     }
 
     public void SendToPlayer(GameObject dockAble, int? dock)
     {
         Debug.LogError(dockAble.name + " + " + dock);
+        idleCapsules.Remove(dockAble);
         var dockingMovement = dockAble.GetComponent<CapsuleMovement>();
         dockingMovement.GoToPlayer(dock);
     }
 
     public void LeftPlayer(GameObject dockAble, int? dock)
     {
-        Destroy(dockAble);
+        // Destroy(dockAble);
 
         for (int i = 0; i < capsules.Count; i++)
         {
@@ -66,10 +75,12 @@ public class CapsuleManager : MonoBehaviour, IObserver
     public void AddObservable(GameObject observable)
     {
         capsules.Add(observable);
+        idleCapsules.Add(observable);
     }
 
     public void RemoveObservable(GameObject observable)
     {
         capsules.Remove(observable);
+        idleCapsules.Remove(observable);
     }
 }

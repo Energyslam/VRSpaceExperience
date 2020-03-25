@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CapsuleMovement : MonoBehaviour, IObservable
 {
@@ -9,12 +7,10 @@ public class CapsuleMovement : MonoBehaviour, IObservable
     [SerializeField]
     private uint speed;
 
-    [SerializeField]
     private Vector3 originalPosition, direction;
 
     public enum State { IDLE, MOVINGTODOCK, ATDOCK, LEAVINGDOCK };
 
-    [SerializeField]
     private State state = State.IDLE;
 
     public void Subscribe()
@@ -54,7 +50,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         if (transform.position == CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position && state == State.MOVINGTODOCK)
         {
             state = State.ATDOCK;
-            Invoke("Leave", Random.Range(1, 3));
+            Invoke("LeaveDock", Random.Range(5, 15));
         }
 
         transform.position = Vector3.MoveTowards(transform.position, CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position, speed * Time.deltaTime);
@@ -80,7 +76,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         state = State.MOVINGTODOCK;
     }
 
-    public void Leave()
+    public void LeaveDock()
     {
         state = State.LEAVINGDOCK;
         CapsuleManager._instance.RemoveObservable(gameObject);

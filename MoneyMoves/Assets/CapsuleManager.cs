@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CapsuleManager : MonoBehaviour, IObserver
@@ -28,9 +27,9 @@ public class CapsuleManager : MonoBehaviour, IObserver
 
     [HideInInspector]
     public List<GameObject> capsules = new List<GameObject>();
+    [HideInInspector]
     public List<GameObject> dockingPlaces = new List<GameObject>();
 
-    [SerializeField]
     private List<GameObject> idleCapsules = new List<GameObject>();
 
     private void Start()

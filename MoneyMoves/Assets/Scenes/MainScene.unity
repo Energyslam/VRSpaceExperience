@@ -670,7 +670,6 @@ MonoBehaviour:
   - {fileID: 1338481193}
   - {fileID: 1250777430}
   - {fileID: 303614123}
-  idleCapsules: []
 --- !u!4 &1144516464
 Transform:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
     [SerializeField]
     private uint speed;
 
+    [SerializeField]
     private Vector3 originalPosition, direction;
 
     public enum State { IDLE, MOVINGTODOCK, ATDOCK, LEAVINGDOCK };
@@ -22,7 +23,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
     }
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         Subscribe();
     }
@@ -53,6 +54,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         if (transform.position == CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position && state == State.MOVINGTODOCK)
         {
             state = State.ATDOCK;
+            Invoke("Leave", Random.Range(1, 3));
         }
 
         transform.position = Vector3.MoveTowards(transform.position, CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position, speed * Time.deltaTime);
@@ -76,14 +78,13 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         dockedAt = dock;
         originalPosition = transform.position;
         state = State.MOVINGTODOCK;
-        Invoke("Leave", 10f);
     }
 
     public void Leave()
     {
+        state = State.LEAVINGDOCK;
         CapsuleManager._instance.RemoveObservable(gameObject);
         CapsuleManager._instance.LeftPlayer(gameObject, dockedAt);
         dockedAt = null;
-        state = State.LEAVINGDOCK;
     }
 }

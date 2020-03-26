@@ -14,7 +14,7 @@ public class CapsuleAnimations : MonoBehaviour
 
     private void Start()
     {
-        closedPosition = transform.position;
+        closedPosition = transform.localPosition;
     }
 
     public void Animate(bool hasToOpen)

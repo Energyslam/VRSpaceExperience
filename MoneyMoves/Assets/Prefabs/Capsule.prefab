@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
+  shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   topCap: {fileID: 6728306134442229326}
   botCap: {fileID: 1706982496286563120}
 --- !u!114 &1706982496286563120

@@ -8,6 +8,9 @@ public class CapsuleMovement : MonoBehaviour, IObservable
     private uint speed;
 
     [SerializeField]
+    Shader shader;
+
+    [SerializeField]
     private CapsuleAnimations topCap, botCap;
 
     private Vector3 originalPosition, direction;
@@ -27,6 +30,10 @@ public class CapsuleMovement : MonoBehaviour, IObservable
     void Start()
     {
         Subscribe();
+        MaterialPropertyBlock material = new MaterialPropertyBlock();
+        material.SetColor("_BaseColor", Random.ColorHSV());
+        topCap.gameObject.GetComponent<Renderer>().SetPropertyBlock(material);
+        botCap.gameObject.GetComponent<Renderer>().SetPropertyBlock(material);
     }
 
     // Update is called once per frame
@@ -76,11 +83,6 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         direction = originalPosition - transform.position;
     }
 
-    private void OpenCloseAnimation()
-    {
-
-    }
-
     public void GoToPlayer(int? dock)
     {
         dockedAt = dock;
@@ -90,6 +92,8 @@ public class CapsuleMovement : MonoBehaviour, IObservable
 
     public void LeaveDock()
     {
+        topCap.Animate(false);
+        botCap.Animate(false);
         state = State.LEAVINGDOCK;
         CapsuleManager._instance.RemoveObservable(gameObject);
         CapsuleManager._instance.LeftPlayer(gameObject, dockedAt);

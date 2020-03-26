@@ -5,27 +5,33 @@ using UnityEngine;
 public class CapsuleAnimations : MonoBehaviour
 {
     [SerializeField]
-    private Vector3 openPosition;
+    private Animator animator;
 
     [SerializeField]
-    private float animationSpeed = 5;
-
-    private Vector3 closedPosition;
+    private float animationSpeed = 1;
 
     private void Start()
     {
-        closedPosition = transform.localPosition;
+        animator = GetComponent<Animator>();
     }
 
     public void Animate(bool hasToOpen)
     {
-        Vector3 newPosition;
+        float speed = hasToOpen ? animationSpeed : -animationSpeed;
 
-        newPosition = hasToOpen ? openPosition : closedPosition;
+        animator.SetTrigger("OpeningTrigger");
+        animator.speed = speed;
 
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, newPosition, animationSpeed / 100);
+        //Vector3 newPosition;
 
-        if (transform.localPosition != newPosition)
-            Animate(hasToOpen);
+        //newPosition = hasToOpen ? openPosition : closedPosition;
+
+        //transform.localPosition = Vector3.MoveTowards(transform.localPosition, newPosition, animationSpeed * Time.deltaTime);
+
+        //if (transform.localPosition != newPosition)
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //    StartCoroutine(Animate(hasToOpen));
+        //}
     }
 }

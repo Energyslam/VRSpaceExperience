@@ -63,12 +63,17 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         {
             state = State.ATDOCK;
             Invoke("LeaveDock", Random.Range(5, 15));
-            topCap.Animate(true);
-            botCap.Animate(true);
+            AnimateCapsule();
         }
 
         transform.position = Vector3.MoveTowards(transform.position, CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position, speed * Time.deltaTime);
         direction = CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position - transform.position;
+    }
+
+    private void AnimateCapsule()
+    {
+        topCap.Animate(false);
+        botCap.Animate(false);
     }
 
     private void MoveAwayFromDock()
@@ -92,8 +97,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
 
     public void LeaveDock()
     {
-        topCap.Animate(false);
-        botCap.Animate(false);
+        AnimateCapsule();
         state = State.LEAVINGDOCK;
         CapsuleManager._instance.RemoveObservable(gameObject);
         CapsuleManager._instance.LeftPlayer(gameObject, dockedAt);

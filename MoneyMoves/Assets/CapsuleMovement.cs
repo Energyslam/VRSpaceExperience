@@ -7,11 +7,16 @@ public class CapsuleMovement : MonoBehaviour, IObservable
     [SerializeField]
     private uint speed;
 
+    [SerializeField]
+    private CapsuleAnimations topCap, botCap;
+
     private Vector3 originalPosition, direction;
 
     public enum State { IDLE, MOVINGTODOCK, ATDOCK, LEAVINGDOCK };
 
     private State state = State.IDLE;
+
+    private bool isOpen = false;
 
     public void Subscribe()
     {
@@ -51,6 +56,8 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         {
             state = State.ATDOCK;
             Invoke("LeaveDock", Random.Range(5, 15));
+            topCap.Animate(true);
+            botCap.Animate(true);
         }
 
         transform.position = Vector3.MoveTowards(transform.position, CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position, speed * Time.deltaTime);
@@ -67,6 +74,11 @@ public class CapsuleMovement : MonoBehaviour, IObservable
 
         transform.position = Vector3.MoveTowards(transform.position, originalPosition, speed * Time.deltaTime);
         direction = originalPosition - transform.position;
+    }
+
+    private void OpenCloseAnimation()
+    {
+
     }
 
     public void GoToPlayer(int? dock)

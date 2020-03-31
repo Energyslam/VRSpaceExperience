@@ -13,6 +13,9 @@ public class CapsuleMovement : MonoBehaviour, IObservable
     [SerializeField]
     private CapsuleAnimations topCap;
 
+    [SerializeField]
+    private Renderer botCap;
+
     private Vector3 originalPosition, direction;
 
     public enum State { IDLE, MOVINGTODOCK, ATDOCK, LEAVINGDOCK };
@@ -32,6 +35,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         Subscribe();
         MaterialPropertyBlock material = new MaterialPropertyBlock();
         material.SetColor("_BaseColor", Random.ColorHSV());
+        botCap.SetPropertyBlock(material);
         topCap.gameObject.GetComponent<Renderer>().SetPropertyBlock(material);
     }
 
@@ -62,21 +66,11 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         {
             state = State.ATDOCK;
             Invoke("LeaveDock", Random.Range(5, 15));
-            OpenCapsule();
+            topCap.Animate(true); // Animation plays that opens the capsule
         }
 
         transform.position = Vector3.MoveTowards(transform.position, CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position, speed * Time.deltaTime);
         direction = CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position - transform.position;
-    }
-
-    private void OpenCapsule()
-    {
-        topCap.Animate(true);
-    }
-
-    private void CloseCapsule()
-    {
-        topCap.Animate(false);
     }
 
     private void MoveAwayFromDock()
@@ -100,7 +94,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
 
     public void LeaveDock()
     {
-        CloseCapsule();
+        topCap.Animate(false); // Animation plays that closes the capsule
         state = State.LEAVINGDOCK;
         CapsuleManager._instance.RemoveObservable(gameObject);
         CapsuleManager._instance.LeftPlayer(gameObject, dockedAt);

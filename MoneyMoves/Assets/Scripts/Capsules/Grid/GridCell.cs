@@ -7,8 +7,9 @@ public class GridCell : MonoBehaviour
     public int horizontal, vertical;
     public Color color;
 
-    private void Update()
+    private void OnDrawGizmos()
     {
-        Debug.DrawLine(transform.position, transform.position + new Vector3(0, 1, 0), color, 1000f);
+        Gizmos.color = color;
+        Gizmos.DrawCube(transform.position, transform.lossyScale);
     }
 }

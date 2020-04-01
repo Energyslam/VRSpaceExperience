@@ -1382,6 +1382,7 @@ GameObject:
   - component: {fileID: 1603923719}
   - component: {fileID: 1603923718}
   - component: {fileID: 1603923717}
+  - component: {fileID: 1603923721}
   m_Layer: 0
   m_Name: Playerplatform
   m_TagString: Untagged
@@ -1463,6 +1464,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1603923721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603923716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236b2b2635b687a428e485abb18a3361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  columns: 10
+  rows: 10
+  gridSizeX: 10
+  gridSizeZ: 10
+  scale: 1
+  DEBUGGING: 0
+  offset: {x: -5, y: 0, z: -5}
+  cellParent: {fileID: 1603923720}
 --- !u!1001 &1788971779
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class GridManager : MonoBehaviour
     public float[,] grid;
     private float verticalCellSize, horizontalCellSize;
     [Range(1.0f, 250)]
-    public uint columns, rows, gridSizeX, gridSizeZ, scale;
+    public uint columns = 10, rows = 10, gridSizeX = 10, gridSizeZ = 10, scale = 1;
 
     public bool DEBUGGING = false;
 
@@ -64,16 +64,17 @@ public class GridManager : MonoBehaviour
                 int j = cells[x].GetComponent<GridCell>().vertical;
                 cells[x].transform.position = new Vector3(i * horizontalCellSize + horizontalCellSize * 0.5f, 0f, j * verticalCellSize + verticalCellSize * 0.5f) + transform.position + offset;
 
-                float hor = i / columns * scale;
-                float ver = j / rows * scale;
-
-                float noise = Mathf.PerlinNoise(hor, ver);
-                // noise = Mathf.Round(noise * 2) / 2;
-                // Debug.LogError(noise);
-
-                Color color = new Color(noise, noise, noise);
-                cells[x].GetComponent<GridCell>().color = color;
+                cells[x].GetComponent<GridCell>().color = CalculateColor(i, j);
             }
         }
+    }
+
+    Color CalculateColor(int x, int y)
+    {
+        float xCoord = (float)x / (float)columns * (float)scale;
+        float yCoord = (float)y / (float)rows * (float)scale;
+
+        float sample = Mathf.PerlinNoise(xCoord, yCoord);
+        return new Color(sample, sample, sample);
     }
 }

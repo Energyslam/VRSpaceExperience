@@ -53,6 +53,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
                 MoveAwayFromDock();
                 break;
             case State.ATDOCK:
+                Docked();
                 break;
         }
 
@@ -83,6 +84,13 @@ public class CapsuleMovement : MonoBehaviour, IObservable
 
         transform.position = Vector3.MoveTowards(transform.position, originalPosition, speed * Time.deltaTime);
         direction = originalPosition - transform.position;
+    }
+
+    private void Docked()
+    {
+        // Look to middle
+        direction = CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.forward;
+        direction = new Vector3(direction.x, 0.0f, direction.z);
     }
 
     public void GoToPlayer(int? dock)

@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
 
+    public TextMeshProUGUI scoreAndLifeText;
+
+    public int lives = 3;
+    public int score = 0;
+
     [Header("Vibration settings")]
     public SteamVR_Action_Vibration hapticAction;
     public float duration, frequency;
@@ -28,10 +33,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AddScore(int scoreValue)
+    {
+        score += scoreValue;
+        UpdateText();
+        //TODO: CHeck for death later
+    }
+
+    public void UpdateText()
+    {
+        scoreAndLifeText.text = "Score: " + score + "\nLives: " + lives;
+    }
     /// <summary>
     /// Default vibration
     /// </summary>
-   public void VibrateControllers()
+    public void VibrateControllers()
     {
         try
         {

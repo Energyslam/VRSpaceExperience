@@ -10,6 +10,6 @@ public class GridCell : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = color;
-        Gizmos.DrawCube(transform.position, new Vector3(transform.parent.localScale.x * transform.localScale.x, transform.parent.localScale.y * transform.localScale.y, transform.parent.localScale.z * transform.localScale.z));
+        Gizmos.DrawCube(transform.position, transform.lossyScale);
     }
 }

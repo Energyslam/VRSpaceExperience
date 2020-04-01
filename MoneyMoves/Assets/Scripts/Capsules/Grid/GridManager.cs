@@ -7,12 +7,18 @@ public class GridManager : MonoBehaviour
     public float[,] grid;
     private float verticalCellSize, horizontalCellSize;
     [Range(1.0f, 250)]
-    public uint columns = 10, rows = 10, gridSizeX = 10, gridSizeZ = 10, scale = 1;
+    public uint columns = 10, rows = 10, gridSizeX = 10, gridSizeZ = 10;
+
+    [Range(1.0f, 50)]
+    public float scale = 1;
 
     public bool DEBUGGING = false;
 
     [SerializeField]
-    private Vector3 offset;
+    private Vector3 gridCellsOffset;
+
+    [SerializeField]
+    private Vector2 perlinNoiseOffset;
 
     [SerializeField]
     private Transform cellParent;
@@ -31,7 +37,7 @@ public class GridManager : MonoBehaviour
             for (int j = 0; j < rows; j++)
             {
                 GameObject gridCell = new GameObject(i + "+" + j);
-                gridCell.transform.position = new Vector3(i * horizontalCellSize + horizontalCellSize * 0.5f, 0f, j * verticalCellSize + verticalCellSize * 0.5f) + transform.position + offset;
+                gridCell.transform.position = new Vector3(i * horizontalCellSize + horizontalCellSize * 0.5f, 0f, j * verticalCellSize + verticalCellSize * 0.5f) + transform.position + gridCellsOffset;
                 gridCell.transform.parent = cellParent;
                 gridCell.tag = "Cell";
                 BoxCollider collider = gridCell.AddComponent<BoxCollider>();
@@ -62,7 +68,7 @@ public class GridManager : MonoBehaviour
             {
                 int i = cells[x].GetComponent<GridCell>().horizontal;
                 int j = cells[x].GetComponent<GridCell>().vertical;
-                cells[x].transform.position = new Vector3(i * horizontalCellSize + horizontalCellSize * 0.5f, 0f, j * verticalCellSize + verticalCellSize * 0.5f) + transform.position + offset;
+                cells[x].transform.position = new Vector3(i * horizontalCellSize + horizontalCellSize * 0.5f, 0f, j * verticalCellSize + verticalCellSize * 0.5f) + transform.position + gridCellsOffset;
 
                 cells[x].GetComponent<GridCell>().color = CalculateColor(i, j);
             }
@@ -71,10 +77,11 @@ public class GridManager : MonoBehaviour
 
     Color CalculateColor(int x, int y)
     {
-        float xCoord = (float)x / (float)columns * (float)scale;
-        float yCoord = (float)y / (float)rows * (float)scale;
+        float xCoord = (float)x / (float)columns * (float)scale + perlinNoiseOffset.x;
+        float yCoord = (float)y / (float)rows * (float)scale + perlinNoiseOffset.y;
 
         float sample = Mathf.PerlinNoise(xCoord, yCoord);
+        sample = Mathf.Round(sample * 2) / 2;
         return new Color(sample, sample, sample);
     }
 }

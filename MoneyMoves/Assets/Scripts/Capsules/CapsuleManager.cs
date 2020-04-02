@@ -38,18 +38,20 @@ public class CapsuleManager : MonoBehaviour, IObserver
         {
             int newCapsule = Random.Range(0, idleCapsules.Count);
 
-            SendToPlayer(idleCapsules[newCapsule], i);
+            SendCapsuleToDock(idleCapsules[newCapsule], i);
         }
     }
 
-    public void SendToPlayer(GameObject dockAble, int? dock)
+    // Grabs random idle Capsule from list and sends it to the dock
+    public void SendCapsuleToDock(GameObject dockAble, int? dock)
     {
         idleCapsules.Remove(dockAble);
         var dockingMovement = dockAble.GetComponent<CapsuleMovement>();
         dockingMovement.GoToPlayer(dock);
     }
 
-    public void LeftPlayer(GameObject dockAble, int? dock)
+    // Called by a Capsule. Informs the CapsuleManager that a docking spot is now open. 
+    public void CapsuleLeftDock(GameObject dockAble, int? dock)
     {
         for (int i = 0; i < idleCapsules.Count; i++)
         {
@@ -63,16 +65,18 @@ public class CapsuleManager : MonoBehaviour, IObserver
         {
             int newCapsule = Random.Range(0, idleCapsules.Count);
 
-            SendToPlayer(idleCapsules[newCapsule], dock);
+            SendCapsuleToDock(idleCapsules[newCapsule], dock);
         }
     }
 
+    // Add gameobject to lists of observables. Method from IObserver interface
     public void AddObservable(GameObject observable)
     {
         capsules.Add(observable);
         idleCapsules.Add(observable);
     }
 
+    // Removes gameobject from lists of observables. Method from IObserver interface
     public void RemoveObservable(GameObject observable)
     {
         capsules.Remove(observable);

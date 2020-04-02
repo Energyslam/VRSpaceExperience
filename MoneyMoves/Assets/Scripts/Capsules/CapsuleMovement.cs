@@ -24,6 +24,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
 
     private bool isOpen = false;
 
+    // Adds itself to lists in CapsuleManager singleton
     public void Subscribe()
     {
         CapsuleManager._instance.AddObservable(gameObject);
@@ -33,15 +34,12 @@ public class CapsuleMovement : MonoBehaviour, IObservable
     void Start()
     {
         Subscribe();
-        MaterialPropertyBlock material = new MaterialPropertyBlock();
-        material.SetColor("_BaseColor", Random.ColorHSV());
-        botCap.SetPropertyBlock(material);
-        topCap.gameObject.GetComponent<Renderer>().SetPropertyBlock(material);
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Decide how to move around
         switch (state)
         {
             case State.IDLE:
@@ -61,6 +59,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         transform.forward = direction;
     }
 
+    // Move capsule from start position to the dock
     private void MoveTowardsDock()
     {
         if (transform.position == CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position && state == State.MOVINGTODOCK)
@@ -74,6 +73,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         direction = CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position - transform.position;
     }
 
+    // Moves capsule away from dock back to start position
     private void MoveAwayFromDock()
     {
         if (transform.position == originalPosition && state == State.LEAVINGDOCK)
@@ -86,6 +86,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         direction = originalPosition - transform.position;
     }
 
+    // Makes capsule look towards the middle of the player platform
     private void Docked()
     {
         // Look to middle
@@ -93,6 +94,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         direction = new Vector3(direction.x, 0.0f, direction.z);
     }
 
+    // Change state to make capsule move to dock. Called from CapsuleManager
     public void GoToPlayer(int? dock)
     {
         dockedAt = dock;
@@ -100,12 +102,13 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         state = State.MOVINGTODOCK;
     }
 
+    // Capsule left the dock, called with an Invoke upon entering dock or when all content has been grabbed
     public void LeaveDock()
     {
         topCap.Animate(false); // Animation plays that closes the capsule
         state = State.LEAVINGDOCK;
         CapsuleManager._instance.RemoveObservable(gameObject);
-        CapsuleManager._instance.LeftPlayer(gameObject, dockedAt);
+        CapsuleManager._instance.CapsuleLeftDock(gameObject, dockedAt);
         dockedAt = null;
     }
 }

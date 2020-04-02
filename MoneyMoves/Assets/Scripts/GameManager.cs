@@ -10,16 +10,15 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
 
+    [SerializeField] GameObject deliverPoint;
+    public GameObject DeliverPoint { get { return deliverPoint; } }
+
     public TextMeshProUGUI scoreAndLifeText;
 
     public int lives = 3;
     public int score = 0;
 
-    [Header("Vibration settings")]
-    public SteamVR_Action_Vibration hapticAction;
-    public float duration, frequency;
-    [Range(0.0f, 1.0f)]
-    public float amplitude;
+
 
     void Awake()
     {
@@ -44,6 +43,13 @@ public class GameManager : MonoBehaviour
     {
         scoreAndLifeText.text = "Score: " + score + "\nLives: " + lives;
     }
+
+    #region Vibration
+    [Header("Vibration settings")]
+    public SteamVR_Action_Vibration hapticAction;
+    public float duration, frequency;
+    [Range(0.0f, 1.0f)]
+    public float amplitude;
     /// <summary>
     /// Default vibration
     /// </summary>
@@ -77,4 +83,5 @@ public class GameManager : MonoBehaviour
             Debug.Log("Hands not found");
         }
     }
+    #endregion
 }

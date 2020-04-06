@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateText()
     {
+        if (scoreAndLifeText != null)
         scoreAndLifeText.text = "Score: " + score + "\nLives: " + lives;
     }
 

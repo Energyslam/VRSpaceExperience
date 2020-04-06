@@ -59,7 +59,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         if (transform.position == CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position && state == State.MOVINGTODOCK)
         {
             state = State.ATDOCK;
-            Invoke("LeaveDock", Random.Range(5, 15));
+            Invoke("CloseDoors", Random.Range(5, 15));
             animationHandler.Animate(true); // Animation plays that opens the capsule
         }
 
@@ -99,10 +99,15 @@ public class CapsuleMovement : MonoBehaviour, IObservable
     // Capsule left the dock, called with an Invoke upon entering dock or when all content has been grabbed
     public void LeaveDock()
     {
-        animationHandler.Animate(false); // Animation plays that closes the capsule
         state = State.LEAVINGDOCK;
         CapsuleManager._instance.RemoveObservable(gameObject);
         CapsuleManager._instance.CapsuleLeftDock(gameObject, dockedAt);
         dockedAt = null;
+    }
+
+    private void CloseDoors()
+    {
+        animationHandler.Animate(false); // Animation plays that closes the capsule
+        Invoke("LeaveDock", 1.0f);
     }
 }

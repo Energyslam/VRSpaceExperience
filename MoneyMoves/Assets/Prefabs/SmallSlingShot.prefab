@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pullPoint: {fileID: 8372077820587847557}
-  lineMaterial: {fileID: 2100000, guid: 2f258c27bf0831c4fb0a79276c740cad, type: 2}
-  startWidth: 0.01
-  endWidth: 0.01
+  lineMaterial: {fileID: 2100000, guid: 35371e66513ec0d439ef95555671b2fe, type: 2}
+  startWidth: 0.03
+  endWidth: 0.03
 --- !u!1 &2681166178035181007
 GameObject:
   m_ObjectHideFlags: 0

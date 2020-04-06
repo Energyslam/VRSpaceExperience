@@ -24,7 +24,7 @@ public class PlaytestCapsule : MonoBehaviour
     int amountToSpawn;
 
     [SerializeField] float rotationSpeed;
-    [SerializeField] float respawnWaitTime = 1f;
+    [SerializeField] float respawnWaitTime = 2f;
     float newRotation;
 
     bool rotating;
@@ -57,12 +57,13 @@ public class PlaytestCapsule : MonoBehaviour
 
     IEnumerator CountdownTime()
     {
-        currentTime--;
         timeText.text = "Time Left: " + currentTime;
         yield return new WaitForSeconds(1f);
+        currentTime--;
+        timeText.text = "Time Left: " + currentTime;
         if (currentTime <= 0)
         {
-            timeText.text = "Fail! Gifts left: " + spawnedGifts.Count;
+            timeText.text = "Fail ! You didn't get all gifts";
             StartCoroutine(RespawnGifts());
         }
         else if (currentTime > 0)

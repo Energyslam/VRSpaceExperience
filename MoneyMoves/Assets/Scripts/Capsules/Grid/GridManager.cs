@@ -7,7 +7,9 @@ public class GridManager : MonoBehaviour
     public float[,] grid;
     private float verticalCellSize, horizontalCellSize;
     [Range(1.0f, 250)]
-    public uint columns = 10, rows = 10, gridSizeX = 10, gridSizeZ = 10;
+    public uint columns = 10, rows = 10;
+    [Range(1.0f, 250)]
+    public float gridSizeX = 10, gridSizeZ = 10;
 
     [Range(1.0f, 50)]
     public float scale = 1;
@@ -31,6 +33,7 @@ public class GridManager : MonoBehaviour
         horizontalCellSize = (float)gridSizeX / (float)columns;
         verticalCellSize = (float)gridSizeZ / (float)rows;
         grid = new float[columns, rows];
+        gridCellsOffset = new Vector3(-gridSizeX / 2, gridCellsOffset.y, -gridSizeZ / 2);
 
         for (int i = 0; i < columns; i++)
         {
@@ -47,6 +50,7 @@ public class GridManager : MonoBehaviour
                 GridCell cellInfo = gridCell.AddComponent<GridCell>();
                 cellInfo.horizontal = i;
                 cellInfo.vertical = j;
+                cellInfo.scale = new Vector3(horizontalCellSize, 0.1f, verticalCellSize);
 
                 float x = (float)i / columns * scale;
                 float y = (float)j / rows * scale;

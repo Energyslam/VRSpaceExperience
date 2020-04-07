@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.AI;
 
 public class PlaytestCapsule : MonoBehaviour
 {
@@ -22,33 +23,124 @@ public class PlaytestCapsule : MonoBehaviour
     int currentTime;
     int locationAmount;
     int amountToSpawn;
+    [SerializeField] int timesToOpen = 3;
+    public int timesOpened = 0;
 
     [SerializeField] float rotationSpeed;
     [SerializeField] float respawnWaitTime = 2f;
     float newRotation;
 
+    public bool available;
     bool rotating;
+    bool moving;
+
+    #region navmeshtesting
+
+    NavMeshAgent agent;
+    NavMeshObstacle obstacle;
+    GameObject destination;
+    Vector3 originalPosition;
+    public float textSpeed = 50f;
+
+    #endregion
 
     void Start()
     {
+        available = true;
+        originalPosition = this.transform.position;
         foreach (Transform t in locationParent.transform)
         {
             giftLocations.Add(t.gameObject);
         }
 
+        agent = this.GetComponentInParent<NavMeshAgent>();
+        obstacle = this.GetComponentInParent<NavMeshObstacle>();
+        agent.avoidancePriority = GameManager.Instance.AssignLowPriority();
+        GameManager.Instance.priority--;
         locationAmount = giftLocations.Count;
         amountToSpawn = locationAmount / 2;
-        SpawnGifts();
+        //SpawnGifts();
     }
 
     private void Update()
     {
+        UpdateAgent();
         if (rotating)
         {
             RotateCapsule(newRotation);
         }
+        timeText.transform.RotateAround(this.transform.position, Vector3.up, textSpeed * Time.deltaTime);
     }
 
+    void ResetVariables()
+    {
+        timesOpened = 0;
+        available = true;
+    }
+    void UpdateAgent()
+    {
+        if (!moving) return;
+        if (this.transform.position == agent.destination)
+        {
+            moving = false;
+            if (FastApproximately(agent.destination.x, originalPosition.x, 1f) && FastApproximately(agent.destination.z, originalPosition.z, 1f))
+            {
+                ResetVariables();
+            }
+            else
+            {
+                this.agent.enabled = false;
+                StartCoroutine(activateObstacle());
+                SpawnGifts();
+                //Rotatetoplayer, then open capsule
+                //GameObject tempObject = new GameObject();
+                //tempObject.transform.position = this.transform.position;
+                //tempObject.transform.LookAt(GameManager.Instance.player.transform.position);
+                //Debug.Log(tempObject.transform.localEulerAngles.y);
+                //Debug.Log(tempObject.transform.localEulerAngles.y + 180f);
+                //newRotation = tempObject.transform.localEulerAngles.y + 180f;
+                //rotating = true;
+            }
+        }
+    }
+    public void MoveToDestination()
+    {
+        moving = true;
+        available = false;
+        destination = GameManager.Instance.destinations[Random.Range(0, GameManager.Instance.destinations.Count)];
+        GameManager.Instance.destinations.Remove(destination);
+        agent.destination = destination.transform.position;
+    }
+
+    void MoveToOriginalPosition()
+    {
+        this.obstacle.enabled = false;
+        StartCoroutine(activateAgent());
+
+
+    }
+
+    IEnumerator activateObstacle()
+    {
+        Debug.Log("What");
+        yield return new WaitForSeconds(0.01f);
+        Debug.Log("The Frick");
+        obstacle.enabled = true;
+    }
+
+    IEnumerator activateAgent()
+    {
+        Debug.Log("Mister");
+        yield return new WaitForSeconds(0.01f);
+        Debug.Log("Agent");
+        agent.enabled = true;
+        agent.avoidancePriority = GameManager.Instance.AssignHighPriority();
+        moving = true;
+        GameManager.Instance.destinations.Add(destination);
+        agent.destination = originalPosition;
+        GameManager.Instance.MoveACapsule();
+
+    }
     void ManageTime()
     {
         currentTime = totalTime;
@@ -88,6 +180,7 @@ public class PlaytestCapsule : MonoBehaviour
         foreach(GameObject go in chosenLocations)
         {
             GameObject giftGO = Instantiate(destroyableGift, go.transform.position, Quaternion.identity);
+            giftGO.transform.parent = this.transform;
             giftGO.GetComponentInChildren<GiftBehaviour>().attachedCapsule = this;
             spawnedGifts.Add(giftGO);
         }
@@ -106,21 +199,31 @@ public class PlaytestCapsule : MonoBehaviour
         if (remainingGifts == 0)
         {
             timeText.text = "Good job!";
+            StopAllCoroutines();
             StartCoroutine(RespawnGifts());
         }
     }
     void OpenCapsule()
     {
+        timesOpened++;
         cheatPrevention.SetActive(false);
         capsuleAnim.SetFloat("Speed", 1f);
         capsuleAnim.SetTrigger("OpeningTrigger");
+        timeText.gameObject.SetActive(true);
     }
 
     IEnumerator CloseCapsule()
     {
+        timeText.gameObject.SetActive(false);
         capsuleAnim.SetFloat("Speed", -0.5f);
         capsuleAnim.SetTrigger("OpeningTrigger");
         yield return new WaitForSeconds(capsuleAnim.GetCurrentAnimatorStateInfo(0).length);// + capsuleAnim.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        if (timesOpened >= timesToOpen)
+        {
+            MoveToOriginalPosition();
+            yield break;
+        }
+        Debug.Log("Opening");
         SetNewRotation();
         rotating = true;
     }
@@ -148,15 +251,10 @@ public class PlaytestCapsule : MonoBehaviour
     void RotateCapsule(float toRotateTo)
     {
         this.transform.localEulerAngles = new Vector3(0f, Mathf.Lerp(this.transform.localEulerAngles.y, toRotateTo, rotationSpeed * Time.deltaTime), 0f);
-        if (Mathf.Approximately(this.transform.localEulerAngles.y, toRotateTo))
-        {
-            rotating = false;
-            OpenCapsule();
-        }
         if (FastApproximately(this.transform.localEulerAngles.y, toRotateTo, 10f))
         {
             rotating = false;
-            SpawnGifts();
+            SpawnGifts(); //CC
         }
     }
 

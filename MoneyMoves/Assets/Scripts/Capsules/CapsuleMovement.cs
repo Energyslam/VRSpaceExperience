@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class CapsuleMovement : MonoBehaviour, IObservable
 {
@@ -8,7 +10,16 @@ public class CapsuleMovement : MonoBehaviour, IObservable
     private uint speed;
 
     [SerializeField]
-    private CapsuleAnimations animationHandler;
+    List<float> distances = new List<float>();
+
+    [SerializeField]
+    private GameObject player;
+
+    [SerializeField]
+    private int doorsToOpenAtOnce = 1;
+
+    [SerializeField]
+    private List<CapsuleAnimations> animationHandlers;
 
     private Vector3 originalPosition, direction;
 
@@ -60,7 +71,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         {
             state = State.ATDOCK;
             Invoke("CloseDoors", Random.Range(5, 15));
-            animationHandler.Animate(true); // Animation plays that opens the capsule
+            CalculateNearestDoors(true); // Animation plays that opens the capsule
         }
 
         transform.position = Vector3.MoveTowards(transform.position, CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position, speed * Time.deltaTime);
@@ -78,6 +89,40 @@ public class CapsuleMovement : MonoBehaviour, IObservable
 
         transform.position = Vector3.MoveTowards(transform.position, originalPosition, speed * Time.deltaTime);
         direction = originalPosition - transform.position;
+    }
+
+    private void CalculateNearestDoors(bool hasToOpen)
+    {
+        for (int i = 0; i < animationHandlers.Count; i++)
+        {
+            distances.Add(Vector3.Distance(player.transform.position, animationHandlers[i].transform.position));
+        }
+
+        List<float> smallestDistances = new List<float>();
+
+        for (int i = 0; i <= doorsToOpenAtOnce - 1; i++)
+        {
+            smallestDistances.Add(1000.0f);
+        }
+
+        for (int i = 0; i < distances.Count; i++)
+        {
+            Foo: 
+            for (int j = 0; j < smallestDistances.Count; j++)
+            {
+                if (distances[i] < smallestDistances[j])
+                {
+                    smallestDistances[j] = distances[i];
+                    animationHandlers[i].Animate(hasToOpen);
+                    j++;
+                    goto Foo;
+                }
+                j++;
+            }
+            i++;
+        }
+
+       // animationHandlers.OrderBy();
     }
 
     // Makes capsule look towards the middle of the player platform
@@ -107,7 +152,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
 
     private void CloseDoors()
     {
-        animationHandler.Animate(false); // Animation plays that closes the capsule
+        CalculateNearestDoors(false); // Animation plays that closes the capsule
         Invoke("LeaveDock", 1.0f);
     }
 }

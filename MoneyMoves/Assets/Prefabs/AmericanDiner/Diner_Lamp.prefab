@@ -80,7 +80,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -101,6 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5924076579048467841}
+  - component: {fileID: 8921701699515073747}
   m_Layer: 0
   m_Name: Diner_Lamp
   m_TagString: Untagged
@@ -124,6 +125,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &8921701699515073747
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7236675034124902290}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.06
+  m_Center: {x: 0, y: -0.07, z: 0}
 --- !u!1 &7321297487439851779
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,6 +230,7 @@ GameObject:
   - component: {fileID: 8098920723710710969}
   - component: {fileID: 4943354471065466105}
   - component: {fileID: 7960081917624018465}
+  - component: {fileID: 7524695075112671279}
   m_Layer: 0
   m_Name: Kabel
   m_TagString: Untagged
@@ -231,8 +246,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8525032892332388615}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.9802322e-10, y: 1.036, z: 1.4901161e-10}
-  m_LocalScale: {x: 1, y: 7.4494553, z: 1}
+  m_LocalPosition: {x: -0.001, y: 0.6611, z: 0.001}
+  m_LocalScale: {x: 1, y: 4.8671136, z: 1}
   m_Children: []
   m_Father: {fileID: 5924076579048467841}
   m_RootOrder: 0
@@ -284,3 +299,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &7524695075112671279
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8525032892332388615}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1471383629854610319, guid: 323785a0ae0fa8f4b91bd71ae4da072d, type: 3}

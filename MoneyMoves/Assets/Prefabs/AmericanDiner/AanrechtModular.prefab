@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 8078960084308845246}
   - component: {fileID: 956238508522395784}
   - component: {fileID: 6807670980321551473}
+  - component: {fileID: 767598282948287320}
+  - component: {fileID: 5497401869840968310}
+  - component: {fileID: 608877349873682156}
   m_Layer: 0
   m_Name: AanrechtModular
   m_TagString: Untagged
@@ -82,3 +85,42 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &767598282948287320
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5063561918130622637}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.099999994, y: 0.36250007, z: 0.03803408}
+  m_Center: {x: 0, y: 0, z: 0.0638026}
+--- !u!65 &5497401869840968310
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5063561918130622637}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.099999994, y: 0.013002723, z: 0.058164537}
+  m_Center: {x: 0, y: 0.17474875, z: 0.07716772}
+--- !u!65 &608877349873682156
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5063561918130622637}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.099999994, y: 0.042131655, z: 0.050357126}
+  m_Center: {x: 0, y: 0.06947765, z: 0.025210608}

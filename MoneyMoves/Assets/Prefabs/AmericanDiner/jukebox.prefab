@@ -318,6 +318,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1688156858285692564}
+  - component: {fileID: 150725773204752169}
+  - component: {fileID: 7578328465440626137}
   m_Layer: 0
   m_Name: jukebox
   m_TagString: Untagged
@@ -333,7 +335,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2393329427302114439}
   m_LocalRotation: {x: 7.87548e-17, y: 0.34906498, z: -3.60067e-17, w: -0.9370985}
-  m_LocalPosition: {x: -0, y: 0.051, z: 0}
+  m_LocalPosition: {x: -0, y: 0.0891, z: -0}
   m_LocalScale: {x: 15.329495, y: 15.329495, z: 15.329495}
   m_Children:
   - {fileID: 1772171327828803430}
@@ -341,6 +343,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -40.86, z: 0}
+--- !u!65 &150725773204752169
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2393329427302114439}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.008, y: 0.009, z: 0.006}
+  m_Center: {x: 0, y: 0.004, z: 0.0015}
+--- !u!136 &7578328465440626137
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2393329427302114439}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.0037893765
+  m_Height: 0.007578753
+  m_Direction: 1
+  m_Center: {x: 0.000058349775, y: 0.008360258, z: 0.0016039698}
 --- !u!1 &2688045775826874441
 GameObject:
   m_ObjectHideFlags: 0

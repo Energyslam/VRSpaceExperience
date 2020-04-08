@@ -28,9 +28,9 @@ GameObject:
   - component: {fileID: 5035224685834082480}
   - component: {fileID: 706674950290498676}
   - component: {fileID: 3490557014214939241}
-  - component: {fileID: -2350670223361198665}
+  - component: {fileID: 2866644743414076550}
   m_Layer: 0
-  m_Name: GrabbableCadeautje
+  m_Name: DestroyableGift
   m_TagString: Collideable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3782659753171893661}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.8064175, y: 2.337532, z: -0.04260242}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4424466681498682116}
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf052267c319d14fa6d631c5064441b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabbable: 1
+  grabbable: 0
   speed: 5
   fireworkGO: {fileID: 4424466681498197796}
   grabber: {fileID: 2842588472507958378}
@@ -148,7 +148,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!95 &-2350670223361198665
+--- !u!95 &2866644743414076550
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0

@@ -2128,6 +2128,11 @@ PrefabInstance:
       propertyPath: rotateText
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8818204573176509199, guid: dcbc7cba37c332b428b8f3549fdba5a0,
+        type: 3}
+      propertyPath: flickerLights
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8818204573217445608, guid: dcbc7cba37c332b428b8f3549fdba5a0,
         type: 3}
       propertyPath: m_Name
@@ -2728,6 +2733,11 @@ PrefabInstance:
     - target: {fileID: 8818204573176509199, guid: dcbc7cba37c332b428b8f3549fdba5a0,
         type: 3}
       propertyPath: giftType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8818204573176509199, guid: dcbc7cba37c332b428b8f3549fdba5a0,
+        type: 3}
+      propertyPath: flickerLights
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8818204573217445608, guid: dcbc7cba37c332b428b8f3549fdba5a0,

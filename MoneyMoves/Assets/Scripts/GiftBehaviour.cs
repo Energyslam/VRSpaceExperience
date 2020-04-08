@@ -7,10 +7,12 @@ public class GiftBehaviour : ICollisionBehaviour
     [SerializeField] bool grabbable;
     [SerializeField] float speed = 1f;
     [SerializeField] GameObject fireworkGO, grabber, deliverPoint;
+    public PlaytestCapsule attachedCapsule;
     bool canMove;
     void Start()
     {
         deliverPoint = GameManager.Instance.DeliverPoint;
+        this.GetComponent<Animator>().SetFloat("BobSpeed", Random.Range(0.5f, 1f));
     }
 
     // Update is called once per frame
@@ -40,12 +42,17 @@ public class GiftBehaviour : ICollisionBehaviour
         {
             fireworkGO.SetActive(true);
             fireworkGO.transform.parent = null;
+            attachedCapsule.UpdateGifts(transform.parent.gameObject);
             Destroy(this.gameObject);
             GameManager.Instance.AddScore(10);
         }
         else if (grabbable)
         {
+            this.GetComponent<Animator>().enabled = false;
             grabber.SetActive(true);
+            attachedCapsule.UpdateGifts(transform.parent.gameObject);
+            GameManager.Instance.AddScore(10);
+            Destroy(this.gameObject, 10f);
         }
     }
 }

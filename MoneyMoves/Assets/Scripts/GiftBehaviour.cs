@@ -48,9 +48,11 @@ public class GiftBehaviour : ICollisionBehaviour
         }
         else if (grabbable)
         {
+            this.GetComponent<Animator>().enabled = false;
             grabber.SetActive(true);
             attachedCapsule.UpdateGifts(transform.parent.gameObject);
             GameManager.Instance.AddScore(10);
+            Destroy(this.gameObject, 10f);
         }
     }
 }

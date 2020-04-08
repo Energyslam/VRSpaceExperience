@@ -31,8 +31,11 @@ public class PlaytestCapsule : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] float respawnWaitTime = 2f;
     float newRotation;
+    float textStartingY;
 
     public bool available;
+    public bool rotateText = true;
+    public bool flickerLights;
     bool rotating;
     bool moving;
 
@@ -54,6 +57,7 @@ public class PlaytestCapsule : MonoBehaviour
 
     void Start()
     {
+        textStartingY = timeText.transform.position.y;
         available = true;
         originalPosition = this.transform.position;
         foreach (Transform t in locationParent.transform)
@@ -77,7 +81,10 @@ public class PlaytestCapsule : MonoBehaviour
         {
             RotateCapsule(newRotation);
         }
-        timeText.transform.RotateAround(this.transform.position, Vector3.up, textSpeed * Time.deltaTime);
+        if (rotateText)
+        {
+            timeText.transform.RotateAround(this.transform.position, Vector3.up, textSpeed * Time.deltaTime);
+        }
     }
 
     void ResetVariables()
@@ -230,9 +237,29 @@ public class PlaytestCapsule : MonoBehaviour
         cheatPrevention.SetActive(false);
         capsuleAnim.SetFloat("Speed", 1f);
         capsuleAnim.SetTrigger("OpeningTrigger");
-        yield return new WaitForSeconds(capsuleAnim.GetCurrentAnimatorStateInfo(0).length);
+        //Calculate distance, set it to opposite of player, rotate towards player
+        if (!rotateText)
+        {
+            Vector3 textToCapsule = this.transform.position - timeText.transform.position;
+            float textDistance = textToCapsule.magnitude;
+            Vector3 playerToCapsule = this.transform.position - GameManager.Instance.player.transform.position;
+            timeText.transform.position = this.transform.position + (playerToCapsule.normalized * textDistance);
+            timeText.transform.LookAt(GameManager.Instance.player.transform);
+            timeText.transform.localEulerAngles += new Vector3(0f, 180f, 0f);
+            timeText.transform.position = new Vector3(timeText.transform.position.x, textStartingY, timeText.transform.position.z);
+        }
         timeText.gameObject.SetActive(true);
-        light.FlickerLights();
+        if(!flickerLights)
+        {
+            light.TurnOnLight();
+        }
+        yield return new WaitForSeconds(capsuleAnim.GetCurrentAnimatorStateInfo(0).length);
+        if (flickerLights)
+        {
+            light.FlickerLights();
+        }
+
+
     }
 
     IEnumerator CloseCapsule()

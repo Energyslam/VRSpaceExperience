@@ -7,6 +7,8 @@ public class CapsuleAnimations : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    public GameObject distancePivot;
+
     [SerializeField]
     private float animationSpeed = 1;
 

@@ -27,7 +27,7 @@ public class CapsuleManager : MonoBehaviour, IObserver
 
     [HideInInspector]
     public List<GameObject> capsules = new List<GameObject>();
-    [HideInInspector]
+
     public List<GameObject> dockingPlaces = new List<GameObject>();
 
     private List<GameObject> idleCapsules = new List<GameObject>();

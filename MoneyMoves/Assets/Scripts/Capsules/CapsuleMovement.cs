@@ -30,7 +30,6 @@ public class CapsuleMovement : MonoBehaviour, IObservable
 
     private bool isOpen = false;
 
-    [SerializeField]
     private List<CapsuleAnimations> openDoors = new List<CapsuleAnimations>();
 
     // Adds itself to lists in CapsuleManager singleton
@@ -105,7 +104,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
 
             for (int i = 0; i < clonedAnimations.Count; i++)
             {
-                distances.Add((clonedAnimations[i].transform.position - player.transform.position).sqrMagnitude);
+                distances.Add((clonedAnimations[i].distancePivot.transform.position - player.transform.position).sqrMagnitude);
             }
 
             for (int i = 0; i < doorsToOpenAtOnce; i++)

@@ -30,6 +30,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
 
     private bool isOpen = false;
 
+    [SerializeField]
     private List<CapsuleAnimations> openDoors = new List<CapsuleAnimations>();
 
     // Adds itself to lists in CapsuleManager singleton
@@ -126,6 +127,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
             }
             openDoors.Clear();
         }
+        distances.Clear();
     }
 
     // Makes capsule look towards the middle of the player platform

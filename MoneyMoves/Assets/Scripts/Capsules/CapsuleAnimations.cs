@@ -18,7 +18,5 @@ public class CapsuleAnimations : MonoBehaviour
         animator.SetFloat("Speed", speed);
 
         animator.SetTrigger("OpeningTrigger");
-
-        // animator.SetBool("hasToOpen", hasToOpen);
     }
 }

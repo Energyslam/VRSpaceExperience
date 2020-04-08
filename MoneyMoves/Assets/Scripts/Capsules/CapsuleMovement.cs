@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -29,6 +30,9 @@ public class CapsuleMovement : MonoBehaviour, IObservable
 
     private bool isOpen = false;
 
+    [SerializeField]
+    private List<CapsuleAnimations> openDoors = new List<CapsuleAnimations>();
+
     // Adds itself to lists in CapsuleManager singleton
     public void Subscribe()
     {
@@ -48,6 +52,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         switch (state)
         {
             case State.IDLE:
+                direction = transform.forward;
                 break;
             case State.MOVINGTODOCK:
                 MoveTowardsDock();
@@ -71,7 +76,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         {
             state = State.ATDOCK;
             Invoke("CloseDoors", Random.Range(5, 15));
-            CalculateNearestDoors(true); // Animation plays that opens the capsule
+            StartCoroutine(CalculateNearestDoors());
         }
 
         transform.position = Vector3.MoveTowards(transform.position, CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position, speed * Time.deltaTime);
@@ -91,44 +96,43 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         direction = originalPosition - transform.position;
     }
 
-    private void CalculateNearestDoors(bool hasToOpen)
+    private IEnumerator CalculateNearestDoors()
     {
-        for (int i = 0; i < animationHandlers.Count; i++)
+        yield return new WaitForSeconds(0.1f);
+        if (openDoors.Count <= 0) // No doors are open, open closest doors 
         {
-            distances.Add(Vector3.Distance(player.transform.position, animationHandlers[i].transform.position));
-        }
+            List<CapsuleAnimations> clonedAnimations = new List<CapsuleAnimations>(animationHandlers);
 
-        List<float> smallestDistances = new List<float>();
-
-        for (int i = 0; i <= doorsToOpenAtOnce - 1; i++)
-        {
-            smallestDistances.Add(1000.0f);
-        }
-
-        for (int i = 0; i < distances.Count; i++)
-        {
-            Foo: 
-            for (int j = 0; j < smallestDistances.Count; j++)
+            for (int i = 0; i < clonedAnimations.Count; i++)
             {
-                if (distances[i] < smallestDistances[j])
-                {
-                    smallestDistances[j] = distances[i];
-                    animationHandlers[i].Animate(hasToOpen);
-                    j++;
-                    goto Foo;
-                }
-                j++;
+                distances.Add((clonedAnimations[i].transform.position - player.transform.position).sqrMagnitude);
             }
-            i++;
-        }
 
-       // animationHandlers.OrderBy();
+            for (int i = 0; i < doorsToOpenAtOnce; i++)
+            {
+                float minimum = distances.Min();
+
+                int index = distances.IndexOf(minimum);
+                clonedAnimations[index].Animate(true);
+                openDoors.Add(clonedAnimations[index]);
+                clonedAnimations.RemoveAt(index);
+                distances.RemoveAt(index);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < openDoors.Count; i++)
+            {
+                openDoors[i].Animate(false);
+            }
+            openDoors.Clear();
+        }
     }
 
     // Makes capsule look towards the middle of the player platform
     private void Docked()
     {
-        // Look to middle
+        // Look to middle, without rotating the y axis
         direction = CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.forward;
         direction = new Vector3(direction.x, 0.0f, direction.z);
     }
@@ -152,7 +156,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
 
     private void CloseDoors()
     {
-        CalculateNearestDoors(false); // Animation plays that closes the capsule
+        StartCoroutine(CalculateNearestDoors()); // Animation plays that closes the capsule
         Invoke("LeaveDock", 1.0f);
     }
 }

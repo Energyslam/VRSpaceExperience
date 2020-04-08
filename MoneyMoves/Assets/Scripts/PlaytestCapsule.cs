@@ -19,6 +19,8 @@ public class PlaytestCapsule : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI timeText;
 
+    [SerializeField] LightFlicker light;
+
     [SerializeField] int totalTime = 15;
     int currentTime;
     int locationAmount;
@@ -34,6 +36,12 @@ public class PlaytestCapsule : MonoBehaviour
     bool rotating;
     bool moving;
 
+    enum GiftType
+    {
+        Destroyable,
+        Collectable
+    }
+    [SerializeField]GiftType giftType = GiftType.Destroyable;
     #region navmeshtesting
 
     NavMeshAgent agent;
@@ -144,6 +152,7 @@ public class PlaytestCapsule : MonoBehaviour
     void ManageTime()
     {
         currentTime = totalTime;
+        timeText.color = Color.white;
         StartCoroutine(CountdownTime());
     }
 
@@ -155,6 +164,7 @@ public class PlaytestCapsule : MonoBehaviour
         timeText.text = "Time Left: " + currentTime;
         if (currentTime <= 0)
         {
+            timeText.color = Color.red;
             timeText.text = "Fail ! You didn't get all gifts";
             StartCoroutine(RespawnGifts());
         }
@@ -179,13 +189,23 @@ public class PlaytestCapsule : MonoBehaviour
         }
         foreach(GameObject go in chosenLocations)
         {
-            GameObject giftGO = Instantiate(destroyableGift, go.transform.position, Quaternion.identity);
-            giftGO.transform.parent = this.transform;
-            giftGO.GetComponentInChildren<GiftBehaviour>().attachedCapsule = this;
-            spawnedGifts.Add(giftGO);
+            if (giftType == GiftType.Destroyable)
+            {
+                GameObject giftGO = Instantiate(destroyableGift, go.transform.position, Quaternion.identity);
+                giftGO.transform.parent = this.transform;
+                giftGO.GetComponentInChildren<GiftBehaviour>().attachedCapsule = this;
+                spawnedGifts.Add(giftGO);
+            }
+            else if (giftType == GiftType.Collectable)
+            {
+                GameObject giftGO = Instantiate(grabbableGift, go.transform.position, Quaternion.identity);
+                giftGO.transform.parent = this.transform;
+                giftGO.GetComponentInChildren<GiftBehaviour>().attachedCapsule = this;
+                spawnedGifts.Add(giftGO);
+            }
         }
         ManageTime();
-        OpenCapsule();
+        StartCoroutine(OpenCapsule());
     }
 
     public void UpdateGifts(GameObject gift)
@@ -198,22 +218,26 @@ public class PlaytestCapsule : MonoBehaviour
         }
         if (remainingGifts == 0)
         {
+            timeText.color = Color.green;
             timeText.text = "Good job!";
             StopAllCoroutines();
             StartCoroutine(RespawnGifts());
         }
     }
-    void OpenCapsule()
+    IEnumerator OpenCapsule()
     {
         timesOpened++;
         cheatPrevention.SetActive(false);
         capsuleAnim.SetFloat("Speed", 1f);
         capsuleAnim.SetTrigger("OpeningTrigger");
+        yield return new WaitForSeconds(capsuleAnim.GetCurrentAnimatorStateInfo(0).length);
         timeText.gameObject.SetActive(true);
+        light.FlickerLights();
     }
 
     IEnumerator CloseCapsule()
     {
+        light.TurnOffLight();
         timeText.gameObject.SetActive(false);
         capsuleAnim.SetFloat("Speed", -0.5f);
         capsuleAnim.SetTrigger("OpeningTrigger");

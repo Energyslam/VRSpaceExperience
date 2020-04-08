@@ -2199,19 +2199,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 17013495}
     m_Modifications:
-    - target: {fileID: 1818987018194865568, guid: dcbc7cba37c332b428b8f3549fdba5a0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8818204572725437424, guid: dcbc7cba37c332b428b8f3549fdba5a0,
-        type: 3}
-      propertyPath: m_Speed
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8818204573176509199, guid: dcbc7cba37c332b428b8f3549fdba5a0,
         type: 3}
-      propertyPath: timesToOpen
+      propertyPath: giftType
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8818204573217445608, guid: dcbc7cba37c332b428b8f3549fdba5a0,

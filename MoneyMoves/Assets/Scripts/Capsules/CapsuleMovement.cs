@@ -33,6 +33,11 @@ public class CapsuleMovement : MonoBehaviour, IObservable
     [SerializeField]
     private List<CapsuleAnimations> openDoors = new List<CapsuleAnimations>();
 
+    [SerializeField]
+    private AudioSource jukeBox;
+
+    public float audioLerpSpeed;
+
     // Adds itself to lists in CapsuleManager singleton
     public void Subscribe()
     {
@@ -80,6 +85,10 @@ public class CapsuleMovement : MonoBehaviour, IObservable
             if (!CapsuleManager._instance.dockingPlaces[(int)dockedAt].GetComponent<LookToMiddle>().straightAngle)
             {
                 doorsToOpenAtOnce = 2;
+                jukeBox.time = CapsuleManager._instance.timeInSong;
+                jukeBox.volume = 0.0f;
+                StartCoroutine(FadeInVolume());
+                jukeBox.Play();
             }
 
             StartCoroutine(CalculateNearestDoors());
@@ -87,6 +96,17 @@ public class CapsuleMovement : MonoBehaviour, IObservable
 
         transform.position = Vector3.MoveTowards(transform.position, CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position, speed * Time.deltaTime);
         direction = CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position - transform.position;
+    }
+
+    private IEnumerator FadeInVolume()
+    {
+        jukeBox.volume += audioLerpSpeed;
+        yield return new WaitForSeconds(0.02f);
+
+        if (jukeBox.volume < 0.1f)
+        {
+            StartCoroutine(FadeInVolume());
+        }
     }
 
     // Moves capsule away from dock back to start position
@@ -125,16 +145,29 @@ public class CapsuleMovement : MonoBehaviour, IObservable
                 distances.RemoveAt(index);
             }
         }
-        else
+        else // Close open doors
         {
+            if (openDoors.Count > 1)
+            {
+                Invoke("StopMusic", 5.5f);   
+            }
+
             for (int i = 0; i < openDoors.Count; i++)
             {
                 openDoors[i].Animate(false);
             }
+
             openDoors.Clear();
         }
+
         distances.Clear();
         doorsToOpenAtOnce = 1;
+    }
+
+    private void StopMusic()
+    {
+        CapsuleManager._instance.timeInSong = jukeBox.time;
+        jukeBox.Stop();
     }
 
     // Makes capsule look towards the middle of the player platform

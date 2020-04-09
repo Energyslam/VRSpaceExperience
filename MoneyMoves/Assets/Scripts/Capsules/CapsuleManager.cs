@@ -32,6 +32,8 @@ public class CapsuleManager : MonoBehaviour, IObserver
 
     private List<GameObject> idleCapsules = new List<GameObject>();
 
+    public float timeInSong = 0.0f;
+
     private void Start()
     {
         for (int i = 0; i < dockingPlaces.Count; i++)

@@ -76,6 +76,12 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         {
             state = State.ATDOCK;
             Invoke("CloseDoors", Random.Range(5, 15));
+
+            if (!CapsuleManager._instance.dockingPlaces[(int)dockedAt].GetComponent<LookToMiddle>().straightAngle)
+            {
+                doorsToOpenAtOnce = 2;
+            }
+
             StartCoroutine(CalculateNearestDoors());
         }
 
@@ -128,6 +134,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
             openDoors.Clear();
         }
         distances.Clear();
+        doorsToOpenAtOnce = 1;
     }
 
     // Makes capsule look towards the middle of the player platform

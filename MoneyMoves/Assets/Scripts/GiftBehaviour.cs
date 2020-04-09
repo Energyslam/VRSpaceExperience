@@ -42,7 +42,11 @@ public class GiftBehaviour : ICollisionBehaviour
         {
             fireworkGO.SetActive(true);
             fireworkGO.transform.parent = null;
-            attachedCapsule.UpdateGifts(transform.parent.gameObject);
+            Destroy(fireworkGO, 3f);
+            if(attachedCapsule != null)
+            {
+                attachedCapsule.UpdateGifts(transform.parent.gameObject);
+            }
             Destroy(this.gameObject);
             GameManager.Instance.AddScore(10);
         }
@@ -50,7 +54,15 @@ public class GiftBehaviour : ICollisionBehaviour
         {
             this.GetComponent<Animator>().enabled = false;
             grabber.SetActive(true);
-            attachedCapsule.UpdateGifts(transform.parent.gameObject);
+            if (attachedCapsule != null)
+            {
+                attachedCapsule.UpdateGifts(transform.parent.gameObject);
+            }
+            BoxCollider col = this.GetComponent<BoxCollider>();
+            if (col != null)
+            {
+                col.enabled = false;
+            }
             GameManager.Instance.AddScore(10);
             Destroy(this.gameObject, 10f);
         }

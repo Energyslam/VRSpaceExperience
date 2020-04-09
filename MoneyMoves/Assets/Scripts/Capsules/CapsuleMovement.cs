@@ -80,7 +80,7 @@ public class CapsuleMovement : MonoBehaviour, IObservable
         if (transform.position == CapsuleManager._instance.dockingPlaces[(int)dockedAt].transform.position && state == State.MOVINGTODOCK)
         {
             state = State.ATDOCK;
-            Invoke("CloseDoors", Random.Range(5, 15));
+            Invoke("CloseDoors", Random.Range(10, 25));
 
             if (!CapsuleManager._instance.dockingPlaces[(int)dockedAt].GetComponent<LookToMiddle>().straightAngle)
             {

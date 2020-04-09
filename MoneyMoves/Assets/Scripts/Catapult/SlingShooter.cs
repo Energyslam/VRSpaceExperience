@@ -26,6 +26,7 @@ public class SlingShooter : MonoBehaviour
     {
         Vector3 forward = centerPoint.transform.position - this.transform.position;
         GameObject projectileGO = Instantiate(go, this.transform.position, Quaternion.identity);
+        Destroy(projectileGO, 5f);
         Rigidbody projectileRB = projectileGO.GetComponent<Rigidbody>();
         projectileRB.AddForce(forward * projectileSpeed, ForceMode.VelocityChange);
     }

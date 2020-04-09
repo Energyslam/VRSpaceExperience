@@ -1317,6 +1317,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4000013303659494}
     m_Modifications:
+    - target: {fileID: 1999301212252794487, guid: 6c2f6e9bdebbceb458f1f89082b69843,
+        type: 3}
+      propertyPath: hideHandOnAttach
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2202354534780264965, guid: 6c2f6e9bdebbceb458f1f89082b69843,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -7,6 +7,7 @@ public class GridCell : MonoBehaviour
     public int horizontal, vertical;
     public Color color;
     public Vector3 scale;
+    public float value;
 
     private void OnDrawGizmos()
     {

@@ -66,6 +66,8 @@ public class GridManager : MonoBehaviour
                 cells.Add(cellInfo);
             }
         }
+
+        grid = FindNeighbours(grid, columns, rows);
     }
 
     private void Update() 
@@ -103,11 +105,28 @@ public class GridManager : MonoBehaviour
     }
 
     // Function to print next generation 
-    static GridCell[,] ExecuteGameOfLife(GridCell[,] grid, int M, int N)
+    private GridCell[,] ExecuteGameOfLife(GridCell[,] grid, int M, int N)
     {
         GridCell[,] future = new GridCell[M, N];
 
         future = grid;
+
+        future = FindNeighbours(grid, M, N);
+
+        // Implementing the Rules of Life 
+
+        // Cell is lonely and dies 
+        // if (grid[l, m].isAlive == true && future[l, m].aliveNeighbours < 2)
+        // future[l, m].isAlive = false;
+
+        return future;
+    }
+
+    private GridCell[,] FindNeighbours(GridCell[,] gridWithCells, int M, int N)
+    {
+        GridCell[,] newGrid = new GridCell[M, N];
+
+        newGrid = gridWithCells;
 
         // Loop through every cell 
         for (int l = 0; l < M; l++)
@@ -137,33 +156,13 @@ public class GridManager : MonoBehaviour
                     }
                 }
 
-                // The cell needs to be subtracted 
-                // from its neighbours as it was  
-                // counted before 
                 if (grid[l, m].isAlive)
                     aliveNeighbours--;
 
-                future[l, m].aliveNeighbours = aliveNeighbours;
-                Debug.LogError(aliveNeighbours);
-
-                // Implementing the Rules of Life 
-
-                // Cell is lonely and dies 
-                if (grid[l, m].isAlive && aliveNeighbours < 2)
-                    future[l, m].isAlive = false;
-
-                // Cell dies due to over population 
-                else if (grid[l, m].isAlive && aliveNeighbours > 3)
-                    future[l, m].isAlive = false;
-
-                // A new cell is born 
-                else if (!grid[l, m].isAlive && aliveNeighbours == 3)
-                    future[l, m].isAlive = true;
-
-                else
-                    future[l, m] = grid[l, m];
+                newGrid[l, m].aliveNeighbours = aliveNeighbours;
             }
         }
-        return future;
+
+        return newGrid;
     }
 }

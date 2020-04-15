@@ -5,11 +5,11 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     [SerializeField]
-    public float[,] grid;
+    public GridCell[,] grid;
 
     private float verticalCellSize, horizontalCellSize;
     [Range(1.0f, 250)]
-    public uint columns = 10, rows = 10;
+    public int columns = 10, rows = 10;
     [Range(1.0f, 250)]
     public float gridSizeX = 10, gridSizeZ = 10;
 
@@ -33,14 +33,14 @@ public class GridManager : MonoBehaviour
     [SerializeField]
     private float aliveThreshold = 0.5f;
 
-    private List<GameObject> cells = new List<GameObject>();
+    private List<GridCell> cells = new List<GridCell>();
 
     // Start is called before the first frame update
     void Awake()
     {
         horizontalCellSize = (float)gridSizeX / (float)columns;
         verticalCellSize = (float)gridSizeZ / (float)rows;
-        grid = new float[columns, rows];
+        grid = new GridCell[columns, rows];
         gridCellsOffset = new Vector3(-gridSizeX / 2, gridCellsOffset.y, -gridSizeZ / 2);
 
         for (int i = 0; i < columns; i++)
@@ -59,10 +59,11 @@ public class GridManager : MonoBehaviour
                 cellInfo.horizontal = i;
                 cellInfo.vertical = j;
                 cellInfo.scale = new Vector3(horizontalCellSize, 0.1f, verticalCellSize);
+                grid[i, j] = cellInfo;
 
                 CalculateColor(i, j); 
 
-                cells.Add(gridCell);
+                cells.Add(cellInfo);
             }
         }
     }
@@ -73,25 +74,17 @@ public class GridManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                for (int x = 0; x < cells.Count; x++)
-                {
-                    GridCell cell = cells[x].GetComponent<GridCell>();
-
-                    int i = cell.horizontal;
-                    int j = cell.vertical;
-
-                    CountLiveNeighbors(i, j);
-                }
+                grid = ExecuteGameOfLife(grid, columns, rows);
             }   
 
             for (int x = 0; x < cells.Count; x++)
             {
-                GridCell cell = cells[x].GetComponent<GridCell>();
+                GridCell cell = cells[x];
                 int i = cell.horizontal;
                 int j = cell.vertical;
-                cell.value = grid[i, j];
+                cell.isAlive = grid[i, j].isAlive;
                 cells[x].transform.position = new Vector3(i * horizontalCellSize + horizontalCellSize * 0.5f, 0f, j * verticalCellSize + verticalCellSize * 0.5f) + transform.position + gridCellsOffset;
-                cell.color = new Color(grid[i, j], grid[i, j], grid[i, j]);
+                cell.color = grid[i, j].isAlive ? new Color(0, 0, 0) : new Color(1, 1 , 1);
             }
         }
     }
@@ -102,58 +95,75 @@ public class GridManager : MonoBehaviour
         float xCoord = (float)x / (float)columns * (float)scale + perlinNoiseOffset.x;
         float yCoord = (float)y / (float)rows * (float)scale + perlinNoiseOffset.y;
 
-        float sample = Mathf.PerlinNoise(xCoord, yCoord);
+        float fSample = Mathf.PerlinNoise(xCoord, yCoord);
 
-        sample = sample >= aliveThreshold ? 0 : 1;
+        bool sample = fSample >= aliveThreshold;
 
-        grid[x, y] = sample;
+        grid[x, y].isAlive = sample;
     }
 
-    // Returns the number of live neighbors around the cell at position (x,y).
-    private void CountLiveNeighbors(int x, int y)
+    // Function to print next generation 
+    static GridCell[,] ExecuteGameOfLife(GridCell[,] grid, int M, int N)
     {
-        float[,] future = new float[columns, rows];
+        GridCell[,] future = new GridCell[M, N];
+
+        future = grid;
 
         // Loop through every cell 
-        for (int l = 1; l < x - 1; l++)
+        for (int l = 0; l < M; l++)
         {
-            for (int m = 1; m < y - 1; m++)
+            for (int m = 0; m < N; m++)
             {
-
                 // finding no Of Neighbours 
                 // that are alive 
-                float aliveNeighbours = 0;
+                int aliveNeighbours = 0;
+
                 for (int i = -1; i <= 1; i++)
+                {
+                    if (l + i < 0 || l + i >= M)
+                    {
+                        continue;
+                    }
+
                     for (int j = -1; j <= 1; j++)
-                        aliveNeighbours += grid[l + i, m + j];
+                    {
+                        if (m + j < 0 || m + j >= M)
+                        {
+                            continue;
+                        }
+
+                        if (grid[l + i, m + j].isAlive)
+                            aliveNeighbours++;
+                    }
+                }
 
                 // The cell needs to be subtracted 
                 // from its neighbours as it was  
                 // counted before 
-                aliveNeighbours -= grid[l, m];
+                if (grid[l, m].isAlive)
+                    aliveNeighbours--;
+
+                future[l, m].aliveNeighbours = aliveNeighbours;
+                Debug.LogError(aliveNeighbours);
 
                 // Implementing the Rules of Life 
 
                 // Cell is lonely and dies 
-                if ((grid[l, m] == 1) &&
-                            (aliveNeighbours < 2))
-                    future[l, m] = 0;
+                if (grid[l, m].isAlive && aliveNeighbours < 2)
+                    future[l, m].isAlive = false;
 
                 // Cell dies due to over population 
-                else if ((grid[l, m] == 1) &&
-                             (aliveNeighbours > 3))
-                    future[l, m] = 0;
+                else if (grid[l, m].isAlive && aliveNeighbours > 3)
+                    future[l, m].isAlive = false;
 
                 // A new cell is born 
-                else if ((grid[l, m] == 0) &&
-                            (aliveNeighbours == 3))
-                    future[l, m] = 1;
+                else if (!grid[l, m].isAlive && aliveNeighbours == 3)
+                    future[l, m].isAlive = true;
 
-                // Remains the same 
                 else
                     future[l, m] = grid[l, m];
             }
         }
-        grid = future;
+        return future;
     }
 }

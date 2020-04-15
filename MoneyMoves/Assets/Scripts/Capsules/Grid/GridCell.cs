@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class GridCell : MonoBehaviour
 {
     public int horizontal, vertical;
     public Color color;
     public Vector3 scale;
-    public float value;
+    public bool isAlive;
+    public int aliveNeighbours = 0;
 
     private void OnDrawGizmos()
     {

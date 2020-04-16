@@ -7,13 +7,15 @@ public class GridCell : MonoBehaviour
 {
     public int horizontal, vertical;
     public Color color;
-    public Vector3 scale;
+    public Vector3 scale, position, totalScale;
     public bool isAlive;
     public int aliveNeighbours = 0;
 
     private void OnDrawGizmos()
     {
         Gizmos.color = color;
-        Gizmos.DrawCube(transform.position, new Vector3(transform.lossyScale.x * scale.x, transform.lossyScale.y * scale.y, transform.lossyScale.z * scale.z) - new Vector3(0.01f, 0.01f, 0.01f));
+        position = transform.position;
+        totalScale = new Vector3(transform.lossyScale.x * scale.x, transform.lossyScale.y * scale.y, transform.lossyScale.z * scale.z) - new Vector3(0.01f, 0.01f, 0.01f);
+        Gizmos.DrawCube(position, totalScale);
     }
 }

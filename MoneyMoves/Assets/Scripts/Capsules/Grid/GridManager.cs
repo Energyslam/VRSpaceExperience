@@ -45,7 +45,7 @@ public class GridManager : MonoBehaviour
     private List<GridCell> cells = new List<GridCell>();
 
     [SerializeField]
-    private GameObject connectableBigObject, standaloneBigObject;
+    private GameObject objectsHolder, connectableBigObject, standaloneBigObject;
 
     // Start is called before the first frame update
     void Awake()
@@ -150,13 +150,36 @@ public class GridManager : MonoBehaviour
         {
             for (int j = 0; j < rows; j++)
             {
-                if (i > 0)
+                if (grid[i, j].vertical > 0)
                 {
-                    if (j == 0 && j == columns)
+                    if (grid[i, j].horizontal == 0 && grid[i, j].vertical <= 2 || grid[i, j].horizontal == rows - 1 && grid[i, j].vertical <= 2)
                         continue;
 
                     else
                         grid[i, j].isAlive = false;
+                }
+            }
+        }
+
+        grid = FindNeighbours(grid, columns, rows);
+
+        for (int i = 0; i < columns; i++)
+        {
+            for (int j = 0; j < rows; j++)
+            {
+                if (grid[i, j].isAlive)
+                {
+                    if (grid[i, j].aliveNeighbours == 0)
+                    {
+                        GameObject obj = Instantiate(standaloneBigObject, grid[i, j].transform.position, Quaternion.identity, objectsHolder.transform);
+                        obj.transform.localScale = grid[i, j].totalScale;
+                    }
+
+                    else
+                    {
+                        GameObject obj = Instantiate(connectableBigObject, grid[i, j].transform.position, Quaternion.identity, objectsHolder.transform);
+                        obj.transform.localScale = grid[i, j].totalScale;
+                    }
                 }
             }
         }
@@ -178,7 +201,7 @@ public class GridManager : MonoBehaviour
                 // Implementing the Rules of Life 
 
                 // Top row stays filled
-                if (grid[x, y].isAlive && grid[x, y].horizontal == 0)
+                if (grid[x, y].isAlive && grid[x, y].vertical == 0)
                     future[x, y].isAlive = grid[x, y].isAlive;
 
                 // Lonelyness

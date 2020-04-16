@@ -61,4 +61,5 @@ MonoBehaviour:
   vertical: 0
   color: {r: 1, g: 1, b: 1, a: 1}
   scale: {x: 1, y: 0.1, z: 1}
-  isDead: 0
+  isAlive: 0
+  aliveNeighbours: 0

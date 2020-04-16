@@ -149,6 +149,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cubesule4Doors (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2709503910731663622, guid: 555f918f53d309644af43f6747114316,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7572514319573298951, guid: 555f918f53d309644af43f6747114316,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -363,6 +368,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cubesule4Doors (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2709503910731663622, guid: 555f918f53d309644af43f6747114316,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7572514319573298951, guid: 555f918f53d309644af43f6747114316,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -432,25 +442,40 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 999936027}
-    - target: {fileID: 2298949711079761233, guid: 555f918f53d309644af43f6747114316,
-        type: 3}
-      propertyPath: doorsToOpenAtOnce
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2298949711079761233, guid: 555f918f53d309644af43f6747114316,
-        type: 3}
-      propertyPath: speed
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 2709503910731663622, guid: 555f918f53d309644af43f6747114316,
         type: 3}
       propertyPath: m_Name
       value: Cubesule4Doors (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 2709503910731663622, guid: 555f918f53d309644af43f6747114316,
+    - target: {fileID: 4123044388304850485, guid: 555f918f53d309644af43f6747114316,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: gridSizeX
+      value: 4.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123044388304850485, guid: 555f918f53d309644af43f6747114316,
+        type: 3}
+      propertyPath: gridSizeZ
+      value: 4.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123044388304850485, guid: 555f918f53d309644af43f6747114316,
+        type: 3}
+      propertyPath: columns
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123044388304850485, guid: 555f918f53d309644af43f6747114316,
+        type: 3}
+      propertyPath: rows
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123044388304850485, guid: 555f918f53d309644af43f6747114316,
+        type: 3}
+      propertyPath: perlinNoiseOffset.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123044388304850485, guid: 555f918f53d309644af43f6747114316,
+        type: 3}
+      propertyPath: perlinNoiseOffset.y
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7572514319573298951, guid: 555f918f53d309644af43f6747114316,
         type: 3}
@@ -675,7 +700,7 @@ PrefabInstance:
     - target: {fileID: 2709503910731663622, guid: 555f918f53d309644af43f6747114316,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7572514319573298951, guid: 555f918f53d309644af43f6747114316,
         type: 3}
@@ -755,6 +780,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cubesule4Doors
+      objectReference: {fileID: 0}
+    - target: {fileID: 2709503910731663622, guid: 555f918f53d309644af43f6747114316,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3002546724314225334, guid: 555f918f53d309644af43f6747114316,
         type: 3}
@@ -1013,7 +1043,7 @@ PrefabInstance:
     - target: {fileID: 2709503910731663622, guid: 555f918f53d309644af43f6747114316,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7572514319573298951, guid: 555f918f53d309644af43f6747114316,
         type: 3}
@@ -1346,6 +1376,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cubesule4Doors (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2709503910731663622, guid: 555f918f53d309644af43f6747114316,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7572514319573298951, guid: 555f918f53d309644af43f6747114316,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1526,7 +1561,7 @@ PrefabInstance:
     - target: {fileID: 2709503910731663622, guid: 555f918f53d309644af43f6747114316,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7572514319573298951, guid: 555f918f53d309644af43f6747114316,
         type: 3}

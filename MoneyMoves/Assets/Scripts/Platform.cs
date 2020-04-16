@@ -85,6 +85,7 @@ public class Platform : MonoBehaviour
 
     public void ChangeStateToSplit()
     {
+        currentIndex = 0;
         State = MovementState.MovingToSplit;
         maxSpeedIndex = Tracks.OriginToSplit.Count - 1;
         rotationSpeed = 2f;
@@ -92,6 +93,7 @@ public class Platform : MonoBehaviour
 
     public void ChangeStateToA()
     {
+        currentIndex = 0;
         State = MovementState.MovingToA;
         maxSpeedIndex = Tracks.SplitToA.Count - 1;
         rotationSpeed = 1f;
@@ -99,6 +101,7 @@ public class Platform : MonoBehaviour
 
     public void ChangeStateToB()
     {
+        currentIndex = 0;
         State = MovementState.MovingToB;
         maxSpeedIndex = Tracks.SplitToA.Count - 1;
         rotationSpeed = 1f;

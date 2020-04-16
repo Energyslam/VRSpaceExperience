@@ -113,11 +113,25 @@ public class GridManager : MonoBehaviour
 
         future = FindNeighbours(grid, M, N);
 
-        // Implementing the Rules of Life 
+        for (int x = 0; x < M; x++)
+        {
+            for (int y = 0; y < N; y++)
+            {
+                // Implementing the Rules of Life 
 
-        // Cell is lonely and dies 
-        // if (grid[l, m].isAlive == true && future[l, m].aliveNeighbours < 2)
-        // future[l, m].isAlive = false;
+                if (grid[x, y].isAlive && grid[x, y].aliveNeighbours < 2)
+                    future[x, y].isAlive = false;
+
+                else if (grid[x, y].isAlive && grid[x, y].aliveNeighbours > 3)
+                    future[x, y].isAlive = false;
+
+                else if (!grid[x, y].isAlive && grid[x, y].aliveNeighbours == 3)
+                    future[x, y].isAlive = true;
+
+                else
+                    future[x, y].isAlive = grid[x, y].isAlive;    
+            }
+        }
 
         return future;
     }

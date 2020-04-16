@@ -24,6 +24,14 @@ public class Platform : MonoBehaviour
     }
     public MovementState State = MovementState.Idle;
 
+    public void RemoveArrowColliders()
+    {
+        foreach(GameObject go in arrows)
+        {
+            go.GetComponent<BoxCollider>().enabled = false;
+        }
+    }
+
     private void Start()
     {
         maxSpeed = speed;
@@ -98,7 +106,7 @@ public class Platform : MonoBehaviour
     void MoveToSplit()
     {
         target = Tracks.OriginToSplit[currentIndex];
-        if (this.transform.position == target)
+        if (StaticCapsule.FastVectorApproximately(this.transform.position, target, 0.1f))
         {
             SpeedHandler();
             if (target == Tracks.OriginToSplit[Tracks.OriginToSplit.Count - 1])
@@ -116,7 +124,7 @@ public class Platform : MonoBehaviour
     {
         State = MovementState.MovingToA;
         target = Tracks.SplitToA[currentIndex];
-        if (this.transform.position == target)
+        if (StaticCapsule.FastVectorApproximately(this.transform.position, target, 0.1f))
         {
             SpeedHandler();
             if (target == Tracks.SplitToA[Tracks.SplitToA.Count - 1])
@@ -135,7 +143,7 @@ public class Platform : MonoBehaviour
     {
         State = MovementState.MovingToB;
         target = Tracks.SplitToB[currentIndex];
-        if (this.transform.position == target)
+        if (StaticCapsule.FastVectorApproximately(this.transform.position, target, 0.1f))
         {
             SpeedHandler();
             if (target == Tracks.SplitToB[Tracks.SplitToB.Count - 1])
@@ -203,8 +211,8 @@ public class Platform : MonoBehaviour
 
     void CreateTheNiceCursors()
     {
-        GameObject arrowA = Instantiate(arrow, Tracks.SplitToA[7], Quaternion.identity);
-        GameObject arrowB = Instantiate(arrow, Tracks.SplitToB[7], Quaternion.identity);
+        GameObject arrowA = Instantiate(arrow, Tracks.SplitToA[Tracks.SplitToA.Count / 4], Quaternion.identity);
+        GameObject arrowB = Instantiate(arrow, Tracks.SplitToB[Tracks.SplitToB.Count / 4], Quaternion.identity);
         arrowA.name = "arrowA";
         arrowB.name = "arrowB";
         arrowA.transform.LookAt(this.transform.position);

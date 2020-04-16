@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tracks : MonoBehaviour
 {
+    static int trackParts = 40;
     static List<Vector3> originToSplit = new List<Vector3>();
     static List<Vector3> splitToA = new List<Vector3>();
     static List<Vector3> splitToB = new List<Vector3>();
@@ -23,9 +24,9 @@ public class Tracks : MonoBehaviour
         Vector3 halfwayFromSplitToB = pointToSplitFrom + ((destinationB - pointToSplitFrom) / 2f);
         Vector3 halfwayFromHalfwayBToMiddleOfDestinations = halfwayFromSplitToB + ((halfwaypointBetweenDestinations - halfwayFromSplitToB) / 2f);
 
-        originToSplit = GenerateVectorsBetweenTwoPoints(origin, pointToSplitFrom, 30);
-        splitToA = BezierCurveHandler.GenerateQuadraticCurve(pointToSplitFrom, halfwayFromHalfwayAToMiddleOfDestinations, destinationA, 30);
-        splitToB = BezierCurveHandler.GenerateQuadraticCurve(pointToSplitFrom, halfwayFromHalfwayBToMiddleOfDestinations, destinationB, 30);
+        originToSplit = GenerateVectorsBetweenTwoPoints(origin, pointToSplitFrom, trackParts);
+        splitToA = BezierCurveHandler.GenerateQuadraticCurve(pointToSplitFrom, halfwayFromHalfwayAToMiddleOfDestinations, destinationA, trackParts);
+        splitToB = BezierCurveHandler.GenerateQuadraticCurve(pointToSplitFrom, halfwayFromHalfwayBToMiddleOfDestinations, destinationB, trackParts);
 
     }
 

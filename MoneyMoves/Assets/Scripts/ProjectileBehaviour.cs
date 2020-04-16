@@ -22,15 +22,18 @@ public class ProjectileBehaviour : MonoBehaviour
         if (other.CompareTag("Collideable"))
         {
             other.GetComponent<ICollisionBehaviour>().SolveCollision();
-            Destroy(this.gameObject);
+            
         }
         if (other.name == "arrowA")
         {
+            GameManager.Instance.platform.RemoveArrowColliders();
             GameManager.Instance.platform.ChangeStateToA();
         }
         if (other.name == "arrowB")
         {
+            GameManager.Instance.platform.RemoveArrowColliders();
             GameManager.Instance.platform.ChangeStateToB();
         }
+        Destroy(this.gameObject);
     }
 }

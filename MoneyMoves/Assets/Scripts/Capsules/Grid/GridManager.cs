@@ -31,9 +31,21 @@ public class GridManager : MonoBehaviour
     private Transform cellParent;
 
     [SerializeField]
+    private int iterateAmount = 5;
+
+    private int hasIterated = 0;
+
+    public enum SpawningPhase { BIG, MEDIUM, SMALL, WALL, ROOF, TABLE };
+
+    private SpawningPhase currentSpawningPhase = SpawningPhase.BIG;
+
+    [SerializeField]
     private float aliveThreshold = 0.5f;
 
     private List<GridCell> cells = new List<GridCell>();
+
+    [SerializeField]
+    private GameObject connectableBigObject, standaloneBigObject;
 
     // Start is called before the first frame update
     void Awake()
@@ -61,7 +73,7 @@ public class GridManager : MonoBehaviour
                 cellInfo.scale = new Vector3(horizontalCellSize, 0.1f, verticalCellSize);
                 grid[i, j] = cellInfo;
 
-                CalculateColor(i, j); 
+                SetUpGrid(i, j); 
 
                 cells.Add(cellInfo);
             }
@@ -76,7 +88,8 @@ public class GridManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                grid = ExecuteGameOfLife(grid, columns, rows);
+                hasIterated = 0;
+                StartCoroutine(IterateGameOfLife(grid, columns, rows));
             }   
 
             for (int x = 0; x < cells.Count; x++)
@@ -91,8 +104,8 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    // Calculates and sets the color based on Perlin noise. Black (float of 0) means a cell is alive, white means dead
-    private void CalculateColor(int x, int y)
+    // Calculates and sets the color based on Perlin noise. Black means a cell is alive, white means dead
+    private void SetUpGrid(int x, int y)
     {
         float xCoord = (float)x / (float)columns * (float)scale + perlinNoiseOffset.x;
         float yCoord = (float)y / (float)rows * (float)scale + perlinNoiseOffset.y;
@@ -102,6 +115,51 @@ public class GridManager : MonoBehaviour
         bool sample = fSample >= aliveThreshold;
 
         grid[x, y].isAlive = sample;
+    }
+
+    private IEnumerator IterateGameOfLife(GridCell[,] grid, int M, int N)
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        if (hasIterated < iterateAmount)
+        {
+            hasIterated++;
+            this.grid = ExecuteGameOfLife(grid, M, N);
+            StartCoroutine(IterateGameOfLife(grid, M, N));
+        }
+
+        else
+            SpawnObjects();
+    }
+
+    private void SpawnObjects()
+    {
+        switch (currentSpawningPhase)
+        {
+            case SpawningPhase.BIG:
+                SpawnBigObjects();
+                break;
+        }
+
+        iterateAmount = 0;
+    }
+
+    private void SpawnBigObjects()
+    {
+        for (int i = 0; i < columns; i++)
+        {
+            for (int j = 0; j < rows; j++)
+            {
+                if (i > 0)
+                {
+                    if (j == 0 && j == columns)
+                        continue;
+
+                    else
+                        grid[i, j].isAlive = false;
+                }
+            }
+        }
     }
 
     // Function to print next generation 
@@ -119,15 +177,23 @@ public class GridManager : MonoBehaviour
             {
                 // Implementing the Rules of Life 
 
-                if (grid[x, y].isAlive && grid[x, y].aliveNeighbours < 2)
+                // Top row stays filled
+                if (grid[x, y].isAlive && grid[x, y].horizontal == 0)
+                    future[x, y].isAlive = grid[x, y].isAlive;
+
+                // Lonelyness
+                else if (grid[x, y].isAlive && grid[x, y].aliveNeighbours < 2)
                     future[x, y].isAlive = false;
 
+                // Overpopulation
                 else if (grid[x, y].isAlive && grid[x, y].aliveNeighbours > 3)
                     future[x, y].isAlive = false;
 
+                // Birth
                 else if (!grid[x, y].isAlive && grid[x, y].aliveNeighbours == 3)
                     future[x, y].isAlive = true;
 
+                // Cell remains dead/alive
                 else
                     future[x, y].isAlive = grid[x, y].isAlive;    
             }

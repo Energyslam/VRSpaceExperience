@@ -157,14 +157,17 @@ MonoBehaviour:
   rows: 10
   gridSizeX: 10
   gridSizeZ: 10
-  scale: 35
+  scale: 15
   DEBUGGING: 1
   gridCellsOffset: {x: 0, y: 0, z: 0}
-  perlinNoiseOffset: {x: 3, y: -3}
+  perlinNoiseOffset: {x: 0, y: 0}
   gridCellPrefab: {fileID: 6593446899856398828, guid: 85d39e92cfa0e024680ef8e8ad853ef7,
     type: 3}
   cellParent: {fileID: 634308778}
-  aliveThreshold: 0.7
+  iterateAmount: 15
+  aliveThreshold: 0.5
+  connectableBigObject: {fileID: 0}
+  standaloneBigObject: {fileID: 0}
 --- !u!64 &184836743
 MeshCollider:
   m_ObjectHideFlags: 0

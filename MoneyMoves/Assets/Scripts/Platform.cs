@@ -61,8 +61,8 @@ public class Platform : MonoBehaviour
         if (State != MovementState.Idle)
         {
             RotatorObjectBecauseMathIsTooHardForMe.transform.LookAt(target);
-            this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, RotatorObjectBecauseMathIsTooHardForMe.transform.rotation, rotationSpeed * Time.deltaTime);
-            //this.transform.rotation = Quaternion.Lerp(this.transform.rotation, RotatorObjectBecauseMathIsTooHardForMe.transform.rotation, rotationSpeed * Time.deltaTime);
+            //this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, RotatorObjectBecauseMathIsTooHardForMe.transform.rotation, rotationSpeed * Time.deltaTime); // erger als je te snel gaat bij kleine rotaties
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, RotatorObjectBecauseMathIsTooHardForMe.transform.rotation, rotationSpeed * Time.deltaTime);
             this.transform.position = Vector3.MoveTowards(this.transform.position, target, speed * Time.deltaTime);
         }
     }
@@ -79,18 +79,21 @@ public class Platform : MonoBehaviour
     {
         State = MovementState.MovingToSplit;
         maxSpeedIndex = Tracks.OriginToSplit.Count - 1;
+        rotationSpeed = 2f;
     }
 
     public void ChangeStateToA()
     {
         State = MovementState.MovingToA;
         maxSpeedIndex = Tracks.SplitToA.Count - 1;
+        rotationSpeed = 1f;
     }
 
     public void ChangeStateToB()
     {
         State = MovementState.MovingToB;
         maxSpeedIndex = Tracks.SplitToA.Count - 1;
+        rotationSpeed = 1f;
     }
     void MoveToSplit()
     {

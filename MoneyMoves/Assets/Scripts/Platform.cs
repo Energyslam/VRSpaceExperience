@@ -105,7 +105,7 @@ public class Platform : MonoBehaviour
             {
                 currentIndex = 0;
                 State = MovementState.Idle;
-                GameManager.Instance.ActivateLaserPointer();
+                //GameManager.Instance.ActivateLaserPointer();
                 return;
             }
             currentIndex++;

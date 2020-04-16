@@ -24,5 +24,13 @@ public class ProjectileBehaviour : MonoBehaviour
             other.GetComponent<ICollisionBehaviour>().SolveCollision();
             Destroy(this.gameObject);
         }
+        if (other.name == "arrowA")
+        {
+            GameManager.Instance.platform.ChangeStateToA();
+        }
+        if (other.name == "arrowB")
+        {
+            GameManager.Instance.platform.ChangeStateToB();
+        }
     }
 }

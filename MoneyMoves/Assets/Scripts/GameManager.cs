@@ -61,10 +61,12 @@ public class GameManager : MonoBehaviour
     public void ActivateLaserPointer()
     {
         laserpointer.enabled = true;
+        laserpointer.ActivatePointer();
     }
 
     public void DeactivateLaserPointer()
     {
+        laserpointer.DeactivatePointer();
         laserpointer.enabled = false;
     }
     public int AssignHighPriority()

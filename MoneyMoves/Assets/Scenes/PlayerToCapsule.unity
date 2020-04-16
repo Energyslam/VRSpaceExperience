@@ -362,6 +362,7 @@ MonoBehaviour:
   RotatorObjectBecauseMathIsTooHardForMe: {fileID: 0}
   arrow: {fileID: 0}
   woop: {x: 0, y: 0, z: 0}
+  currentIndex: 0
   State: 0
 --- !u!1001 &163439524
 PrefabInstance:
@@ -2157,6 +2158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1381682646}
+  - component: {fileID: 1381682647}
   m_Layer: 0
   m_Name: RotatorObject
   m_TagString: Untagged
@@ -2178,6 +2180,18 @@ Transform:
   m_Father: {fileID: 1621345692}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1381682647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381682645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0979768732d374b45a96b28f868a7561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1419570442 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3655274185753058860, guid: f68cfcbb1302e894e91cb8af4bffc035,
@@ -2432,8 +2446,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
-  speed: 5
-  rotationSpeed: 1
+  speed: 4
+  rotationSpeed: 15
   dockingSpotA: {fileID: 0}
   dockingSpotB: {fileID: 0}
   trackVisual: {fileID: 7480742132511350952, guid: 4d83d7969108e464180e5695556bb3c4,
@@ -2441,6 +2455,7 @@ MonoBehaviour:
   RotatorObjectBecauseMathIsTooHardForMe: {fileID: 1381682645}
   arrow: {fileID: 8305536434212282163, guid: 7fa9e1608b935324eb14432bfc076d96, type: 3}
   woop: {x: 0, y: 0, z: 0}
+  currentIndex: 0
   State: 0
 --- !u!4 &1639068276 stripped
 Transform:

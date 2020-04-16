@@ -27,11 +27,11 @@ public class CustomPlaytestCapsule : Editor
         Platform platform = (Platform)target;
         if (GUILayout.Button("Move left"))
         {
-            platform.MoveToDestinationA();
+            platform.ChangeStateToA();
         }
         if (GUILayout.Button("Move right"))
         {
-            platform.MoveToDestinationB();
+            platform.ChangeStateToB();
         }
         if (GUILayout.Button("Create Visuals"))
         {

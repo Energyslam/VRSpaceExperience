@@ -15,7 +15,6 @@ public class Tracks : MonoBehaviour
     {
         ClearTracks();
         Vector3 pointToSplitFrom = origin + ((destinationA - origin) + (destinationB - origin)) * 0.25f;
-        Debug.Log("origin = " + origin);
         Vector3 halfwaypointBetweenDestinations = destinationA + (destinationB - destinationA) * 0.5f;
 
         Vector3 halfwayFromSplitToA = pointToSplitFrom + ((destinationA - pointToSplitFrom) / 2f);
@@ -24,9 +23,9 @@ public class Tracks : MonoBehaviour
         Vector3 halfwayFromSplitToB = pointToSplitFrom + ((destinationB - pointToSplitFrom) / 2f);
         Vector3 halfwayFromHalfwayBToMiddleOfDestinations = halfwayFromSplitToB + ((halfwaypointBetweenDestinations - halfwayFromSplitToB) / 2f);
 
-        originToSplit = GenerateVectorsBetweenTwoPoints(origin, pointToSplitFrom, 10);
-        splitToA = BezierCurveHandler.GenerateQuadraticCurve(pointToSplitFrom, halfwayFromHalfwayAToMiddleOfDestinations, destinationA, 20);
-        splitToB = BezierCurveHandler.GenerateQuadraticCurve(pointToSplitFrom, halfwayFromHalfwayBToMiddleOfDestinations, destinationB, 20);
+        originToSplit = GenerateVectorsBetweenTwoPoints(origin, pointToSplitFrom, 30);
+        splitToA = BezierCurveHandler.GenerateQuadraticCurve(pointToSplitFrom, halfwayFromHalfwayAToMiddleOfDestinations, destinationA, 30);
+        splitToB = BezierCurveHandler.GenerateQuadraticCurve(pointToSplitFrom, halfwayFromHalfwayBToMiddleOfDestinations, destinationB, 30);
 
     }
 

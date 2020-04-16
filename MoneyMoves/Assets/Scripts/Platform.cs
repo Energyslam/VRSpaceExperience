@@ -7,11 +7,13 @@ public class Platform : MonoBehaviour
     bool isMoving;
     [SerializeField] Vector3 target;
     public float speed, rotationSpeed;
+    float maxSpeed;
     public GameObject dockingSpotA, dockingSpotB, trackVisual, RotatorObjectBecauseMathIsTooHardForMe, arrow;
     public Vector3 woop;
-    int currentIndex = 0;
+    public int currentIndex = 0;
     GameObject visualParent;
     List<GameObject> arrows = new List<GameObject>();
+    int maxSpeedIndex;
     public enum MovementState
     {
         Idle,
@@ -24,13 +26,26 @@ public class Platform : MonoBehaviour
 
     private void Start()
     {
+        maxSpeed = speed;
         visualParent = new GameObject();
         CreateVisuals();
         ChangeStateToSplit();
     }
 
+    void SpeedHandler()
+    {
+        if (currentIndex > maxSpeedIndex - 10)
+        {
+            int distanceToSlowDown = maxSpeedIndex - (maxSpeedIndex - 10);
+            int currentDistanceTo0 = maxSpeedIndex - currentIndex;
+            float dividerThingy = (float)currentDistanceTo0 / (float)distanceToSlowDown;
+            speed = Mathf.Lerp(1f, 5f, dividerThingy);
+        }
+        else speed = 5f;
+    }
     void Update()
     {
+
         if (State == MovementState.MovingToSplit)
         {
             MoveToSplit();
@@ -46,75 +61,93 @@ public class Platform : MonoBehaviour
         if (State != MovementState.Idle)
         {
             RotatorObjectBecauseMathIsTooHardForMe.transform.LookAt(target);
-            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, RotatorObjectBecauseMathIsTooHardForMe.transform.rotation, rotationSpeed * Time.deltaTime);
+            this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, RotatorObjectBecauseMathIsTooHardForMe.transform.rotation, rotationSpeed * Time.deltaTime);
+            //this.transform.rotation = Quaternion.Lerp(this.transform.rotation, RotatorObjectBecauseMathIsTooHardForMe.transform.rotation, rotationSpeed * Time.deltaTime);
             this.transform.position = Vector3.MoveTowards(this.transform.position, target, speed * Time.deltaTime);
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // Draws a 5 unit long red line in front of the object
+        Gizmos.color = Color.blue;
+        Vector3 direction = transform.TransformDirection(Vector3.forward) * 10;
+        Gizmos.DrawRay(transform.position, direction);
     }
 
     public void ChangeStateToSplit()
     {
         State = MovementState.MovingToSplit;
+        maxSpeedIndex = Tracks.OriginToSplit.Count - 1;
     }
 
     public void ChangeStateToA()
     {
         State = MovementState.MovingToA;
+        maxSpeedIndex = Tracks.SplitToA.Count - 1;
     }
 
     public void ChangeStateToB()
     {
         State = MovementState.MovingToB;
+        maxSpeedIndex = Tracks.SplitToA.Count - 1;
     }
-    public void MoveToSplit()
+    void MoveToSplit()
     {
         target = Tracks.OriginToSplit[currentIndex];
         if (this.transform.position == target)
         {
+            SpeedHandler();
             if (target == Tracks.OriginToSplit[Tracks.OriginToSplit.Count - 1])
             {
                 currentIndex = 0;
                 State = MovementState.Idle;
                 GameManager.Instance.ActivateLaserPointer();
+                return;
             }
             currentIndex++;
         }
     }
 
-    public void MoveToDestinationA()
+    void MoveToDestinationA()
     {
         State = MovementState.MovingToA;
         target = Tracks.SplitToA[currentIndex];
         if (this.transform.position == target)
         {
+            SpeedHandler();
             if (target == Tracks.SplitToA[Tracks.SplitToA.Count - 1])
             {
                 currentIndex = 0;
                 State = MovementState.Idle;
                 dockingSpotA.GetComponent<DockingSpot>().capsule.OpenUp();
                 ClearVisuals();
+                return;
             }
             currentIndex++;
         }
     }
 
-    public void MoveToDestinationB()
+    void MoveToDestinationB()
     {
         State = MovementState.MovingToB;
         target = Tracks.SplitToB[currentIndex];
         if (this.transform.position == target)
         {
+            SpeedHandler();
             if (target == Tracks.SplitToB[Tracks.SplitToB.Count - 1])
             {
                 currentIndex = 0;
                 State = MovementState.Idle;
                 dockingSpotB.GetComponent<DockingSpot>().capsule.OpenUp();
                 ClearVisuals();
+                return;
             }
             currentIndex++;
         }
     }
 
-    public void ClearVisuals()
+    void ClearVisuals()
     {
         foreach(Transform t in visualParent.transform)
         {

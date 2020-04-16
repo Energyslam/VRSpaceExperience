@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.AI;
 
-public class PlaytestCapsule : MonoBehaviour
+public class StaticCapsule : MonoBehaviour
 {
-    [SerializeField] List<GameObject> giftLocations = new List<GameObject>();
-    [SerializeField] List<GameObject> chosenLocations = new List<GameObject>();
-    [SerializeField] List<GameObject> spawnedGifts = new List<GameObject>();
+     List<GameObject> giftLocations = new List<GameObject>();
+     List<GameObject> chosenLocations = new List<GameObject>();
+     List<GameObject> spawnedGifts = new List<GameObject>();
 
     [SerializeField] GameObject destroyableGift;
     [SerializeField] GameObject grabbableGift;
     [SerializeField] GameObject locationParent;
     [SerializeField] GameObject cheatPrevention;
-    [SerializeField] GameObject dockingSpot;
+    public GameObject dockingSpot;
+    public GameObject otherCapsuleInWave;
 
     [SerializeField] Animator capsuleAnim;
 
@@ -34,51 +34,39 @@ public class PlaytestCapsule : MonoBehaviour
     float newRotation;
     float textStartingY;
 
-    public bool available;
     public bool rotateText = true;
-    public bool flickerLights;
     bool rotating;
-    bool moving;
 
     enum GiftType
     {
         Destroyable,
         Collectable
     }
-    [SerializeField]GiftType giftType = GiftType.Destroyable;
-    #region navmeshtesting
+    [SerializeField] GiftType giftType = GiftType.Destroyable;
 
-    NavMeshAgent agent;
-    NavMeshObstacle obstacle;
-    GameObject destination;
-    Vector3 originalPosition;
     public float textSpeed = 50f;
 
-    #endregion
 
     void Start()
     {
-        dockingSpot.transform.position = this.transform.position + (GameManager.Instance.player.transform.position - dockingSpot.transform.position).normalized * (dockingSpot.transform.position - this.transform.position).magnitude;
+        Wave wave = GetComponentInParent<Wave>();
+        otherCapsuleInWave = this.gameObject == wave.a.gameObject ? wave.b.gameObject : wave.a.gameObject; 
+        dockingSpot.transform.position = this.transform.position + (otherCapsuleInWave.transform.position - dockingSpot.transform.position).normalized * (dockingSpot.transform.position - this.transform.position).magnitude;
         textStartingY = timeText.transform.position.y;
-        available = true;
-        originalPosition = this.transform.position;
         foreach (Transform t in locationParent.transform)
         {
             giftLocations.Add(t.gameObject);
         }
-
-        agent = this.GetComponentInParent<NavMeshAgent>();
-        obstacle = this.GetComponentInParent<NavMeshObstacle>();
-        agent.avoidancePriority = GameManager.Instance.AssignLowPriority();
-        GameManager.Instance.priority--;
         locationAmount = giftLocations.Count;
         amountToSpawn = locationAmount / 2;
-        //SpawnGifts();
     }
 
+    public void OpenUp()
+    {
+        SpawnGifts();
+    }
     private void Update()
     {
-        UpdateAgent();
         if (rotating)
         {
             RotateCapsule(newRotation);
@@ -89,61 +77,6 @@ public class PlaytestCapsule : MonoBehaviour
         }
     }
 
-    void ResetVariables()
-    {
-        timesOpened = 0;
-        available = true;
-    }
-    void UpdateAgent()
-    {
-        if (!moving) return;
-        if (this.transform.position == agent.destination)
-        {
-            moving = false;
-            if (FastApproximately(agent.destination.x, originalPosition.x, 1f) && FastApproximately(agent.destination.z, originalPosition.z, 1f))
-            {
-                ResetVariables();
-            }
-            else
-            {
-                this.agent.enabled = false;
-                StartCoroutine(activateObstacle());
-                SpawnGifts();
-            }
-        }
-    }
-    public void MoveToDestination()
-    {
-        moving = true;
-        available = false;
-        destination = GameManager.Instance.destinations[Random.Range(0, GameManager.Instance.destinations.Count)];
-        GameManager.Instance.destinations.Remove(destination);
-        agent.destination = destination.transform.position;
-    }
-
-    void MoveToOriginalPosition()
-    {
-        this.obstacle.enabled = false;
-        StartCoroutine(activateAgent());
-    }
-
-    IEnumerator activateObstacle()
-    {
-        yield return new WaitForSeconds(0.01f);
-        obstacle.enabled = true;
-    }
-
-    IEnumerator activateAgent()
-    {
-        yield return new WaitForSeconds(0.01f);
-        agent.enabled = true;
-        agent.avoidancePriority = GameManager.Instance.AssignHighPriority();
-        moving = true;
-        GameManager.Instance.destinations.Add(destination);
-        agent.destination = originalPosition;
-        GameManager.Instance.MoveACapsule();
-
-    }
     void ManageTime()
     {
         currentTime = totalTime;
@@ -161,18 +94,12 @@ public class PlaytestCapsule : MonoBehaviour
         {
             timeText.color = Color.red;
             timeText.text = "Fail ! You didn't get all gifts";
-            StartCoroutine(RespawnGifts());
+            StartCoroutine(CloseCapsule());
         }
         else if (currentTime > 0)
         {
             StartCoroutine(CountdownTime());
         }
-    }
-    IEnumerator RespawnGifts()
-    {
-        cheatPrevention.SetActive(true);
-        yield return new WaitForSeconds(respawnWaitTime);
-        StartCoroutine(CloseCapsule());
     }
     void SpawnGifts()
     {
@@ -182,32 +109,32 @@ public class PlaytestCapsule : MonoBehaviour
             GameObject locationGO = PickGiftLocation();
             chosenLocations.Add(locationGO);
         }
-        foreach(GameObject go in chosenLocations)
+        foreach (GameObject go in chosenLocations)
         {
             if (giftType == GiftType.Destroyable)
             {
                 GameObject giftGO = Instantiate(destroyableGift, go.transform.position, Quaternion.identity);
                 giftGO.transform.parent = this.transform;
-                giftGO.GetComponentInChildren<GiftBehaviour>().attachedCapsule = this;
+                giftGO.GetComponentInChildren<GiftBehaviour>().attachedStatic = this;
                 spawnedGifts.Add(giftGO);
             }
             else if (giftType == GiftType.Collectable)
             {
                 GameObject giftGO = Instantiate(grabbableGift, go.transform.position, Quaternion.identity);
                 giftGO.transform.parent = this.transform;
-                giftGO.GetComponentInChildren<GiftBehaviour>().attachedCapsule = this;
+                giftGO.GetComponentInChildren<GiftBehaviour>().attachedStatic = this;
                 spawnedGifts.Add(giftGO);
             }
         }
         ManageTime();
-        StartCoroutine(OpenCapsule());
+        OpenCapsule();
     }
 
     public void UpdateGifts(GameObject gift)
     {
         spawnedGifts.Remove(gift);
         int remainingGifts = 0;
-        foreach(GameObject go in spawnedGifts)
+        foreach (GameObject go in spawnedGifts)
         {
             remainingGifts++;
         }
@@ -216,16 +143,16 @@ public class PlaytestCapsule : MonoBehaviour
             timeText.color = Color.green;
             timeText.text = "Good job!";
             StopAllCoroutines();
-            StartCoroutine(RespawnGifts());
+            StartCoroutine(CloseCapsule());
         }
     }
-    IEnumerator OpenCapsule()
+    void OpenCapsule()
     {
         timesOpened++;
         cheatPrevention.SetActive(false);
         capsuleAnim.SetFloat("Speed", 1f);
         capsuleAnim.SetTrigger("OpeningTrigger");
-        //Calculate distance, set it to opposite of player, rotate towards player
+
         if (!rotateText)
         {
             Vector3 textToCapsule = this.transform.position - timeText.transform.position;
@@ -237,27 +164,22 @@ public class PlaytestCapsule : MonoBehaviour
             timeText.transform.position = new Vector3(timeText.transform.position.x, textStartingY, timeText.transform.position.z);
         }
         timeText.gameObject.SetActive(true);
-        if(!flickerLights)
-        {
-            light.TurnOnLight();
-        }
-        yield return new WaitForSeconds(capsuleAnim.GetCurrentAnimatorStateInfo(0).length);
-        if (flickerLights)
-        {
-            light.FlickerLights();
-        }
+        light.TurnOnLight();
     }
 
     IEnumerator CloseCapsule()
     {
+        cheatPrevention.SetActive(true);
+        yield return new WaitForSeconds(respawnWaitTime);
         light.TurnOffLight();
         timeText.gameObject.SetActive(false);
         capsuleAnim.SetFloat("Speed", -0.5f);
         capsuleAnim.SetTrigger("OpeningTrigger");
-        yield return new WaitForSeconds(capsuleAnim.GetCurrentAnimatorStateInfo(0).length);// + capsuleAnim.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        yield return new WaitForSeconds(capsuleAnim.GetCurrentAnimatorStateInfo(0).length);
         if (timesOpened >= timesToOpen)
         {
-            MoveToOriginalPosition();
+            //TODO: Player moves to new location
+            WaveManager.Instance.GetNextWave();
             yield break;
         }
         SetNewRotation();
@@ -297,7 +219,7 @@ public class PlaytestCapsule : MonoBehaviour
     void ClearListsForRespawn()
     {
         chosenLocations.Clear();
-        foreach(GameObject go in spawnedGifts)
+        foreach (GameObject go in spawnedGifts)
         {
             GameManager.Instance.AddScore(-10);
             Destroy(go);

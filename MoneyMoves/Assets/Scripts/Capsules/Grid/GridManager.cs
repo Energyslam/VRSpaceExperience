@@ -144,7 +144,7 @@ public class GridManager : MonoBehaviour
 
     private IEnumerator IterateGameOfLife(GridCell[,] grid, int M, int N, SpawningPhase phase, int iterateAmount)
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.00f);
 
         if (hasIterated < iterateAmount)
         {
@@ -230,46 +230,37 @@ public class GridManager : MonoBehaviour
                 if (grid[x, y].isAlive && grid[x, y].aliveNeighbours > 0)
                     grid[x, y].isAlive = false;
 
-                if (grid[x, y].horizontal == 0 || grid[x, y].horizontal == columns - 1)
+                // Only allow 2 alive edge cells
+                if (grid[x, y].vertical == 0 || grid[x, y].vertical == rows - 1)
                 {
-                    if (grid[x, y].isAlive)
-                        spawnedMedium++;
+                    // Kill all alive cells but the first two
+                    if (spawnedMedium >= 2)
+                        grid[x, y].isAlive = false;
+
+                    else 
+                        if (grid[x, y].isAlive)
+                            spawnedMedium++;
                 }
 
-                if (grid[x, y].horizontal < 2 && spawnedMedium >= 2 || grid[x, y].horizontal == columns - 3 && spawnedMedium >= 2)
-                {
+                else
                     grid[x, y].isAlive = false;
+
+                if (grid[x, y].horizontal == columns - 1 && grid[x, y].vertical == rows - 1)
+                {
+                    if (spawnedMedium < 2)
+                    {
+                        grid[x, y].isAlive = true;
+                        spawnedMedium++;
+                    }
                 }
 
                 grid = FindNeighbours(grid, columns, rows);
 
-                if (grid[x, y].horizontal > 0 && grid[x, y].vertical > 0)
+                if (grid[x, y].isAlive)
                 {
-                    if (grid[x, y].horizontal < columns - 1 && grid[x, y].vertical < rows - 1)
-                    {
-                        if (grid[x, y].isAlive)
-                        {
-                            // SpawnObjectOnGridCell(i, j, mediumTables, new Vector3(1.0f, 1.0f, 1.0f));
-                        }
-                    }
-
-                    else
-                    {
-                        if (grid[x, y].isAlive)
-                        {
-                            // SpawnObjectOnGridCell(i, j, mediumGuitar, new Vector3(1.0f, 1.0f, 1.0f));
-                        }
-                    }
+                    SpawnObjectOnGridCell(x, y, mediumGuitar, new Vector3(1.0f, 1.0f, 1.0f));
                 }
-
-                else
-                {
-                    if (grid[x, y].isAlive)
-                    {
-                        // SpawnObjectOnGridCell(i, j, mediumGuitar, new Vector3(1.0f, 1.0f, 1.0f));
-                    }
-                }
-            }
+            }            
         }
     }
 
@@ -295,7 +286,7 @@ public class GridManager : MonoBehaviour
 
         grid = FindNeighbours(grid, columns, rows);
 
-        StartCoroutine(IterateGameOfLife(grid, columns, rows, currentSpawningPhase, 10));
+        StartCoroutine(IterateGameOfLife(grid, columns, rows, currentSpawningPhase, 5));
     }
 
     private void SpawnObjectOnGridCell(int i, int j, GameObject toSpawn, Vector3 upscaleFactor)

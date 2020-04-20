@@ -183,10 +183,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 236b2b2635b687a428e485abb18a3361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 9
-  rows: 9
-  gridSizeX: 10
-  gridSizeZ: 10
+  columns: 10
+  rows: 10
+  gridSizeX: 4.8
+  gridSizeZ: 4.8
   perlinScale: 35
   DEBUGGING: 1
   gridCellsOffset: {x: 0, y: 0, z: 0}
@@ -203,7 +203,7 @@ MonoBehaviour:
     type: 3}
   mediumTables: {fileID: 4988544443558938778, guid: f735140a8c7adbd449a0ffc87f68fb3b,
     type: 3}
-  mediumGuitar: {fileID: 90142587202620352, guid: 418621ea765dbeb4ebd664c84b0f445a,
+  mediumGuitar: {fileID: 3344900817703281367, guid: b31aa5887ff32f647a7edadceeee8a3d,
     type: 3}
 --- !u!64 &184836743
 MeshCollider:
@@ -226,7 +226,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184836741}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

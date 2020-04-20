@@ -70,9 +70,28 @@ public class GridManager : MonoBehaviour
                 collider.size = new Vector3(horizontalCellSize, 0.1f, verticalCellSize);
 
                 GridCell cellInfo = gridCell.GetComponent<GridCell>();
-                cellInfo.horizontal = i;
-                cellInfo.vertical = j;
+                cellInfo.vertical = i;
+                cellInfo.horizontal = j;
                 cellInfo.scale = new Vector3(horizontalCellSize, 0.1f, verticalCellSize);
+
+                if (cellInfo.vertical < columns / 2)
+                    cellInfo.rotation = GridCell.RotateTowards.TOP;
+
+                else if (cellInfo.vertical >= columns / 2)
+                    cellInfo.rotation = GridCell.RotateTowards.BOTTOM;
+
+                if (cellInfo.horizontal == 0)
+                {
+                    if (cellInfo.vertical > 0 && cellInfo.vertical < rows - 1)
+                        cellInfo.rotation = GridCell.RotateTowards.LEFT;
+                }
+
+                else if (cellInfo.horizontal == columns - 1)
+                {
+                    if (cellInfo.vertical > 0 && cellInfo.vertical < rows - 1)
+                        cellInfo.rotation = GridCell.RotateTowards.RIGHT;
+                }
+
                 grid[i, j] = cellInfo;
 
                 SetUpGrid(i, j); 
@@ -98,8 +117,8 @@ public class GridManager : MonoBehaviour
             for (int x = 0; x < cells.Count; x++)
             {
                 GridCell cell = cells[x];
-                int i = cell.horizontal;
-                int j = cell.vertical;
+                int i = cell.vertical;
+                int j = cell.horizontal;
                 cell.isAlive = grid[i, j].isAlive;
                 cells[x].transform.position = new Vector3(i * horizontalCellSize + horizontalCellSize * 0.5f, 0f, j * verticalCellSize + verticalCellSize * 0.5f) + transform.position + gridCellsOffset;
                 cell.color = grid[i, j].isAlive ? new Color(0, 0, 0) : new Color(1, 1 , 1);
@@ -122,7 +141,7 @@ public class GridManager : MonoBehaviour
 
     private IEnumerator IterateGameOfLife(GridCell[,] grid, int M, int N)
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);
 
         if (hasIterated < iterateAmount)
         {
@@ -153,9 +172,9 @@ public class GridManager : MonoBehaviour
         {
             for (int j = 0; j < rows; j++)
             {
-                if (grid[i, j].vertical > 0)
+                if (grid[i, j].horizontal > 0)
                 {
-                    if (grid[i, j].horizontal == 0 && grid[i, j].vertical <= 2 || grid[i, j].horizontal == rows - 1 && grid[i, j].vertical <= 2)
+                    if (grid[i, j].vertical == 0 && grid[i, j].horizontal <= 2 || grid[i, j].vertical == rows - 1 && grid[i, j].horizontal <= 2)
                         continue;
 
                     else
@@ -174,17 +193,38 @@ public class GridManager : MonoBehaviour
                 {
                     if (grid[i, j].aliveNeighbours == 0)
                     {
-                        GameObject obj = Instantiate(standaloneBigObject, grid[i, j].transform.position, Quaternion.identity, objectsHolder.transform);
-                        obj.transform.localScale = grid[i, j].totalScale;
+                        SpawnObjectOnGridCell(i, j, standaloneBigObject);
                     }
 
                     else
                     {
-                        GameObject obj = Instantiate(connectableBigObject, grid[i, j].transform.position, Quaternion.identity, objectsHolder.transform);
-                        obj.transform.localScale = new Vector3(obj.transform.localScale.x * gridSizeX, obj.transform.localScale.y * (gridSizeX + gridSizeZ / 2), obj.transform.localScale.z * gridSizeZ) + new Vector3(0.1f * gridSizeX + 0.1f, 0.0f, 0.1f * gridSizeZ + 0.1f);
+                        SpawnObjectOnGridCell(i, j, connectableBigObject);
                     }
                 }
             }
+        }
+    }
+
+    private void SpawnObjectOnGridCell(int i, int j, GameObject toSpawn)
+    {
+        GameObject obj = Instantiate(toSpawn, grid[i, j].transform.position, Quaternion.identity, objectsHolder.transform);
+        obj.transform.localScale = new Vector3(obj.transform.localScale.x * gridSizeX, obj.transform.localScale.y * (gridSizeX + gridSizeZ / 2), obj.transform.localScale.z * gridSizeZ) + new Vector3(0.1f * gridSizeX + 0.1f, 0.0f, 0.1f * gridSizeZ + 0.1f);
+        switch (grid[i, j].rotation)
+        {
+            case GridCell.RotateTowards.LEFT:
+                break;
+
+            case GridCell.RotateTowards.RIGHT:
+                obj.transform.eulerAngles = new Vector3(0, 180, 0);
+                break;
+
+            case GridCell.RotateTowards.TOP:
+                obj.transform.eulerAngles = new Vector3(0, 90, 0);
+                break;
+
+            case GridCell.RotateTowards.BOTTOM:
+                obj.transform.eulerAngles = new Vector3(0, -90, 0);
+                break;
         }
     }
 
@@ -204,7 +244,7 @@ public class GridManager : MonoBehaviour
                 // Implementing the Rules of Life 
 
                 // Top row stays filled
-                if (grid[x, y].isAlive && grid[x, y].vertical == 0)
+                if (grid[x, y].isAlive && grid[x, y].horizontal == 0)
                     future[x, y].isAlive = grid[x, y].isAlive;
 
                 // Lonelyness

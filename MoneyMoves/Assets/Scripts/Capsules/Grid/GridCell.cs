@@ -5,11 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class GridCell : MonoBehaviour
 {
-    public int horizontal, vertical;
+    public int vertical, horizontal;
     public Color color;
     public Vector3 scale, position;
     public bool isAlive;
     public int aliveNeighbours = 0;
+
+    public enum RotateTowards { TOP, RIGHT, BOTTOM, LEFT};
+    public RotateTowards rotation = RotateTowards.TOP;
 
     private void OnDrawGizmos()
     {

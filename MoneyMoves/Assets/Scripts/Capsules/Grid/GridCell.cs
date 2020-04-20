@@ -7,7 +7,7 @@ public class GridCell : MonoBehaviour
 {
     public int horizontal, vertical;
     public Color color;
-    public Vector3 scale, position, totalScale;
+    public Vector3 scale, position;
     public bool isAlive;
     public int aliveNeighbours = 0;
 
@@ -15,7 +15,7 @@ public class GridCell : MonoBehaviour
     {
         Gizmos.color = color;
         position = transform.position;
-        totalScale = new Vector3(transform.lossyScale.x * scale.x, transform.lossyScale.y * scale.y, transform.lossyScale.z * scale.z) - new Vector3(0.01f, 0.01f, 0.01f);
+        Vector3 totalScale = new Vector3(transform.lossyScale.x * scale.x, transform.lossyScale.y * scale.y, transform.lossyScale.z * scale.z) - new Vector3(0.01f, 0.00f, 0.01f);
         Gizmos.DrawCube(position, totalScale);
     }
 }

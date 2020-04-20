@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    #region Variables
     [SerializeField]
     public GridCell[,] grid;
 
@@ -14,7 +15,7 @@ public class GridManager : MonoBehaviour
     public float gridSizeX = 10, gridSizeZ = 10;
 
     [Range(1.0f, 50)]
-    public float scale = 1;
+    public float perlinScale = 1;
 
     public bool DEBUGGING = false;
 
@@ -46,6 +47,7 @@ public class GridManager : MonoBehaviour
 
     [SerializeField]
     private GameObject objectsHolder, connectableBigObject, standaloneBigObject;
+    #endregion
 
     // Start is called before the first frame update
     void Awake()
@@ -80,6 +82,7 @@ public class GridManager : MonoBehaviour
         }
 
         grid = FindNeighbours(grid, columns, rows);
+        StartCoroutine(IterateGameOfLife(grid, columns, rows));
     }
 
     private void Update() 
@@ -107,8 +110,8 @@ public class GridManager : MonoBehaviour
     // Calculates and sets the color based on Perlin noise. Black means a cell is alive, white means dead
     private void SetUpGrid(int x, int y)
     {
-        float xCoord = (float)x / (float)columns * (float)scale + perlinNoiseOffset.x;
-        float yCoord = (float)y / (float)rows * (float)scale + perlinNoiseOffset.y;
+        float xCoord = (float)x / (float)columns * (float)perlinScale + perlinNoiseOffset.x;
+        float yCoord = (float)y / (float)rows * (float)perlinScale + perlinNoiseOffset.y;
 
         float fSample = Mathf.PerlinNoise(xCoord, yCoord);
 
@@ -178,7 +181,7 @@ public class GridManager : MonoBehaviour
                     else
                     {
                         GameObject obj = Instantiate(connectableBigObject, grid[i, j].transform.position, Quaternion.identity, objectsHolder.transform);
-                        obj.transform.localScale = grid[i, j].totalScale;
+                        obj.transform.localScale = new Vector3(obj.transform.localScale.x * gridSizeX, obj.transform.localScale.y * (gridSizeX + gridSizeZ / 2), obj.transform.localScale.z * gridSizeZ) + new Vector3(0.1f * gridSizeX + 0.1f, 0.0f, 0.1f * gridSizeZ + 0.1f);
                     }
                 }
             }

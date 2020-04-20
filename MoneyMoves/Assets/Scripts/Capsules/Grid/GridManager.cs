@@ -262,6 +262,10 @@ public class GridManager : MonoBehaviour
                 }
             }            
         }
+
+        int newX = Random.Range(2, columns - 3);
+        int newY = Random.Range(4, rows - 3);
+        SpawnObjectOnGridCell(newX, newY, mediumTables, new Vector3(1.0f, 1.0f, 1.0f));
     }
 
     private void GoToNextPhase()
@@ -292,7 +296,7 @@ public class GridManager : MonoBehaviour
     private void SpawnObjectOnGridCell(int i, int j, GameObject toSpawn, Vector3 upscaleFactor)
     {
         GameObject obj = Instantiate(toSpawn, grid[i, j].transform.position, Quaternion.identity, objectsHolder.transform);
-        obj.transform.localScale = new Vector3(obj.transform.localScale.x * upscaleFactor.x, obj.transform.localScale.y * (upscaleFactor.x + upscaleFactor.z / 2), obj.transform.localScale.z * upscaleFactor.z) + new Vector3(0.1f * upscaleFactor.x + 0.1f, 0.0f, 0.1f * upscaleFactor.z + 0.1f);
+        obj.transform.localScale = new Vector3(obj.transform.localScale.x * upscaleFactor.x, obj.transform.localScale.y * ((upscaleFactor.x + upscaleFactor.z) / 2), obj.transform.localScale.z * upscaleFactor.z) + new Vector3(0.1f * upscaleFactor.x + 0.1f, 0.0f, 0.1f * upscaleFactor.z + 0.1f);
         switch (grid[i, j].rotation)
         {
             case GridCell.RotateTowards.LEFT:

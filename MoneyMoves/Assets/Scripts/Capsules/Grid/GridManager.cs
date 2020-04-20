@@ -19,6 +19,8 @@ public class GridManager : MonoBehaviour
 
     public bool DEBUGGING = false;
 
+    private int totalAlive = 0;
+
     [SerializeField]
     private Vector3 gridCellsOffset;
 
@@ -30,9 +32,6 @@ public class GridManager : MonoBehaviour
 
     [SerializeField]
     private Transform cellParent;
-
-    [SerializeField]
-    private int iterateAmount = 5;
 
     private int hasIterated = 0;
 
@@ -47,7 +46,7 @@ public class GridManager : MonoBehaviour
     private List<GridCell> cells = new List<GridCell>();
 
     [SerializeField]
-    private GameObject objectsHolder, connectableBigObject, standaloneBigObject;
+    private GameObject objectsHolder, connectableBigObject, standaloneBigObject, mediumTables, mediumGuitar;
     #endregion
 
     // Start is called before the first frame update
@@ -95,17 +94,17 @@ public class GridManager : MonoBehaviour
 
                 grid[i, j] = cellInfo;
 
-                SetUpGrid(i, j); 
+                SetUpGrid(i, j);
 
                 cells.Add(cellInfo);
             }
         }
 
         grid = FindNeighbours(grid, columns, rows);
-        StartCoroutine(IterateGameOfLife(grid, columns, rows, currentSpawningPhase));
+        StartCoroutine(IterateGameOfLife(grid, columns, rows, currentSpawningPhase, 15));
     }
 
-    private void Update() 
+    private void Update()
     {
         if (DEBUGGING)
         {
@@ -116,7 +115,7 @@ public class GridManager : MonoBehaviour
                 int j = cell.horizontal;
                 cell.isAlive = grid[i, j].isAlive;
                 cells[x].transform.position = new Vector3(i * horizontalCellSize + horizontalCellSize * 0.5f, 0f, j * verticalCellSize + verticalCellSize * 0.5f) + transform.position + gridCellsOffset;
-                cell.color = grid[i, j].isAlive ? new Color(0, 0, 0) : new Color(1, 1 , 1);
+                cell.color = grid[i, j].isAlive ? new Color(0, 0, 0) : new Color(1, 1, 1);
             }
         }
     }
@@ -124,6 +123,8 @@ public class GridManager : MonoBehaviour
     // Calculates and sets the color based on Perlin noise. Black means a cell is alive, white means dead
     private void SetUpGrid(int x, int y)
     {
+        perlinScale = Random.Range(1, 50);
+
         float xCoord = (float)x / (float)columns * (float)perlinScale + perlinNoiseOffset.x;
         float yCoord = (float)y / (float)rows * (float)perlinScale + perlinNoiseOffset.y;
 
@@ -132,13 +133,16 @@ public class GridManager : MonoBehaviour
         bool sample = fSample >= aliveThreshold;
 
         if (!grid[x, y].hasSpawnedAnObject)
+        {
             grid[x, y].isAlive = sample;
+            totalAlive++;
+        }
 
         else
             grid[x, y].isAlive = false;
     }
 
-    private IEnumerator IterateGameOfLife(GridCell[,] grid, int M, int N, SpawningPhase phase)
+    private IEnumerator IterateGameOfLife(GridCell[,] grid, int M, int N, SpawningPhase phase, int iterateAmount)
     {
         yield return new WaitForSeconds(0.01f);
 
@@ -146,7 +150,7 @@ public class GridManager : MonoBehaviour
         {
             hasIterated++;
             this.grid = ExecuteGameOfLife(grid, M, N, phase);
-            StartCoroutine(IterateGameOfLife(grid, M, N, phase));
+            StartCoroutine(IterateGameOfLife(grid, M, N, phase, iterateAmount));
         }
 
         else
@@ -160,9 +164,11 @@ public class GridManager : MonoBehaviour
             case SpawningPhase.BIG:
                 SpawnBigObjects();
                 break;
-        }
 
-        iterateAmount = 0;
+            case SpawningPhase.MEDIUM:
+                SpawnMediumObjects();
+                break;
+        }
     }
 
     private void SpawnBigObjects()
@@ -192,12 +198,12 @@ public class GridManager : MonoBehaviour
                 {
                     if (grid[i, j].aliveNeighbours == 0)
                     {
-                        SpawnObjectOnGridCell(i, j, standaloneBigObject);
+                        SpawnObjectOnGridCell(i, j, standaloneBigObject, new Vector3(gridSizeX, 1, gridSizeZ));
                     }
 
                     else
                     {
-                        SpawnObjectOnGridCell(i, j, connectableBigObject);
+                        SpawnObjectOnGridCell(i, j, connectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ));
                     }
                 }
             }
@@ -206,26 +212,96 @@ public class GridManager : MonoBehaviour
         GoToNextPhase();
     }
 
-    private void GoToNextPhase()
+    private void SpawnMediumObjects()
     {
-        currentSpawningPhase = SpawningPhase.MEDIUM;
-        hasIterated = 0;
+        int spawnedMedium = 0;
 
         for (int x = 0; x < columns; x++)
         {
             for (int y = 0; y < rows; y++)
             {
+                if (grid[x, y].horizontal < 3)
+                {
+                    grid[x, y].isAlive = false;
+                    continue;
+                }
+
+                // Overpopulation
+                if (grid[x, y].isAlive && grid[x, y].aliveNeighbours > 0)
+                    grid[x, y].isAlive = false;
+
+                if (grid[x, y].horizontal == 0 || grid[x, y].horizontal == columns - 1)
+                {
+                    if (grid[x, y].isAlive)
+                        spawnedMedium++;
+                }
+
+                if (grid[x, y].horizontal < 2 && spawnedMedium >= 2 || grid[x, y].horizontal == columns - 3 && spawnedMedium >= 2)
+                {
+                    grid[x, y].isAlive = false;
+                }
+
+                grid = FindNeighbours(grid, columns, rows);
+
+                if (grid[x, y].horizontal > 0 && grid[x, y].vertical > 0)
+                {
+                    if (grid[x, y].horizontal < columns - 1 && grid[x, y].vertical < rows - 1)
+                    {
+                        if (grid[x, y].isAlive)
+                        {
+                            // SpawnObjectOnGridCell(i, j, mediumTables, new Vector3(1.0f, 1.0f, 1.0f));
+                        }
+                    }
+
+                    else
+                    {
+                        if (grid[x, y].isAlive)
+                        {
+                            // SpawnObjectOnGridCell(i, j, mediumGuitar, new Vector3(1.0f, 1.0f, 1.0f));
+                        }
+                    }
+                }
+
+                else
+                {
+                    if (grid[x, y].isAlive)
+                    {
+                        // SpawnObjectOnGridCell(i, j, mediumGuitar, new Vector3(1.0f, 1.0f, 1.0f));
+                    }
+                }
+            }
+        }
+    }
+
+    private void GoToNextPhase()
+    {
+        currentSpawningPhase = SpawningPhase.MEDIUM;
+        hasIterated = 0;
+        totalAlive = 0;
+
+        for (int x = 0; x < columns; x++)
+        {
+            for (int y = 0; y < rows; y++)
+            {
+                aliveThreshold = 0.55f;
                 SetUpGrid(x, y);
             }
         }
 
+        if (totalAlive < 3)
+        {
+            GoToNextPhase();
+        }
+
         grid = FindNeighbours(grid, columns, rows);
+
+        StartCoroutine(IterateGameOfLife(grid, columns, rows, currentSpawningPhase, 10));
     }
 
-    private void SpawnObjectOnGridCell(int i, int j, GameObject toSpawn)
+    private void SpawnObjectOnGridCell(int i, int j, GameObject toSpawn, Vector3 upscaleFactor)
     {
         GameObject obj = Instantiate(toSpawn, grid[i, j].transform.position, Quaternion.identity, objectsHolder.transform);
-        obj.transform.localScale = new Vector3(obj.transform.localScale.x * gridSizeX, obj.transform.localScale.y * (gridSizeX + gridSizeZ / 2), obj.transform.localScale.z * gridSizeZ) + new Vector3(0.1f * gridSizeX + 0.1f, 0.0f, 0.1f * gridSizeZ + 0.1f);
+        obj.transform.localScale = new Vector3(obj.transform.localScale.x * upscaleFactor.x, obj.transform.localScale.y * (upscaleFactor.x + upscaleFactor.z / 2), obj.transform.localScale.z * upscaleFactor.z) + new Vector3(0.1f * upscaleFactor.x + 0.1f, 0.0f, 0.1f * upscaleFactor.z + 0.1f);
         switch (grid[i, j].rotation)
         {
             case GridCell.RotateTowards.LEFT:
@@ -266,6 +342,9 @@ public class GridManager : MonoBehaviour
                     case SpawningPhase.BIG:
                         future = GameOfLifeBig(x, y, future);
                         break;
+                    case SpawningPhase.MEDIUM:
+                        future = GameOfLifeMedium(x, y, future);
+                        break;
                 }
             }
         }
@@ -289,6 +368,23 @@ public class GridManager : MonoBehaviour
 
         // Birth
         else if (!grid[x, y].isAlive && grid[x, y].aliveNeighbours == 3)
+            future[x, y].isAlive = true;
+
+        // Cell remains dead/alive
+        else
+            future[x, y].isAlive = grid[x, y].isAlive;
+
+        return future;
+    }
+
+    private GridCell[,] GameOfLifeMedium(int x, int y, GridCell[,] future)
+    { 
+        // Overpopulation
+        if (grid[x, y].isAlive && grid[x, y].aliveNeighbours > 0)
+            future[x, y].isAlive = false;
+
+        // Birth
+        else if (!grid[x, y].isAlive && grid[x, y].aliveNeighbours == 0)
             future[x, y].isAlive = true;
 
         // Cell remains dead/alive

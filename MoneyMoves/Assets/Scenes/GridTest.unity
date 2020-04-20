@@ -194,12 +194,16 @@ MonoBehaviour:
   gridCellPrefab: {fileID: 6593446899856398828, guid: 85d39e92cfa0e024680ef8e8ad853ef7,
     type: 3}
   cellParent: {fileID: 634308778}
-  iterateAmount: 15
+  currentSpawningPhase: 0
   aliveThreshold: 0.5
   objectsHolder: {fileID: 184508000}
   connectableBigObject: {fileID: 5063561918130622637, guid: f09688ecc2d8f3c489bf9f678c7a2824,
     type: 3}
   standaloneBigObject: {fileID: 2393329427302114439, guid: 078bd10dce211de45aa8fc6303f0997f,
+    type: 3}
+  mediumTables: {fileID: 4988544443558938778, guid: f735140a8c7adbd449a0ffc87f68fb3b,
+    type: 3}
+  mediumGuitar: {fileID: 90142587202620352, guid: 418621ea765dbeb4ebd664c84b0f445a,
     type: 3}
 --- !u!64 &184836743
 MeshCollider:

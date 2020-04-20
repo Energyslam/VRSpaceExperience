@@ -38,6 +38,7 @@ public class GridManager : MonoBehaviour
 
     public enum SpawningPhase { BIG, MEDIUM, SMALL, WALL, ROOF, TABLE };
 
+    [SerializeField]
     private SpawningPhase currentSpawningPhase = SpawningPhase.BIG;
 
     [SerializeField]
@@ -101,19 +102,13 @@ public class GridManager : MonoBehaviour
         }
 
         grid = FindNeighbours(grid, columns, rows);
-        StartCoroutine(IterateGameOfLife(grid, columns, rows));
+        StartCoroutine(IterateGameOfLife(grid, columns, rows, currentSpawningPhase));
     }
 
     private void Update() 
     {
         if (DEBUGGING)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                hasIterated = 0;
-                StartCoroutine(IterateGameOfLife(grid, columns, rows));
-            }   
-
             for (int x = 0; x < cells.Count; x++)
             {
                 GridCell cell = cells[x];
@@ -136,18 +131,22 @@ public class GridManager : MonoBehaviour
 
         bool sample = fSample >= aliveThreshold;
 
-        grid[x, y].isAlive = sample;
+        if (!grid[x, y].hasSpawnedAnObject)
+            grid[x, y].isAlive = sample;
+
+        else
+            grid[x, y].isAlive = false;
     }
 
-    private IEnumerator IterateGameOfLife(GridCell[,] grid, int M, int N)
+    private IEnumerator IterateGameOfLife(GridCell[,] grid, int M, int N, SpawningPhase phase)
     {
         yield return new WaitForSeconds(0.01f);
 
         if (hasIterated < iterateAmount)
         {
             hasIterated++;
-            this.grid = ExecuteGameOfLife(grid, M, N);
-            StartCoroutine(IterateGameOfLife(grid, M, N));
+            this.grid = ExecuteGameOfLife(grid, M, N, phase);
+            StartCoroutine(IterateGameOfLife(grid, M, N, phase));
         }
 
         else
@@ -203,6 +202,24 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
+
+        GoToNextPhase();
+    }
+
+    private void GoToNextPhase()
+    {
+        currentSpawningPhase = SpawningPhase.MEDIUM;
+        hasIterated = 0;
+
+        for (int x = 0; x < columns; x++)
+        {
+            for (int y = 0; y < rows; y++)
+            {
+                SetUpGrid(x, y);
+            }
+        }
+
+        grid = FindNeighbours(grid, columns, rows);
     }
 
     private void SpawnObjectOnGridCell(int i, int j, GameObject toSpawn)
@@ -226,10 +243,12 @@ public class GridManager : MonoBehaviour
                 obj.transform.eulerAngles = new Vector3(0, -90, 0);
                 break;
         }
+
+        grid[i, j].hasSpawnedAnObject = true;
     }
 
     // Function to print next generation 
-    private GridCell[,] ExecuteGameOfLife(GridCell[,] grid, int M, int N)
+    private GridCell[,] ExecuteGameOfLife(GridCell[,] grid, int M, int N, SpawningPhase phase)
     {
         GridCell[,] future = new GridCell[M, N];
 
@@ -242,28 +261,39 @@ public class GridManager : MonoBehaviour
             for (int y = 0; y < N; y++)
             {
                 // Implementing the Rules of Life 
-
-                // Top row stays filled
-                if (grid[x, y].isAlive && grid[x, y].horizontal == 0)
-                    future[x, y].isAlive = grid[x, y].isAlive;
-
-                // Lonelyness
-                else if (grid[x, y].isAlive && grid[x, y].aliveNeighbours < 2)
-                    future[x, y].isAlive = false;
-
-                // Overpopulation
-                else if (grid[x, y].isAlive && grid[x, y].aliveNeighbours > 3)
-                    future[x, y].isAlive = false;
-
-                // Birth
-                else if (!grid[x, y].isAlive && grid[x, y].aliveNeighbours == 3)
-                    future[x, y].isAlive = true;
-
-                // Cell remains dead/alive
-                else
-                    future[x, y].isAlive = grid[x, y].isAlive;    
+                switch (phase)
+                {
+                    case SpawningPhase.BIG:
+                        future = GameOfLifeBig(x, y, future);
+                        break;
+                }
             }
         }
+
+        return future;
+    }
+
+    private GridCell[,] GameOfLifeBig(int x, int y, GridCell[,] future)
+    {
+        // Top row stays filled
+        if (grid[x, y].isAlive && grid[x, y].horizontal == 0)
+            future[x, y].isAlive = grid[x, y].isAlive;
+
+        // Lonelyness
+        else if (grid[x, y].isAlive && grid[x, y].aliveNeighbours < 2)
+            future[x, y].isAlive = false;
+
+        // Overpopulation
+        else if (grid[x, y].isAlive && grid[x, y].aliveNeighbours > 3)
+            future[x, y].isAlive = false;
+
+        // Birth
+        else if (!grid[x, y].isAlive && grid[x, y].aliveNeighbours == 3)
+            future[x, y].isAlive = true;
+
+        // Cell remains dead/alive
+        else
+            future[x, y].isAlive = grid[x, y].isAlive;
 
         return future;
     }

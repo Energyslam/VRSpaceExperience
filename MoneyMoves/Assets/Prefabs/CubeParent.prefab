@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 9087589035307787825}
   - component: {fileID: 5200184684718870052}
   - component: {fileID: 5856844907102483870}
+  - component: {fileID: 1478357596420857135}
   m_Layer: 0
   m_Name: CheatPrevention
   m_TagString: Untagged
@@ -126,6 +127,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1478357596420857135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 463959689913426797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f88e97eb0c72748b300cc5f869b6fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &498356092928718751
 GameObject:
   m_ObjectHideFlags: 0

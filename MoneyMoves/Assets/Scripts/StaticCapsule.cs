@@ -69,6 +69,8 @@ public class StaticCapsule : MonoBehaviour
         float dockingSpotY = dockingSpot.transform.position.y;
         dockingSpot.transform.position = this.transform.position + (otherCapsuleInWave.transform.position - dockingSpot.transform.position).normalized * (dockingSpot.transform.position - this.transform.position).magnitude;
         dockingSpot.transform.position = new Vector3(dockingSpot.transform.position.x, dockingSpotY, dockingSpot.transform.position.z);
+        this.transform.LookAt(dockingSpot.transform);
+        this.transform.localEulerAngles = new Vector3(0, this.transform.localEulerAngles.y, 0);
         textStartingY = timeText.transform.position.y;
         foreach (Transform t in locationParent.transform)
         {
@@ -227,21 +229,19 @@ public class StaticCapsule : MonoBehaviour
         //{
         //    newRotation += 360;
         //}
-        Debug.Log("Going to pick");
-        float[] angles = { 0, 45, 90, 135, 180, 225, 270, 315 };
-    repickAngle:
-        Debug.Log("Picking now");
-        newRotation = angles[Random.Range(0, angles.Length)];
-        Debug.Log("Picked " + newRotation);
-        if (FastApproximately(this.transform.localEulerAngles.y, newRotation, 2f)) // this.transform.localEulerAngles.y +2f < newRotation)
-        {
-            goto repickAngle;
-        }
-        if (newRotation == 45 || newRotation == 135 || newRotation == 225 || newRotation == 315)
+        float[] angles = { 45, 90, 135, 180, 225, 270, 315 };
+    //repickAngle:
+        float chosenAngle = angles[Random.Range(0, angles.Length)];
+        newRotation = newRotation + chosenAngle;
+        //if (FastApproximately(this.transform.localEulerAngles.y, newRotation, 2f)) // this.transform.localEulerAngles.y +2f < newRotation)
+        //{
+        //    goto repickAngle;
+        //}
+        if (chosenAngle == 45 || chosenAngle == 135 || chosenAngle == 225 || chosenAngle == 315)
         {
             doorsToOpenAtOnce = 2;
         }
-        else if (newRotation == 0 || newRotation == 90 || newRotation == 180 || newRotation == 270)
+        else if (chosenAngle == 90 || chosenAngle == 180 || chosenAngle == 270)
         {
             doorsToOpenAtOnce = 1;
         }
@@ -345,7 +345,7 @@ public class StaticCapsule : MonoBehaviour
     private IEnumerator FadeInVolume()
     {
         jukeBox.volume += audioLerpSpeed;
-        yield return new WaitForSeconds(0.03f);
+        yield return new WaitForSeconds(0.01f);
 
         if (jukeBox.volume < 0.3f)
         {
@@ -370,7 +370,7 @@ public class StaticCapsule : MonoBehaviour
     private IEnumerator StopMusic()
     {
         jukeBox.volume -= audioLerpSpeed;
-        yield return new WaitForSeconds(0.03f);
+        yield return new WaitForSeconds(0.02f);
 
         if (jukeBox.volume <= 0f)
         {

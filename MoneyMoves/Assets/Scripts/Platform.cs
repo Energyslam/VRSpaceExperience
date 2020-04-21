@@ -223,6 +223,7 @@ public class Platform : MonoBehaviour
         arrowA.transform.position += new Vector3(0, 3f, 0);
         arrowB.transform.position += new Vector3(0, 3f, 0);
         arrowA.transform.localEulerAngles += new Vector3(0, 180f, 0);
+        arrowA.transform.localEulerAngles = new Vector3(arrowA.transform.localEulerAngles.x * -1f, arrowA.transform.localEulerAngles.y, arrowA.transform.localEulerAngles.z);
 
         arrows.Clear();
         arrows.Add(arrowA);

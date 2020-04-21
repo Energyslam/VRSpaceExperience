@@ -2,12 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public class StaticCapsule : MonoBehaviour
 {
      List<GameObject> giftLocations = new List<GameObject>();
      List<GameObject> chosenLocations = new List<GameObject>();
      List<GameObject> spawnedGifts = new List<GameObject>();
+
+
+    [SerializeField]
+    private AudioSource jukeBox;
+    [SerializeField]
+    private List<CapsuleAnimations> openDoors = new List<CapsuleAnimations>();
+    [SerializeField]
+    List<float> distances = new List<float>();
+    [SerializeField]
+    private int doorsToOpenAtOnce = 1;
+    [SerializeField]
+    private List<CapsuleAnimations> animationHandlers;
+    public float audioLerpSpeed;
+
 
     [SerializeField] GameObject destroyableGift;
     [SerializeField] GameObject grabbableGift;
@@ -50,8 +65,10 @@ public class StaticCapsule : MonoBehaviour
     void Start()
     {
         Wave wave = GetComponentInParent<Wave>();
-        otherCapsuleInWave = this.gameObject == wave.a.gameObject ? wave.b.gameObject : wave.a.gameObject; 
+        otherCapsuleInWave = this.gameObject == wave.a.gameObject ? wave.b.gameObject : wave.a.gameObject;
+        float dockingSpotY = dockingSpot.transform.localPosition.y;
         dockingSpot.transform.position = this.transform.position + (otherCapsuleInWave.transform.position - dockingSpot.transform.position).normalized * (dockingSpot.transform.position - this.transform.position).magnitude;
+        dockingSpot.transform.position += new Vector3(0,dockingSpotY,0);
         textStartingY = timeText.transform.position.y;
         foreach (Transform t in locationParent.transform)
         {
@@ -69,7 +86,7 @@ public class StaticCapsule : MonoBehaviour
     {
         if (rotating)
         {
-            RotateCapsule(newRotation);
+            RotateCapsule();
         }
         if (rotateText)
         {
@@ -150,8 +167,10 @@ public class StaticCapsule : MonoBehaviour
     {
         timesOpened++;
         cheatPrevention.SetActive(false);
-        capsuleAnim.SetFloat("Speed", 1f);
-        capsuleAnim.SetTrigger("OpeningTrigger");
+        CalculateNearestDoors();
+        PlayMusic();
+        //capsuleAnim.SetFloat("Speed", 1f);
+        //capsuleAnim.SetTrigger("OpeningTrigger");
 
         if (!rotateText)
         {
@@ -164,21 +183,25 @@ public class StaticCapsule : MonoBehaviour
             timeText.transform.position = new Vector3(timeText.transform.position.x, textStartingY, timeText.transform.position.z);
         }
         timeText.gameObject.SetActive(true);
-        light.TurnOnLight();
+        //light.TurnOnLight();
     }
 
     IEnumerator CloseCapsule()
     {
         cheatPrevention.SetActive(true);
         yield return new WaitForSeconds(respawnWaitTime);
-        light.TurnOffLight();
+        //light.TurnOffLight();
         timeText.gameObject.SetActive(false);
-        capsuleAnim.SetFloat("Speed", -0.5f);
-        capsuleAnim.SetTrigger("OpeningTrigger");
-        yield return new WaitForSeconds(capsuleAnim.GetCurrentAnimatorStateInfo(0).length);
+        //capsuleAnim.SetFloat("Speed", -0.5f);
+        //capsuleAnim.SetTrigger("OpeningTrigger");
+
+        CalculateNearestDoors();
+        //yield return new WaitForSeconds(capsuleAnim.GetCurrentAnimatorStateInfo(0).length);
+
         if (timesOpened >= timesToOpen)
         {
             //TODO: Player moves to new location
+            StartCoroutine(StopMusic());
             WaveManager.Instance.GetNextWave();
             yield break;
         }
@@ -186,30 +209,50 @@ public class StaticCapsule : MonoBehaviour
     }
     void SetNewRotation()
     {
-        int i = Random.Range(1, 3);
-        if (i % 2 == 0)
+        //For a random rotation that's atleast 90 degrees in a different direction
+        //int i = Random.Range(1, 3);
+        //if (i % 2 == 0)
+        //{
+        //    newRotation = this.transform.localEulerAngles.y + 90f + Random.Range(0f, 180f);
+        //}
+        //else if (i % 2 == 1)
+        //{
+        //    newRotation = this.transform.localEulerAngles.y - 90f - Random.Range(0f, 180f);
+        //}
+        //if (newRotation > 360)
+        //{
+        //    newRotation -= 360;
+        //}
+        //else if (newRotation < 0)
+        //{
+        //    newRotation += 360;
+        //}
+        Debug.Log("Going to pick");
+        float[] angles = { 0, 45, 90, 135, 180, 225, 270, 315 };
+    repickAngle:
+        Debug.Log("Picking now");
+        newRotation = angles[Random.Range(0, angles.Length)];
+        Debug.Log("Picked " + newRotation);
+        if (FastApproximately(this.transform.localEulerAngles.y, newRotation, 2f)) // this.transform.localEulerAngles.y +2f < newRotation)
         {
-            newRotation = this.transform.localEulerAngles.y + 90f + Random.Range(0f, 180f);
+            goto repickAngle;
         }
-        else if (i % 2 == 1)
+        if (newRotation == 45 || newRotation == 135 || newRotation == 225 || newRotation == 315)
         {
-            newRotation = this.transform.localEulerAngles.y - 90f - Random.Range(0f, 180f);
+            doorsToOpenAtOnce = 2;
         }
-        if (newRotation > 360)
+        else if (newRotation == 0 || newRotation == 90 || newRotation == 180 || newRotation == 270)
         {
-            newRotation -= 360;
+            doorsToOpenAtOnce = 1;
         }
-        else if (newRotation < 0)
-        {
-            newRotation += 360;
-        }
+        Debug.Log("Setting rota to true");
         rotating = true;
     }
 
-    void RotateCapsule(float toRotateTo)
+    void RotateCapsule()
     {
-        this.transform.localEulerAngles = new Vector3(0f, Mathf.Lerp(this.transform.localEulerAngles.y, toRotateTo, rotationSpeed * Time.deltaTime), 0f);
-        if (FastApproximately(this.transform.localEulerAngles.y, toRotateTo, 10f))
+        this.transform.localEulerAngles = new Vector3(0f, Mathf.Lerp(this.transform.localEulerAngles.y, newRotation, rotationSpeed * Time.deltaTime), 0f);
+        if (FastApproximately(this.transform.localEulerAngles.y, newRotation, 1f))
         {
             rotating = false;
             SpawnGifts();
@@ -255,6 +298,89 @@ public class StaticCapsule : MonoBehaviour
         else
         {
             return Mathf.Approximately(a, b);
+        }
+    }
+
+    private void CalculateNearestDoors()
+    {
+        if (openDoors.Count <= 0) // No doors are open, open closest doors 
+        {
+            List<CapsuleAnimations> clonedAnimations = new List<CapsuleAnimations>(animationHandlers);
+
+            for (int i = 0; i < clonedAnimations.Count; i++)
+            {
+                distances.Add((clonedAnimations[i].distancePivot.transform.position - GameManager.Instance.player.transform.position).sqrMagnitude);
+            }
+
+            for (int i = 0; i < doorsToOpenAtOnce; i++)
+            {
+                float minimum = distances.Min();
+
+                int index = distances.IndexOf(minimum);
+                clonedAnimations[index].Animate(true);
+                openDoors.Add(clonedAnimations[index]);
+                clonedAnimations.RemoveAt(index);
+                distances.RemoveAt(index);
+            }
+        }
+        else // Close open doors
+        {
+            if (openDoors.Count > 1)
+            {
+                Invoke("StopMusic", 5.5f);
+            }
+
+            for (int i = 0; i < openDoors.Count; i++)
+            {
+                openDoors[i].Animate(false);
+            }
+
+            openDoors.Clear();
+        }
+
+        distances.Clear();
+        //doorsToOpenAtOnce = 1;
+    }
+
+    private IEnumerator FadeInVolume()
+    {
+        jukeBox.volume += audioLerpSpeed;
+        yield return new WaitForSeconds(0.02f);
+
+        if (jukeBox.volume < 0.1f)
+        {
+            StartCoroutine(FadeInVolume());
+        }
+    }
+
+    private void PlayMusic()
+    {
+        if (jukeBox.isPlaying)
+        {
+            return;
+
+        }
+        jukeBox.time = CapsuleManager._instance.timeInSong;
+        jukeBox.volume = 0.0f;
+        StartCoroutine(FadeInVolume());
+        jukeBox.Play();
+    }
+
+
+    private IEnumerator StopMusic()
+    {
+        jukeBox.volume -= audioLerpSpeed;
+        yield return new WaitForSeconds(0.02f);
+
+        if (jukeBox.volume <= 0f)
+        {
+            CapsuleManager._instance.timeInSong = jukeBox.time;
+            jukeBox.Stop();
+            yield return new WaitForEndOfFrame();
+        }
+        else if (jukeBox.volume > 0f)
+        {
+            StartCoroutine(StopMusic());
         }
     }
 }

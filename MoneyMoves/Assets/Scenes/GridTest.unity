@@ -162,7 +162,6 @@ GameObject:
   - component: {fileID: 184836746}
   - component: {fileID: 184836745}
   - component: {fileID: 184836744}
-  - component: {fileID: 184836743}
   - component: {fileID: 184836742}
   m_Layer: 0
   m_Name: Plane
@@ -197,28 +196,16 @@ MonoBehaviour:
   currentSpawningPhase: 0
   aliveThreshold: 0.5
   objectsHolder: {fileID: 184508000}
-  connectableBigObject: {fileID: 5063561918130622637, guid: f09688ecc2d8f3c489bf9f678c7a2824,
+  connectableBigObject: {fileID: 8199688303501405120, guid: 7b8117e291364654aa3dbe444155aa26,
+    type: 3}
+  cornerConnectableBigObject: {fileID: 4255642824647951325, guid: 8c0ea8c921e13e341b1cd76ce40ff4d2,
     type: 3}
   standaloneBigObject: {fileID: 2393329427302114439, guid: 078bd10dce211de45aa8fc6303f0997f,
     type: 3}
-  mediumTables: {fileID: 4988544443558938778, guid: f735140a8c7adbd449a0ffc87f68fb3b,
+  mediumMultiObject: {fileID: 4988544443558938778, guid: f735140a8c7adbd449a0ffc87f68fb3b,
     type: 3}
-  mediumGuitar: {fileID: 3344900817703281367, guid: b31aa5887ff32f647a7edadceeee8a3d,
+  mediumSingleObject: {fileID: 3344900817703281367, guid: b31aa5887ff32f647a7edadceeee8a3d,
     type: 3}
---- !u!64 &184836743
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184836741}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &184836744
 MeshRenderer:
   m_ObjectHideFlags: 0

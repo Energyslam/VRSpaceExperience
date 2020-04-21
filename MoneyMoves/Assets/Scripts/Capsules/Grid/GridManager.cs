@@ -46,7 +46,7 @@ public class GridManager : MonoBehaviour
     private List<GridCell> cells = new List<GridCell>();
 
     [SerializeField]
-    private GameObject objectsHolder, connectableBigObject, standaloneBigObject, mediumTables, mediumGuitar;
+    private GameObject objectsHolder, connectableBigObject, cornerConnectableBigObject, standaloneBigObject, mediumMultiObject, mediumSingleObject;
     #endregion
 
     // Start is called before the first frame update
@@ -75,15 +75,20 @@ public class GridManager : MonoBehaviour
                 cellInfo.scale = new Vector3(horizontalCellSize, 0.1f, verticalCellSize);
 
                 if (cellInfo.vertical < columns / 2)
+                {
                     cellInfo.rotation = GridCell.RotateTowards.TOP;
+                }
 
                 else if (cellInfo.vertical >= columns / 2)
+                {
                     cellInfo.rotation = GridCell.RotateTowards.BOTTOM;
+                }
 
                 if (cellInfo.horizontal == 0)
                 {
-                    if (cellInfo.vertical > 0 && cellInfo.vertical < rows - 1)
-                        cellInfo.rotation = GridCell.RotateTowards.LEFT;
+                    if (cellInfo.vertical > 0)
+                        if (cellInfo.vertical <= rows - 1)
+                            cellInfo.rotation = GridCell.RotateTowards.LEFT;
                 }
 
                 else if (cellInfo.horizontal == columns - 1)
@@ -163,10 +168,12 @@ public class GridManager : MonoBehaviour
         {
             case SpawningPhase.BIG:
                 SpawnBigObjects();
+                GoToNextPhase(currentSpawningPhase);
                 break;
 
             case SpawningPhase.MEDIUM:
                 SpawnMediumObjects();
+                GoToNextPhase(currentSpawningPhase);
                 break;
         }
     }
@@ -203,13 +210,15 @@ public class GridManager : MonoBehaviour
 
                     else
                     {
-                        SpawnObjectOnGridCell(i, j, connectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ));
+                        if (grid[i, j].horizontal == 0 && grid[i, j].vertical == 0 || grid[i, j].horizontal == 0 && grid[i, j].vertical == rows - 1)
+                            SpawnObjectOnGridCell(i, j, cornerConnectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ));
+
+                        else
+                            SpawnObjectOnGridCell(i, j, connectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ));
                     }
                 }
             }
         }
-
-        GoToNextPhase();
     }
 
     private void SpawnMediumObjects()
@@ -258,34 +267,44 @@ public class GridManager : MonoBehaviour
 
                 if (grid[x, y].isAlive)
                 {
-                    SpawnObjectOnGridCell(x, y, mediumGuitar, new Vector3(1.0f, 1.0f, 1.0f));
+                    SpawnObjectOnGridCell(x, y, mediumSingleObject, new Vector3(1.0f, 1.0f, 1.0f));
                 }
             }            
         }
 
         int newX = Random.Range(2, columns - 3);
         int newY = Random.Range(4, rows - 3);
-        SpawnObjectOnGridCell(newX, newY, mediumTables, new Vector3(1.0f, 1.0f, 1.0f));
+        SpawnObjectOnGridCell(newX, newY, mediumMultiObject, new Vector3(1.0f, 1.0f, 1.0f));
     }
 
-    private void GoToNextPhase()
+    private void GoToNextPhase(SpawningPhase oldPhase)
     {
-        currentSpawningPhase = SpawningPhase.MEDIUM;
         hasIterated = 0;
         totalAlive = 0;
+
+        switch (oldPhase)
+        {
+            case SpawningPhase.BIG:
+                currentSpawningPhase = SpawningPhase.MEDIUM;
+                aliveThreshold = 0.55f;
+                break;
+            case SpawningPhase.MEDIUM:
+                currentSpawningPhase = SpawningPhase.ROOF;
+                aliveThreshold = 0.55f;
+                break;
+        }
 
         for (int x = 0; x < columns; x++)
         {
             for (int y = 0; y < rows; y++)
             {
-                aliveThreshold = 0.55f;
                 SetUpGrid(x, y);
             }
         }
 
         if (totalAlive < 3)
         {
-            GoToNextPhase();
+            GoToNextPhase(oldPhase);
         }
 
         grid = FindNeighbours(grid, columns, rows);

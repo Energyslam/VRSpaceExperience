@@ -1,71 +1,156 @@
 fileFormatVersion: 2
 guid: 4b3071d113f87f24fb37f0b071ab1c7a
-timeCreated: 1473678887
-licenseType: Store
 ModelImporter:
-  serializedVersion: 19
-  fileIDToRecycleName:
-    100000: Core engine
-    100002: core engine ribs003
-    100004: core engine ribs004
-    100006: core engine ribs005
-    100008: lower Rotor
-    100010: //RootNode
-    100012: upper engine
-    400000: Core engine
-    400002: core engine ribs003
-    400004: core engine ribs004
-    400006: core engine ribs005
-    400008: lower Rotor
-    400010: //RootNode
-    400012: upper engine
-    2300000: Core engine
-    2300002: core engine ribs003
-    2300004: core engine ribs004
-    2300006: core engine ribs005
-    2300008: lower Rotor
-    2300010: //RootNode
-    2300012: upper engine
-    3300000: Core engine
-    3300002: core engine ribs003
-    3300004: core engine ribs004
-    3300006: core engine ribs005
-    3300008: lower Rotor
-    3300010: //RootNode
-    3300012: upper engine
-    4300000: Luminaris Ingame
-    4300002: core engine ribs004
-    4300004: core engine ribs005
-    4300006: core engine ribs003
-    4300008: Core engine
-    4300010: upper engine
-    4300012: lower Rotor
-    7400000: Take 001
-    9500000: //RootNode
+  serializedVersion: 19300
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Core engine
+  - first:
+      1: 100002
+    second: core engine ribs003
+  - first:
+      1: 100004
+    second: core engine ribs004
+  - first:
+      1: 100006
+    second: core engine ribs005
+  - first:
+      1: 100008
+    second: lower Rotor
+  - first:
+      1: 100010
+    second: //RootNode
+  - first:
+      1: 100012
+    second: upper engine
+  - first:
+      4: 400000
+    second: Core engine
+  - first:
+      4: 400002
+    second: core engine ribs003
+  - first:
+      4: 400004
+    second: core engine ribs004
+  - first:
+      4: 400006
+    second: core engine ribs005
+  - first:
+      4: 400008
+    second: lower Rotor
+  - first:
+      4: 400010
+    second: //RootNode
+  - first:
+      4: 400012
+    second: upper engine
+  - first:
+      23: 2300000
+    second: Core engine
+  - first:
+      23: 2300002
+    second: core engine ribs003
+  - first:
+      23: 2300004
+    second: core engine ribs004
+  - first:
+      23: 2300006
+    second: core engine ribs005
+  - first:
+      23: 2300008
+    second: lower Rotor
+  - first:
+      23: 2300010
+    second: //RootNode
+  - first:
+      23: 2300012
+    second: upper engine
+  - first:
+      33: 3300000
+    second: Core engine
+  - first:
+      33: 3300002
+    second: core engine ribs003
+  - first:
+      33: 3300004
+    second: core engine ribs004
+  - first:
+      33: 3300006
+    second: core engine ribs005
+  - first:
+      33: 3300008
+    second: lower Rotor
+  - first:
+      33: 3300010
+    second: //RootNode
+  - first:
+      33: 3300012
+    second: upper engine
+  - first:
+      43: 4300000
+    second: Luminaris Ingame
+  - first:
+      43: 4300002
+    second: core engine ribs004
+  - first:
+      43: 4300004
+    second: core engine ribs005
+  - first:
+      43: 4300006
+    second: core engine ribs003
+  - first:
+      43: 4300008
+    second: Core engine
+  - first:
+      43: 4300010
+    second: upper engine
+  - first:
+      43: 4300012
+    second: lower Rotor
+  - first:
+      74: 7400000
+    second: Take 001
+  - first:
+      95: 9500000
+    second: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Luminaris starship material
+    second: {fileID: 2100000, guid: ee9fb3e4c573e2746b928e57f66e0595, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
       name: Take 001
       takeName: Take 001
+      internalID: 0
       firstFrame: 0
       lastFrame: 100
       wrapMode: 0
@@ -111,13 +196,23 @@ ModelImporter:
     globalScale: 0.1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
@@ -127,9 +222,14 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -139,11 +239,16 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 0.1
     rootMotionBoneName: 
     hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

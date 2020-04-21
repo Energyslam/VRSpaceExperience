@@ -3,7 +3,77 @@ guid: de5af3a9e2bddaf418a0785e14877312
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CENTRAL_PARTS
+    second: {fileID: 2100000, guid: 892e1686fd51fc34c912df5296cf2519, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _1001
+    second: {fileID: 2100000, guid: f1d2e72c3597a5d4d94068437224174d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: button_1
+    second: {fileID: 2100000, guid: b85fd78f6e187c04a8cfe524c5aca539, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cabinet
+    second: {fileID: 2100000, guid: 2a85e10ee17690449b1d53691cdbbd36, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass
+    second: {fileID: 2100000, guid: 5f2859dc261ebe54c861177f9f3f327c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: d1a27017d6169d44a8064c13f6be1935, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lights
+    second: {fileID: 2100000, guid: 3b4da210b14dc36408367b93003ae454, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lights_1
+    second: {fileID: 2100000, guid: e58920ff4a96bdb4092f91661f7a35ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lights_2
+    second: {fileID: 2100000, guid: 7a696461671aba74291e5626ef857efd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lights_3
+    second: {fileID: 2100000, guid: 5ce45e071c92c854997f04d8c8f062b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lights_4
+    second: {fileID: 2100000, guid: aee04308f8ceb374abdb5f1613f34184, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lights_5
+    second: {fileID: 2100000, guid: b15124df92dc1ed4fbec9f8e5ef3de3b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lights_6
+    second: {fileID: 2100000, guid: 6713e05e5b20e2545b0a9f17ec9ffa23, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: record_texture
+    second: {fileID: 2100000, guid: f5e7e953d8970ce4c9b089569b5efe81, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -44,7 +114,7 @@ ModelImporter:
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -80,7 +150,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0005
+    globalScale: 0.05
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

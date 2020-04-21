@@ -66,9 +66,9 @@ public class StaticCapsule : MonoBehaviour
     {
         Wave wave = GetComponentInParent<Wave>();
         otherCapsuleInWave = this.gameObject == wave.a.gameObject ? wave.b.gameObject : wave.a.gameObject;
-        float dockingSpotY = dockingSpot.transform.localPosition.y;
+        float dockingSpotY = dockingSpot.transform.position.y;
         dockingSpot.transform.position = this.transform.position + (otherCapsuleInWave.transform.position - dockingSpot.transform.position).normalized * (dockingSpot.transform.position - this.transform.position).magnitude;
-        dockingSpot.transform.position += new Vector3(0,dockingSpotY,0);
+        dockingSpot.transform.position = new Vector3(dockingSpot.transform.position.x, dockingSpotY, dockingSpot.transform.position.z);
         textStartingY = timeText.transform.position.y;
         foreach (Transform t in locationParent.transform)
         {
@@ -345,9 +345,9 @@ public class StaticCapsule : MonoBehaviour
     private IEnumerator FadeInVolume()
     {
         jukeBox.volume += audioLerpSpeed;
-        yield return new WaitForSeconds(0.02f);
+        yield return new WaitForSeconds(0.03f);
 
-        if (jukeBox.volume < 0.1f)
+        if (jukeBox.volume < 0.3f)
         {
             StartCoroutine(FadeInVolume());
         }
@@ -370,7 +370,7 @@ public class StaticCapsule : MonoBehaviour
     private IEnumerator StopMusic()
     {
         jukeBox.volume -= audioLerpSpeed;
-        yield return new WaitForSeconds(0.02f);
+        yield return new WaitForSeconds(0.03f);
 
         if (jukeBox.volume <= 0f)
         {

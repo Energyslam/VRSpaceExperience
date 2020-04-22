@@ -9,7 +9,7 @@ public class GridCell : MonoBehaviour
     public Color color;
     public Vector3 scale, position;
     public bool isAlive;
-    public int aliveNeighbours = 0;
+    public int aliveNeighbours = 0, neighboursWithObjects = 0;
     public bool hasSpawnedAnObject = false;
 
     public enum RotateTowards { TOP, RIGHT, BOTTOM, LEFT};

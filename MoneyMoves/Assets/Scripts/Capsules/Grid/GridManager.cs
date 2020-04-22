@@ -174,7 +174,7 @@ public class GridManager : MonoBehaviour
 
             case SpawningPhase.MEDIUM:
                 SpawnMediumObjects();
-                GoToNextPhase(currentSpawningPhase);
+                // GoToNextPhase(currentSpawningPhase);
                 break;
         }
     }
@@ -187,7 +187,7 @@ public class GridManager : MonoBehaviour
             {
                 if (grid[i, j].horizontal > 0)
                 {
-                    if (grid[i, j].vertical == 0 && grid[i, j].horizontal <= 2 || grid[i, j].vertical == rows - 1 && grid[i, j].horizontal <= 2)
+                    if (grid[i, j].vertical == 0 && grid[i, j].horizontal <= 4 || grid[i, j].vertical == rows - 1 && grid[i, j].horizontal <= 4)
                         continue;
 
                     else
@@ -206,16 +206,16 @@ public class GridManager : MonoBehaviour
                 {
                     if (grid[i, j].aliveNeighbours == 0)
                     {
-                        SpawnObjectOnGridCell(i, j, standaloneBigObject, new Vector3(gridSizeX, 1, gridSizeZ));
+                        SpawnObjectOnGridCell(i, j, standaloneBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 1, Vector3.zero);
                     }
 
                     else
                     {
                         if (grid[i, j].horizontal == 0 && grid[i, j].vertical == 0 || grid[i, j].horizontal == 0 && grid[i, j].vertical == rows - 1)
-                            SpawnObjectOnGridCell(i, j, cornerConnectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ));
+                            SpawnObjectOnGridCell(i, j, cornerConnectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 0, Vector3.zero);
 
                         else
-                            SpawnObjectOnGridCell(i, j, connectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ));
+                            SpawnObjectOnGridCell(i, j, connectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 0, Vector3.zero);
                     }
                 }
             }
@@ -230,7 +230,7 @@ public class GridManager : MonoBehaviour
         {
             for (int y = 0; y < rows; y++)
             {
-                if (grid[x, y].horizontal < 3)
+                if (grid[x, y].horizontal <= 4)
                 {
                     grid[x, y].isAlive = false;
                     continue;
@@ -268,16 +268,42 @@ public class GridManager : MonoBehaviour
 
                 if (grid[x, y].isAlive)
                 {
-                    SpawnObjectOnGridCell(x, y, mediumSingleObject, new Vector3(1.0f, 1.0f, 1.0f));
+                    SpawnObjectOnGridCell(x, y, mediumSingleObject, new Vector3(1.0f, 1.0f, 1.0f), 0, Vector3.zero);
                 }
             }            
         }
 
-        int newX = Random.Range(2, columns - 3);
-        int newY = Random.Range(4, rows - 3);
-        SpawnObjectOnGridCell(newX, newY, mediumMultiObject, new Vector3(1.0f, 1.0f, 1.0f));
+        PlaceRandomly(mediumMultiObject, 0);
+    }
 
-        Lightmapping.Bake();
+    private void PlaceRandomly(GameObject toSpawn, int tries)
+    {
+        // Spawn multi object, such as a table
+        int newX = Random.Range(3, columns - 3);
+        int newY = Random.Range(3, rows - 3);
+
+        float random = Random.Range(0, 3);
+        random = Mathf.RoundToInt(random);
+        Vector3 rotation = Vector3.zero;
+
+        if (random < 1)
+            rotation = new Vector3(0, -90, 0);
+
+        else if (random > 1 && random < 2)
+            rotation = new Vector3(0, 90, 0);
+
+        if (grid[newX, newY].neighboursWithObjects <= 0)
+        {
+            SpawnObjectOnGridCell(newX, newY, toSpawn, new Vector3(1.0f, 1.0f, 1.0f), 1, rotation);
+        }
+
+        else
+        {
+            if (tries <= 25)
+            {
+                PlaceRandomly(toSpawn, tries++);
+            }
+        }
     }
 
     private void GoToNextPhase(SpawningPhase oldPhase)
@@ -315,29 +341,50 @@ public class GridManager : MonoBehaviour
         StartCoroutine(IterateGameOfLife(grid, columns, rows, currentSpawningPhase, 5));
     }
 
-    private void SpawnObjectOnGridCell(int i, int j, GameObject toSpawn, Vector3 upscaleFactor)
+    private void SpawnObjectOnGridCell(int i, int j, GameObject toSpawn, Vector3 upscaleFactor, int radius, Vector3 extraRotation)
     {
         GameObject obj = Instantiate(toSpawn, grid[i, j].transform.position, Quaternion.identity, objectsHolder.transform);
         obj.transform.localScale = new Vector3(obj.transform.localScale.x * upscaleFactor.x, obj.transform.localScale.y * ((upscaleFactor.x + upscaleFactor.z) / 2), obj.transform.localScale.z * upscaleFactor.z) + new Vector3(0.1f * upscaleFactor.x + 0.1f, 0.0f, 0.1f * upscaleFactor.z + 0.1f);
         switch (grid[i, j].rotation)
         {
             case GridCell.RotateTowards.LEFT:
+                obj.transform.eulerAngles += extraRotation;
                 break;
 
             case GridCell.RotateTowards.RIGHT:
-                obj.transform.eulerAngles = new Vector3(0, 180, 0);
+                obj.transform.eulerAngles += new Vector3(0, 180, 0) + extraRotation;
                 break;
 
             case GridCell.RotateTowards.TOP:
-                obj.transform.eulerAngles = new Vector3(0, 90, 0);
+                obj.transform.eulerAngles += new Vector3(0, 90, 0) + extraRotation;
                 break;
 
             case GridCell.RotateTowards.BOTTOM:
-                obj.transform.eulerAngles = new Vector3(0, -90, 0);
+                obj.transform.eulerAngles += new Vector3(0, -90, 0) + extraRotation;
                 break;
         }
 
+        for (int x = -radius; x <= radius; x++)
+        {
+            if (i + x < 0 || i + x >= columns)
+            {
+                continue;
+            }
+
+            for (int y = -radius; y <= radius; y++)
+            {
+                if (j + y < 0 || j + y >= rows)
+                {
+                    continue;
+                }
+
+                grid[i + x, j + y].hasSpawnedAnObject = true;
+            }
+        }
+
         grid[i, j].hasSpawnedAnObject = true;
+
+        grid = FindNeighbours(grid, columns, rows);
     }
 
     // Function to print next generation 
@@ -425,6 +472,7 @@ public class GridManager : MonoBehaviour
                 // finding no Of Neighbours 
                 // that are alive 
                 int aliveNeighbours = 0;
+                int neighboursWithObjects = 0;
 
                 for (int i = -1; i <= 1; i++)
                 {
@@ -442,13 +490,20 @@ public class GridManager : MonoBehaviour
 
                         if (grid[l + i, m + j].isAlive)
                             aliveNeighbours++;
+
+                        if (grid[l + i, m + j].hasSpawnedAnObject)
+                            neighboursWithObjects++;
                     }
                 }
 
                 if (grid[l, m].isAlive)
                     aliveNeighbours--;
 
+                if (grid[l, m].hasSpawnedAnObject)
+                    neighboursWithObjects--;
+
                 newGrid[l, m].aliveNeighbours = aliveNeighbours;
+                newGrid[l, m].neighboursWithObjects = neighboursWithObjects;
             }
         }
 

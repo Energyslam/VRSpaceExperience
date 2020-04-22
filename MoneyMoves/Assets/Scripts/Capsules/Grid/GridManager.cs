@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
@@ -275,6 +276,8 @@ public class GridManager : MonoBehaviour
         int newX = Random.Range(2, columns - 3);
         int newY = Random.Range(4, rows - 3);
         SpawnObjectOnGridCell(newX, newY, mediumMultiObject, new Vector3(1.0f, 1.0f, 1.0f));
+
+        Lightmapping.Bake();
     }
 
     private void GoToNextPhase(SpawningPhase oldPhase)

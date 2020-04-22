@@ -198,7 +198,7 @@ MonoBehaviour:
   objectsHolder: {fileID: 184508000}
   connectableBigObject: {fileID: 8199688303501405120, guid: 7b8117e291364654aa3dbe444155aa26,
     type: 3}
-  cornerConnectableBigObject: {fileID: 4255642824647951325, guid: 8c0ea8c921e13e341b1cd76ce40ff4d2,
+  cornerConnectableBigObject: {fileID: 570723254751743050, guid: b89d4fec24edc154fad27e0409132c57,
     type: 3}
   standaloneBigObject: {fileID: 2393329427302114439, guid: 078bd10dce211de45aa8fc6303f0997f,
     type: 3}

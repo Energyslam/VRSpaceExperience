@@ -64,6 +64,10 @@ public class StaticCapsule : MonoBehaviour
 
     void Start()
     {
+        timesToOpen = GameManager.Instance.timesToOpenCapsules;
+        totalTime = GameManager.Instance.totalOpenTime;
+        rotateText = GameManager.Instance.rotateText;
+        respawnWaitTime = GameManager.Instance.respawnWaitTime;
         Wave wave = GetComponentInParent<Wave>();
         otherCapsuleInWave = this.gameObject == wave.a.gameObject ? wave.b.gameObject : wave.a.gameObject;
         float dockingSpotY = dockingSpot.transform.position.y;
@@ -232,7 +236,8 @@ public class StaticCapsule : MonoBehaviour
         float[] angles = { 45, 90, 135, 180, 225, 270, 315 };
     //repickAngle:
         float chosenAngle = angles[Random.Range(0, angles.Length)];
-        newRotation = newRotation + chosenAngle;
+        newRotation = RepickAngle(newRotation);
+        Debug.Log("newRotation = " + newRotation);
         //if (FastApproximately(this.transform.localEulerAngles.y, newRotation, 2f)) // this.transform.localEulerAngles.y +2f < newRotation)
         //{
         //    goto repickAngle;
@@ -249,6 +254,23 @@ public class StaticCapsule : MonoBehaviour
         rotating = true;
     }
 
+    float RepickAngle(float angle)
+    {
+        float newAngle = 0f;
+        float[] angles = { 45, 90, 135, 180, 225, 270, 315 };
+        //repickAngle:
+        float chosenAngle = angles[Random.Range(0, angles.Length)];
+        if (!FastApproximately(chosenAngle, angle, 2f))
+        {
+            newAngle = chosenAngle;
+        }
+        else if (FastApproximately(chosenAngle, angle, 2f))
+        {
+            newAngle = RepickAngle(angle);
+        }
+
+        return newAngle;
+    }
     void RotateCapsule()
     {
         this.transform.localEulerAngles = new Vector3(0f, Mathf.Lerp(this.transform.localEulerAngles.y, newRotation, rotationSpeed * Time.deltaTime), 0f);

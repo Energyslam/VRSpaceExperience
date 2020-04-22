@@ -76,7 +76,7 @@ Material:
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.707
+    - _Smoothness: 0.539
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -84,7 +84,7 @@ Material:
     - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.52257633, g: 0.9245283, b: 0, a: 1}
+    - _BaseColor: {r: 0.062077243, g: 0.52640945, b: 0.8773585, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.28971657, g: 0.6603774, b: 0.009344946, a: 1}
+    - _EmissionColor: {r: 0.14134654, g: 0.007843147, b: 0.65882355, a: 1}
     - _SpecColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}

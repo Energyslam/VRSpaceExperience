@@ -43,10 +43,10 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 20
-  m_Range: 2.24
-  m_SpotAngle: 67.19481
-  m_InnerSpotAngle: 51.939713
+  m_Intensity: 2
+  m_Range: 6.4971914
+  m_SpotAngle: 88.26914
+  m_InnerSpotAngle: 73.01403
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -88,9 +88,9 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0.906519, y: 30, z: 1, w: 117}
   m_UseBoundingSphereOverride: 0
-  m_ShadowRadius: 30
+  m_ShadowRadius: 50
   m_ShadowAngle: 0
 --- !u!1 &7236675034124902290
 GameObject:

@@ -10,8 +10,14 @@ public class SlingShooter : MonoBehaviour
 
     public bool isShooting, isPulling;
     public float reloadSpeed, projectileSpeed;
+    AudioSource audio;
 
     public UnityEvent onPullReset;
+
+    private void Start()
+    {
+        audio = this.GetComponent<AudioSource>();
+    }
 
     public void Shoot()
     {
@@ -29,6 +35,7 @@ public class SlingShooter : MonoBehaviour
         Destroy(projectileGO, 5f);
         Rigidbody projectileRB = projectileGO.GetComponent<Rigidbody>();
         projectileRB.AddForce(forward * projectileSpeed, ForceMode.VelocityChange);
+        audio.Play();
     }
     public void StartPull()
     {

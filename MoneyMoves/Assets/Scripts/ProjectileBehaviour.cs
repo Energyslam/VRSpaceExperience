@@ -4,17 +4,7 @@ using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] GameObject explosionSound;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,6 +12,8 @@ public class ProjectileBehaviour : MonoBehaviour
         if (other.CompareTag("Collideable"))
         {
             other.GetComponent<ICollisionBehaviour>().SolveCollision();
+            GameObject explosion = Instantiate(explosionSound, this.transform.position, Quaternion.identity);
+            Destroy(explosion, explosion.GetComponent<AudioSource>().clip.length);
             Destroy(this.gameObject);
         }
         if (other.name == "arrowA")

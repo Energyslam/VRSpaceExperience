@@ -238,6 +238,8 @@ namespace Valve.VR.InteractionSystem
             }
         }
 
+        public bool useTheWorkingHigherlighter = true;
+        public GameObject fancyHigherLighter;
         /// <summary>
         /// Called when a Hand starts hovering over this object
         /// </summary>
@@ -247,6 +249,17 @@ namespace Valve.VR.InteractionSystem
             isHovering = true;
 
             hoveringHands.Add(hand);
+
+            if (useTheWorkingHigherlighter == true && fancyHigherLighter != null && wasHovering == false)
+            {
+                if (fancyHigherLighter != null)
+                {
+                    if (!fancyHigherLighter.activeInHierarchy)
+                    {
+                        fancyHigherLighter.SetActive(true);
+                    }
+                }
+            }
 
             if (highlightOnHover == true && wasHovering == false)
             {
@@ -269,6 +282,11 @@ namespace Valve.VR.InteractionSystem
             {
                 isHovering = false;
 
+                if (fancyHigherLighter.activeInHierarchy && useTheWorkingHigherlighter == true)
+                {
+                    fancyHigherLighter.SetActive(false);
+                }
+
                 if (highlightOnHover && highlightHolder != null)
                     Destroy(highlightHolder);
             }
@@ -276,6 +294,11 @@ namespace Valve.VR.InteractionSystem
 
         protected virtual void Update()
         {
+            if (isHovering == false && fancyHigherLighter.activeInHierarchy)
+            {
+                fancyHigherLighter.SetActive(false);
+            }
+
             if (highlightOnHover)
             {
                 UpdateHighlightRenderers();

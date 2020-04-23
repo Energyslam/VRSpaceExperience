@@ -233,20 +233,20 @@ public class StaticCapsule : MonoBehaviour
         //{
         //    newRotation += 360;
         //}
-        float[] angles = { 45, 90, 135, 180, 225, 270, 315 };
-    //repickAngle:
-        float chosenAngle = angles[Random.Range(0, angles.Length)];
+    //    float[] angles = { 45, 90, 135, 180, 225, 270, 315 };
+    ////repickAngle:
+    //    float chosenAngle = angles[Random.Range(0, angles.Length)];
         newRotation = RepickAngle(newRotation);
         Debug.Log("newRotation = " + newRotation);
         //if (FastApproximately(this.transform.localEulerAngles.y, newRotation, 2f)) // this.transform.localEulerAngles.y +2f < newRotation)
         //{
         //    goto repickAngle;
         //}
-        if (chosenAngle == 45 || chosenAngle == 135 || chosenAngle == 225 || chosenAngle == 315)
+        if (newRotation == 45 || newRotation == 135 || newRotation == 225 || newRotation == 315)
         {
             doorsToOpenAtOnce = 2;
         }
-        else if (chosenAngle == 90 || chosenAngle == 180 || chosenAngle == 270)
+        else if (newRotation == 90 || newRotation == 180 || newRotation == 270)
         {
             doorsToOpenAtOnce = 1;
         }
@@ -264,7 +264,7 @@ public class StaticCapsule : MonoBehaviour
         {
             newAngle = chosenAngle;
         }
-        else if (FastApproximately(chosenAngle, angle, 2f))
+        else if (FastApproximately(chosenAngle, angle, 6f))
         {
             newAngle = RepickAngle(angle);
         }
@@ -274,7 +274,7 @@ public class StaticCapsule : MonoBehaviour
     void RotateCapsule()
     {
         this.transform.localEulerAngles = new Vector3(0f, Mathf.Lerp(this.transform.localEulerAngles.y, newRotation, rotationSpeed * Time.deltaTime), 0f);
-        if (FastApproximately(this.transform.localEulerAngles.y, newRotation, 1f))
+        if (FastApproximately(this.transform.localEulerAngles.y, newRotation, 4f))
         {
             rotating = false;
             SpawnGifts();
@@ -369,7 +369,7 @@ public class StaticCapsule : MonoBehaviour
         jukeBox.volume += audioLerpSpeed;
         yield return new WaitForSeconds(0.01f);
 
-        if (jukeBox.volume < 0.3f)
+        if (jukeBox.volume < 0.4f)
         {
             StartCoroutine(FadeInVolume());
         }
@@ -392,7 +392,7 @@ public class StaticCapsule : MonoBehaviour
     private IEnumerator StopMusic()
     {
         jukeBox.volume -= audioLerpSpeed;
-        yield return new WaitForSeconds(0.02f);
+        yield return new WaitForSeconds(0.01f);
 
         if (jukeBox.volume <= 0f)
         {

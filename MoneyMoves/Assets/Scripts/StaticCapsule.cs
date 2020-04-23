@@ -86,7 +86,7 @@ public class StaticCapsule : MonoBehaviour
 
     public void OpenUp()
     {
-        SpawnGifts();
+        SetNewRotation();
     }
     private void Update()
     {
@@ -369,7 +369,7 @@ public class StaticCapsule : MonoBehaviour
         jukeBox.volume += audioLerpSpeed;
         yield return new WaitForSeconds(0.01f);
 
-        if (jukeBox.volume < 0.4f)
+        if (jukeBox.volume < 0.6f)
         {
             StartCoroutine(FadeInVolume());
         }

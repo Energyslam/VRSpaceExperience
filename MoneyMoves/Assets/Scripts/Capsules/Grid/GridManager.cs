@@ -351,24 +351,27 @@ public class GridManager : MonoBehaviour
     {
         GameObject obj = Instantiate(toSpawn, grid[i, j].transform.position + new Vector3(0, yOffset, 0), Quaternion.identity, objectsHolder.transform);
         obj.transform.localScale = new Vector3(obj.transform.localScale.x * upscaleFactor.x, obj.transform.localScale.y * ((upscaleFactor.x + upscaleFactor.z) / 2), obj.transform.localScale.z * upscaleFactor.z) + new Vector3(0.1f * upscaleFactor.x + 0.1f, 0.0f, 0.1f * upscaleFactor.z + 0.1f);
+        Vector3 rotateToWall = new Vector3();
         switch (grid[i, j].rotation)
         {
             case GridCell.RotateTowards.LEFT:
-                obj.transform.eulerAngles += extraRotation;
+                rotateToWall = leftWall.GetComponent<ForwardVector>().lookingVector;
+                obj.transform.eulerAngles += rotateToWall + extraRotation;
                 break;
 
-                // snap rotation to the corresponding 90 degrees of wall to look at
             case GridCell.RotateTowards.RIGHT:
-                // Vector3 rotateToWall = new Vector3(0, rightWall.transform.position - transform.position.y, 0);
-                obj.transform.eulerAngles += extraRotation;
+                rotateToWall = rightWall.GetComponent<ForwardVector>().lookingVector;
+                obj.transform.eulerAngles += rotateToWall + extraRotation;
                 break;
 
             case GridCell.RotateTowards.TOP:
-                obj.transform.eulerAngles += new Vector3(0, 90, 0) + extraRotation;
+                rotateToWall = topWall.GetComponent<ForwardVector>().lookingVector;
+                obj.transform.eulerAngles += rotateToWall + extraRotation;
                 break;
 
             case GridCell.RotateTowards.BOTTOM:
-                obj.transform.eulerAngles += new Vector3(0, -90, 0) + extraRotation;
+                rotateToWall = botWall.GetComponent<ForwardVector>().lookingVector;
+                obj.transform.eulerAngles += rotateToWall + extraRotation;
                 break;
         }
 

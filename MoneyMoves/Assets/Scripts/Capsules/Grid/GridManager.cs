@@ -47,7 +47,7 @@ public class GridManager : MonoBehaviour
     private List<GridCell> cells = new List<GridCell>();
 
     [SerializeField]
-    private GameObject objectsHolder, connectableBigObject, cornerConnectableBigObject, standaloneBigObject, mediumMultiObject, mediumSingleObject;
+    private GameObject objectsHolder, connectableBigObject, cornerConnectableBigObject, standaloneBigObject, mediumMultiObject, mediumSingleObject, topOfMediumMulti;
     #endregion
 
     // Start is called before the first frame update
@@ -206,16 +206,16 @@ public class GridManager : MonoBehaviour
                 {
                     if (grid[i, j].aliveNeighbours == 0)
                     {
-                        SpawnObjectOnGridCell(i, j, standaloneBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 1, Vector3.zero);
+                        SpawnObjectOnGridCell(i, j, standaloneBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 1, Vector3.zero, 0);
                     }
 
                     else
                     {
                         if (grid[i, j].horizontal == 0 && grid[i, j].vertical == 0 || grid[i, j].horizontal == 0 && grid[i, j].vertical == rows - 1)
-                            SpawnObjectOnGridCell(i, j, cornerConnectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 0, Vector3.zero);
+                            SpawnObjectOnGridCell(i, j, cornerConnectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 0, Vector3.zero, 0);
 
                         else
-                            SpawnObjectOnGridCell(i, j, connectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 0, Vector3.zero);
+                            SpawnObjectOnGridCell(i, j, connectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 0, Vector3.zero, 0);
                     }
                 }
             }
@@ -268,15 +268,15 @@ public class GridManager : MonoBehaviour
 
                 if (grid[x, y].isAlive)
                 {
-                    SpawnObjectOnGridCell(x, y, mediumSingleObject, new Vector3(1.0f, 1.0f, 1.0f), 0, Vector3.zero);
+                    SpawnObjectOnGridCell(x, y, mediumSingleObject, new Vector3(1.0f, 1.0f, 1.0f), 0, Vector3.zero, 0);
                 }
             }            
         }
 
-        PlaceRandomly(mediumMultiObject, 0);
+        PlaceRandomly(mediumMultiObject, 0, topOfMediumMulti, Random.Range(2, 4));
     }
 
-    private void PlaceRandomly(GameObject toSpawn, int tries)
+    private void PlaceRandomly(GameObject toSpawn, int tries, GameObject onTop, float yOffset)
     {
         // Spawn multi object, such as a table
         int newX = Random.Range(3, columns - 3);
@@ -294,14 +294,17 @@ public class GridManager : MonoBehaviour
 
         if (grid[newX, newY].neighboursWithObjects <= 0)
         {
-            SpawnObjectOnGridCell(newX, newY, toSpawn, new Vector3(1.0f, 1.0f, 1.0f), 1, rotation);
+            SpawnObjectOnGridCell(newX, newY, toSpawn, new Vector3(1.0f, 1.0f, 1.0f), 1, rotation, 0);
+
+            if (onTop != null)
+                SpawnObjectOnGridCell(newX, newY, onTop, new Vector3(1.0f, 1.0f, 1.0f), 1, rotation, yOffset);
         }
 
         else
         {
             if (tries <= 25)
             {
-                PlaceRandomly(toSpawn, tries++);
+                PlaceRandomly(toSpawn, tries++, onTop, yOffset);
             }
         }
     }
@@ -341,9 +344,9 @@ public class GridManager : MonoBehaviour
         StartCoroutine(IterateGameOfLife(grid, columns, rows, currentSpawningPhase, 5));
     }
 
-    private void SpawnObjectOnGridCell(int i, int j, GameObject toSpawn, Vector3 upscaleFactor, int radius, Vector3 extraRotation)
+    private void SpawnObjectOnGridCell(int i, int j, GameObject toSpawn, Vector3 upscaleFactor, int radius, Vector3 extraRotation, float yOffset)
     {
-        GameObject obj = Instantiate(toSpawn, grid[i, j].transform.position, Quaternion.identity, objectsHolder.transform);
+        GameObject obj = Instantiate(toSpawn, grid[i, j].transform.position + new Vector3(0, yOffset, 0), Quaternion.identity, objectsHolder.transform);
         obj.transform.localScale = new Vector3(obj.transform.localScale.x * upscaleFactor.x, obj.transform.localScale.y * ((upscaleFactor.x + upscaleFactor.z) / 2), obj.transform.localScale.z * upscaleFactor.z) + new Vector3(0.1f * upscaleFactor.x + 0.1f, 0.0f, 0.1f * upscaleFactor.z + 0.1f);
         switch (grid[i, j].rotation)
         {

@@ -12,9 +12,9 @@ public class SlingLine : MonoBehaviour
         rend = this.GetComponent<LineRenderer>();
     }
 
-    void Update()
+    void LateUpdate()
     {
         rend.SetPosition(0, this.transform.position);
-        rend.SetPosition(1, pullPoint.transform.position);     
+        rend.SetPosition(1, pullPoint.transform.position);
     }
 }

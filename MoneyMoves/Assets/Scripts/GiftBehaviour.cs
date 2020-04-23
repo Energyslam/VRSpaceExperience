@@ -8,6 +8,7 @@ public class GiftBehaviour : ICollisionBehaviour
     [SerializeField] float speed = 1f;
     [SerializeField] GameObject fireworkGO, grabber, deliverPoint;
     public PlaytestCapsule attachedCapsule;
+    public StaticCapsule attachedStatic;
     bool canMove;
     void Start()
     {
@@ -47,6 +48,10 @@ public class GiftBehaviour : ICollisionBehaviour
             {
                 attachedCapsule.UpdateGifts(transform.parent.gameObject);
             }
+            else if (attachedStatic != null)
+            {
+                attachedStatic.UpdateGifts(transform.parent.gameObject);
+            }
             Destroy(this.gameObject);
             GameManager.Instance.AddScore(10);
         }
@@ -57,6 +62,10 @@ public class GiftBehaviour : ICollisionBehaviour
             if (attachedCapsule != null)
             {
                 attachedCapsule.UpdateGifts(transform.parent.gameObject);
+            }
+            else if (attachedStatic != null)
+            {
+                attachedStatic.UpdateGifts(transform.parent.gameObject);
             }
             BoxCollider col = this.GetComponent<BoxCollider>();
             if (col != null)

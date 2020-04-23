@@ -70,6 +70,15 @@ namespace Valve.VR.Extras
             pointer.GetComponent<MeshRenderer>().material = newMaterial;
         }
 
+        public void DeactivatePointer()
+        {
+            holder.SetActive(false);
+        }
+
+        public void ActivatePointer()
+        {
+            holder.SetActive(true);
+        }
         public virtual void OnPointerIn(PointerEventArgs e)
         {
             if (PointerIn != null)

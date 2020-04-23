@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Valve.VR;
+using Valve.VR.Extras;
+using Valve.VR.InteractionSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,7 +15,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject deliverPoint;
     [SerializeField] GameObject destinationsParent;
     [SerializeField] GameObject capsulesParent;
+    public int timesToOpenCapsules;
+    public int totalOpenTime;
+    public bool rotateText;
+    public float respawnWaitTime;
 
+    public Platform platform;
+
+    [SerializeField] SteamVR_LaserPointer laserpointer;
     public List<GameObject> destinations = new List<GameObject>();
     public List<PlaytestCapsule> capsules = new List<PlaytestCapsule>();
     List<PlaytestCapsule> capsulesThatHaveBeenMovedAlready = new List<PlaytestCapsule>();
@@ -50,6 +59,19 @@ public class GameManager : MonoBehaviour
         {
             capsules.Add(t.GetComponentInChildren<PlaytestCapsule>());
         }
+        laserpointer.PointerClick += PointerClick;
+    }
+
+    public void ActivateLaserPointer()
+    {
+        laserpointer.enabled = true;
+        laserpointer.ActivatePointer();
+    }
+
+    public void DeactivateLaserPointer()
+    {
+        laserpointer.DeactivatePointer();
+        laserpointer.enabled = false;
     }
     public int AssignHighPriority()
     {
@@ -63,7 +85,7 @@ public class GameManager : MonoBehaviour
     {
         difficultyMax = destinations.Count;
         currentDifficulty = 1;
-        StartCoroutine(WaitBeforeMoving());
+        //StartCoroutine(WaitBeforeMoving());
     }
     IEnumerator WaitBeforeMoving()
     {
@@ -130,7 +152,19 @@ public class GameManager : MonoBehaviour
         if (scoreAndLifeText != null)
         scoreAndLifeText.text = "Score: " + score + "\nLives: " + lives;
     }
-
+    public void PointerClick(object sender, PointerEventArgs e)
+    {
+        if (e.target.name == "arrowA")
+        {
+            platform.ChangeStateToA();
+            DeactivateLaserPointer();
+        }
+        else if (e.target.name == "arrowB")
+        {
+            platform.ChangeStateToB();
+            DeactivateLaserPointer();
+        }
+    }
     #region Vibration
     [Header("Vibration settings")]
     public SteamVR_Action_Vibration hapticAction;

@@ -14,6 +14,7 @@ public class PlaytestCapsule : MonoBehaviour
     [SerializeField] GameObject grabbableGift;
     [SerializeField] GameObject locationParent;
     [SerializeField] GameObject cheatPrevention;
+    [SerializeField] GameObject dockingSpot;
 
     [SerializeField] Animator capsuleAnim;
 
@@ -57,6 +58,7 @@ public class PlaytestCapsule : MonoBehaviour
 
     void Start()
     {
+        dockingSpot.transform.position = this.transform.position + (GameManager.Instance.player.transform.position - dockingSpot.transform.position).normalized * (dockingSpot.transform.position - this.transform.position).magnitude;
         textStartingY = timeText.transform.position.y;
         available = true;
         originalPosition = this.transform.position;
@@ -107,14 +109,6 @@ public class PlaytestCapsule : MonoBehaviour
                 this.agent.enabled = false;
                 StartCoroutine(activateObstacle());
                 SpawnGifts();
-                //Rotatetoplayer, then open capsule
-                //GameObject tempObject = new GameObject();
-                //tempObject.transform.position = this.transform.position;
-                //tempObject.transform.LookAt(GameManager.Instance.player.transform.position);
-                //Debug.Log(tempObject.transform.localEulerAngles.y);
-                //Debug.Log(tempObject.transform.localEulerAngles.y + 180f);
-                //newRotation = tempObject.transform.localEulerAngles.y + 180f;
-                //rotating = true;
             }
         }
     }
@@ -131,23 +125,17 @@ public class PlaytestCapsule : MonoBehaviour
     {
         this.obstacle.enabled = false;
         StartCoroutine(activateAgent());
-
-
     }
 
     IEnumerator activateObstacle()
     {
-        Debug.Log("What");
         yield return new WaitForSeconds(0.01f);
-        Debug.Log("The Frick");
         obstacle.enabled = true;
     }
 
     IEnumerator activateAgent()
     {
-        Debug.Log("Mister");
         yield return new WaitForSeconds(0.01f);
-        Debug.Log("Agent");
         agent.enabled = true;
         agent.avoidancePriority = GameManager.Instance.AssignHighPriority();
         moving = true;
@@ -258,8 +246,6 @@ public class PlaytestCapsule : MonoBehaviour
         {
             light.FlickerLights();
         }
-
-
     }
 
     IEnumerator CloseCapsule()
@@ -274,9 +260,7 @@ public class PlaytestCapsule : MonoBehaviour
             MoveToOriginalPosition();
             yield break;
         }
-        Debug.Log("Opening");
         SetNewRotation();
-        rotating = true;
     }
     void SetNewRotation()
     {
@@ -297,6 +281,7 @@ public class PlaytestCapsule : MonoBehaviour
         {
             newRotation += 360;
         }
+        rotating = true;
     }
 
     void RotateCapsule(float toRotateTo)
@@ -305,7 +290,7 @@ public class PlaytestCapsule : MonoBehaviour
         if (FastApproximately(this.transform.localEulerAngles.y, toRotateTo, 10f))
         {
             rotating = false;
-            SpawnGifts(); //CC
+            SpawnGifts();
         }
     }
 

@@ -36,12 +36,12 @@ public class CapsuleManager : MonoBehaviour, IObserver
 
     private void Start()
     {
-        for (int i = 0; i < dockingPlaces.Count; i++)
-        {
-            int newCapsule = Random.Range(0, idleCapsules.Count);
+        //for (int i = 0; i < dockingPlaces.Count; i++)
+        //{
+        //    int newCapsule = Random.Range(0, idleCapsules.Count);
 
-            SendCapsuleToDock(idleCapsules[newCapsule], i);
-        }
+        //    SendCapsuleToDock(idleCapsules[newCapsule], i);
+        //}
     }
 
     // Grabs random idle Capsule from list and sends it to the dock

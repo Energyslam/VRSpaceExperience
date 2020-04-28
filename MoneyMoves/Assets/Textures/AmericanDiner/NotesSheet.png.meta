@@ -1,12 +1,42 @@
 fileFormatVersion: 2
-guid: f611a06d1dffeca4eaf33c76254cbe5a
+guid: 74f1129b5d4debb4a9bdbb8feda19586
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -7388553012079863135
+    second: NotesSheet_0
+  - first:
+      213: -4607858019152709303
+    second: NotesSheet_1
+  - first:
+      213: 1174975478335303294
+    second: NotesSheet_2
+  - first:
+      213: -8880219935714642555
+    second: NotesSheet_3
+  - first:
+      213: 2999532909554132826
+    second: NotesSheet_4
+  - first:
+      213: 3732863600840880785
+    second: NotesSheet_5
+  - first:
+      213: 3738082631728937091
+    second: NotesSheet_6
+  - first:
+      213: 8243873151051239512
+    second: NotesSheet_7
+  - first:
+      213: -3693407560360769827
+    second: NotesSheet_8
+  - first:
+      213: -4801327931439362838
+    second: NotesSheet_9
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -20,7 +50,7 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
@@ -34,29 +64,30 @@ TextureImporter:
     filterMode: -1
     aniso: 2
     mipBias: -100
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -120,11 +151,95 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: NotesSheet_2
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 263
+        width: 78
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7e68f5e8f95e4010800000000000000
+      internalID: 1174975478335303294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotesSheet_3
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 300
+        width: 72
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 585f264940f13c480800000000000000
+      internalID: -8880219935714642555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotesSheet_8
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 30
+        width: 176
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd644f174616ebcc0800000000000000
+      internalID: -3693407560360769827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NotesSheet_9
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 10
+        width: 190
+        height: 235
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aec45645fa14e5db0800000000000000
+      internalID: -4801327931439362838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

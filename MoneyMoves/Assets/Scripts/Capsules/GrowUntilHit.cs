@@ -6,6 +6,9 @@ public class GrowUntilHit : MonoBehaviour
 {
     private bool stopGrowing = false;
 
+    [SerializeField]
+    GameObject swingParent, lamp;
+
     private void FixedUpdate()
     {
         if (!stopGrowing)
@@ -15,5 +18,10 @@ public class GrowUntilHit : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         stopGrowing = true;
+        swingParent.transform.position = new Vector3(swingParent.transform.position.x, other.transform.position.y, swingParent.transform.position.z);
+        transform.parent = swingParent.transform;
+        lamp.transform.parent = swingParent.transform;
+        Swing swing = swingParent.AddComponent<Swing>();
+        swing.randomRotation = true;
     }
 }

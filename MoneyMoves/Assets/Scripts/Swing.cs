@@ -7,13 +7,31 @@ public class Swing : MonoBehaviour
     [SerializeField]
     float swingSpeed = 1.0f;
 
+    public bool randomRotation = false;
+
     // Update is called once per frame
     void FixedUpdate()
     {
         float angle = -1f + Mathf.Sin(swingSpeed * Time.realtimeSinceStartup) * 15f;
 
-        Vector3 newRotation = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, angle);
+        Vector3 newRotation = new Vector3();
 
+        if (randomRotation)
+        {
+            if (Random.value > 0.5f)
+            {
+                newRotation = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, angle);
+            }
+            else
+            {
+                newRotation = new Vector3(transform.localEulerAngles.x, angle, transform.localEulerAngles.z);
+            }
+        }
+        else
+        {
+            newRotation = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, angle);
+        }
+        
         transform.localEulerAngles = newRotation;
     }
 }

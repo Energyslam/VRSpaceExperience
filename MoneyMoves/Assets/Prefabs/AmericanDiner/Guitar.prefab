@@ -1460,6 +1460,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swingSpeed: 5
+  randomRotation: 0
+  rotation: 15
 --- !u!1 &5750019792229603968
 GameObject:
   m_ObjectHideFlags: 0

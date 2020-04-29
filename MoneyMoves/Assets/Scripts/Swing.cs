@@ -9,10 +9,12 @@ public class Swing : MonoBehaviour
 
     public bool randomRotation = false;
 
+    public float rotation = 60; 
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        float angle = -1f + Mathf.Sin(swingSpeed * Time.realtimeSinceStartup) * 15f;
+        float angle = -1f + Mathf.Sin(swingSpeed * Time.realtimeSinceStartup) * rotation;
 
         Vector3 newRotation = new Vector3();
 

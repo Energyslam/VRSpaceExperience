@@ -209,6 +209,9 @@ public class GridManager : MonoBehaviour
                 {
                     if (grid[i, j].aliveNeighbours == 0)
                     {
+                        if (grid[i, j].horizontal == 0 && grid[i, j].vertical == 0 || grid[i, j].horizontal == 0 && grid[i, j].vertical == rows - 1)
+                            continue;
+
                         SpawnObjectOnGridCell(i, j, standaloneBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 1, Vector3.zero, 0);
                     }
 
@@ -269,9 +272,9 @@ public class GridManager : MonoBehaviour
 
                 grid = FindNeighbours(grid, columns, rows);
 
-                if (grid[x, y].isAlive)
+                if (grid[x, y].isAlive && !grid[x, y].hasSpawnedAnObject)
                 {
-                    SpawnObjectOnGridCell(x, y, mediumSingleObject, new Vector3(1.0f, 1.0f, 1.0f), 0, Vector3.zero, 0);
+                    SpawnObjectOnGridCell(x, y, mediumSingleObject, new Vector3(1.0f, 1.0f, 1.0f), 0, Vector3.zero, 0.05f);
                 }
             }            
         }

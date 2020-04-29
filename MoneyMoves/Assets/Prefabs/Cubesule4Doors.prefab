@@ -602,7 +602,7 @@ MonoBehaviour:
   gridSizeZ: 4.3
   perlinScale: 1
   DEBUGGING: 0
-  gridCellsOffset: {x: -2.15, y: -2.89, z: -1.85}
+  gridCellsOffset: {x: -2.15, y: -2.8938, z: -1.85}
   perlinNoiseOffset: {x: 0, y: 0}
   gridCellPrefab: {fileID: 6593446899856398828, guid: 85d39e92cfa0e024680ef8e8ad853ef7,
     type: 3}
@@ -618,7 +618,7 @@ MonoBehaviour:
     type: 3}
   mediumMultiObject: {fileID: 4988544443558938778, guid: f735140a8c7adbd449a0ffc87f68fb3b,
     type: 3}
-  mediumSingleObject: {fileID: 3344900817703281367, guid: b31aa5887ff32f647a7edadceeee8a3d,
+  mediumSingleObject: {fileID: 5606973801648911004, guid: a9d5ab74d363e7449b804fd0f695e721,
     type: 3}
   topOfMediumMulti: {fileID: 7236675034124902290, guid: 06bfe2f4fa4522949a328efb55bf2f45,
     type: 3}

@@ -9,14 +9,17 @@ public class StaticCapsule : MonoBehaviour
      List<GameObject> giftLocations = new List<GameObject>();
      List<GameObject> chosenLocations = new List<GameObject>();
      List<GameObject> spawnedGifts = new List<GameObject>();
-
+    
+    [SerializeField]
+    List<GameObject> connectingWalls = new List<GameObject>();
 
     [SerializeField]
     private AudioSource jukeBox;
     [SerializeField]
     private List<CapsuleAnimations> openDoors = new List<CapsuleAnimations>();
     [SerializeField]
-    List<float> distances = new List<float>();
+    List<float> distancesDoors = new List<float>();
+    List<float> distancesPillars = new List<float>();
     [SerializeField]
     private int doorsToOpenAtOnce = 1;
     [SerializeField]
@@ -328,21 +331,39 @@ public class StaticCapsule : MonoBehaviour
         if (openDoors.Count <= 0) // No doors are open, open closest doors 
         {
             List<CapsuleAnimations> clonedAnimations = new List<CapsuleAnimations>(animationHandlers);
+            List<GameObject> clonedPillars = new List<GameObject>(connectingWalls);
 
             for (int i = 0; i < clonedAnimations.Count; i++)
             {
-                distances.Add((clonedAnimations[i].distancePivot.transform.position - GameManager.Instance.player.transform.position).sqrMagnitude);
+                distancesDoors.Add((clonedAnimations[i].distancePivot.transform.position - GameManager.Instance.player.transform.position).sqrMagnitude);
+            }
+
+            for (int i = 0; i < clonedPillars.Count; i++)
+            {
+                distancesPillars.Add((clonedPillars[i].transform.position - GameManager.Instance.player.transform.position).sqrMagnitude);
             }
 
             for (int i = 0; i < doorsToOpenAtOnce; i++)
             {
-                float minimum = distances.Min();
+                float minimum = distancesDoors.Min();
 
-                int index = distances.IndexOf(minimum);
+                int index = distancesDoors.IndexOf(minimum);
                 clonedAnimations[index].Animate(true);
                 openDoors.Add(clonedAnimations[index]);
                 clonedAnimations.RemoveAt(index);
-                distances.RemoveAt(index);
+                distancesDoors.RemoveAt(index);
+            }
+
+            if (doorsToOpenAtOnce > 1) // Also remove the pillar connecting these doors
+            {
+                for (int i = 0; i < doorsToOpenAtOnce; i++)
+                {
+                    float minimum = distancesPillars.Min();
+                    int index = distancesPillars.IndexOf(minimum);
+                    connectingWalls[index].SetActive(false);
+                    clonedPillars.RemoveAt(index);
+                    distancesPillars.RemoveAt(index);
+                }
             }
         }
         else // Close open doors
@@ -358,9 +379,16 @@ public class StaticCapsule : MonoBehaviour
             }
 
             openDoors.Clear();
+
+            for (int i = 0; i < connectingWalls.Count; i++)
+            {
+                if (!connectingWalls[i].activeSelf)
+                    connectingWalls[i].SetActive(true);
+            }
         }
 
-        distances.Clear();
+        distancesDoors.Clear();
+        distancesPillars.Clear();
         //doorsToOpenAtOnce = 1;
     }
 

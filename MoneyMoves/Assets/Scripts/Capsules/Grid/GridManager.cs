@@ -352,51 +352,54 @@ public class GridManager : MonoBehaviour
 
     private void SpawnObjectOnGridCell(int i, int j, GameObject toSpawn, Vector3 upscaleFactor, int radius, Vector3 extraRotation, float yOffset)
     {
-        GameObject obj = Instantiate(toSpawn, grid[i, j].transform.position + new Vector3(0, yOffset, 0), Quaternion.identity, objectsHolder.transform);
-        obj.transform.localScale = new Vector3(obj.transform.localScale.x * upscaleFactor.x, obj.transform.localScale.y * ((upscaleFactor.x + upscaleFactor.z) / 2), obj.transform.localScale.z * upscaleFactor.z) + new Vector3(0.1f * upscaleFactor.x + 0.1f, 0.0f, 0.1f * upscaleFactor.z + 0.1f);
-        Vector3 rotateToWall = new Vector3();
-        switch (grid[i, j].rotation)
+        if (toSpawn != null)
         {
-            case GridCell.RotateTowards.LEFT:
-                rotateToWall = leftWall.GetComponent<ForwardVector>().lookingVector;
-                obj.transform.eulerAngles += rotateToWall + extraRotation;
-                break;
-
-            case GridCell.RotateTowards.RIGHT:
-                rotateToWall = rightWall.GetComponent<ForwardVector>().lookingVector;
-                obj.transform.eulerAngles += rotateToWall + extraRotation;
-                break;
-
-            case GridCell.RotateTowards.TOP:
-                rotateToWall = topWall.GetComponent<ForwardVector>().lookingVector;
-                obj.transform.eulerAngles += rotateToWall + extraRotation;
-                break;
-
-            case GridCell.RotateTowards.BOTTOM:
-                rotateToWall = botWall.GetComponent<ForwardVector>().lookingVector;
-                obj.transform.eulerAngles += rotateToWall + extraRotation;
-                break;
-        }
-
-        for (int x = -radius; x <= radius; x++)
-        {
-            if (i + x < 0 || i + x >= columns)
+            GameObject obj = Instantiate(toSpawn, grid[i, j].transform.position + new Vector3(0, yOffset, 0), Quaternion.identity, objectsHolder.transform);
+            obj.transform.localScale = new Vector3(obj.transform.localScale.x * upscaleFactor.x, obj.transform.localScale.y * ((upscaleFactor.x + upscaleFactor.z) / 2), obj.transform.localScale.z * upscaleFactor.z) + new Vector3(0.1f * upscaleFactor.x + 0.1f, 0.0f, 0.1f * upscaleFactor.z + 0.1f);
+            Vector3 rotateToWall = new Vector3();
+            switch (grid[i, j].rotation)
             {
-                continue;
+                case GridCell.RotateTowards.LEFT:
+                    rotateToWall = leftWall.GetComponent<ForwardVector>().lookingVector;
+                    obj.transform.eulerAngles += rotateToWall + extraRotation;
+                    break;
+
+                case GridCell.RotateTowards.RIGHT:
+                    rotateToWall = rightWall.GetComponent<ForwardVector>().lookingVector;
+                    obj.transform.eulerAngles += rotateToWall + extraRotation;
+                    break;
+
+                case GridCell.RotateTowards.TOP:
+                    rotateToWall = topWall.GetComponent<ForwardVector>().lookingVector;
+                    obj.transform.eulerAngles += rotateToWall + extraRotation;
+                    break;
+
+                case GridCell.RotateTowards.BOTTOM:
+                    rotateToWall = botWall.GetComponent<ForwardVector>().lookingVector;
+                    obj.transform.eulerAngles += rotateToWall + extraRotation;
+                    break;
             }
 
-            for (int y = -radius; y <= radius; y++)
+            for (int x = -radius; x <= radius; x++)
             {
-                if (j + y < 0 || j + y >= rows)
+                if (i + x < 0 || i + x >= columns)
                 {
                     continue;
                 }
 
-                grid[i + x, j + y].hasSpawnedAnObject = true;
-            }
-        }
+                for (int y = -radius; y <= radius; y++)
+                {
+                    if (j + y < 0 || j + y >= rows)
+                    {
+                        continue;
+                    }
 
-        grid[i, j].hasSpawnedAnObject = true;
+                    grid[i + x, j + y].hasSpawnedAnObject = true;
+                }
+            }
+
+            grid[i, j].hasSpawnedAnObject = true;
+        }
 
         grid = FindNeighbours(grid, columns, rows);
     }

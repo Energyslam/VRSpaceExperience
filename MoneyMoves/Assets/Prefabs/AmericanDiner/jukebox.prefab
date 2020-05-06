@@ -1175,7 +1175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3310331076529932249}
-  bpm: 1.3
+  animationSpeed: 1.2
 --- !u!1 &8964084204206226544
 GameObject:
   m_ObjectHideFlags: 0

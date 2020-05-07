@@ -2124,75 +2124,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1137166647595930429, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1500500087003922005, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1762015127484923687, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2330680350341206936, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2551453179412723536, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2706827257889251655, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2709503910731663622, guid: 50d4f22a384834449b40a00cd1db1038,
         type: 3}
       propertyPath: m_Name
       value: TechCubesule
-      objectReference: {fileID: 0}
-    - target: {fileID: 3063388374027598739, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3524083845267346111, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4878350750080009828, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5159222867218870278, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6235086468976042998, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7286186672111692687, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7550279362366204910, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7572514319573298951, guid: 50d4f22a384834449b40a00cd1db1038,
         type: 3}
@@ -2247,21 +2182,6 @@ PrefabInstance:
     - target: {fileID: 7572514319573298951, guid: 50d4f22a384834449b40a00cd1db1038,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7835703401146216259, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7985031018094170235, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8305875990113246049, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: isClosed
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

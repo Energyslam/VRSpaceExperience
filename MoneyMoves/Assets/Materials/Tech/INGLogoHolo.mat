@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hologram
+  m_Name: INGLogoHolo
   m_Shader: {fileID: -6465566751694194690, guid: 40bbb99911a706343ba2cdde66901eb2,
     type: 3}
   m_ShaderKeywords: 
@@ -25,11 +25,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_139CDA69: 0
-    - Vector1_1C64BBB1: 0
-    - Vector1_CEE3861A: 5
+    - Vector1_139CDA69: 0.5
+    - Vector1_1C64BBB1: 0.001
+    - Vector1_CEE3861A: 1
     m_Colors:
-    - Color_10FB31B4: {r: 0, g: 1.035294, b: 8, a: 0}
-    - Color_14CDFECE: {r: 0.32907617, g: 0.4875229, b: 0.8207547, a: 0}
-    - Vector2_146018F0: {r: 0, g: 0, b: 0, a: 0}
-    - Vector2_B49D1716: {r: 1, g: 0, b: 0, a: 0}
+    - Color_10FB31B4: {r: 10.378345, g: 2.6343243, b: 0, a: 0}
+    - Color_14CDFECE: {r: 0.78823537, g: 0.42352945, b: 0.27058825, a: 0}
+    - Vector2_146018F0: {r: 0, g: 0.05, b: 0, a: 0}
+    - Vector2_B49D1716: {r: 0, g: 3, b: 0, a: 0}

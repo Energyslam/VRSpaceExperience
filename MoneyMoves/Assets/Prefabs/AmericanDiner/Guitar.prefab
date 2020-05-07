@@ -1462,6 +1462,7 @@ MonoBehaviour:
   swingSpeed: 5
   randomRotation: 0
   rotation: 15
+  axis: {x: 0, y: 0, z: 1}
 --- !u!1 &5750019792229603968
 GameObject:
   m_ObjectHideFlags: 0

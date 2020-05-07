@@ -9,7 +9,9 @@ public class Swing : MonoBehaviour
 
     public bool randomRotation = false;
 
-    public float rotation = 60; 
+    public float rotation = 60;
+
+    public Vector3 axis;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -31,7 +33,16 @@ public class Swing : MonoBehaviour
         }
         else
         {
-            newRotation = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, angle);
+            newRotation = transform.localEulerAngles;
+
+            if (axis.x != 0)
+                newRotation.x = angle;
+
+            if (axis.y != 0)
+                newRotation.y = angle;
+
+            if (axis.z != 0)
+                newRotation.z = angle;
         }
         
         transform.localEulerAngles = newRotation;

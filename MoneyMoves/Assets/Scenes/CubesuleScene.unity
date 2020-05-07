@@ -2124,6 +2124,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1459975224, guid: 50d4f22a384834449b40a00cd1db1038, type: 3}
+      propertyPath: connectableBigObject
+      value: 
+      objectReference: {fileID: 8199688303501405120, guid: 4621da1bbc3bbb346aa65a215781f03f,
+        type: 3}
+    - target: {fileID: 1459975224, guid: 50d4f22a384834449b40a00cd1db1038, type: 3}
+      propertyPath: cornerConnectableBigObject
+      value: 
+      objectReference: {fileID: 570723254751743050, guid: a6a97946deb7a784b892f5ea2b08502b,
+        type: 3}
+    - target: {fileID: 1459975224, guid: 50d4f22a384834449b40a00cd1db1038, type: 3}
+      propertyPath: mediumSingleObject
+      value: 
+      objectReference: {fileID: 6113310644154000927, guid: 30c4972e5623e2b42b40b969558ae181,
+        type: 3}
+    - target: {fileID: 1459975224, guid: 50d4f22a384834449b40a00cd1db1038, type: 3}
+      propertyPath: gridSizeX
+      value: 4.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459975224, guid: 50d4f22a384834449b40a00cd1db1038, type: 3}
+      propertyPath: gridSizeZ
+      value: 4.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2709503910731663622, guid: 50d4f22a384834449b40a00cd1db1038,
         type: 3}
       propertyPath: m_Name

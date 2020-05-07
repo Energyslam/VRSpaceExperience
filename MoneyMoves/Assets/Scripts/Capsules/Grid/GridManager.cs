@@ -355,6 +355,7 @@ public class GridManager : MonoBehaviour
         if (toSpawn != null)
         {
             GameObject obj = Instantiate(toSpawn, grid[i, j].transform.position + new Vector3(0, yOffset, 0), Quaternion.identity, objectsHolder.transform);
+            obj.transform.rotation = toSpawn.transform.rotation;
             obj.transform.localScale = new Vector3(obj.transform.localScale.x * upscaleFactor.x, obj.transform.localScale.y * ((upscaleFactor.x + upscaleFactor.z) / 2), obj.transform.localScale.z * upscaleFactor.z) + new Vector3(0.1f * upscaleFactor.x + 0.1f, 0.0f, 0.1f * upscaleFactor.z + 0.1f);
             Vector3 rotateToWall = new Vector3();
             switch (grid[i, j].rotation)

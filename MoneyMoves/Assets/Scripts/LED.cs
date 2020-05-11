@@ -39,8 +39,8 @@ public class LED : WallObject
         StartCoroutine(ChangeColor(mat, waitTime));
     }
 
-    public override void NotifyWallChange(bool isClosed)
+    public override void NotifyWallChange(bool isOpen)
     {
-        rend.enabled = isClosed;
+        rend.enabled = !isOpen;
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WallObject : MonoBehaviour
 {
-    public virtual void NotifyWallChange(bool isClosed)
+    public virtual void NotifyWallChange(bool isOpen)
     {
 
     }

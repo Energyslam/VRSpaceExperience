@@ -107,7 +107,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
+    agentRadius: 0.2
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
@@ -115,13 +115,13 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.06666667
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: e9e94129666c64546b9a7bc3e784ca8e, type: 2}
 --- !u!1001 &28148028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2132,15 +2132,100 @@ PrefabInstance:
       propertyPath: DEBUGGING
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 322333423680139856, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 322333423680139856, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.data[0]
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 485196508914005161, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 485196508914005161, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.data[0]
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356035682472423514, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1356035682472423514, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.data[0]
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658458404451448058, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1658458404451448058, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.data[0]
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2635185736854445493, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2635185736854445493, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.data[0]
+      value: 3000
+      objectReference: {fileID: 0}
     - target: {fileID: 2709503910731663622, guid: 50d4f22a384834449b40a00cd1db1038,
         type: 3}
       propertyPath: m_Name
       value: TechCubesule
       objectReference: {fileID: 0}
+    - target: {fileID: 2988316498383372368, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2988316498383372368, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.data[0]
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4538330111210081903, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4538330111210081903, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.data[0]
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5031104597468185607, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5031104597468185607, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.data[0]
+      value: 3000
+      objectReference: {fileID: 0}
     - target: {fileID: 5451004030347864642, guid: 50d4f22a384834449b40a00cd1db1038,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5585027567055131784, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5743423491552107408, guid: 50d4f22a384834449b40a00cd1db1038,
         type: 3}
@@ -2156,6 +2241,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OverrideVoxelSize
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360378602436746771, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6360378602436746771, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.data[0]
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 7572514319573298951, guid: 50d4f22a384834449b40a00cd1db1038,
         type: 3}
@@ -2211,6 +2306,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460196442053950628, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460196442053950628, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_queues.Array.data[0]
+      value: 3000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50d4f22a384834449b40a00cd1db1038, type: 3}

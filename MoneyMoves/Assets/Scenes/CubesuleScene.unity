@@ -1041,6 +1041,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1459975224, guid: 555f918f53d309644af43f6747114316, type: 3}
+      propertyPath: DEBUGGING
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2298949711079761233, guid: 555f918f53d309644af43f6747114316,
         type: 3}
       propertyPath: player
@@ -2124,6 +2128,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1459975224, guid: 50d4f22a384834449b40a00cd1db1038, type: 3}
+      propertyPath: DEBUGGING
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2709503910731663622, guid: 50d4f22a384834449b40a00cd1db1038,
         type: 3}
       propertyPath: m_Name

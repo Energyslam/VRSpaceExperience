@@ -7,6 +7,9 @@ public class CapsuleAnimations : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
+    [SerializeField]
+    private bool openOnStartUp;
+
     public GameObject distancePivot;
 
     public bool isOpen = true;
@@ -19,7 +22,7 @@ public class CapsuleAnimations : MonoBehaviour
 
     private void Start()
     {
-        if (Random.value > 0.5f) Animate(true);
+        if (openOnStartUp) Animate(true);
     }
 
     public void Animate(bool hasToOpen)

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4185098936981796284}
   - component: {fileID: 4671143462569933799}
   - component: {fileID: 7276083132249348600}
+  - component: {fileID: 7574619974641798025}
   m_Layer: 0
   m_Name: AanrechtModularPCG
   m_TagString: Untagged
@@ -126,6 +127,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.099999994, y: 0.042353004, z: 0.04136529}
   m_Center: {x: 0, y: 0.25281858, z: -0.03242633}
+--- !u!208 &7574619974641798025
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8199688303501405120}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.05, y: 0.18100001, z: 0.053000003}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0.18100001, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8870255236228303702
 GameObject:
   m_ObjectHideFlags: 0

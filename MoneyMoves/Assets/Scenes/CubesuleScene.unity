@@ -2129,6 +2129,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: TechCubesule
       objectReference: {fileID: 0}
+    - target: {fileID: 5451004030347864642, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743423491552107408, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743423491552107408, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_UseGeometry
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743423491552107408, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_OverrideVoxelSize
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7572514319573298951, guid: 50d4f22a384834449b40a00cd1db1038,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5542737764125082735}
   - component: {fileID: 2294385868088703126}
   - component: {fileID: 3956662885646836238}
+  - component: {fileID: 2536250525965356277}
   m_Layer: 0
   m_Name: AanrechtModularCornerOutsideProper
   m_TagString: Untagged
@@ -97,6 +98,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.10625357, y: 0.3625018, z: 0.10641433}
   m_Center: {x: 0, y: 0.1812509, z: 0}
+--- !u!208 &2536250525965356277
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570723254751743050}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.053000003, y: 0.18100001, z: 0.053000003}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0.18100001, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &6846568845068721943
 PrefabInstance:
   m_ObjectHideFlags: 0

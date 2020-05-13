@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject deliverPoint;
     [SerializeField] GameObject destinationsParent;
     [SerializeField] GameObject capsulesParent;
+    public GameObject minigame;
+    public GameObject cam;
     public int timesToOpenCapsules;
     public int totalOpenTime;
     public bool rotateText;

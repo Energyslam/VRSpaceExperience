@@ -29,5 +29,11 @@ public class ProjectileBehaviour : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        if (other.CompareTag("MinigameTarget"))
+        {
+            other.GetComponent<MinigameTarget>().Hit();
+            Destroy(this.gameObject);
+        }
+
     }
 }

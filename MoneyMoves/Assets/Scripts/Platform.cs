@@ -42,6 +42,7 @@ public class Platform : MonoBehaviour
 
     void SpeedHandler()
     {
+        return; //MINGAME DEBUG
         if (currentIndex > maxSpeedIndex - 10)
         {
             int distanceToSlowDown = maxSpeedIndex - (maxSpeedIndex - 10);
@@ -53,7 +54,6 @@ public class Platform : MonoBehaviour
     }
     void Update()
     {
-
         if (State == MovementState.MovingToSplit)
         {
             MoveToSplit();
@@ -72,6 +72,10 @@ public class Platform : MonoBehaviour
             //this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, RotatorObjectBecauseMathIsTooHardForMe.transform.rotation, rotationSpeed * Time.deltaTime); // erger als je te snel gaat bij kleine rotaties
             this.transform.rotation = Quaternion.Lerp(this.transform.rotation, RotatorObjectBecauseMathIsTooHardForMe.transform.rotation, rotationSpeed * Time.deltaTime);
             this.transform.position = Vector3.MoveTowards(this.transform.position, target, speed * Time.deltaTime);
+        }
+        if (State == MovementState.Idle)
+        {
+            //TODO: slowly go to neutral x and z
         }
     }
 
@@ -116,6 +120,8 @@ public class Platform : MonoBehaviour
             {
                 currentIndex = 0;
                 State = MovementState.Idle;
+                //MINIGAME:
+                GameObject minigame = Instantiate(GameManager.Instance.minigame);
                 //GameManager.Instance.ActivateLaserPointer();
                 return;
             }
@@ -209,7 +215,7 @@ public class Platform : MonoBehaviour
                 visualGO.transform.LookAt(Tracks.OriginToSplit[i + 1]);
             }
         }
-        CreateTheNiceCursors();
+        //CreateTheNiceCursors();
     }
 
     void CreateTheNiceCursors()

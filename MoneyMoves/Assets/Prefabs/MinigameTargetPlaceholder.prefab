@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9b6c68e5add316347b0ace39a8e2798e, type: 2}
+  - {fileID: 2100000, guid: 4b338ca1fc9f52d478897fc5d5e4841f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,5 +107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 1
-  side: 0
+  speed: 0.5
+  minigame: {fileID: 0}
+  gameSide: 0

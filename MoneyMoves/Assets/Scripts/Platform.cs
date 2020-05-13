@@ -42,7 +42,7 @@ public class Platform : MonoBehaviour
 
     void SpeedHandler()
     {
-        return; //MINGAME DEBUG
+        //return; //MINGAME DEBUG
         if (currentIndex > maxSpeedIndex - 10)
         {
             int distanceToSlowDown = maxSpeedIndex - (maxSpeedIndex - 10);

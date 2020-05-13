@@ -31,17 +31,24 @@ public class Minigame : MonoBehaviour
         if (side == TinyGame.GameSide.Left)
         {
             leftPoints += 1;
-            leftScore.text = "Left: " + leftPoints;
+            leftScore.text = "" + leftPoints;
         } else if (side == TinyGame.GameSide.RIght)
         {
             rightPoints += 1;
-            rightScore.text = "Right: " + rightPoints;
+            rightScore.text = "" + rightPoints;
         }
     }
 
     IEnumerator CountdownTime()
     {
-        time.text = "Remaining time: " + remainingTime;
+        if (remainingTime < 10)
+        {
+            time.text = "00: 0" + remainingTime;
+        }
+        else if (remainingTime >= 10)
+        {
+            time.text = "00: " + remainingTime;
+        }
         yield return new WaitForSeconds(1f);
         remainingTime--;
         if (remainingTime > 0)

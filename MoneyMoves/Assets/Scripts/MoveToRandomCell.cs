@@ -45,7 +45,7 @@ public class MoveToRandomCell : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         target = cell.gameObject;
-        targetLocation = cell.position;
+        targetLocation = target.transform.position;
         state = State.WALKING;
     }
 

@@ -48,9 +48,9 @@ public class Platform : MonoBehaviour
             int distanceToSlowDown = maxSpeedIndex - (maxSpeedIndex - 10);
             int currentDistanceTo0 = maxSpeedIndex - currentIndex;
             float dividerThingy = (float)currentDistanceTo0 / (float)distanceToSlowDown;
-            speed = Mathf.Lerp(1f, 5f, dividerThingy);
+            speed = Mathf.Lerp(1f, 8f, dividerThingy);
         }
-        else speed = 5f;
+        else speed = 8f;
     }
     void Update()
     {

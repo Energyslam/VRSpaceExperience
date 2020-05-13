@@ -228,8 +228,8 @@ MonoBehaviour:
   minigame: {fileID: 6348416947097759027, guid: d6faf0e92a2af25438442baef3ff7a68,
     type: 3}
   cam: {fileID: 1689244929}
-  timesToOpenCapsules: 15
-  totalOpenTime: 2
+  timesToOpenCapsules: 2
+  totalOpenTime: 15
   rotateText: 0
   respawnWaitTime: 2
   platform: {fileID: 1621345693}
@@ -277,7 +277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca06496bffeec8c458bed273a9ac54e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugCam: {fileID: 0}
 --- !u!1001 &68769117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3576,7 +3575,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca06496bffeec8c458bed273a9ac54e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugCam: {fileID: 1689244933}
 --- !u!1 &1705671443 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 125964, guid: dc06161b6d97feb419f45f03b62e14b9,

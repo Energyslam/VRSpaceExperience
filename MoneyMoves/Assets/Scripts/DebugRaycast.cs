@@ -5,8 +5,6 @@ using Valve.VR.InteractionSystem;
 
 public class DebugRaycast : MonoBehaviour
 {
-    public Camera debugCam;
-    Vector3 mousePosition;
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -17,8 +15,6 @@ public class DebugRaycast : MonoBehaviour
             {
                 if (hit.collider.CompareTag("MinigameTarget"))
                 {
-                    //Do something
-                    Debug.Log("Implement logic here for minigame hits");
                     hit.collider.GetComponent<MinigameTarget>().Hit();
                 }
             }

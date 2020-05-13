@@ -44,6 +44,7 @@ public class MoveToRandomCell : MonoBehaviour
     private IEnumerator WalkToCell(GridCell cell, float delay)
     {
         yield return new WaitForSeconds(delay);
+        target = cell.gameObject;
         targetLocation = cell.position;
         state = State.WALKING;
     }
@@ -58,7 +59,7 @@ public class MoveToRandomCell : MonoBehaviour
             MoveToCell();
         }
 
-        if (targetLocation != Vector3.zero)
+        if (state == State.WALKING && target != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetLocation, walkingSpeed);
             transform.LookAt(targetLocation);

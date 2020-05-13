@@ -1625,10 +1625,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 4512060056102158318, guid: 3f5755b6fa68c2949bcb6b3b998512e9, type: 3}
+  explosion: {fileID: 100010, guid: 645413a00f7bd0242bbd6d0e5eb6f439, type: 3}
   leftScore: {fileID: 6431276279855103450}
   rightScore: {fileID: 2263689518757869642}
   time: {fileID: 499390970}
   totalTime: 15
+  destrucTorque: {x: 0, y: 500, z: 0}
+  ookietsmettorque: 0
 --- !u!1 &7978285285945597997
 GameObject:
   m_ObjectHideFlags: 0

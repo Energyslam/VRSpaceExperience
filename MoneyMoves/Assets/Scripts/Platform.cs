@@ -14,6 +14,8 @@ public class Platform : MonoBehaviour
     GameObject visualParent;
     List<GameObject> arrows = new List<GameObject>();
     int maxSpeedIndex;
+    List<GameObject> splitToATracks = new List<GameObject>();
+    List<GameObject> splitToBTracks = new List<GameObject>();
     public enum MovementState
     {
         Idle,
@@ -189,6 +191,9 @@ public class Platform : MonoBehaviour
 
         Tracks.GenerateSplitTracks(dockingSpotA.transform.position, dockingSpotB.transform.position, this.transform.position);
 
+        splitToATracks.Clear();
+        splitToBTracks.Clear();
+
         for (int i = 0; i < Tracks.SplitToA.Count; i++)
         {
             GameObject visualGO = Instantiate(trackVisual, Tracks.SplitToA[i], Quaternion.identity, visualParent.transform);
@@ -196,6 +201,7 @@ public class Platform : MonoBehaviour
             {
                 visualGO.transform.LookAt(Tracks.SplitToA[i + 1]);
             }
+            splitToATracks.Add(visualGO);
         }
 
         for (int i = 0; i < Tracks.SplitToB.Count; i++)
@@ -205,6 +211,7 @@ public class Platform : MonoBehaviour
             {
                 visualGO.transform.LookAt(Tracks.SplitToB[i + 1]);
             }
+            splitToBTracks.Add(visualGO);
         }
 
         for (int i = 0; i < Tracks.OriginToSplit.Count; i++)
@@ -216,6 +223,22 @@ public class Platform : MonoBehaviour
             }
         }
         //CreateTheNiceCursors();
+    }
+
+    public void ClearATrack()
+    {
+        foreach(GameObject go in splitToATracks)
+        {
+            go.SetActive(false);
+        }
+    }
+
+    public void ClearBTrack()
+    {
+        foreach(GameObject go in splitToBTracks)
+        {
+            go.SetActive(false);
+        }
     }
 
     void CreateTheNiceCursors()

@@ -6,13 +6,18 @@ using TMPro;
 public class Minigame : MonoBehaviour
 {
     [SerializeField] GameObject target;
+    [SerializeField] GameObject explosion;
     public TextMeshProUGUI leftScore, rightScore, time;
     int leftPoints = 0, rightPoints = 0;
     [SerializeField] int totalTime;
     int remainingTime;
+    public Vector3 destrucTorque;
+    public float ookietsmettorque;
+    Platform platform;
     Vector3 centeroffset;
     void Start()
     {
+        platform = GameManager.Instance.platform;
         centeroffset = new Vector3(Camera.main.transform.position.x - 15, Camera.main.transform.position.y, Camera.main.transform.position.z);
         Vector3 UNO = Tracks.SplitToA[Tracks.SplitToA.Count / 4];
         Vector3 DUO = Tracks.SplitToB[Tracks.SplitToB.Count / 4];
@@ -59,17 +64,40 @@ public class Minigame : MonoBehaviour
         {
             if (leftPoints > rightPoints)
             {
-                GameManager.Instance.platform.ChangeStateToA();
+                MoveToA();
             }
             else if (rightPoints > leftPoints)
             {
-                GameManager.Instance.platform.ChangeStateToB();
+                MoveToB();
             }
             else if (leftPoints == rightPoints)
             {
-                GameManager.Instance.platform.ChangeStateToA();
+                //TODO: do something else than defaulting to left
+                MoveToA();
             }
             Destroy(this.gameObject);
         }
+    }
+
+    void MoveToA()
+    {
+        platform.dockingSpotB.transform.parent.gameObject.AddComponent<Rigidbody>();
+        platform.ClearBTrack();
+        Destroy(platform.dockingSpotB.transform.parent.gameObject, 10f);
+        platform.dockingSpotB.transform.parent.gameObject.GetComponent<Rigidbody>().AddTorque(destrucTorque);
+        GameObject explo = Instantiate(explosion, platform.dockingSpotB.transform.parent.gameObject.transform.position, Quaternion.identity);
+        Destroy(explo, 2f);
+        platform.ChangeStateToA();
+    }
+
+    void MoveToB()
+    {
+        platform.dockingSpotA.transform.parent.gameObject.AddComponent<Rigidbody>();
+        platform.ClearBTrack();
+        Destroy(platform.dockingSpotA.transform.parent.gameObject, 10f);
+        platform.dockingSpotA.transform.parent.gameObject.GetComponent<Rigidbody>().AddTorque(destrucTorque);
+        GameObject explo = Instantiate(explosion, platform.dockingSpotA.transform.parent.gameObject.transform.position, Quaternion.identity);
+        Destroy(explo, 2f);
+        platform.ChangeStateToB();
     }
 }

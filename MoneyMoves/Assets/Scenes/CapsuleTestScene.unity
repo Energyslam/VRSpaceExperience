@@ -193,6 +193,12 @@ MonoBehaviour:
   deliverPoint: {fileID: 277420713}
   destinationsParent: {fileID: 242363449}
   capsulesParent: {fileID: 17013494}
+  timesToOpenCapsules: 0
+  totalOpenTime: 0
+  rotateText: 0
+  respawnWaitTime: 0
+  platform: {fileID: 0}
+  laserpointer: {fileID: 0}
   destinations: []
   capsules: []
   player: {fileID: 423450303}
@@ -319,6 +325,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744871867043474344, guid: dcbc7cba37c332b428b8f3549fdba5a0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8818204572725437424, guid: dcbc7cba37c332b428b8f3549fdba5a0,
         type: 3}
@@ -1430,6 +1441,7 @@ MonoBehaviour:
   - {fileID: 1338481193}
   - {fileID: 1250777430}
   - {fileID: 303614123}
+  timeInSong: 0
 --- !u!4 &1144516464
 Transform:
   m_ObjectHideFlags: 0
@@ -2132,6 +2144,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 17013495}
     m_Modifications:
+    - target: {fileID: 4744871867043474344, guid: dcbc7cba37c332b428b8f3549fdba5a0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8818204573176509199, guid: dcbc7cba37c332b428b8f3549fdba5a0,
         type: 3}
       propertyPath: giftType
@@ -2320,6 +2337,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 17013495}
     m_Modifications:
+    - target: {fileID: 4744871867043474344, guid: dcbc7cba37c332b428b8f3549fdba5a0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8818204573176509199, guid: dcbc7cba37c332b428b8f3549fdba5a0,
         type: 3}
       propertyPath: rotateText
@@ -2753,6 +2775,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744871867043474344, guid: dcbc7cba37c332b428b8f3549fdba5a0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8818204572725437424, guid: dcbc7cba37c332b428b8f3549fdba5a0,
         type: 3}

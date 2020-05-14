@@ -432,7 +432,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 61144d6fd34d28740b81e4390922d68c, type: 2}
 --- !u!1001 &68769117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1482,7 +1482,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -2132,6 +2132,11 @@ PrefabInstance:
       propertyPath: DEBUGGING
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1459975224, guid: 50d4f22a384834449b40a00cd1db1038, type: 3}
+      propertyPath: topOfMediumMulti
+      value: 
+      objectReference: {fileID: 2697685724563096509, guid: 7ccaa274c9c68184d91fc28225aba02f,
+        type: 3}
     - target: {fileID: 322333423680139856, guid: 50d4f22a384834449b40a00cd1db1038,
         type: 3}
       propertyPath: m_queues.Array.size

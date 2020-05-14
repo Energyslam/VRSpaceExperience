@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8678932368153582257}
   - component: {fileID: 6861527672544862498}
   - component: {fileID: 329622290206565640}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GridCell
   m_TagString: Cell
   m_Icon: {fileID: 0}
@@ -57,9 +57,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dde0ff4c2992b64e990e67c321a7eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horizontal: 0
   vertical: 0
+  horizontal: 0
   color: {r: 1, g: 1, b: 1, a: 1}
   scale: {x: 1, y: 0.1, z: 1}
+  position: {x: -4.5, y: 0, z: -4.5}
   isAlive: 0
   aliveNeighbours: 0
+  neighboursWithObjects: 0
+  hasSpawnedAnObject: 0
+  rotation: 0

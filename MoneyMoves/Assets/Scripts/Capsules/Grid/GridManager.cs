@@ -36,7 +36,7 @@ public class GridManager : MonoBehaviour
 
     private int hasIterated = 0;
 
-    public enum SpawningPhase { BIG, MEDIUM, SMALL, WALL, ROOF, TABLE };
+    public enum SpawningPhase { BIG, MEDIUM, FINISHED };
 
     [SerializeField]
     private SpawningPhase currentSpawningPhase = SpawningPhase.BIG;
@@ -177,7 +177,7 @@ public class GridManager : MonoBehaviour
 
             case SpawningPhase.MEDIUM:
                 SpawnMediumObjects();
-                // GoToNextPhase(currentSpawningPhase);
+                GoToNextPhase(currentSpawningPhase);
                 break;
         }
     }
@@ -327,9 +327,9 @@ public class GridManager : MonoBehaviour
                 aliveThreshold = 0.55f;
                 break;
             case SpawningPhase.MEDIUM:
-                currentSpawningPhase = SpawningPhase.ROOF;
-                aliveThreshold = 0.55f;
-                break;
+                currentSpawningPhase = SpawningPhase.FINISHED;
+                // TODO bake navmesh
+                return;
         }
 
         for (int x = 0; x < columns; x++)

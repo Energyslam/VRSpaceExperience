@@ -7,6 +7,9 @@ TagManager:
   - Cell
   - Collideable
   - Projectile
+  - projectile
+  - FxTemporaire
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -19,7 +22,7 @@ TagManager:
   - NoShadows
   - PostProcessing
   - GridCell
-  - 
+  - NoDirectionalLight
   - 
   - 
   - 

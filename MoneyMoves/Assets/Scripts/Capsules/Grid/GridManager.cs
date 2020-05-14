@@ -41,8 +41,10 @@ public class GridManager : MonoBehaviour
     [SerializeField]
     private SpawningPhase currentSpawningPhase = SpawningPhase.BIG;
 
-    [SerializeField]
     private float aliveThreshold = 0.5f;
+
+    [SerializeField]
+    private float aliveThresholdBig = 0.5f, aliveThresholdMedium = 0.55f;
 
     private List<GridCell> cells = new List<GridCell>();
 
@@ -53,14 +55,26 @@ public class GridManager : MonoBehaviour
     private Transform topWall, rightWall, botWall, leftWall;
     #endregion
 
-    // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
+        Initialize();
+    }
+
+    // Sets up grid and spawns objects using game of life
+    public void Initialize()
+    {
+        // Calculating grid size
         horizontalCellSize = (float)gridSizeX / (float)columns;
         verticalCellSize = (float)gridSizeZ / (float)rows;
         grid = new GridCell[columns, rows];
         gridCellsOffset = new Vector3(-gridSizeX / 2, gridCellsOffset.y, -gridSizeZ / 2);
 
+        // Resetting Game of Life variables
+        aliveThreshold = aliveThresholdBig;
+        currentSpawningPhase = SpawningPhase.BIG;
+        totalAlive = 0;
+
+        // Spawning grid
         for (int i = 0; i < columns; i++)
         {
             for (int j = 0; j < rows; j++)
@@ -69,9 +83,6 @@ public class GridManager : MonoBehaviour
                 gridCell.name = "Cell: " + i + ", " + j;
                 gridCell.transform.position = new Vector3(i * horizontalCellSize + horizontalCellSize * 0.5f, 0f, j * verticalCellSize + verticalCellSize * 0.5f) + transform.position + gridCellsOffset;
                 gridCell.transform.parent = cellParent;
-                BoxCollider collider = gridCell.GetComponent<BoxCollider>();
-                collider.center = Vector3.zero;
-                collider.size = new Vector3(horizontalCellSize, 0.1f, verticalCellSize);
 
                 GridCell cellInfo = gridCell.GetComponent<GridCell>();
                 cellInfo.vertical = i;
@@ -113,6 +124,33 @@ public class GridManager : MonoBehaviour
         StartCoroutine(IterateGameOfLife(grid, columns, rows, currentSpawningPhase, 15));
     }
 
+    private void Reset()
+    {
+        Clean();
+        Initialize();
+    }
+
+    public void Clean()
+    {
+        if (objectsHolder.transform.childCount > 0)
+        {
+            for (int i = 0; i < objectsHolder.transform.childCount; i++)
+            {
+                Destroy(objectsHolder.transform.GetChild(i).gameObject);
+            }
+        }
+
+        if (cellParent.transform.childCount > 0)
+        {
+            for (int i = 0; i < cellParent.transform.childCount; i++)
+            {
+                Destroy(cellParent.transform.GetChild(i).gameObject);
+            }
+        }
+
+        cells.Clear();
+    }
+
     private void Update()
     {
         if (DEBUGGING)
@@ -127,6 +165,9 @@ public class GridManager : MonoBehaviour
                 cell.color = grid[i, j].isAlive ? new Color(0, 0, 0) : new Color(1, 1, 1);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+            Reset();
     }
 
     // Calculates and sets the color based on Perlin noise. Black means a cell is alive, white means dead
@@ -324,11 +365,10 @@ public class GridManager : MonoBehaviour
         {
             case SpawningPhase.BIG:
                 currentSpawningPhase = SpawningPhase.MEDIUM;
-                aliveThreshold = 0.55f;
+                aliveThreshold = aliveThresholdMedium;
                 break;
             case SpawningPhase.MEDIUM:
                 currentSpawningPhase = SpawningPhase.FINISHED;
-                // TODO bake navmesh
                 return;
         }
 

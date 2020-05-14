@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &1223269849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7910732199065177438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81cb6bd98037cbf4a899c2ebef3fd232, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  capsule: {fileID: 7099692150905078113}
 --- !u!114 &3079146935040867838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,6 +74,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   a: {fileID: 2543303219586828805}
   b: {fileID: 7099692150905078113}
+--- !u!114 &1223269849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7910732199065177438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81cb6bd98037cbf4a899c2ebef3fd232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  capsule: {fileID: 7099692150905078113}
 --- !u!1001 &1340329315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -178,6 +178,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171864484307812705, guid: 722e17ad71ec84549a2529e41bbd133b,
+        type: 3}
+      propertyPath: openOnStartUp
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7910732199918665789, guid: 722e17ad71ec84549a2529e41bbd133b,
         type: 3}

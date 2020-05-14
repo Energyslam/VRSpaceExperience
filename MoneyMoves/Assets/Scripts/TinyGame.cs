@@ -15,6 +15,7 @@ public class TinyGame : MonoBehaviour
     [SerializeField] GameObject target;
 
     [SerializeField] Minigame minigame;
+    public bool playing;
     public int spawnSpeed;
     int quickSpawner = 0;
     int enumLength;
@@ -75,6 +76,10 @@ public class TinyGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!playing)
+        {
+            return;
+        }
         quickSpawner++;
         if (quickSpawner >= spawnSpeed)
         {

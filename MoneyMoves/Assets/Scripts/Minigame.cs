@@ -7,12 +7,16 @@ public class Minigame : MonoBehaviour
 {
     [SerializeField] GameObject target;
     [SerializeField] GameObject explosion;
+    [SerializeField] TinyGame leftTinyGame;
+    [SerializeField] TinyGame rightTinyGame;
+    [SerializeField] GameObject whirlingText;
+
     public TextMeshProUGUI leftScore, rightScore, time;
     int leftPoints = 0, rightPoints = 0;
     [SerializeField] int totalTime;
     int remainingTime;
     public Vector3 destrucTorque;
-    public float ookietsmettorque;
+    public float waitBeforeStart;
     Platform platform;
     Vector3 centeroffset;
     void Start()
@@ -28,9 +32,31 @@ public class Minigame : MonoBehaviour
         transform.LookAt(Camera.main.transform);
         transform.eulerAngles -= new Vector3(transform.localEulerAngles.x, 90, 0);
         remainingTime = totalTime;
-        StartCoroutine(CountdownTime());
+        if (!GameManager.Instance.hasShownInstruction)
+        {
+            StartCoroutine(WaitToStart());
+        }
+        else
+        {
+            StartPlay();
+        }
     }
 
+    IEnumerator WaitToStart()
+    {
+        GameManager.Instance.hasShownInstruction = true;
+        yield return new WaitForSeconds(waitBeforeStart);
+        whirlingText.AddComponent<WhirlingText>();
+        yield return new WaitForSeconds(0.2f);
+        StartPlay();
+    }
+
+    public void StartPlay()
+    {
+        leftTinyGame.playing = true;
+        rightTinyGame.playing = true;
+        StartCoroutine(CountdownTime());
+    }
     public void UpdateScore(TinyGame.GameSide side)
     {
         if (side == TinyGame.GameSide.Left)
@@ -93,7 +119,7 @@ public class Minigame : MonoBehaviour
     void MoveToB()
     {
         platform.dockingSpotA.transform.parent.gameObject.AddComponent<Rigidbody>();
-        platform.ClearBTrack();
+        platform.ClearATrack();
         Destroy(platform.dockingSpotA.transform.parent.gameObject, 10f);
         platform.dockingSpotA.transform.parent.gameObject.GetComponent<Rigidbody>().AddTorque(destrucTorque);
         GameObject explo = Instantiate(explosion, platform.dockingSpotA.transform.parent.gameObject.transform.position, Quaternion.identity);

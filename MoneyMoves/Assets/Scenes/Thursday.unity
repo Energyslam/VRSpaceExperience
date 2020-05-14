@@ -231,6 +231,7 @@ MonoBehaviour:
   timesToOpenCapsules: 2
   totalOpenTime: 15
   rotateText: 0
+  hasShownInstruction: 0
   respawnWaitTime: 2
   platform: {fileID: 1621345693}
   laserpointer: {fileID: 404619939}

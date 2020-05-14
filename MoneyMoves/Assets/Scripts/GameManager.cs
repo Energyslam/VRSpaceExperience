@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public int timesToOpenCapsules;
     public int totalOpenTime;
     public bool rotateText;
+    public bool hasShownInstruction;
     public float respawnWaitTime;
 
     public Platform platform;

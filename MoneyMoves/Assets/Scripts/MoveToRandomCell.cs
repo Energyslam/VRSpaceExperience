@@ -29,7 +29,7 @@ public class MoveToRandomCell : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        grid = transform.root.GetComponent<GridManager>();
+        grid = transform.GetComponentInParent<GridManager>();
         transform.localPosition = Vector3.zero;
         MoveToCell();
     }

@@ -1792,7 +1792,7 @@ MonoBehaviour:
   time: {fileID: 499390970}
   totalTime: 15
   destrucTorque: {x: 0, y: 500, z: 0}
-  waitBeforeStart: 5
+  waitBeforeStart: 4
 --- !u!1 &7978285285945597997
 GameObject:
   m_ObjectHideFlags: 0

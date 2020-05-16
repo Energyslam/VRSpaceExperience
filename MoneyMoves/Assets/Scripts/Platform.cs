@@ -115,7 +115,7 @@ public class Platform : MonoBehaviour
     void MoveToSplit()
     {
         target = Tracks.OriginToSplit[currentIndex];
-        if (StaticCapsule.FastVectorApproximately(this.transform.position, target, 0.1f))
+        if (HelperFunctions.FastVectorApproximately(this.transform.position, target, 0.1f))
         {
             SpeedHandler();
             if (target == Tracks.OriginToSplit[Tracks.OriginToSplit.Count - 1])
@@ -135,7 +135,7 @@ public class Platform : MonoBehaviour
     {
         State = MovementState.MovingToA;
         target = Tracks.SplitToA[currentIndex];
-        if (StaticCapsule.FastVectorApproximately(this.transform.position, target, 0.1f))
+        if (HelperFunctions.FastVectorApproximately(this.transform.position, target, 0.1f))
         {
             SpeedHandler();
             if (target == Tracks.SplitToA[Tracks.SplitToA.Count - 1])
@@ -154,7 +154,7 @@ public class Platform : MonoBehaviour
     {
         State = MovementState.MovingToB;
         target = Tracks.SplitToB[currentIndex];
-        if (StaticCapsule.FastVectorApproximately(this.transform.position, target, 0.1f))
+        if (HelperFunctions.FastVectorApproximately(this.transform.position, target, 0.1f))
         {
             SpeedHandler();
             if (target == Tracks.SplitToB[Tracks.SplitToB.Count - 1])

@@ -1790,7 +1790,7 @@ MonoBehaviour:
   leftScore: {fileID: 6431276279855103450}
   rightScore: {fileID: 2263689518757869642}
   time: {fileID: 499390970}
-  totalTime: 15
+  totalTime: 1
   destrucTorque: {x: 0, y: 500, z: 0}
   waitBeforeStart: 4
 --- !u!1 &7978285285945597997

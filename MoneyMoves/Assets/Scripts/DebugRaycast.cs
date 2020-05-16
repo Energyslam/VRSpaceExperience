@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Boo.Lang;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
@@ -16,6 +17,14 @@ public class DebugRaycast : MonoBehaviour
                 if (hit.collider.CompareTag("MinigameTarget"))
                 {
                     hit.collider.GetComponent<MinigameTarget>().Hit();
+                }
+                else if (hit.collider.CompareTag("Collideable"))
+                {
+                    GiftBehaviour behaviour = hit.collider.gameObject.GetComponent<GiftBehaviour>();
+                    if (behaviour != null)
+                    {
+                        behaviour.SolveCollision();
+                    }
                 }
             }
         }

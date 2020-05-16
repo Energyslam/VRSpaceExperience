@@ -6,49 +6,40 @@ using System.Linq;
 
 public class StaticCapsule : MonoBehaviour
 {
-     List<GameObject> giftLocations = new List<GameObject>();
-     List<GameObject> chosenLocations = new List<GameObject>();
-     List<GameObject> spawnedGifts = new List<GameObject>();
-    
-    [SerializeField]
-    List<GameObject> connectingWalls = new List<GameObject>();
-
-    [SerializeField]
-    private AudioSource jukeBox;
-    [SerializeField]
-    private List<CapsuleAnimations> openDoors = new List<CapsuleAnimations>();
-    [SerializeField]
-    List<float> distancesDoors = new List<float>();
-    List<float> distancesPillars = new List<float>();
-    [SerializeField]
-    private int doorsToOpenAtOnce = 1;
-    [SerializeField]
-    private List<CapsuleAnimations> animationHandlers;
-    public float audioLerpSpeed;
-
-
+    [SerializeField] List<GameObject> connectingWalls = new List<GameObject>();
+    List<GameObject> giftLocations = new List<GameObject>();
+    List<GameObject> chosenLocations = new List<GameObject>();
+    List<GameObject> spawnedGifts = new List<GameObject>();
     [SerializeField] GameObject destroyableGift;
     [SerializeField] GameObject grabbableGift;
     [SerializeField] GameObject locationParent;
     [SerializeField] GameObject cheatPrevention;
+    [SerializeField] GameObject otherCapsuleInWave;
     public GameObject dockingSpot;
-    public GameObject otherCapsuleInWave;
+
+    [SerializeField] List<CapsuleAnimations> openDoors = new List<CapsuleAnimations>();
+    [SerializeField] List<CapsuleAnimations> animationHandlers;
+
+    [SerializeField] AudioSource jukeBox;
 
     [SerializeField] Animator capsuleAnim;
 
     [SerializeField] TextMeshProUGUI timeText;
 
-    [SerializeField] LightFlicker light;
-
     [SerializeField] int totalTime = 15;
+    [SerializeField] int timesToOpen = 3;
+    [SerializeField] int doorsToOpenAtOnce = 1;
     int currentTime;
     int locationAmount;
     int amountToSpawn;
-    [SerializeField] int timesToOpen = 3;
-    public int timesOpened = 0;
+    int timesOpened = 0;
 
+    [SerializeField] List<float> distancesDoors = new List<float>();
+    List<float> distancesPillars = new List<float>();
     [SerializeField] float rotationSpeed;
     [SerializeField] float respawnWaitTime = 2f;
+    [SerializeField] float audioLerpSpeed;
+    [SerializeField] float textSpeed = 50f;
     float newRotation;
     float textStartingY;
 
@@ -62,15 +53,13 @@ public class StaticCapsule : MonoBehaviour
     }
     [SerializeField] GiftType giftType = GiftType.Destroyable;
 
-    public float textSpeed = 50f;
-
-
     void Start()
     {
         timesToOpen = GameManager.Instance.timesToOpenCapsules;
         totalTime = GameManager.Instance.totalOpenTime;
         rotateText = GameManager.Instance.rotateText;
         respawnWaitTime = GameManager.Instance.respawnWaitTime;
+
         Wave wave = GetComponentInParent<Wave>();
         otherCapsuleInWave = this.gameObject == wave.a.gameObject ? wave.b.gameObject : wave.a.gameObject;
         float dockingSpotY = dockingSpot.transform.position.y;
@@ -78,7 +67,9 @@ public class StaticCapsule : MonoBehaviour
         dockingSpot.transform.position = new Vector3(dockingSpot.transform.position.x, dockingSpotY, dockingSpot.transform.position.z);
         this.transform.LookAt(dockingSpot.transform);
         this.transform.localEulerAngles = new Vector3(0, this.transform.localEulerAngles.y, 0);
+
         textStartingY = timeText.transform.position.y;
+
         foreach (Transform t in locationParent.transform)
         {
             giftLocations.Add(t.gameObject);
@@ -89,7 +80,15 @@ public class StaticCapsule : MonoBehaviour
 
     public void OpenUp()
     {
-        SetNewRotation();
+        //SetNewRotation(); //starts with a rotation, call openfreshcapsule if first rotation isn't wanted
+        OpenFreshCapsule();
+    }
+    void OpenFreshCapsule()
+    {
+        ClearListsForRespawn();
+        SpawnGifts();
+        ManageTime();
+        OpenCapsule();
     }
     private void Update()
     {
@@ -127,9 +126,9 @@ public class StaticCapsule : MonoBehaviour
             StartCoroutine(CountdownTime());
         }
     }
+
     void SpawnGifts()
     {
-        ClearListsForRespawn();
         for (int i = 0; i < amountToSpawn; i++)
         {
             GameObject locationGO = PickGiftLocation();
@@ -152,8 +151,6 @@ public class StaticCapsule : MonoBehaviour
                 spawnedGifts.Add(giftGO);
             }
         }
-        ManageTime();
-        OpenCapsule();
     }
 
     public void UpdateGifts(GameObject gift)
@@ -175,76 +172,39 @@ public class StaticCapsule : MonoBehaviour
     void OpenCapsule()
     {
         timesOpened++;
-        cheatPrevention.SetActive(false);
         CalculateNearestDoors();
         PlayMusic();
-        //capsuleAnim.SetFloat("Speed", 1f);
-        //capsuleAnim.SetTrigger("OpeningTrigger");
 
         if (!rotateText)
         {
-            Vector3 textToCapsule = this.transform.position - timeText.transform.position;
-            float textDistance = textToCapsule.magnitude;
-            Vector3 playerToCapsule = this.transform.position - GameManager.Instance.player.transform.position;
-            timeText.transform.position = this.transform.position + (playerToCapsule.normalized * textDistance);
-            timeText.transform.LookAt(GameManager.Instance.player.transform);
-            timeText.transform.localEulerAngles += new Vector3(0f, 180f, 0f);
-            timeText.transform.position = new Vector3(timeText.transform.position.x, textStartingY, timeText.transform.position.z);
+            CalculateVisibleTextPosition();
         }
+        cheatPrevention.SetActive(false);
         timeText.gameObject.SetActive(true);
-        //light.TurnOnLight();
     }
 
     IEnumerator CloseCapsule()
     {
         cheatPrevention.SetActive(true);
         yield return new WaitForSeconds(respawnWaitTime);
-        //light.TurnOffLight();
         timeText.gameObject.SetActive(false);
-        //capsuleAnim.SetFloat("Speed", -0.5f);
-        //capsuleAnim.SetTrigger("OpeningTrigger");
-
         CalculateNearestDoors();
         //yield return new WaitForSeconds(capsuleAnim.GetCurrentAnimatorStateInfo(0).length);
 
         if (timesOpened >= timesToOpen)
         {
-            //TODO: Player moves to new location
             StartCoroutine(StopMusic());
             WaveManager.Instance.GetNextWave();
             yield break;
         }
+
         SetNewRotation();
     }
+
+    #region Rotation
     void SetNewRotation()
     {
-        //For a random rotation that's atleast 90 degrees in a different direction
-        //int i = Random.Range(1, 3);
-        //if (i % 2 == 0)
-        //{
-        //    newRotation = this.transform.localEulerAngles.y + 90f + Random.Range(0f, 180f);
-        //}
-        //else if (i % 2 == 1)
-        //{
-        //    newRotation = this.transform.localEulerAngles.y - 90f - Random.Range(0f, 180f);
-        //}
-        //if (newRotation > 360)
-        //{
-        //    newRotation -= 360;
-        //}
-        //else if (newRotation < 0)
-        //{
-        //    newRotation += 360;
-        //}
-    //    float[] angles = { 45, 90, 135, 180, 225, 270, 315 };
-    ////repickAngle:
-    //    float chosenAngle = angles[Random.Range(0, angles.Length)];
         newRotation = RepickAngle(newRotation);
-        Debug.Log("newRotation = " + newRotation);
-        //if (FastApproximately(this.transform.localEulerAngles.y, newRotation, 2f)) // this.transform.localEulerAngles.y +2f < newRotation)
-        //{
-        //    goto repickAngle;
-        //}
         if (newRotation == 45 || newRotation == 135 || newRotation == 225 || newRotation == 315)
         {
             doorsToOpenAtOnce = 2;
@@ -253,7 +213,6 @@ public class StaticCapsule : MonoBehaviour
         {
             doorsToOpenAtOnce = 1;
         }
-        Debug.Log("Setting rota to true");
         rotating = true;
     }
 
@@ -261,13 +220,12 @@ public class StaticCapsule : MonoBehaviour
     {
         float newAngle = 0f;
         float[] angles = { 45, 90, 135, 180, 225, 270, 315 };
-        //repickAngle:
         float chosenAngle = angles[Random.Range(0, angles.Length)];
-        if (!FastApproximately(chosenAngle, angle, 2f))
+        if (!HelperFunctions.FastApproximately(chosenAngle, angle, 2f))
         {
             newAngle = chosenAngle;
         }
-        else if (FastApproximately(chosenAngle, angle, 6f))
+        else if (HelperFunctions.FastApproximately(chosenAngle, angle, 6f))
         {
             newAngle = RepickAngle(angle);
         }
@@ -277,21 +235,22 @@ public class StaticCapsule : MonoBehaviour
     void RotateCapsule()
     {
         this.transform.localEulerAngles = new Vector3(0f, Mathf.Lerp(this.transform.localEulerAngles.y, newRotation, rotationSpeed * Time.deltaTime), 0f);
-        if (FastApproximately(this.transform.localEulerAngles.y, newRotation, 4f))
+        if (HelperFunctions.FastApproximately(this.transform.localEulerAngles.y, newRotation, 4f))
         {
             rotating = false;
-            SpawnGifts();
+            OpenFreshCapsule();
         }
     }
+    #endregion
 
     void ClearListsForRespawn()
     {
-        chosenLocations.Clear();
         foreach (GameObject go in spawnedGifts)
         {
             GameManager.Instance.AddScore(-10);
             Destroy(go);
         }
+        chosenLocations.Clear();
         spawnedGifts.Clear();
     }
     GameObject PickGiftLocation()
@@ -303,27 +262,15 @@ public class StaticCapsule : MonoBehaviour
         }
         return chosenGiftLocation;
     }
-
-    public static bool FastVectorApproximately(Vector3 a, Vector3 b, float threshold)
+    void CalculateVisibleTextPosition()
     {
-        if (FastApproximately(a.x, b.x, threshold) && FastApproximately(a.y, b.y, threshold) && FastApproximately(a.z, b.z, threshold)){
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    public static bool FastApproximately(float a, float b, float threshold)
-    {
-        if (threshold > 0f)
-        {
-            return Mathf.Abs(a - b) <= threshold;
-        }
-        else
-        {
-            return Mathf.Approximately(a, b);
-        }
+        Vector3 textToCapsule = this.transform.position - timeText.transform.position;
+        float textDistance = textToCapsule.magnitude;
+        Vector3 playerToCapsule = this.transform.position - GameManager.Instance.player.transform.position;
+        timeText.transform.position = this.transform.position + (playerToCapsule.normalized * textDistance);
+        timeText.transform.LookAt(GameManager.Instance.player.transform);
+        timeText.transform.localEulerAngles += new Vector3(0f, 180f, 0f);
+        timeText.transform.position = new Vector3(timeText.transform.position.x, textStartingY, timeText.transform.position.z);
     }
 
     private void CalculateNearestDoors()
@@ -392,6 +339,7 @@ public class StaticCapsule : MonoBehaviour
         //doorsToOpenAtOnce = 1;
     }
 
+    #region Music
     private IEnumerator FadeInVolume()
     {
         jukeBox.volume += audioLerpSpeed;
@@ -433,4 +381,5 @@ public class StaticCapsule : MonoBehaviour
             StartCoroutine(StopMusic());
         }
     }
+    #endregion
 }

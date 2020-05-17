@@ -15,7 +15,10 @@ public class StaticCapsule : MonoBehaviour
     [SerializeField] GameObject locationParent;
     [SerializeField] GameObject cheatPrevention;
     [SerializeField] GameObject otherCapsuleInWave;
+    [SerializeField] GameObject objectsInside;
     public GameObject dockingSpot;
+
+    [SerializeField] GridManager gridManager;
 
     [SerializeField] List<CapsuleAnimations> openDoors = new List<CapsuleAnimations>();
     [SerializeField] List<CapsuleAnimations> animationHandlers;
@@ -55,6 +58,7 @@ public class StaticCapsule : MonoBehaviour
 
     void Start()
     {
+        objectsInside.SetActive(false);
         timesToOpen = GameManager.Instance.timesToOpenCapsules;
         totalTime = GameManager.Instance.totalOpenTime;
         rotateText = GameManager.Instance.rotateText;
@@ -81,6 +85,7 @@ public class StaticCapsule : MonoBehaviour
     public void OpenUp()
     {
         //SetNewRotation(); //starts with a rotation, call openfreshcapsule if first rotation isn't wanted
+        objectsInside.SetActive(true);
         OpenFreshCapsule();
     }
     void OpenFreshCapsule()
@@ -194,6 +199,8 @@ public class StaticCapsule : MonoBehaviour
         if (timesOpened >= timesToOpen)
         {
             StartCoroutine(StopMusic());
+            //TODO: Destroy active objects in capsule
+            objectsInside.SetActive(false);
             WaveManager.Instance.GetNextWave();
             yield break;
         }

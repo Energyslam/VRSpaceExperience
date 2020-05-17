@@ -53,8 +53,11 @@ public class Minigame : MonoBehaviour
 
     public void StartPlay()
     {
-        leftTinyGame.playing = true;
-        rightTinyGame.playing = true;
+        //leftTinyGame.playing = true;
+        //rightTinyGame.playing = true;
+        leftTinyGame.StartPlaying();
+        rightTinyGame.StartPlaying();
+
         StartCoroutine(CountdownTime());
     }
     public void UpdateScore(TinyGame.GameSide side)

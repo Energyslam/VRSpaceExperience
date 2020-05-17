@@ -38,6 +38,11 @@ public class TinyGame : MonoBehaviour
         enumLength = System.Enum.GetNames(typeof(Sides)).Length;
     }
 
+    public void StartPlaying()
+    {
+        InvokeRepeating("SpawnObject", 0f, 1f);
+    }
+
     void SpawnObject()
     {
         GameObject newTarget = Instantiate(target, transform);
@@ -73,6 +78,7 @@ public class TinyGame : MonoBehaviour
         }
         return pos;
     }
+
     // Update is called once per frame
     void Update()
     {

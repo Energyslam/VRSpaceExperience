@@ -60,6 +60,11 @@ public class GridManager : MonoBehaviour
         Initialize();
     }
 
+    public void DoTheGameOfLifeThing()
+    {
+        //Doesn't work if not done in awake. If initialize/reset gets called anywhere after awake, grid gets wrong rotation. Might be worth fixing for dynamic PCG ?
+        Initialize();
+    }
     // Sets up grid and spawns objects using game of life
     public void Initialize()
     {

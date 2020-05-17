@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEditor.PackageManager;
+using UnityEngine.PlayerLoop;
 
 public class WhacASphereManager : MonoBehaviour
 {
@@ -12,8 +15,11 @@ public class WhacASphereManager : MonoBehaviour
     public Vector3 destrucTorque;
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI totalScoreText;
+    public Image ErrorCross;
     public int totalTime;
     int remainingTime;
+    int finalLeftScore;
+    int finalRightScore;
     int totalScore = 0;
     // Start is called before the first frame update
     void Start()
@@ -31,6 +37,21 @@ public class WhacASphereManager : MonoBehaviour
         StartCoroutine(CountdownTime());
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.G))
+        {
+                ErrorCross.gameObject.SetActive(true);
+                ErrorCross.transform.position = leftSide.transform.position;
+                ErrorCross.transform.position += new Vector3(0, 0, -0.5f);
+        }
+        if (Input.GetKey(KeyCode.H))
+        {
+                ErrorCross.gameObject.SetActive(true);
+                ErrorCross.transform.position = rightSide.transform.position;
+                ErrorCross.transform.position += new Vector3(0, 0, -0.5f);
+        }
+    }
     IEnumerator CountdownTime()
     {
         if (remainingTime < 10)
@@ -51,6 +72,8 @@ public class WhacASphereManager : MonoBehaviour
         {
             leftSide.DeactivateAll();
             rightSide.DeactivateAll();
+            finalLeftScore = leftSide.score;
+            finalRightScore = rightSide.score;
             StartCoroutine(CalculateFinalScore());
         }
     }
@@ -68,10 +91,29 @@ public class WhacASphereManager : MonoBehaviour
             leftSide.UpdateScore(-10);
             totalScore += 10;
         }
+        else if (leftSide.score -10 < 0)
+        {
+            if (!ErrorCross.gameObject.activeInHierarchy)
+            {
+                ErrorCross.gameObject.SetActive(true);
+                ErrorCross.transform.position = leftSide.transform.position;
+                ErrorCross.transform.position += new Vector3(0, 0, -0.5f);
+            }
+        }
         if (rightSide.score -10 >= 0)
         {
             rightSide.UpdateScore(-10);
             totalScore += 10;
+
+        }
+        else if (rightSide.score - 10 < 0)
+        {
+            if (!ErrorCross.gameObject.activeInHierarchy)
+            {
+                ErrorCross.gameObject.SetActive(true);
+                ErrorCross.transform.position = rightSide.transform.position;
+                ErrorCross.transform.position += new Vector3(0, 0, -0.5f);
+            }
         }
 
         totalScoreText.text = "Total score = " + totalScore;
@@ -89,15 +131,15 @@ public class WhacASphereManager : MonoBehaviour
 
     public void EndGame()
     {
-        if (leftSide.score > rightSide.score)
+        if (finalLeftScore > finalRightScore)
         {
             MoveToA();
         }
-        else if (rightSide.score > leftSide.score)
+        else if (finalRightScore > finalLeftScore)
         {
             MoveToB();
         }
-        else if (leftSide.score == rightSide.score)
+        else if (finalLeftScore == finalRightScore)
         {
             //TODO: do something else than defaulting to left
             MoveToA();

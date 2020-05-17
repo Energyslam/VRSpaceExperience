@@ -16,6 +16,9 @@ public class Platform : MonoBehaviour
     int maxSpeedIndex;
     List<GameObject> splitToATracks = new List<GameObject>();
     List<GameObject> splitToBTracks = new List<GameObject>();
+    Quaternion targetRotation;
+    public float resetSpeed;
+    public bool immediateStart;
     public enum MovementState
     {
         Idle,
@@ -39,7 +42,10 @@ public class Platform : MonoBehaviour
         maxSpeed = speed;
         visualParent = new GameObject();
         CreateVisuals();
-        ChangeStateToSplit();
+        if (immediateStart)
+        {
+            ChangeStateToSplit();
+        }
     }
 
     void SpeedHandler()
@@ -78,6 +84,8 @@ public class Platform : MonoBehaviour
         if (State == MovementState.Idle)
         {
             //TODO: slowly go to neutral x and z
+            targetRotation = Quaternion.Euler(new Vector3(0, this.transform.localEulerAngles.y, 0));
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, resetSpeed * Time.deltaTime);
         }
     }
 

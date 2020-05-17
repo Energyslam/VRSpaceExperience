@@ -8,7 +8,7 @@ public class DebugRaycast : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -25,6 +25,20 @@ public class DebugRaycast : MonoBehaviour
                     {
                         behaviour.SolveCollision();
                     }
+                }
+
+                if (hit.collider.CompareTag("MinigameSphere"))
+                {
+                    hit.collider.GetComponent<Sphere>().Hit();
+                }
+
+                if (hit.collider.name == "FirstCollider")
+                {
+                    hit.collider.GetComponentInParent<BeatSaberCube>().HitFirstCollider();
+                }
+                else if (hit.collider.gameObject.name == "SecondCollider")
+                {
+                        hit.collider.GetComponentInParent<BeatSaberCube>().HitSecondCollider();
                 }
             }
         }

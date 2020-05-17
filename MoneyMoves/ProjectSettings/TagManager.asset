@@ -10,6 +10,8 @@ TagManager:
   - projectile
   - FxTemporaire
   - Fire
+  - MinigameTarget
+  - MinigameSphere
   layers:
   - Default
   - TransparentFX

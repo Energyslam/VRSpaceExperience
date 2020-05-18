@@ -71,7 +71,7 @@ public class GridManager : MonoBehaviour
     public void Initialize()
     {
         originalRotation = transform.rotation;
-        transform.rotation = new Quaternion(0, 0, 0, 0);
+        transform.rotation = Quaternion.identity;
 
         // Calculating grid size
         horizontalCellSize = (float)gridSizeX / (float)columns;
@@ -132,8 +132,6 @@ public class GridManager : MonoBehaviour
 
         grid = FindNeighbours(grid, columns, rows);
         StartCoroutine(IterateGameOfLife(grid, columns, rows, currentSpawningPhase, 15));
-
-        transform.rotation = originalRotation;
     }
 
     private void Reset()
@@ -381,6 +379,7 @@ public class GridManager : MonoBehaviour
                 break;
             case SpawningPhase.MEDIUM:
                 currentSpawningPhase = SpawningPhase.FINISHED;
+                transform.rotation = originalRotation;
                 return;
         }
 

@@ -497,7 +497,6 @@ MonoBehaviour:
   cheatPrevention: {fileID: 463959689913426797}
   otherCapsuleInWave: {fileID: 0}
   objectsInside: {fileID: 8460527514010130168}
-  pcg: {fileID: 6767730032681543636}
   dockingSpot: {fileID: 0}
   gridManager: {fileID: 1459975224}
   openDoors: []
@@ -1045,7 +1044,7 @@ GameObject:
   - component: {fileID: 686987349065464536}
   - component: {fileID: 4204647003447984991}
   m_Layer: 0
-  m_Name: JukeboxSoundOnly
+  m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1075,7 +1074,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b0d1abbd753a24b49afa504b62c0a5cb, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9116b9ac675a64745a8dd182fc9d053e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.1
   m_Pitch: 1

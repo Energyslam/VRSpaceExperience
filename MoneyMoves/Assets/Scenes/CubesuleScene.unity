@@ -2117,26 +2117,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TechCubesule
       objectReference: {fileID: 0}
-    - target: {fileID: 5122998847523154186, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6135928673509657149, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.51341385
-      objectReference: {fileID: 0}
-    - target: {fileID: 6135928673509657149, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.8581411
-      objectReference: {fileID: 0}
-    - target: {fileID: 6135928673509657149, guid: 50d4f22a384834449b40a00cd1db1038,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -61.783
-      objectReference: {fileID: 0}
     - target: {fileID: 7572514319573298951, guid: 50d4f22a384834449b40a00cd1db1038,
         type: 3}
       propertyPath: m_LocalPosition.x

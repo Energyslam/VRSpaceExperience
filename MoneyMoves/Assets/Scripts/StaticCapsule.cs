@@ -365,7 +365,6 @@ public class StaticCapsule : MonoBehaviour
             return;
 
         }
-        jukeBox.time = CapsuleManager._instance.timeInSong;
         jukeBox.volume = 0.0f;
         StartCoroutine(FadeInVolume());
         jukeBox.Play();
@@ -379,7 +378,6 @@ public class StaticCapsule : MonoBehaviour
 
         if (jukeBox.volume <= 0f)
         {
-            CapsuleManager._instance.timeInSong = jukeBox.time;
             jukeBox.Stop();
             yield return new WaitForEndOfFrame();
         }

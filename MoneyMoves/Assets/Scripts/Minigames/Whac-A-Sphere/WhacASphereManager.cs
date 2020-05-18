@@ -36,22 +36,6 @@ public class WhacASphereManager : MonoBehaviour
         transform.eulerAngles -= new Vector3(transform.localEulerAngles.x, 90, 0);
         StartCoroutine(CountdownTime());
     }
-
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.G))
-        {
-                ErrorCross.gameObject.SetActive(true);
-                ErrorCross.transform.position = leftSide.transform.position;
-                ErrorCross.transform.position += new Vector3(0, 0, -0.5f);
-        }
-        if (Input.GetKey(KeyCode.H))
-        {
-                ErrorCross.gameObject.SetActive(true);
-                ErrorCross.transform.position = rightSide.transform.position;
-                ErrorCross.transform.position += new Vector3(0, 0, -0.5f);
-        }
-    }
     IEnumerator CountdownTime()
     {
         if (remainingTime < 10)

@@ -557,6 +557,7 @@ MonoBehaviour:
   currentIndex: 0
   resetSpeed: 0
   immediateStart: 0
+  overrideSpeed: 0
   State: 0
 --- !u!4 &180350203 stripped
 Transform:
@@ -3566,6 +3567,7 @@ MonoBehaviour:
   currentIndex: 0
   resetSpeed: 20
   immediateStart: 1
+  overrideSpeed: 1
   State: 0
 --- !u!4 &1639068276 stripped
 Transform:
@@ -4487,6 +4489,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6774403507485878371, guid: 77ac0e6ab7ccee9479680afb1ed7e4e8,
+        type: 3}
+      propertyPath: totalTime
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 9038212394177635291, guid: 77ac0e6ab7ccee9479680afb1ed7e4e8,
         type: 3}
       propertyPath: m_Name

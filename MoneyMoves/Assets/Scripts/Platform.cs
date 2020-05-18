@@ -19,6 +19,7 @@ public class Platform : MonoBehaviour
     Quaternion targetRotation;
     public float resetSpeed;
     public bool immediateStart;
+    public bool overrideSpeed;
     public enum MovementState
     {
         Idle,
@@ -50,7 +51,10 @@ public class Platform : MonoBehaviour
 
     void SpeedHandler()
     {
-        //return; //MINGAME DEBUG
+        if (overrideSpeed)
+        {
+            return;
+        }
         if (currentIndex > maxSpeedIndex - 10)
         {
             int distanceToSlowDown = maxSpeedIndex - (maxSpeedIndex - 10);

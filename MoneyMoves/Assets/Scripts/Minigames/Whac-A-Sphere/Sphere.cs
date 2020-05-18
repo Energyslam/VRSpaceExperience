@@ -5,39 +5,58 @@ using UnityEngine;
 public class Sphere : MonoBehaviour
 {
     Renderer rend;
-    Material unlit, lit;
+    public Material unlit, positiveLit, negativeLit;
     WhacASphere whacASphere;
     bool isActive;
     float activeTime;
 
+    public enum Mood
+    {
+        Positive,
+        Negative
+    }
+    Mood mood;
     // Start is called before the first frame update
     void  Awake()
     {
         rend = this.GetComponent<Renderer>();
     }
 
-    public void Initialize(Material unlit, Material lit, WhacASphere whacASphere, float activeTime)
+    public void Initialize(WhacASphere whacASphere, float activeTime)
     {
-        this.unlit = unlit;
-        this.lit = lit;
         this.whacASphere = whacASphere;
         this.activeTime = activeTime;
     }
 
-    public void Sphereoooo()
+    public void Sphereoooo(Mood mood)
     {
+        this.mood = mood;
         StartCoroutine(c_ActivateSphere());
     }
     IEnumerator c_ActivateSphere()
     {
-        ActivateSphere();
+        if (this.mood == Mood.Positive)
+        {
+            ActivateSphere();
+        }
+        else if (this.mood == Mood.Negative)
+        {
+            ActivateNegativeSphere();
+        }
         yield return new WaitForSeconds(activeTime);
         DeactivateSphere();
     }
 
     public void ActivateSphere()
     {
-        rend.material = lit;
+        rend.material = positiveLit;
+        whacASphere.activatedSpheres.Add(this.gameObject);
+        isActive = true;
+    }
+    
+    public void ActivateNegativeSphere()
+    {
+        rend.material = negativeLit;
         whacASphere.activatedSpheres.Add(this.gameObject);
         isActive = true;
     }
@@ -56,8 +75,15 @@ public class Sphere : MonoBehaviour
         {
             return;
         }
-        whacASphere.ActivateRandomSphere();
-        whacASphere.UpdateScore(10);
+        //whacASphere.ActivateRandomSphere();
+        if (mood == Mood.Negative)
+        {
+            whacASphere.UpdateScore(-10);
+        }
+        else if (mood == Mood.Positive)
+        {
+            whacASphere.UpdateScore(10);
+        }
         DeactivateSphere();
     }
 

@@ -13,6 +13,8 @@ public class SpawnSmallOnTop : MonoBehaviour
     [SerializeField]
     private Vector3 edge1, edge2;
 
+    private GameObject spawnedObj;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,8 +29,21 @@ public class SpawnSmallOnTop : MonoBehaviour
             Vector3 randomPositions = new Vector3(xPos, 0, zPos);
             Vector3 position = transform.position + randomPositions;
 
-            GameObject smallObj = Instantiate(objectsToSpawn[rand], position, Quaternion.identity);
-            smallObj.transform.parent = transform;
+            spawnedObj = Instantiate(objectsToSpawn[rand], position, Quaternion.identity);
+            spawnedObj.transform.parent = transform;
+            MakeStatic();
+            Invoke("Fall", 3);
         }
+    }
+
+    private void Fall()
+    {
+        spawnedObj.GetComponent<Rigidbody>().isKinematic = false;
+        Invoke("MakeStatic", 3);
+    }
+
+    private void MakeStatic()
+    {
+        spawnedObj.GetComponent<Rigidbody>().isKinematic = true;
     }
 }

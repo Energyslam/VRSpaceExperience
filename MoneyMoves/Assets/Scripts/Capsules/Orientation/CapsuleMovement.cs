@@ -85,7 +85,6 @@ public class CapsuleMovement : MonoBehaviour, IObservable
             if (!CapsuleManager._instance.dockingPlaces[(int)dockedAt].GetComponent<LookToMiddle>().straightAngle)
             {
                 doorsToOpenAtOnce = 2;
-                jukeBox.time = CapsuleManager._instance.timeInSong;
                 jukeBox.volume = 0.0f;
                 StartCoroutine(FadeInVolume());
                 jukeBox.Play();
@@ -166,7 +165,6 @@ public class CapsuleMovement : MonoBehaviour, IObservable
 
     private void StopMusic()
     {
-        CapsuleManager._instance.timeInSong = jukeBox.time;
         jukeBox.Stop();
     }
 

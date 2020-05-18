@@ -1500,7 +1500,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   capsules: []
   dockingPlaces: []
-  timeInSong: 0
 --- !u!4 &428164098
 Transform:
   m_ObjectHideFlags: 0
@@ -2197,9 +2196,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 170e9a15654875b4993241f6a4879b59, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6a2e08d940017144c996022f5e73518a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.05
+  m_Volume: 0.025
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2332,7 +2331,6 @@ MonoBehaviour:
   - {fileID: 1338481193}
   - {fileID: 1250777430}
   - {fileID: 303614123}
-  timeInSong: 0
 --- !u!4 &1144516464
 Transform:
   m_ObjectHideFlags: 0

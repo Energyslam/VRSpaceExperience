@@ -31,8 +31,12 @@ public class SpawnSmallOnTop : MonoBehaviour
 
             spawnedObj = Instantiate(objectsToSpawn[rand], position, Quaternion.identity);
             spawnedObj.transform.parent = transform;
-            MakeStatic();
-            Invoke("Fall", 3);
+
+            if (transform.GetComponentInParent<GridManager>().transform.rotation.x == 0 && transform.GetComponentInParent<GridManager>().transform.rotation.z == 0)
+            {
+                MakeStatic();
+                Invoke("Fall", 3);
+            }
         }
     }
 

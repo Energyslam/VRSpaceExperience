@@ -20,6 +20,9 @@ public class CapsuleAnimations : MonoBehaviour
     [SerializeField]
     private float animationSpeed = 1;
 
+    [SerializeField]
+    AudioSource openDoors, closeDoors;
+
     private void Start()
     {
         if (openOnStartUp) Animate(true);
@@ -29,6 +32,11 @@ public class CapsuleAnimations : MonoBehaviour
     {
         float speed = hasToOpen ? animationSpeed : -animationSpeed;
         isOpen = speed > 0 ? true : false;
+
+        if (hasToOpen)
+            openDoors.Play();
+        else
+            closeDoors.Play();
 
         for (int i = 0; i < wallObjects.Count; i++)
         {

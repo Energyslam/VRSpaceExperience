@@ -2004,7 +2004,6 @@ MonoBehaviour:
   - {fileID: 380700142}
   - {fileID: 1338481193}
   - {fileID: 303614123}
-  timeInSong: 0
 --- !u!4 &1144516464
 Transform:
   m_ObjectHideFlags: 0

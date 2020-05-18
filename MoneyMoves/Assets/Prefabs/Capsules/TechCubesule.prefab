@@ -2050,7 +2050,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 26b2604ce624bcd45b0f72c502c3891f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.85
+  m_Volume: 0.9
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2645,8 +2645,8 @@ MonoBehaviour:
   - {fileID: 8313527173548349433}
   - {fileID: 625130550364051055}
   animationSpeed: 5
-  openDoors: {fileID: 233203770046443053}
-  closeDoors: {fileID: 4038988668665335819}
+  openDoors: {fileID: 2384762009696698798}
+  closeDoors: {fileID: 7849578403423890285}
 --- !u!1 &6427556985253767159
 GameObject:
   m_ObjectHideFlags: 0
@@ -3079,8 +3079,8 @@ MonoBehaviour:
   - {fileID: 862883516686483223}
   - {fileID: 4753721235438338229}
   animationSpeed: 5
-  openDoors: {fileID: 233203770046443053}
-  closeDoors: {fileID: 4038988668665335819}
+  openDoors: {fileID: 224970318830267500}
+  closeDoors: {fileID: 8734186712903986946}
 --- !u!64 &3725226318592815633
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3467,8 +3467,8 @@ MonoBehaviour:
   - {fileID: 1581053002772645528}
   - {fileID: 7062673202728969341}
   animationSpeed: 5
-  openDoors: {fileID: 233203770046443053}
-  closeDoors: {fileID: 4038988668665335819}
+  openDoors: {fileID: 4986999494008694803}
+  closeDoors: {fileID: 8844462589928972489}
 --- !u!64 &6710431287596005356
 MeshCollider:
   m_ObjectHideFlags: 0

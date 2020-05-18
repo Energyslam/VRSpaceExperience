@@ -10,6 +10,10 @@ public class GiftBehaviour : ICollisionBehaviour
     public PlaytestCapsule attachedCapsule;
     public StaticCapsule attachedStatic;
     bool canMove;
+
+    [SerializeField]
+    private AudioSource explodeSFX;
+
     void Start()
     {
         deliverPoint = GameManager.Instance.DeliverPoint;
@@ -52,6 +56,7 @@ public class GiftBehaviour : ICollisionBehaviour
             {
                 attachedStatic.UpdateGifts(transform.parent.gameObject);
             }
+            explodeSFX.Play();
             Destroy(this.gameObject);
             GameManager.Instance.AddScore(10);
         }

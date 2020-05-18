@@ -53,6 +53,8 @@ public class GridManager : MonoBehaviour
 
     [SerializeField]
     private Transform topWall, rightWall, botWall, leftWall;
+
+    private Quaternion originalRotation;
     #endregion
 
     private void Awake()
@@ -68,6 +70,9 @@ public class GridManager : MonoBehaviour
     // Sets up grid and spawns objects using game of life
     public void Initialize()
     {
+        originalRotation = transform.rotation;
+        transform.rotation = new Quaternion(0, 0, 0, 0);
+
         // Calculating grid size
         horizontalCellSize = (float)gridSizeX / (float)columns;
         verticalCellSize = (float)gridSizeZ / (float)rows;
@@ -127,6 +132,8 @@ public class GridManager : MonoBehaviour
 
         grid = FindNeighbours(grid, columns, rows);
         StartCoroutine(IterateGameOfLife(grid, columns, rows, currentSpawningPhase, 15));
+
+        transform.rotation = originalRotation;
     }
 
     private void Reset()

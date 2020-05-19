@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class WhacASphereManager : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class WhacASphereManager : MonoBehaviour
     int finalLeftScore;
     int finalRightScore;
     int totalScore = 0;
-    int totalPossibleScore;
+
     [Header("After minigame")]
     Platform platform;
     public GameObject explosion;
@@ -38,7 +39,7 @@ public class WhacASphereManager : MonoBehaviour
             transform.eulerAngles -= new Vector3(transform.localEulerAngles.x, 90, 0);
         }
         StartCoroutine(CountdownTime());
-        totalPossibleScore = (int)Mathf.Round(totalTime / variables.timeBetweenActivation);
+        
     }
 
     IEnumerator CountdownTime()
@@ -57,12 +58,36 @@ public class WhacASphereManager : MonoBehaviour
         }
     }
 
+    void AdjustDifficulty()
+    {
+        float totalPossibleScore = (int)Mathf.Round(totalTime / variables.timeBetweenActivation * 10f * 2f);
+        float desiredPoints = totalPossibleScore / 2f;
+        int finalScore = finalLeftScore + finalRightScore;
+
+        float scalar = (Mathf.Abs(finalScore - desiredPoints)) / desiredPoints;
+
+        Debug.Log("Total Possible Score = " + totalPossibleScore);
+        Debug.Log("Desired points  = " + desiredPoints);
+        Debug.Log("Final Score = " + finalScore);
+        Debug.Log("Scalar = " + scalar);
+        if (finalScore > desiredPoints) // if player is too bueno
+        {//afstand delen door desired point voor een scalar;
+
+            variables.activeTime *= (1 - (scalar / 10f));
+        }
+        else if (finalScore < desiredPoints) //if player is badderino
+        {
+            variables.activeTime *= (1 + (scalar / 10f));
+        }
+    }
+
     void StartCalculatingFinalScore()
     {
         leftGame.DeactivateAll();
         rightGame.DeactivateAll();
-        finalLeftScore = rightGame.score;
+        finalLeftScore = leftGame.score;
         finalRightScore = rightGame.score;
+        AdjustDifficulty();
         totalScoreText.gameObject.SetActive(true);
         StartCoroutine(CalculateFinalScore());
     }

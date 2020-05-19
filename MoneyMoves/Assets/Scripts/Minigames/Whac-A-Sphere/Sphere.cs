@@ -9,6 +9,7 @@ public class Sphere : MonoBehaviour
     WhacASphere whacASphere;
     bool isActive;
     float activeTime, negativeActiveTime;
+    float lifetime = 0f;
 
     public enum Mood
     {
@@ -21,6 +22,12 @@ public class Sphere : MonoBehaviour
     {
         rend = this.GetComponent<Renderer>();
     }
+    IEnumerator KeepTrackOfLifetime()
+    {
+        yield return new WaitForSeconds(0.1f);
+            lifetime += 0.1f;
+        StartCoroutine(KeepTrackOfLifetime());
+    }
 
     public void Initialize(WhacASphere whacASphere, WhacASphereVariables variables)
     {
@@ -32,7 +39,9 @@ public class Sphere : MonoBehaviour
     public void ActivateASphere(Mood mood)
     {
         this.mood = mood;
+        lifetime = 0f;
         StartCoroutine(c_ActivateSphere());
+        StartCoroutine(KeepTrackOfLifetime());
     }
     IEnumerator c_ActivateSphere()
     {
@@ -66,6 +75,11 @@ public class Sphere : MonoBehaviour
     public void DeactivateSphere()
     {
         StopAllCoroutines();
+        if (mood == Mood.Positive)
+        {
+            whacASphere.totalSphereLifetime += lifetime;
+            Debug.Log("Lifetime was " + lifetime);
+        }
         whacASphere.activatedSpheres.Remove(this.gameObject);
         rend.material = unlit;
         isActive = false;

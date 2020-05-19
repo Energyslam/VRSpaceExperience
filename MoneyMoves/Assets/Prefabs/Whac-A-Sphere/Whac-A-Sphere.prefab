@@ -1763,6 +1763,8 @@ MonoBehaviour:
   timeBetweenActivation: 2
   manager: {fileID: 6774403507485878371}
   spawnNegativeAfterSpawns: 0
+  maxSphereLifetime: 0
+  totalSphereLifetime: 0
   side: 1
 --- !u!1 &5996186850135392215
 GameObject:
@@ -3992,6 +3994,8 @@ MonoBehaviour:
   timeBetweenActivation: 2
   manager: {fileID: 6774403507485878371}
   spawnNegativeAfterSpawns: 0
+  maxSphereLifetime: 0
+  totalSphereLifetime: 0
   side: 0
 --- !u!1 &9038212395341441207
 GameObject:

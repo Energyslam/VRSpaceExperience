@@ -2,8 +2,6 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class WhacASphereManager : MonoBehaviour
 {
@@ -79,6 +77,16 @@ public class WhacASphereManager : MonoBehaviour
         {
             variables.activeTime *= (1 + (scalar / 10f));
         }
+        float combinedMaxLifeTime = leftGame.maxSphereLifetime + rightGame.maxSphereLifetime;
+        float combinedTotalLifetime = leftGame.totalSphereLifetime + rightGame.totalSphereLifetime;
+        //if (combinedTotalLifetime * 2 < combinedMaxLifeTime)
+        //{
+        //    variables.activeTime *= 0.7f;
+        //}
+        //else if (HelperFunctions.FastApproximately(combinedTotalLifetime, combinedMaxLifeTime, 5f)){
+        //    variables.activeTime *= 1.3f;
+        //}
+
     }
 
     void StartCalculatingFinalScore()

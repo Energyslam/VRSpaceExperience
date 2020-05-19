@@ -8,7 +8,7 @@ public class Sphere : MonoBehaviour
     public Material unlit, positiveLit, negativeLit;
     WhacASphere whacASphere;
     bool isActive;
-    float activeTime;
+    float activeTime, negativeActiveTime;
 
     public enum Mood
     {
@@ -16,19 +16,20 @@ public class Sphere : MonoBehaviour
         Negative
     }
     Mood mood;
-    // Start is called before the first frame update
+
     void  Awake()
     {
         rend = this.GetComponent<Renderer>();
     }
 
-    public void Initialize(WhacASphere whacASphere, float activeTime)
+    public void Initialize(WhacASphere whacASphere, WhacASphereVariables variables)
     {
         this.whacASphere = whacASphere;
-        this.activeTime = activeTime;
+        this.activeTime = variables.activeTime;
+        this.negativeActiveTime = variables.negativeActiveTime;
     }
 
-    public void Sphereoooo(Mood mood)
+    public void ActivateASphere(Mood mood)
     {
         this.mood = mood;
         StartCoroutine(c_ActivateSphere());
@@ -37,24 +38,25 @@ public class Sphere : MonoBehaviour
     {
         if (this.mood == Mood.Positive)
         {
-            ActivateSphere();
+            ActivatePositiveSphere(); 
+            yield return new WaitForSeconds(activeTime);
         }
         else if (this.mood == Mood.Negative)
         {
             ActivateNegativeSphere();
+            yield return new WaitForSeconds(negativeActiveTime);
         }
-        yield return new WaitForSeconds(activeTime);
         DeactivateSphere();
     }
 
-    public void ActivateSphere()
+    void ActivatePositiveSphere()
     {
         rend.material = positiveLit;
         whacASphere.activatedSpheres.Add(this.gameObject);
         isActive = true;
     }
     
-    public void ActivateNegativeSphere()
+    void ActivateNegativeSphere()
     {
         rend.material = negativeLit;
         whacASphere.activatedSpheres.Add(this.gameObject);
@@ -75,7 +77,7 @@ public class Sphere : MonoBehaviour
         {
             return;
         }
-        //whacASphere.ActivateRandomSphere();
+
         if (mood == Mood.Negative)
         {
             whacASphere.UpdateScore(-10);

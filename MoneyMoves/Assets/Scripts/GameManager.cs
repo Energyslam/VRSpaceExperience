@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         {
             capsules.Add(t.GetComponentInChildren<PlaytestCapsule>());
         }
-        laserpointer.PointerClick += PointerClick;
+        //laserpointer.PointerClick += PointerClick;
     }
 
     public void ActivateLaserPointer()
@@ -155,19 +155,19 @@ public class GameManager : MonoBehaviour
         if (scoreAndLifeText != null)
         scoreAndLifeText.text = "Score: " + score + "\nLives: " + lives;
     }
-    public void PointerClick(object sender, PointerEventArgs e)
-    {
-        if (e.target.name == "arrowA")
-        {
-            platform.ChangeStateToA();
-            DeactivateLaserPointer();
-        }
-        else if (e.target.name == "arrowB")
-        {
-            platform.ChangeStateToB();
-            DeactivateLaserPointer();
-        }
-    }
+    //public void PointerClick(object sender, PointerEventArgs e)
+    //{
+    //    if (e.target.name == "arrowA")
+    //    {
+    //        platform.ChangeStateToA();
+    //        DeactivateLaserPointer();
+    //    }
+    //    else if (e.target.name == "arrowB")
+    //    {
+    //        platform.ChangeStateToB();
+    //        DeactivateLaserPointer();
+    //    }
+    //}
     #region Vibration
     [Header("Vibration settings")]
     public SteamVR_Action_Vibration hapticAction;

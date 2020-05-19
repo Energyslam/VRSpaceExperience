@@ -4,20 +4,17 @@ using UnityEngine;
 using TMPro;
 
 public class WhacASphere : MonoBehaviour
-{
-    //public Material unlit, positiveLit, negativeLit;
+{ 
+    WhacASphereVariables variables;
     public List<GameObject> spheres = new List<GameObject>();
     public List<GameObject> activatedSpheres = new List<GameObject>();
     public TextMeshProUGUI scoreText;
     public int score = 0;
-    public float activeTime = 1f;
     public float timeBetweenActivation = 1f;
-    public GameObject gizmo;
     public WhacASphereManager manager;
-    public int negativeModulo = 0;
-    int negativeSpawner = 0;
+    public int spawnNegativeAfterSpawns = 0;
+    int spawnerCount = 0;
 
-    Vector3[][] grid;
     public enum Side
     {
         Left,
@@ -27,9 +24,12 @@ public class WhacASphere : MonoBehaviour
 
     void Start()
     {
+        variables = manager.variables;
+        this.timeBetweenActivation = variables.timeBetweenActivation;
+        this.spawnNegativeAfterSpawns = variables.spawnNegativeAfterSpawns;
         foreach(GameObject go in spheres)
         {
-            go.GetComponent<Sphere>().Initialize(this, activeTime);
+            go.GetComponent<Sphere>().Initialize(this, variables);
         }
         StartCoroutine(GameLoop());
     }
@@ -41,6 +41,20 @@ public class WhacASphere : MonoBehaviour
         StartCoroutine(GameLoop());
     }
 
+    public void ActivateRandomSphere()
+    {
+        GetRandomUnactivatedSphere().GetComponent<Sphere>().ActivateASphere(Sphere.Mood.Positive);
+        if (spawnNegativeAfterSpawns == 0)
+        {
+            return;
+        }
+        spawnerCount++;
+        if (spawnerCount % spawnNegativeAfterSpawns == 0)
+        {
+            GetRandomUnactivatedSphere().GetComponent<Sphere>().ActivateASphere(Sphere.Mood.Negative);
+        }
+    }
+
     GameObject GetRandomUnactivatedSphere()
     {
         GameObject randomSphere = spheres[Random.Range(0, spheres.Count)];
@@ -49,19 +63,6 @@ public class WhacASphere : MonoBehaviour
             randomSphere = GetRandomUnactivatedSphere();
         }
         return randomSphere;
-    }
-    public void ActivateRandomSphere()
-    {
-            GetRandomUnactivatedSphere().GetComponent<Sphere>().Sphereoooo(Sphere.Mood.Positive);
-        if (negativeModulo == 0)
-        {
-            return;
-        }
-        negativeSpawner++;
-        if (negativeSpawner % negativeModulo == 0)
-        {
-            GetRandomUnactivatedSphere().GetComponent<Sphere>().Sphereoooo(Sphere.Mood.Negative);
-        }
     }
 
     public void DeactivateAll()

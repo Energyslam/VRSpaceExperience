@@ -25,6 +25,7 @@ public class CapsuleAnimations : MonoBehaviour
 
     private void Start()
     {
+        // Only works if the objectsInside object is active!
         if (openOnStartUp) Animate(true);
     }
 

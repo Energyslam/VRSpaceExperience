@@ -61,7 +61,7 @@ public class WhacASphereManager : MonoBehaviour
     {
         leftGame.DeactivateAll();
         rightGame.DeactivateAll();
-        finalLeftScore = rightGame.score;
+        finalLeftScore = leftGame.score;
         finalRightScore = rightGame.score;
         totalScoreText.gameObject.SetActive(true);
         StartCoroutine(CalculateFinalScore());

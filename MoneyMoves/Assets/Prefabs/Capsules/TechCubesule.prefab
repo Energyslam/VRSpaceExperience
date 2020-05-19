@@ -955,7 +955,6 @@ MonoBehaviour:
   locationParent: {fileID: 0}
   cheatPrevention: {fileID: 463959689913426797}
   otherCapsuleInWave: {fileID: 0}
-  objectsInside: {fileID: 8460527514010130168}
   dockingSpot: {fileID: 0}
   gridManager: {fileID: 1459975224}
   openDoors: []
@@ -1926,8 +1925,10 @@ MonoBehaviour:
   animator: {fileID: 3904451791148835339}
   openOnStartUp: 0
   distancePivot: {fileID: 8866224421630512498}
-  isOpen: 1
+  isOpen: 0
   wallObjects:
+  - {fileID: 1807312987197117240}
+  - {fileID: 5667839379901599177}
   - {fileID: 669390649187897207}
   - {fileID: 7407219707286216004}
   - {fileID: 2220380901409848024}
@@ -1976,8 +1977,6 @@ MonoBehaviour:
   - {fileID: 5910162769981645996}
   - {fileID: 5790349459379735025}
   - {fileID: 8035904702072709280}
-  - {fileID: 1807312987197117240}
-  - {fileID: 5667839379901599177}
   animationSpeed: 5
   openDoors: {fileID: 233203770046443053}
   closeDoors: {fileID: 4038988668665335819}
@@ -2591,10 +2590,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3729340374872464287}
-  openOnStartUp: 1
+  openOnStartUp: 0
   distancePivot: {fileID: 6550348723250982101}
-  isOpen: 1
+  isOpen: 0
   wallObjects:
+  - {fileID: 8313527173548349433}
+  - {fileID: 625130550364051055}
   - {fileID: 6753860667395822005}
   - {fileID: 3619509084054422406}
   - {fileID: 5341497768648385562}
@@ -2643,8 +2644,6 @@ MonoBehaviour:
   - {fileID: 501503712669399662}
   - {fileID: 336603830348683059}
   - {fileID: 4284589564051537506}
-  - {fileID: 8313527173548349433}
-  - {fileID: 625130550364051055}
   animationSpeed: 5
   openDoors: {fileID: 2384762009696698798}
   closeDoors: {fileID: 7849578403423890285}
@@ -3028,8 +3027,9 @@ MonoBehaviour:
   animator: {fileID: 2216870353368828454}
   openOnStartUp: 0
   distancePivot: {fileID: 2933759526125491316}
-  isOpen: 1
+  isOpen: 0
   wallObjects:
+  - {fileID: 4753721235438338229}
   - {fileID: 7869741295585743040}
   - {fileID: 195744030743397107}
   - {fileID: 8839642027383858543}
@@ -3078,7 +3078,6 @@ MonoBehaviour:
   - {fileID: 3925391224356403995}
   - {fileID: 3758151750741661254}
   - {fileID: 862883516686483223}
-  - {fileID: 4753721235438338229}
   animationSpeed: 5
   openDoors: {fileID: 224970318830267500}
   closeDoors: {fileID: 8734186712903986946}
@@ -3416,8 +3415,9 @@ MonoBehaviour:
   animator: {fileID: 6887458803622872658}
   openOnStartUp: 0
   distancePivot: {fileID: 5399271177569675550}
-  isOpen: 1
+  isOpen: 0
   wallObjects:
+  - {fileID: 7062673202728969341}
   - {fileID: 8304185452318648655}
   - {fileID: 2071647584210533244}
   - {fileID: 7251960050110110944}
@@ -3466,7 +3466,6 @@ MonoBehaviour:
   - {fileID: 2914213983462736532}
   - {fileID: 3039709518877372361}
   - {fileID: 1581053002772645528}
-  - {fileID: 7062673202728969341}
   animationSpeed: 5
   openDoors: {fileID: 4986999494008694803}
   closeDoors: {fileID: 8844462589928972489}
@@ -4389,7 +4388,7 @@ PrefabInstance:
     - target: {fileID: 2709649705400063415, guid: 06688fffbf126f94bae1c3e0a1b8b7a0,
         type: 3}
       propertyPath: m_Name
-      value: LED
+      value: LEDRight
       objectReference: {fileID: 0}
     - target: {fileID: 2709649705400063415, guid: 06688fffbf126f94bae1c3e0a1b8b7a0,
         type: 3}
@@ -5980,7 +5979,7 @@ PrefabInstance:
     - target: {fileID: 2709649705400063415, guid: 06688fffbf126f94bae1c3e0a1b8b7a0,
         type: 3}
       propertyPath: m_Name
-      value: LED (2)
+      value: LEDLeft
       objectReference: {fileID: 0}
     - target: {fileID: 2709649705400063415, guid: 06688fffbf126f94bae1c3e0a1b8b7a0,
         type: 3}
@@ -7241,7 +7240,7 @@ PrefabInstance:
     - target: {fileID: 246615493996189323, guid: 2326136c6e010f744ad9a66d512c9bdc,
         type: 3}
       propertyPath: m_Name
-      value: Window (1)
+      value: WindowBack
       objectReference: {fileID: 0}
     - target: {fileID: 246615493996189323, guid: 2326136c6e010f744ad9a66d512c9bdc,
         type: 3}
@@ -7463,7 +7462,7 @@ PrefabInstance:
     - target: {fileID: 246615493996189323, guid: 2326136c6e010f744ad9a66d512c9bdc,
         type: 3}
       propertyPath: m_Name
-      value: Window (5)
+      value: WindowRight
       objectReference: {fileID: 0}
     - target: {fileID: 246615493996189323, guid: 2326136c6e010f744ad9a66d512c9bdc,
         type: 3}
@@ -9443,7 +9442,7 @@ PrefabInstance:
     - target: {fileID: 246615493996189323, guid: 2326136c6e010f744ad9a66d512c9bdc,
         type: 3}
       propertyPath: m_Name
-      value: Window (2)
+      value: WindowFront
       objectReference: {fileID: 0}
     - target: {fileID: 246615493996189323, guid: 2326136c6e010f744ad9a66d512c9bdc,
         type: 3}
@@ -10674,7 +10673,7 @@ PrefabInstance:
     - target: {fileID: 246615493996189323, guid: 2326136c6e010f744ad9a66d512c9bdc,
         type: 3}
       propertyPath: m_Name
-      value: Window (4)
+      value: WindowLeft
       objectReference: {fileID: 0}
     - target: {fileID: 246615493996189323, guid: 2326136c6e010f744ad9a66d512c9bdc,
         type: 3}
@@ -11016,7 +11015,7 @@ PrefabInstance:
     - target: {fileID: 2709649705400063415, guid: 06688fffbf126f94bae1c3e0a1b8b7a0,
         type: 3}
       propertyPath: m_Name
-      value: LED (3)
+      value: LEDFront
       objectReference: {fileID: 0}
     - target: {fileID: 2709649705400063415, guid: 06688fffbf126f94bae1c3e0a1b8b7a0,
         type: 3}
@@ -12297,7 +12296,7 @@ PrefabInstance:
     - target: {fileID: 246615493996189323, guid: 2326136c6e010f744ad9a66d512c9bdc,
         type: 3}
       propertyPath: m_Name
-      value: Window
+      value: WindowBack
       objectReference: {fileID: 0}
     - target: {fileID: 246615493996189323, guid: 2326136c6e010f744ad9a66d512c9bdc,
         type: 3}
@@ -12809,7 +12808,7 @@ PrefabInstance:
     - target: {fileID: 246615493996189323, guid: 2326136c6e010f744ad9a66d512c9bdc,
         type: 3}
       propertyPath: m_Name
-      value: Window (3)
+      value: WindowFront
       objectReference: {fileID: 0}
     - target: {fileID: 246615493996189323, guid: 2326136c6e010f744ad9a66d512c9bdc,
         type: 3}
@@ -13631,7 +13630,7 @@ PrefabInstance:
     - target: {fileID: 2709649705400063415, guid: 06688fffbf126f94bae1c3e0a1b8b7a0,
         type: 3}
       propertyPath: m_Name
-      value: LED (1)
+      value: LEDBack
       objectReference: {fileID: 0}
     - target: {fileID: 2709649705400063415, guid: 06688fffbf126f94bae1c3e0a1b8b7a0,
         type: 3}

@@ -38,9 +38,7 @@ public class WhacASphereManager : MonoBehaviour
             transform.eulerAngles -= new Vector3(transform.localEulerAngles.x, 90, 0);
         }
         StartCoroutine(CountdownTime());
-        float totalFloatScore = Mathf.Round(totalTime / variables.timeBetweenActivation);
         totalPossibleScore = (int)Mathf.Round(totalTime / variables.timeBetweenActivation);
-        Debug.Log("Floaty = " + totalFloatScore + " || inty = " + totalPossibleScore);
     }
 
     IEnumerator CountdownTime()

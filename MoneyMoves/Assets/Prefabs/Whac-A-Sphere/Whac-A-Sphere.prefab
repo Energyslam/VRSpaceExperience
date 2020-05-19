@@ -1731,7 +1731,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4966104a0d53964bbd0f7837498b5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  variables: {fileID: 11400000, guid: 153805805d12bac4b9930ddbddab7b69, type: 2}
   spheres:
   - {fileID: 8410802243277769834}
   - {fileID: 23683186002541927}
@@ -1761,7 +1760,6 @@ MonoBehaviour:
   activatedSpheres: []
   scoreText: {fileID: 9038212394140214681}
   score: 0
-  activeTime: 3
   timeBetweenActivation: 2
   manager: {fileID: 6774403507485878371}
   spawnNegativeAfterSpawns: 0
@@ -3487,7 +3485,7 @@ MonoBehaviour:
   totalTime: 15
   explosion: {fileID: 100010, guid: 645413a00f7bd0242bbd6d0e5eb6f439, type: 3}
   destrucTorque: {x: 0, y: 50, z: 50}
-  isTesting: 1
+  isTesting: 0
 --- !u!1 &9038212394244764126
 GameObject:
   m_ObjectHideFlags: 0
@@ -3962,7 +3960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4966104a0d53964bbd0f7837498b5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  variables: {fileID: 11400000, guid: 153805805d12bac4b9930ddbddab7b69, type: 2}
   spheres:
   - {fileID: 1709747582487969876}
   - {fileID: 6001244685815746899}
@@ -3992,7 +3989,6 @@ MonoBehaviour:
   activatedSpheres: []
   scoreText: {fileID: 9038212395062047705}
   score: 0
-  activeTime: 3
   timeBetweenActivation: 2
   manager: {fileID: 6774403507485878371}
   spawnNegativeAfterSpawns: 0

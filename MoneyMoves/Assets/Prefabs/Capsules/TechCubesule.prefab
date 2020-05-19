@@ -984,7 +984,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2709503910731663622}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 236b2b2635b687a428e485abb18a3361, type: 3}
   m_Name: 
@@ -1003,7 +1003,8 @@ MonoBehaviour:
   currentSpawningPhase: 0
   aliveThresholdBig: 0.5
   aliveThresholdMedium: 0.55
-  objectsHolder: {fileID: 3508249374045290407}
+  objectsHolderPCG: {fileID: 3508249374045290407}
+  insideContext: {fileID: 8460527514010130168}
   connectableBigObject: {fileID: 8199688303501405120, guid: 4621da1bbc3bbb346aa65a215781f03f,
     type: 3}
   cornerConnectableBigObject: {fileID: 570723254751743050, guid: a6a97946deb7a784b892f5ea2b08502b,
@@ -3661,7 +3662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 123
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9161831854246538738
 Transform:
   m_ObjectHideFlags: 0

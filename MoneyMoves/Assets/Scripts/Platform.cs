@@ -115,6 +115,7 @@ public class Platform : MonoBehaviour
         State = MovementState.MovingToA;
         maxSpeedIndex = Tracks.SplitToA.Count - 1;
         rotationSpeed = 1f;
+        dockingSpotA.transform.parent.GetComponentInChildren<GridManager>().enabled = true;
     }
 
     public void ChangeStateToB()
@@ -123,6 +124,7 @@ public class Platform : MonoBehaviour
         State = MovementState.MovingToB;
         maxSpeedIndex = Tracks.SplitToA.Count - 1;
         rotationSpeed = 1f;
+        dockingSpotB.transform.parent.GetComponentInChildren<GridManager>().enabled = true;
     }
     void MoveToSplit()
     {

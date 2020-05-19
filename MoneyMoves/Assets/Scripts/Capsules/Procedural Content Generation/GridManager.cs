@@ -49,7 +49,7 @@ public class GridManager : MonoBehaviour
     private List<GridCell> cells = new List<GridCell>();
 
     [SerializeField]
-    private GameObject objectsHolder, connectableBigObject, cornerConnectableBigObject, standaloneBigObject, mediumMultiObject, mediumSingleObject, topOfMediumMulti;
+    private GameObject objectsHolderPCG, insideContext, connectableBigObject, cornerConnectableBigObject, standaloneBigObject, mediumMultiObject, mediumSingleObject, topOfMediumMulti;
 
     [SerializeField]
     private Transform topWall, rightWall, botWall, leftWall;
@@ -57,16 +57,16 @@ public class GridManager : MonoBehaviour
     private Quaternion originalRotation;
     #endregion
 
-    private void Awake()
+    private void OnEnable()
     {
         Initialize();
     }
 
     public void DoTheGameOfLifeThing()
     {
-        //Doesn't work if not done in awake. If initialize/reset gets called anywhere after awake, grid gets wrong rotation. Might be worth fixing for dynamic PCG ?
         Initialize();
     }
+
     // Sets up grid and spawns objects using game of life
     public void Initialize()
     {
@@ -142,11 +142,11 @@ public class GridManager : MonoBehaviour
 
     public void Clean()
     {
-        if (objectsHolder.transform.childCount > 0)
+        if (objectsHolderPCG.transform.childCount > 0)
         {
-            for (int i = 0; i < objectsHolder.transform.childCount; i++)
+            for (int i = 0; i < objectsHolderPCG.transform.childCount; i++)
             {
-                Destroy(objectsHolder.transform.GetChild(i).gameObject);
+                Destroy(objectsHolderPCG.transform.GetChild(i).gameObject);
             }
         }
 
@@ -159,6 +159,7 @@ public class GridManager : MonoBehaviour
         }
 
         cells.Clear();
+        insideContext.SetActive(false);
     }
 
     private void Update()
@@ -380,6 +381,7 @@ public class GridManager : MonoBehaviour
             case SpawningPhase.MEDIUM:
                 currentSpawningPhase = SpawningPhase.FINISHED;
                 transform.rotation = originalRotation;
+                insideContext.SetActive(true);
                 return;
         }
 
@@ -405,7 +407,7 @@ public class GridManager : MonoBehaviour
     {
         if (toSpawn != null)
         {
-            GameObject obj = Instantiate(toSpawn, grid[i, j].transform.position + new Vector3(0, yOffset, 0), Quaternion.identity, objectsHolder.transform);
+            GameObject obj = Instantiate(toSpawn, grid[i, j].transform.position + new Vector3(0, yOffset, 0), Quaternion.identity, objectsHolderPCG.transform);
             obj.transform.rotation = toSpawn.transform.rotation;
             obj.transform.localScale = new Vector3(obj.transform.localScale.x * upscaleFactor.x, obj.transform.localScale.y * ((upscaleFactor.x + upscaleFactor.z) / 2), obj.transform.localScale.z * upscaleFactor.z) + new Vector3(0.1f * upscaleFactor.x + 0.1f, 0.0f, 0.1f * upscaleFactor.z + 0.1f);
             Vector3 rotateToWall = new Vector3();

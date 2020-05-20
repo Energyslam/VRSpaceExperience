@@ -186,6 +186,7 @@ public class GameManager : MonoBehaviour
         }
         catch(Exception e)
         {
+            Debug.LogError(e.Message);
             Debug.Log("Hands not found");
         }
 
@@ -204,6 +205,7 @@ public class GameManager : MonoBehaviour
             hapticAction.Execute(0, duration, frequency, amplitude, SteamVR_Input_Sources.RightHand);
         }catch(Exception e)
         {
+            Debug.LogError(e.Message);
             Debug.Log("Hands not found");
         }
     }

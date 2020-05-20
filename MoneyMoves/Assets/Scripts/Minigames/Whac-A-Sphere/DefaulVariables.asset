@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b5c74f62c6af34e93a19988771e890, type: 3}
   m_Name: DefaulVariables
   m_EditorClassIdentifier: 
-  activeTime: 2.3903034
+  activeTime: 0.7340572
   negativeActiveTime: 60
   timeBetweenActivation: 2
-  totalTime: 10
-  spawnNegativeAfterSpawns: 1
+  totalTime: 15
+  spawnNegativeAfterSpawns: 0

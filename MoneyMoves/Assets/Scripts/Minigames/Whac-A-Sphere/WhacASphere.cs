@@ -27,7 +27,6 @@ public class WhacASphere : MonoBehaviour
     {
         variables = manager.variables;
         maxSphereLifetime = variables.totalTime / variables.timeBetweenActivation * variables.activeTime * 2f;
-        Debug.Log("Max sphere lifetime = " + maxSphereLifetime);
         this.timeBetweenActivation = variables.timeBetweenActivation;
         this.spawnNegativeAfterSpawns = variables.spawnNegativeAfterSpawns;
         foreach(GameObject go in spheres)

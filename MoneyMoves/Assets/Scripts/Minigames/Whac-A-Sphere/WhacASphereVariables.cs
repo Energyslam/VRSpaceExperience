@@ -8,6 +8,6 @@ public class WhacASphereVariables : ScriptableObject
     public float activeTime;
     public float negativeActiveTime;
     public float timeBetweenActivation;
-    public int totalTime;
+    public float totalTime;
     public int spawnNegativeAfterSpawns;
 }

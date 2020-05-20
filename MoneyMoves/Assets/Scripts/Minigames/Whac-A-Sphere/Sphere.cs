@@ -78,7 +78,6 @@ public class Sphere : MonoBehaviour
         if (mood == Mood.Positive)
         {
             whacASphere.totalSphereLifetime += lifetime;
-            Debug.Log("Lifetime was " + lifetime);
         }
         whacASphere.activatedSpheres.Remove(this.gameObject);
         rend.material = unlit;

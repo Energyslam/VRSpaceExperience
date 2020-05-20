@@ -2,6 +2,8 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Boo.Lang;
+using System;
 
 public class WhacASphereManager : MonoBehaviour
 {
@@ -13,8 +15,8 @@ public class WhacASphereManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI totalScoreText;
     [SerializeField] Image errorCross;
 
-    [SerializeField] int totalTime;
-    int remainingTime;
+    [SerializeField] float totalTime;
+    float remainingTime;
     int finalLeftScore;
     int finalRightScore;
     int totalScore = 0;
@@ -58,35 +60,28 @@ public class WhacASphereManager : MonoBehaviour
 
     void AdjustDifficulty()
     {
-        float totalPossibleScore = (int)Mathf.Round(totalTime / variables.timeBetweenActivation * 10f * 2f);
-        float desiredPoints = totalPossibleScore / 2f;
         int finalScore = finalLeftScore + finalRightScore;
-
-        float scalar = (Mathf.Abs(finalScore - desiredPoints)) / desiredPoints;
-
-        Debug.Log("Total Possible Score = " + totalPossibleScore);
+        float maximumPossibleScore = (int)Mathf.Round(totalTime / variables.timeBetweenActivation * 10f * 2f);
+        float desiredPoints = maximumPossibleScore / 2f; //We want the player to obtain half of the obtainable points
+        float absoluteDifference = Mathf.Abs(finalScore - desiredPoints);
+        float tenPercent = maximumPossibleScore / 10f;
+        float multiplier = Mathf.Clamp((absoluteDifference / tenPercent), 1f, Mathf.Infinity); //prevents multiplier from scaling something that's already being scaled down
+        float scalar = absoluteDifference / desiredPoints / 10f;
+        Debug.Log("Maximum Possible Score = " + maximumPossibleScore);
         Debug.Log("Desired points  = " + desiredPoints);
         Debug.Log("Final Score = " + finalScore);
         Debug.Log("Scalar = " + scalar);
-        if (finalScore > desiredPoints) // if player is too bueno
-        {//afstand delen door desired point voor een scalar;
-
-            variables.activeTime *= (1 - (scalar / 10f));
-        }
-        else if (finalScore < desiredPoints) //if player is badderino
+        if (finalScore > desiredPoints)
         {
-            variables.activeTime *= (1 + (scalar / 10f));
+            variables.activeTime *= (1f - scalar * multiplier);
+
+        }
+        else if (finalScore < desiredPoints)
+        {
+            variables.activeTime *= (1f + scalar * multiplier);
         }
         float combinedMaxLifeTime = leftGame.maxSphereLifetime + rightGame.maxSphereLifetime;
         float combinedTotalLifetime = leftGame.totalSphereLifetime + rightGame.totalSphereLifetime;
-        //if (combinedTotalLifetime * 2 < combinedMaxLifeTime)
-        //{
-        //    variables.activeTime *= 0.7f;
-        //}
-        //else if (HelperFunctions.FastApproximately(combinedTotalLifetime, combinedMaxLifeTime, 5f)){
-        //    variables.activeTime *= 1.3f;
-        //}
-
     }
 
     void StartCalculatingFinalScore()
@@ -107,7 +102,7 @@ public class WhacASphereManager : MonoBehaviour
 
         totalScoreText.text = "Total score = " + totalScore;
 
-        if (leftGame.score - 10 < 0 && rightGame.score -10 < 0)
+        if (leftGame.score - 10 < 0 && rightGame.score - 10 < 0)
         {
             yield return new WaitForSeconds(2f);
             MoveAfterEnding();
@@ -130,7 +125,7 @@ public class WhacASphereManager : MonoBehaviour
             if (!errorCross.gameObject.activeInHierarchy)
             {
                 errorCross.gameObject.SetActive(true);
-                errorCross.transform.localPosition = new Vector3(3f, errorCross.transform.localPosition.y, errorCross.transform.localPosition.z);
+                errorCross.transform.localPosition = new Vector3(-3f, errorCross.transform.localPosition.y, errorCross.transform.localPosition.z);
             }
         }
         if (rightGame.score - 10 >= 0)
@@ -144,7 +139,7 @@ public class WhacASphereManager : MonoBehaviour
             if (!errorCross.gameObject.activeInHierarchy)
             {
                 errorCross.gameObject.SetActive(true);
-                errorCross.transform.localPosition = new Vector3(-3f, errorCross.transform.localPosition.y, errorCross.transform.localPosition.z);
+                errorCross.transform.localPosition = new Vector3(3f, errorCross.transform.localPosition.y, errorCross.transform.localPosition.z);
             }
         }
     }
@@ -196,7 +191,7 @@ public class WhacASphereManager : MonoBehaviour
 
     Vector3 CalculateGamePosition()
     {
-        //TODO: 
+        //TODO: playtest position, track can be rendered behind gamescreen at cost of performance. Should not have any noticeable impact during minigame-gameplay
         Vector3 trackLeftQuarter = Tracks.SplitToA[Tracks.SplitToA.Count / 4];
         Vector3 trackRightQuarter = Tracks.SplitToB[Tracks.SplitToB.Count / 4];
         Vector3 vectorFromLeftToRightQuarter = trackRightQuarter - trackLeftQuarter;

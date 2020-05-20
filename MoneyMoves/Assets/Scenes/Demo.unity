@@ -3566,7 +3566,7 @@ MonoBehaviour:
   woop: {x: 0, y: 0, z: 0}
   currentIndex: 0
   resetSpeed: 20
-  immediateStart: 1
+  immediateStart: 0
   overrideSpeed: 1
   State: 0
 --- !u!4 &1639068276 stripped

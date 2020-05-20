@@ -82,8 +82,7 @@ public class SlingShooter : MonoBehaviour
 
         else if (isPulling)
         {
-            //transform.LookAt(centerPoint.transform.position);
-            //swingObjectHolder.transform.forward = transform.forward;
+            swingObjectHolder.transform.LookAt(transform);
         }
     }
 }

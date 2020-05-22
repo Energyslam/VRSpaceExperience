@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[ExecuteInEditMode]
 public class WhacASphereSpawner : MonoBehaviour
 {
     public GameObject WhacASphere;
     public static WhacASphereSpawner instance;
     public WhacASphereVariables variables;
-    public bool ResetVariables;
-    public bool SpeedUpVariables;
+    //public bool ResetVariables;
+    //public bool SpeedUpVariables;
+
+    public bool SpeedupStart;
+    public bool DefaultStart;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -20,24 +22,33 @@ public class WhacASphereSpawner : MonoBehaviour
         {
             Destroy(this);
         }
+        if (SpeedupStart)
+        {
+            variables.SpeedUp();
+        }
+        else if (DefaultStart)
+        {
+            variables.SetHumanDefaults();
+        }
+        variables.iteration = 0;
     }
 
     private void Start()
-    {
-        variables.iteration = 0;
+    {     
+        GameObject go = Instantiate(WhacASphere);
     }
     void Update()
     {
-        if (ResetVariables)
-        {
-            variables.SetHumanDefaults();
-            ResetVariables = false;
-        }
-        if (SpeedUpVariables)
-        {
-            variables.SpeedUp();
-            SpeedUpVariables = false;
-        }
+        //if (ResetVariables)
+        //{
+        //    variables.SetHumanDefaults();
+        //    ResetVariables = false;
+        //}
+        //if (SpeedUpVariables)
+        //{
+        //    variables.SpeedUp();
+        //    SpeedUpVariables = false;
+        //}
     }
     private void SetDefaultVariablesOnStart()
     {

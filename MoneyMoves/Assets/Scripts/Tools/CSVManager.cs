@@ -7,7 +7,7 @@ public static class CSVManager
 {
     private static string reportDirectoryName = "Report";
     private static string reportFileName = "report.csv";
-    private static string reportSeparator = ",";
+    private static string reportSeparator = ";";
     private static string[] reportHeaders = new string[3]
     {
         "Iteration",

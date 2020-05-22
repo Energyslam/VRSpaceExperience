@@ -16,9 +16,11 @@ public class WhacASphereVariables : ScriptableObject
     public float speedUpDivider;
     public float reactionTime;
     public float skillGrowth;
+    public int iterationsToTest = 20;
 
     public enum PlayerSkill
     {
+        Awful,
         Low,
         Average,
         High,
@@ -29,24 +31,28 @@ public class WhacASphereVariables : ScriptableObject
     public void SetHumanDefaults()
     {
         activeTime = 4;
-        timeBetweenActivation = 1;
+        timeBetweenActivation = 2;
         totalTime = 20;
         reactionTime = 0.3f;
-        if (playerSkill == PlayerSkill.Low)
+        if (playerSkill == PlayerSkill.Awful)
         {
-            testerSpeed = 5;
+            testerSpeed = 1;
+        }
+        else if (playerSkill == PlayerSkill.Low)
+        {
+            testerSpeed = 2.5f;
         }
         else if (playerSkill == PlayerSkill.Average)
         {
-            testerSpeed = 8;
+            testerSpeed = 3;
         }
         else if (playerSkill == PlayerSkill.High)
         {
-            testerSpeed = 10;
+            testerSpeed = 5;
         }
         else if (playerSkill == PlayerSkill.GG)
         {
-            testerSpeed = 15;
+            testerSpeed = 8;
         }
         skillGrowth = testerSpeed / 10f;
     }

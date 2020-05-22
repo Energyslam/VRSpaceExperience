@@ -63,7 +63,7 @@ public class WhacASphereManager : MonoBehaviour
 
     void AdjustDifficulty()
     {
-        variables.testerSpeed += variables.skillGrowth; //simulates player skill growing over time
+        variables.testerSpeed += (variables.skillGrowth * (1f - variables.iteration/variables.iterationsToTest)); //simulates player skill growing over time
         int finalScore = finalLeftScore + finalRightScore;
         float maximumPossibleScore = (totalTime / variables.timeBetweenActivation) * 10 * 2f;
         float desiredPoints = maximumPossibleScore / 2f; //We want the player to obtain half of the obtainable points
@@ -99,7 +99,14 @@ public class WhacASphereManager : MonoBehaviour
         //    finalScore,
         //    variables.activeTime
         //};
-        MyTools.DEV_AppendSpecificsToReport(new string[3] { variables.iteration.ToString(), finalScore.ToString(), (variables.activeTime * variables.speedUpDivider).ToString() });
+        if (isTesting)
+        {
+            MyTools.DEV_AppendSpecificsToReport(new string[3] { variables.iteration.ToString(), finalScore.ToString(), (variables.activeTime * variables.speedUpDivider).ToString("n3") });
+            if (variables.iteration >= variables.iterationsToTest)
+            {
+                Debug.Break();
+            }
+        }
     }
 
     void StartCalculatingFinalScore()

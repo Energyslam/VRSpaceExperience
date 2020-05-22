@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b5c74f62c6af34e93a19988771e890, type: 3}
   m_Name: DefaulVariables
   m_EditorClassIdentifier: 
-  activeTime: 0.023283776
+  activeTime: 4
   negativeActiveTime: 60
-  timeBetweenActivation: 0.05
-  totalTime: 1
+  timeBetweenActivation: 2
+  totalTime: 20
   spawnNegativeAfterSpawns: 0
-  testerSpeed: 1380
+  testerSpeed: 3
   iteration: 0
   speedUpDivider: 20
-  reactionTime: 0.015000001
-  skillGrowth: 30
-  playerSkill: 3
+  reactionTime: 0.3
+  skillGrowth: 0.3
+  iterationsToTest: 20
+  playerSkill: 2

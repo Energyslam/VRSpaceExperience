@@ -1316,6 +1316,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whac-A-Sphere
       objectReference: {fileID: 0}
+    - target: {fileID: 9038212394177635291, guid: 77ac0e6ab7ccee9479680afb1ed7e4e8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9038212394177635292, guid: 77ac0e6ab7ccee9479680afb1ed7e4e8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1483,8 +1488,8 @@ MonoBehaviour:
   WhacASphere: {fileID: 9038212394177635291, guid: 77ac0e6ab7ccee9479680afb1ed7e4e8,
     type: 3}
   variables: {fileID: 11400000, guid: 153805805d12bac4b9930ddbddab7b69, type: 2}
-  ResetVariables: 0
-  SpeedUpVariables: 0
+  SpeedupStart: 0
+  DefaultStart: 1
 --- !u!4 &1842894093
 Transform:
   m_ObjectHideFlags: 0

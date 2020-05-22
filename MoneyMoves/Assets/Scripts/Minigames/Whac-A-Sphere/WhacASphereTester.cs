@@ -10,6 +10,7 @@ public class WhacASphereTester : MonoBehaviour
     public GameObject target;
     public float speed;
     float reactionTime;
+    public bool isTesting;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,10 @@ public class WhacASphereTester : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isTesting)
+        {
+            return;
+        }
         //FindClosestSphere();
         if (target == null)
         {

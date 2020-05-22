@@ -94,6 +94,12 @@ public class WhacASphereManager : MonoBehaviour
         float combinedMaxLifeTime = leftGame.maxSphereLifetime + rightGame.maxSphereLifetime;
         float combinedTotalLifetime = leftGame.totalSphereLifetime + rightGame.totalSphereLifetime;
         variables.iteration++;
+        //string[] VariablesToWrite = new string[3]{
+        //    variables.iteration.ToString(),
+        //    finalScore,
+        //    variables.activeTime
+        //};
+        MyTools.DEV_AppendSpecificsToReport(new string[3] { variables.iteration.ToString(), finalScore.ToString(), (variables.activeTime * variables.speedUpDivider).ToString() });
     }
 
     void StartCalculatingFinalScore()

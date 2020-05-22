@@ -2,9 +2,6 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using Boo.Lang;
-using System;
-using UnityEngine.PlayerLoop;
 
 public class WhacASphereManager : MonoBehaviour
 {
@@ -28,11 +25,15 @@ public class WhacASphereManager : MonoBehaviour
     public Vector3 destrucTorque;
     public bool isTesting;
 
-    void Start()
+    private void Awake()
     {
         platform = GameManager.Instance.platform;
         this.totalTime = variables.totalTime;
         remainingTime = totalTime;
+    }
+    void Start()
+    {
+
         timeText.text = remainingTime < 10 ? "00:0" + remainingTime : "00:" + remainingTime;
         if (!isTesting)
         {
@@ -41,7 +42,6 @@ public class WhacASphereManager : MonoBehaviour
             transform.eulerAngles -= new Vector3(transform.localEulerAngles.x, 90, 0);
         }
         StartCoroutine(CountdownTime());
-
     }
 
 
@@ -63,7 +63,8 @@ public class WhacASphereManager : MonoBehaviour
 
     void AdjustDifficulty()
     {
-        variables.testerSpeed += (variables.skillGrowth * (1f - variables.iteration/variables.iterationsToTest)); //simulates player skill growing over time
+        variables.testerSpeed += Mathf.Clamp((variables.skillGrowth * 1f - (variables.iteration * 2f) / variables.iterationsToTest), 0f, 1f); //simulates player skill growing over time
+        Debug.Log("Adding " + Mathf.Clamp((variables.skillGrowth * 1f - (variables.iteration * 2f) / variables.iterationsToTest), 0f, 1f) + " to testerspeed");
         int finalScore = finalLeftScore + finalRightScore;
         float maximumPossibleScore = (totalTime / variables.timeBetweenActivation) * 10 * 2f;
         float desiredPoints = maximumPossibleScore / 2f; //We want the player to obtain half of the obtainable points
@@ -72,7 +73,7 @@ public class WhacASphereManager : MonoBehaviour
         float multiplier = Mathf.Clamp((absoluteDifference / tenPercent), 1f, Mathf.Infinity); //prevents multiplier from scaling something that's already being scaled down
         float scalar = absoluteDifference / desiredPoints / 10f;
         //Debug.Log("");
-        //Debug.Log("Maximum Possible Score = " + maximumPossibleScore + "\nf" + "\na" + "\nk");
+        //Debug.Log("Maximum Possible Score = " + maximumPossibleScore);
         //Debug.Log("Desired points  = " + desiredPoints);
         //Debug.Log("Final Score = " + finalScore);
         //Debug.Log("");
@@ -84,27 +85,52 @@ public class WhacASphereManager : MonoBehaviour
             );
         if (finalScore > desiredPoints)
         {
-            variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scalar * multiplier), 0.0000001f, 8f);
+            variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scalar * multiplier), 0.0000001f, variables.totalTime);
 
         }
         else if (finalScore < desiredPoints)
         {
-            variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scalar * multiplier), 0.0000001f, 8f);
+            variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scalar * multiplier), 0.0000001f, variables.totalTime);
         }
         float combinedMaxLifeTime = leftGame.maxSphereLifetime + rightGame.maxSphereLifetime;
         float combinedTotalLifetime = leftGame.totalSphereLifetime + rightGame.totalSphereLifetime;
         variables.iteration++;
-        //string[] VariablesToWrite = new string[3]{
-        //    variables.iteration.ToString(),
-        //    finalScore,
-        //    variables.activeTime
-        //};
+        variables.totalIterations++;
+        string average = "";
         if (isTesting)
         {
-            MyTools.DEV_AppendSpecificsToReport(new string[3] { variables.iteration.ToString(), finalScore.ToString(), (variables.activeTime * variables.speedUpDivider).ToString("n3") });
+            if (variables.iteration == 1)
+            {
+                MyTools.DEV_AppendHeadersToReport();
+                average += finalScore.ToString();
+            }
+            else
+            {
+                average += "=AVERAGE($B$" + (variables.totalIterations + variables.skillLevelsDone) + ":$B$" + (variables.totalIterations + 1 + variables.skillLevelsDone) + ")";
+            }
+
+            MyTools.DEV_AppendSpecificsToReport(new string[5] { variables.iteration.ToString(), finalScore.ToString(), average, (variables.activeTime * variables.speedUpDivider).ToString("n3"), variables.playerSkill.ToString() });
             if (variables.iteration >= variables.iterationsToTest)
             {
-                Debug.Break();
+                if (WhacASphereSpawner.instance.fullTest)
+                {
+                    if (variables.playerSkill != WhacASphereVariables.PlayerSkill.Expert)
+                    {
+                        variables.iteration = 0;
+                        variables.playerSkill += 1;
+                        variables.skillLevelsDone += 1;
+                        WhacASphereSpawner.instance.SetVariables();
+                    }
+                    else
+                    {
+                        UnityEditor.EditorApplication.isPlaying = false;
+                    }
+
+                }
+                else{
+                    UnityEditor.EditorApplication.isPlaying = false;
+                }
+
             }
         }
     }

@@ -8,11 +8,13 @@ public static class CSVManager
     private static string reportDirectoryName = "Report";
     private static string reportFileName = "report.csv";
     private static string reportSeparator = ";";
-    private static string[] reportHeaders = new string[3]
+    private static string[] reportHeaders = new string[5]
     {
         "Iteration",
         "Final Score",
-        "Active Sphere Time"
+        "Average Score",
+        "Active Sphere Time",
+        "Skill level"
     };
     private static string timeStampHeader = "time stamp";
 
@@ -42,6 +44,24 @@ public static class CSVManager
         VerifyDirectory();
         using (StreamWriter sw = File.CreateText(GetFilePath()))
         {
+            //string finalString = "";
+            //for (int i = 0; i < reportHeaders.Length; i++)
+            //{
+            //    if (finalString != "")
+            //    {
+            //        finalString += reportSeparator;
+            //    }
+            //    finalString += reportHeaders[i];
+            //}
+            ////finalString += reportSeparator + timeStampHeader;
+            //sw.WriteLine("");
+        }
+    }
+    public static void CreateHeaders()
+    {
+        VerifyDirectory();
+        using (StreamWriter sw = File.AppendText(GetFilePath()))
+        {
             string finalString = "";
             for (int i = 0; i < reportHeaders.Length; i++)
             {
@@ -57,7 +77,7 @@ public static class CSVManager
     }
     #endregion
 
-#region Operations
+    #region Operations
     static void VerifyDirectory()
     {
         string dir = GetDirectoryPath();

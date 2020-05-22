@@ -771,7 +771,7 @@ MonoBehaviour:
   isShooting: 0
   isPulling: 0
   reloadSpeed: 10
-  projectileSpeed: 50
+  projectileSpeed: 100
   onPullReset:
     m_PersistentCalls:
       m_Calls: []

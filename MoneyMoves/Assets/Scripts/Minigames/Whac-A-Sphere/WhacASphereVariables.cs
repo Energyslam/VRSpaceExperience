@@ -13,6 +13,8 @@ public class WhacASphereVariables : ScriptableObject
     public int spawnNegativeAfterSpawns;
     public float testerSpeed;
     public int iteration;
+    public int totalIterations;
+    public int skillLevelsDone;
     public float speedUpDivider;
     public float reactionTime;
     public float skillGrowth;
@@ -24,7 +26,7 @@ public class WhacASphereVariables : ScriptableObject
         Low,
         Average,
         High,
-        GG
+        Expert
     }
     public PlayerSkill playerSkill;
 
@@ -36,23 +38,23 @@ public class WhacASphereVariables : ScriptableObject
         reactionTime = 0.3f;
         if (playerSkill == PlayerSkill.Awful)
         {
-            testerSpeed = 1;
+            testerSpeed = 0.5f;
         }
         else if (playerSkill == PlayerSkill.Low)
         {
-            testerSpeed = 2.5f;
+            testerSpeed = 1.5f;
         }
         else if (playerSkill == PlayerSkill.Average)
         {
-            testerSpeed = 3;
+            testerSpeed = 2.5f;
         }
         else if (playerSkill == PlayerSkill.High)
         {
-            testerSpeed = 5;
+            testerSpeed = 4f;
         }
-        else if (playerSkill == PlayerSkill.GG)
+        else if (playerSkill == PlayerSkill.Expert)
         {
-            testerSpeed = 8;
+            testerSpeed = 6f;
         }
         skillGrowth = testerSpeed / 10f;
     }

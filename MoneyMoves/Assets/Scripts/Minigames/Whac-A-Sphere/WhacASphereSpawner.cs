@@ -10,7 +10,7 @@ public class WhacASphereSpawner : MonoBehaviour
     //public bool SpeedUpVariables;
 
     public bool SpeedupStart;
-    public bool DefaultStart;
+    public bool fullTest;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -22,20 +22,20 @@ public class WhacASphereSpawner : MonoBehaviour
         {
             Destroy(this);
         }
-        if (SpeedupStart)
-        {
-            variables.SpeedUp();
-        }
-        else if (DefaultStart)
-        {
-            variables.SetHumanDefaults();
-        }
         variables.iteration = 0;
+        variables.totalIterations = 0;
+        variables.skillLevelsDone = 0;
+        if (fullTest)
+        {
+            variables.playerSkill = WhacASphereVariables.PlayerSkill.Awful;
+        }
     }
 
     private void Start()
-    {     
+    {
+        SetVariables();
         GameObject go = Instantiate(WhacASphere);
+
     }
     void Update()
     {
@@ -58,6 +58,18 @@ public class WhacASphereSpawner : MonoBehaviour
     float totalTime = 15f;
     int spawnNegativeAfterSpawn = 0; ;
 }
+
+    public void SetVariables()
+    {
+        if (SpeedupStart)
+        {
+            variables.SpeedUp();
+        }
+        else
+        {
+            variables.SetHumanDefaults();
+        }
+    }
     public void CreateNewWhacASphere()
     {
         GameObject go = Instantiate(WhacASphere);

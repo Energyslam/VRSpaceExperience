@@ -26,6 +26,11 @@ public static class MyTools
         Debug.Log("<color=green>Specific data added succesfully!</color>");
     }
 
+    public static void DEV_AppendHeadersToReport()
+    {
+        CSVManager.CreateHeaders();
+    }
+
     [MenuItem("My Tools/Reset-Report %F12")]
     static void DEV_ResetReport()
     {

@@ -4,13 +4,14 @@ using TMPro;
 using UnityEngine.UI;
 using Boo.Lang;
 using System;
+using UnityEngine.PlayerLoop;
 
 public class WhacASphereManager : MonoBehaviour
 {
     public WhacASphereVariables variables;
     [SerializeField] public WhacASphere leftGame;
     [SerializeField] public WhacASphere rightGame;
-
+    public WhacASphereTester tester;
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI totalScoreText;
     [SerializeField] Image errorCross;
@@ -33,17 +34,19 @@ public class WhacASphereManager : MonoBehaviour
         this.totalTime = variables.totalTime;
         remainingTime = totalTime;
         timeText.text = remainingTime < 10 ? "00:0" + remainingTime : "00:" + remainingTime;
-        if (!isTesting){
+        if (!isTesting)
+        {
             this.transform.position = CalculateGamePosition();
             transform.LookAt(Camera.main.transform);
             transform.eulerAngles -= new Vector3(transform.localEulerAngles.x, 90, 0);
         }
         StartCoroutine(CountdownTime());
-        
+
     }
 
+
     IEnumerator CountdownTime()
-    {     
+    {
         yield return new WaitForSeconds(1f);
 
         remainingTime--;
@@ -60,25 +63,33 @@ public class WhacASphereManager : MonoBehaviour
 
     void AdjustDifficulty()
     {
+        variables.testerSpeed += variables.skillGrowth; //simulates player skill growing over time
         int finalScore = finalLeftScore + finalRightScore;
-        float maximumPossibleScore = (int)Mathf.Round(totalTime / variables.timeBetweenActivation * 10f * 2f);
+        float maximumPossibleScore = (totalTime / variables.timeBetweenActivation) * 10 * 2f;
         float desiredPoints = maximumPossibleScore / 2f; //We want the player to obtain half of the obtainable points
         float absoluteDifference = Mathf.Abs(finalScore - desiredPoints);
         float tenPercent = maximumPossibleScore / 10f;
         float multiplier = Mathf.Clamp((absoluteDifference / tenPercent), 1f, Mathf.Infinity); //prevents multiplier from scaling something that's already being scaled down
         float scalar = absoluteDifference / desiredPoints / 10f;
-        Debug.Log("Maximum Possible Score = " + maximumPossibleScore);
-        Debug.Log("Desired points  = " + desiredPoints);
-        Debug.Log("Final Score = " + finalScore);
-        Debug.Log("Scalar = " + scalar);
+        //Debug.Log("");
+        //Debug.Log("Maximum Possible Score = " + maximumPossibleScore + "\nf" + "\na" + "\nk");
+        //Debug.Log("Desired points  = " + desiredPoints);
+        //Debug.Log("Final Score = " + finalScore);
+        //Debug.Log("");
+        Debug.Log(
+            "\nIteration = " + variables.iteration + 
+            "\nMaximum Possible Score = " + maximumPossibleScore + 
+            "\nDesired points  = " + desiredPoints + 
+            "\nFinal Score = " + finalScore
+            );
         if (finalScore > desiredPoints)
         {
-            variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scalar * multiplier), 0.01f, 8f);
+            variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scalar * multiplier), 0.0000001f, 8f);
 
         }
         else if (finalScore < desiredPoints)
         {
-            variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scalar * multiplier), 0.01f, 8f);
+            variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scalar * multiplier), 0.0000001f, 8f);
         }
         float combinedMaxLifeTime = leftGame.maxSphereLifetime + rightGame.maxSphereLifetime;
         float combinedTotalLifetime = leftGame.totalSphereLifetime + rightGame.totalSphereLifetime;
@@ -97,7 +108,14 @@ public class WhacASphereManager : MonoBehaviour
     }
     IEnumerator CalculateFinalScore()
     {
-        yield return new WaitForSeconds(0.1f);
+        if (isTesting)
+        {
+            yield return new WaitForSeconds(0.001f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
 
         DisplayErrorCross();
 
@@ -105,7 +123,14 @@ public class WhacASphereManager : MonoBehaviour
 
         if (leftGame.score - 10 < 0 && rightGame.score - 10 < 0)
         {
-            yield return new WaitForSeconds(2f);
+            if (isTesting)
+            {
+                yield return new WaitForSeconds(0.001f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(2f);
+            }
             MoveAfterEnding();
         }
         else

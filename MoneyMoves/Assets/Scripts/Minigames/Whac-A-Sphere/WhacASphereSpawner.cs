@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[ExecuteInEditMode]
 public class WhacASphereSpawner : MonoBehaviour
 {
     public GameObject WhacASphere;
     public static WhacASphereSpawner instance;
-    WhacASphereVariables variables;
+    public WhacASphereVariables variables;
+    public bool ResetVariables;
+    public bool SpeedUpVariables;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -20,6 +22,23 @@ public class WhacASphereSpawner : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        variables.iteration = 0;
+    }
+    void Update()
+    {
+        if (ResetVariables)
+        {
+            variables.SetHumanDefaults();
+            ResetVariables = false;
+        }
+        if (SpeedUpVariables)
+        {
+            variables.SpeedUp();
+            SpeedUpVariables = false;
+        }
+    }
     private void SetDefaultVariablesOnStart()
     {
     float activeTime = 4f;

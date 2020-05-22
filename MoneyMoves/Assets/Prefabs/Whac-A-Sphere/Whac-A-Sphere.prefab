@@ -3497,6 +3497,7 @@ MonoBehaviour:
   variables: {fileID: 11400000, guid: 153805805d12bac4b9930ddbddab7b69, type: 2}
   leftGame: {fileID: 9038212395123385020}
   rightGame: {fileID: 5258487809335305615}
+  tester: {fileID: 305098744826735373}
   timeText: {fileID: 2607633771014492519}
   totalScoreText: {fileID: 3018612355498993101}
   errorCross: {fileID: 1859464269555469022}

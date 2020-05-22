@@ -9,18 +9,29 @@ public class WhacASphereTester : MonoBehaviour
     WhacASphere rightGame;
     public GameObject target;
     public float speed;
+    float reactionTime;
     // Start is called before the first frame update
     void Start()
     {
         leftGame = manager.leftGame;
         rightGame = manager.rightGame;
         this.speed = manager.variables.testerSpeed;
+        reactionTime = manager.variables.reactionTime;
     }
 
+    public void ImitateAHuman()
+    {
+        StartCoroutine(ImitateHumanReactionTime());
+    }
+    IEnumerator ImitateHumanReactionTime()
+    {
+        yield return new WaitForSeconds(reactionTime);
+        FindClosestSphere();
+    }
     // Update is called once per frame
     void Update()
     {
-        FindClosestSphere();
+        //FindClosestSphere();
         if (target == null)
         {
             return;
@@ -29,6 +40,9 @@ public class WhacASphereTester : MonoBehaviour
         if (this.transform.position == target.transform.position)
         {
             target.GetComponent<Sphere>().Hit();
+            target = null;
+            StopAllCoroutines();
+            FindClosestSphere();
         }
     }
 

@@ -16,6 +16,7 @@ public class WhacASphere : MonoBehaviour
     int spawnerCount = 0;
     public float maxSphereLifetime;
     public float totalSphereLifetime = 0f;
+    WhacASphereTester tester;
     public enum Side
     {
         Left,
@@ -29,6 +30,7 @@ public class WhacASphere : MonoBehaviour
         maxSphereLifetime = variables.totalTime / variables.timeBetweenActivation * variables.activeTime * 2f;
         this.timeBetweenActivation = variables.timeBetweenActivation;
         this.spawnNegativeAfterSpawns = variables.spawnNegativeAfterSpawns;
+        tester = manager.tester;
         foreach(GameObject go in spheres)
         {
             go.GetComponent<Sphere>().Initialize(this, variables);
@@ -45,6 +47,16 @@ public class WhacASphere : MonoBehaviour
 
     public void ActivateRandomSphere()
     {
+        if (side == Side.Left)
+        {
+            tester.ImitateAHuman();
+            //Dirty fix, but only want it activated once
+            //Tester should have a reaction time delay after spheres have spawned
+
+            //I take that back, only activating after spawner is terrible. Doesn't take into account that there are already other spheres active, don't necessarily need to react if you know where you want to go
+
+            //tester.ImitateAHuman();
+        }
         GetRandomUnactivatedSphere().GetComponent<Sphere>().ActivateASphere(Sphere.Mood.Positive);
         if (spawnNegativeAfterSpawns == 0)
         {

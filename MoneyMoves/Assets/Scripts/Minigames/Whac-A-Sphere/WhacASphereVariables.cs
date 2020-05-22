@@ -10,4 +10,6 @@ public class WhacASphereVariables : ScriptableObject
     public float timeBetweenActivation;
     public float totalTime;
     public int spawnNegativeAfterSpawns;
+    public float testerSpeed;
+    public int iteration;
 }

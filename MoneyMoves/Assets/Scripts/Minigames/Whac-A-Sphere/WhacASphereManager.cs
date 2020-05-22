@@ -8,8 +8,8 @@ using System;
 public class WhacASphereManager : MonoBehaviour
 {
     public WhacASphereVariables variables;
-    [SerializeField] WhacASphere leftGame;
-    [SerializeField] WhacASphere rightGame;
+    [SerializeField] public WhacASphere leftGame;
+    [SerializeField] public WhacASphere rightGame;
 
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI totalScoreText;
@@ -73,15 +73,16 @@ public class WhacASphereManager : MonoBehaviour
         Debug.Log("Scalar = " + scalar);
         if (finalScore > desiredPoints)
         {
-            variables.activeTime *= (1f - scalar * multiplier);
+            variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scalar * multiplier), 0.01f, 8f);
 
         }
         else if (finalScore < desiredPoints)
         {
-            variables.activeTime *= (1f + scalar * multiplier);
+            variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scalar * multiplier), 0.01f, 8f);
         }
         float combinedMaxLifeTime = leftGame.maxSphereLifetime + rightGame.maxSphereLifetime;
         float combinedTotalLifetime = leftGame.totalSphereLifetime + rightGame.totalSphereLifetime;
+        variables.iteration++;
     }
 
     void StartCalculatingFinalScore()

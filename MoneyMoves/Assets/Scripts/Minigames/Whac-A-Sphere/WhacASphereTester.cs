@@ -11,6 +11,7 @@ public class WhacASphereTester : MonoBehaviour
     public float speed;
     float reactionTime;
     public bool isTesting;
+    public bool canShoot;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +19,7 @@ public class WhacASphereTester : MonoBehaviour
         rightGame = manager.rightGame;
         this.speed = manager.variables.testerSpeed;
         reactionTime = manager.variables.reactionTime;
+        canShoot = true;
     }
 
     public void ImitateAHuman()
@@ -44,11 +46,22 @@ public class WhacASphereTester : MonoBehaviour
         this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, speed * Time.deltaTime);
         if (this.transform.position == target.transform.position)
         {
-            target.GetComponent<Sphere>().Hit();
-            target = null;
-            StopAllCoroutines();
-            FindClosestSphere();
+            if (canShoot)
+            {
+                canShoot = false;
+                target.GetComponent<Sphere>().Hit();
+                target = null;
+                StopAllCoroutines();
+                FindClosestSphere();
+                StartCoroutine(shootingDelay());
+            }
         }
+    }
+
+    IEnumerator shootingDelay()
+    {
+        yield return new WaitForSeconds(manager.variables.shootingDelay);
+        canShoot = true;
     }
 
     void FindClosestSphere()

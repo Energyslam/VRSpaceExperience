@@ -19,6 +19,7 @@ public class WhacASphereVariables : ScriptableObject
     public float reactionTime;
     public float skillGrowth;
     public int iterationsToTest = 20;
+    public float shootingDelay;
 
     public enum PlayerSkill
     {
@@ -36,17 +37,18 @@ public class WhacASphereVariables : ScriptableObject
         timeBetweenActivation = 2;
         totalTime = 20;
         reactionTime = 0.3f;
+        shootingDelay = 0.8f;
         if (playerSkill == PlayerSkill.Awful)
         {
             testerSpeed = 0.5f;
         }
         else if (playerSkill == PlayerSkill.Low)
         {
-            testerSpeed = 1.5f;
+            testerSpeed = 1f;
         }
         else if (playerSkill == PlayerSkill.Average)
         {
-            testerSpeed = 2.5f;
+            testerSpeed = 2f;
         }
         else if (playerSkill == PlayerSkill.High)
         {
@@ -54,9 +56,9 @@ public class WhacASphereVariables : ScriptableObject
         }
         else if (playerSkill == PlayerSkill.Expert)
         {
-            testerSpeed = 6f;
+            testerSpeed = 8f;
         }
-        skillGrowth = testerSpeed / 10f;
+        skillGrowth = testerSpeed / 20f;
     }
 
     public void SpeedUp()
@@ -68,5 +70,6 @@ public class WhacASphereVariables : ScriptableObject
         testerSpeed *= speedUpDivider;
         reactionTime /= speedUpDivider;
         skillGrowth *= speedUpDivider;
+        shootingDelay /= speedUpDivider;
     }
 }

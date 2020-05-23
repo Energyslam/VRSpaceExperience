@@ -11,6 +11,10 @@ public class WhacASphereSpawner : MonoBehaviour
 
     public bool SpeedupStart;
     public bool fullTest;
+
+    public bool justScalar;
+    public bool scalarNmultiplier;
+    public bool scalarMultiplierNOffset;
     // Start is called before the first frame update
     private void Awake()
     {

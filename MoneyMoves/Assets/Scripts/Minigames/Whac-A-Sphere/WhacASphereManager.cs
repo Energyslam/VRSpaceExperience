@@ -63,8 +63,9 @@ public class WhacASphereManager : MonoBehaviour
 
     void AdjustDifficulty()
     {
-        variables.testerSpeed += Mathf.Clamp((variables.skillGrowth * 1f - (variables.iteration * 2f) / variables.iterationsToTest), 0f, 1f); //simulates player skill growing over time
+        variables.testerSpeed += variables.skillGrowth * Mathf.Clamp(1f - (variables.iteration * 2f) / variables.iterationsToTest, 0f, 1f); //simulates player skill growing over time
         Debug.Log("Adding " + Mathf.Clamp((variables.skillGrowth * 1f - (variables.iteration * 2f) / variables.iterationsToTest), 0f, 1f) + " to testerspeed");
+
         int finalScore = finalLeftScore + finalRightScore;
         float maximumPossibleScore = (totalTime / variables.timeBetweenActivation) * 10 * 2f;
         float desiredPoints = maximumPossibleScore / 2f; //We want the player to obtain half of the obtainable points
@@ -72,25 +73,41 @@ public class WhacASphereManager : MonoBehaviour
         float tenPercent = maximumPossibleScore / 10f;
         float multiplier = Mathf.Clamp((absoluteDifference / tenPercent), 1f, Mathf.Infinity); //prevents multiplier from scaling something that's already being scaled down
         float scalar = absoluteDifference / desiredPoints / 10f;
-        //Debug.Log("");
-        //Debug.Log("Maximum Possible Score = " + maximumPossibleScore);
-        //Debug.Log("Desired points  = " + desiredPoints);
-        //Debug.Log("Final Score = " + finalScore);
-        //Debug.Log("");
         Debug.Log(
-            "\nIteration = " + variables.iteration + 
-            "\nMaximum Possible Score = " + maximumPossibleScore + 
-            "\nDesired points  = " + desiredPoints + 
+            "\nIteration = " + variables.iteration +
+            "\nMaximum Possible Score = " + maximumPossibleScore +
+            "\nDesired points  = " + desiredPoints +
             "\nFinal Score = " + finalScore
             );
         if (finalScore > desiredPoints)
         {
-            variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scalar * multiplier), 0.0000001f, variables.totalTime);
-
+            if (WhacASphereSpawner.instance.justScalar)
+            {
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scalar), 0.0000001f, variables.totalTime);
+            }
+            else if (WhacASphereSpawner.instance.scalarNmultiplier)
+            {
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scalar * (multiplier)), 0.0000001f, variables.totalTime);
+            }
+            else if (WhacASphereSpawner.instance.scalarMultiplierNOffset)
+            {
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scalar * (multiplier + 1f)), 0.0000001f, variables.totalTime);
+            }
         }
         else if (finalScore < desiredPoints)
         {
-            variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scalar * multiplier), 0.0000001f, variables.totalTime);
+            if (WhacASphereSpawner.instance.justScalar)
+            {
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scalar), 0.0000001f, variables.totalTime);
+            }
+            else if (WhacASphereSpawner.instance.scalarNmultiplier)
+            {
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scalar * (multiplier)), 0.0000001f, variables.totalTime);
+            }
+            else if (WhacASphereSpawner.instance.scalarMultiplierNOffset)
+            {
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scalar * (multiplier + 1f)), 0.0000001f, variables.totalTime);
+            }
         }
         float combinedMaxLifeTime = leftGame.maxSphereLifetime + rightGame.maxSphereLifetime;
         float combinedTotalLifetime = leftGame.totalSphereLifetime + rightGame.totalSphereLifetime;
@@ -125,9 +142,9 @@ public class WhacASphereManager : MonoBehaviour
                     {
                         UnityEditor.EditorApplication.isPlaying = false;
                     }
-
                 }
-                else{
+                else
+                {
                     UnityEditor.EditorApplication.isPlaying = false;
                 }
 

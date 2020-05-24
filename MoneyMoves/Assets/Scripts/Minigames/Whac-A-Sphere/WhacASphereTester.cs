@@ -78,12 +78,12 @@ public class WhacASphereTester : MonoBehaviour
         foreach(GameObject go in leftSpheres)
         {
             float distance = (go.transform.position - this.transform.position).magnitude;
-            if (distance < closestDistance || closestDistance == 0)
+            if (distance < closestDistance || closestDistance == 0) 
             {
                 closestDistance = distance;
                 target = go;
             }
-            else if (distance == closestDistance)
+            else if (distance == closestDistance) // don't change targets if a sphere with equal distance is found
             {
                 return;
             }

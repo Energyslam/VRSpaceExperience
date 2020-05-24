@@ -35,13 +35,14 @@ public class WhacASphereManager : MonoBehaviour
     {
 
         timeText.text = remainingTime < 10 ? "00:0" + remainingTime : "00:" + remainingTime;
+        StartCoroutine(CountdownTime());
         if (!isTesting)
         {
             this.transform.position = CalculateGamePosition();
             transform.LookAt(Camera.main.transform);
             transform.eulerAngles -= new Vector3(transform.localEulerAngles.x, 90, 0);
         }
-        StartCoroutine(CountdownTime());
+
     }
 
 
@@ -107,6 +108,10 @@ public class WhacASphereManager : MonoBehaviour
             else if (WhacASphereSpawner.instance.scalarMultiplierNOffset)
             {
                 variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scalar * (multiplier + 1f)), 0.0000001f, variables.totalTime);
+            }
+            else if (WhacASphereSpawner.instance.noScaling)
+            {
+
             }
         }
         float combinedMaxLifeTime = leftGame.maxSphereLifetime + rightGame.maxSphereLifetime;

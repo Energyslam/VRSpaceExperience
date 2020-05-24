@@ -34,7 +34,7 @@ public class WhacASphereVariables : ScriptableObject
     public void SetHumanDefaults()
     {
         activeTime = 4;
-        timeBetweenActivation = 2;
+        timeBetweenActivation = 2f;
         totalTime = 20;
         reactionTime = 0.3f;
         shootingDelay = 0.8f;

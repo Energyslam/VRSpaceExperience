@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6952506944681079700}
   - component: {fileID: 9202794001152062363}
   - component: {fileID: 3574851284188107705}
+  - component: {fileID: 305098744826735373}
   m_Layer: 0
   m_Name: AutomatedTester
   m_TagString: Untagged
@@ -93,3 +94,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &305098744826735373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4473438761090343232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f63d2ccf3788b4c9935d3c0663480d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  target: {fileID: 0}
+  speed: 3
+  isTesting: 1
+  canShoot: 0

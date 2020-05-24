@@ -15,6 +15,7 @@ public class WhacASphereSpawner : MonoBehaviour
     public bool justScalar;
     public bool scalarNmultiplier;
     public bool scalarMultiplierNOffset;
+    public bool noScaling;
     // Start is called before the first frame update
     private void Awake()
     {

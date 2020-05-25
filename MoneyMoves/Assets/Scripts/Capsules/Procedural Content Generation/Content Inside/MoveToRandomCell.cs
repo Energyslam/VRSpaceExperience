@@ -24,7 +24,10 @@ public class MoveToRandomCell : MonoBehaviour
     private LayerMask layer;
 
     [SerializeField]
-    private float walkingSpeed;
+    private float walkingSpeed, animationSpeed;
+
+    [SerializeField]
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +35,7 @@ public class MoveToRandomCell : MonoBehaviour
         grid = transform.GetComponentInParent<GridManager>();
         transform.localPosition = Vector3.zero;
         MoveToCell();
+        animator.SetFloat("LookingSpeed", animationSpeed);
     }
 
     private void MoveToCell()
@@ -47,6 +51,7 @@ public class MoveToRandomCell : MonoBehaviour
         target = cell.gameObject;
         targetLocation = target.transform.position;
         state = State.WALKING;
+        animator.SetTrigger("Forward");
     }
 
     private void FixedUpdate()
@@ -56,6 +61,7 @@ public class MoveToRandomCell : MonoBehaviour
             targetLocation = Vector3.zero;
             target = null;
             state = State.IDLE;
+            animator.SetTrigger("Around");
             MoveToCell();
         }
 

@@ -31,6 +31,7 @@ public class SpawnSmallOnTop : MonoBehaviour
 
             spawnedObj = Instantiate(objectsToSpawn[rand], position, Quaternion.identity);
             spawnedObj.transform.parent = transform;
+            spawnedObj.transform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
 
             if (transform.GetComponentInParent<GridManager>().transform.rotation.x == 0 && transform.GetComponentInParent<GridManager>().transform.rotation.z == 0)
             {

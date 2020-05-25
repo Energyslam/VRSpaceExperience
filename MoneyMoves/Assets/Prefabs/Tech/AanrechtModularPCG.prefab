@@ -65,9 +65,9 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: c9eadb7e19782b141b28bb5d49865a71, type: 2}
-  - {fileID: 2100000, guid: a0870aac9a1912440b742187f38723a3, type: 2}
-  - {fileID: 2100000, guid: a0870aac9a1912440b742187f38723a3, type: 2}
-  - {fileID: 2100000, guid: a0870aac9a1912440b742187f38723a3, type: 2}
+  - {fileID: 2100000, guid: b55da33610ad9d2498d42806c9eafc77, type: 2}
+  - {fileID: 2100000, guid: b55da33610ad9d2498d42806c9eafc77, type: 2}
+  - {fileID: 2100000, guid: b55da33610ad9d2498d42806c9eafc77, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -188,10 +188,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountToSpawn: 1
   objectsToSpawn:
-  - {fileID: 1387868795320857345, guid: ffe842c2f58e1164b8dc59aa2d95bfdb, type: 3}
-  - {fileID: 4925811178909742584, guid: 498c7a912237a384d9cd6ba43b7688d6, type: 3}
-  - {fileID: 3318376883766283132, guid: c498ee0aa304fae48b97e983784c0422, type: 3}
-  - {fileID: 3395611130893623830, guid: 8ec58bec59ac0e44e9742cc1125ed364, type: 3}
+  - {fileID: 4223254974091507231, guid: 14ae18f315175914e8291cc176d20cd4, type: 3}
+  - {fileID: 7495532337029303472, guid: 581a87d1261f552498e6f2034cf5fb75, type: 3}
   edge1: {x: -0.03, y: 0, z: -0.03}
   edge2: {x: 0.2, y: 0, z: 0.2}
 --- !u!1001 &7694863015079193182

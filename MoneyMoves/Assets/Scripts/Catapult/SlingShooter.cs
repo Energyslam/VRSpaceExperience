@@ -6,7 +6,12 @@ using UnityEngine.Events;
 public class SlingShooter : MonoBehaviour
 {
     [SerializeField]
-    GameObject centerPoint, normalProjectile;
+    GameObject centerPoint, swingTarget, normalProjectile, swingObjectHolder;
+
+    [SerializeField]
+    List<GameObject> swingObjects;
+
+    private int currentSwingObject = 0;
 
     public bool isShooting, isPulling;
     public float reloadSpeed, projectileSpeed;
@@ -22,7 +27,6 @@ public class SlingShooter : MonoBehaviour
     public void Shoot()
     {
         //this.GetComponent<PlaySound>().PlayAudio();
-
         isShooting = true;
         isPulling = false;
         CreateProjectile(normalProjectile);
@@ -36,6 +40,7 @@ public class SlingShooter : MonoBehaviour
         Rigidbody projectileRB = projectileGO.GetComponent<Rigidbody>();
         projectileRB.AddForce(forward * projectileSpeed, ForceMode.VelocityChange);
         audio.Play();
+        swingTarget = swingObjects[0];
     }
     public void StartPull()
     {
@@ -44,20 +49,40 @@ public class SlingShooter : MonoBehaviour
 
     void FixedUpdate()
     {
+        SlingSwing();
+    }
+
+    private void SlingSwing()
+    {
         //Only move the pullpoint back if it has been released
         if (isShooting)
         {
-            float distance = (this.transform.position - centerPoint.transform.position).magnitude;
-            this.transform.position = Vector3.MoveTowards(this.transform.position, centerPoint.transform.position, reloadSpeed * Time.deltaTime * distance);
+            float distance = (transform.position - swingTarget.transform.position).magnitude;
+            this.transform.position = Vector3.MoveTowards(this.transform.position, swingTarget.transform.position, reloadSpeed * Time.deltaTime * distance);
+
             if (distance < 0.1f) //snap back into place
             {
-                this.transform.position = centerPoint.transform.position;
+                this.transform.position = swingTarget.transform.position;
+
+                if (currentSwingObject + 1 < swingObjects.Count)
+                {
+                    currentSwingObject++;
+                    swingTarget = swingObjects[currentSwingObject];
+                }
+
             }
+
             if (this.transform.position == centerPoint.transform.position)
             {
                 isShooting = false;
+                currentSwingObject = 0;
                 onPullReset.Invoke();
             }
+        }
+
+        else if (isPulling)
+        {
+            swingObjectHolder.transform.LookAt(transform);
         }
     }
 }

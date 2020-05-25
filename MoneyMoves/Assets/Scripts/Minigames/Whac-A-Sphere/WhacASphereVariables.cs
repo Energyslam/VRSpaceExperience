@@ -10,17 +10,18 @@ public class WhacASphereVariables : ScriptableObject
     public float negativeActiveTime;
     public float timeBetweenActivation;
     public float totalTime;
-    public int spawnNegativeAfterSpawns;
     public float testerSpeed;
+    public float speedUpDivider;
+    public float reactionTime;
+    public float skillGrowth;
+    public float shootingDelay;
+
+    public int spawnNegativeAfterSpawns;
     public int iteration;
     public int totalIterations;
     public int excelOffset;
     public int skillLevelsDone;
-    public float speedUpDivider;
-    public float reactionTime;
-    public float skillGrowth;
     public int iterationsToTest = 20;
-    public float shootingDelay;
 
     public enum PlayerSkill
     {
@@ -34,11 +35,17 @@ public class WhacASphereVariables : ScriptableObject
 
     public void SetHumanDefaults()
     {
+        SetTesterSpeed();
         activeTime = 4;
         timeBetweenActivation = 2f;
         totalTime = 20;
         reactionTime = 0.3f;
         shootingDelay = 0.8f;
+        skillGrowth = testerSpeed / 20f;
+    }
+
+    void SetTesterSpeed()
+    {
         if (playerSkill == PlayerSkill.Awful)
         {
             testerSpeed = 0.5f;
@@ -59,7 +66,6 @@ public class WhacASphereVariables : ScriptableObject
         {
             testerSpeed = 8f;
         }
-        skillGrowth = testerSpeed / 20f;
     }
 
     public void SpeedUp()

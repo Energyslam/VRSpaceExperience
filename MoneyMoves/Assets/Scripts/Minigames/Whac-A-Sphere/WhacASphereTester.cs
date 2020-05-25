@@ -12,9 +12,13 @@ public class WhacASphereTester : MonoBehaviour
     float reactionTime;
     public bool isTesting;
     public bool canShoot;
-    // Start is called before the first frame update
+
     void Start()
     {
+        if (!isTesting)
+        {
+            this.gameObject.SetActive(false);
+        }
         leftGame = manager.leftGame;
         rightGame = manager.rightGame;
         this.speed = manager.variables.testerSpeed;
@@ -31,13 +35,9 @@ public class WhacASphereTester : MonoBehaviour
         yield return new WaitForSeconds(reactionTime);
         FindClosestSphere();
     }
-    // Update is called once per frame
+
     void Update()
     {
-        if (!isTesting)
-        {
-            return;
-        }
         //FindClosestSphere();
         if (target == null)
         {

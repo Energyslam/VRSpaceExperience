@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 public class WhacASphereSpawner : MonoBehaviour
 {
-    public GameObject WhacASphere;
     public static WhacASphereSpawner instance;
+    public GameObject WhacASphere;
     public WhacASphereVariables variables;
+
+    [Header("Test settings")]
     public bool resetIterationsOnStart;
-    public bool SpeedupStart;
+    public bool speedTest;
     public bool fullTest;
 
+    [Header("Dynamic Difficulty Adjustment")]
     public bool justScalar;
     public bool scalarNmultiplier;
     public bool scalarMultiplierNOffset;
@@ -26,12 +29,11 @@ public class WhacASphereSpawner : MonoBehaviour
             Destroy(this);
         }
         variables.iteration = 0;
-        //variables.totalIterations = 0;
         variables.skillLevelsDone = 0;
         if (resetIterationsOnStart)
         {
             variables.totalIterations = 0;
-            variables.excelOffset = 0;
+            variables.excelOffset = -1;
         }
         if (fullTest)
         {
@@ -47,7 +49,7 @@ public class WhacASphereSpawner : MonoBehaviour
     }
     public void SetVariables()
     {
-        if (SpeedupStart)
+        if (speedTest)
         {
             variables.SpeedUp();
         }

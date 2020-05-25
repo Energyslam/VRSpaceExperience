@@ -4,19 +4,22 @@ using UnityEngine;
 using TMPro;
 
 public class WhacASphere : MonoBehaviour
-{ 
+{
+    public WhacASphereManager manager;
     WhacASphereVariables variables;
+    WhacASphereTester tester;
+
     public List<GameObject> spheres = new List<GameObject>();
     public List<GameObject> activatedSpheres = new List<GameObject>();
+
     public TextMeshProUGUI scoreText;
+
     public int score = 0;
-    public float timeBetweenActivation = 1f;
-    public WhacASphereManager manager;
-    public int spawnNegativeAfterSpawns = 0;
     int spawnerCount = 0;
+
     public float maxSphereLifetime;
     public float totalSphereLifetime = 0f;
-    WhacASphereTester tester;
+
     public enum Side
     {
         Left,
@@ -28,8 +31,6 @@ public class WhacASphere : MonoBehaviour
     {
         variables = manager.variables;
         maxSphereLifetime = variables.totalTime / variables.timeBetweenActivation * variables.activeTime * 2f;
-        this.timeBetweenActivation = variables.timeBetweenActivation;
-        this.spawnNegativeAfterSpawns = variables.spawnNegativeAfterSpawns;
         tester = manager.tester;
         foreach(GameObject go in spheres)
         {
@@ -41,7 +42,7 @@ public class WhacASphere : MonoBehaviour
     IEnumerator GameLoop()
     {
         ActivateRandomSphere();
-        yield return new WaitForSeconds(timeBetweenActivation);
+        yield return new WaitForSeconds(variables.timeBetweenActivation);
         StartCoroutine(GameLoop());
     }
 
@@ -50,20 +51,14 @@ public class WhacASphere : MonoBehaviour
         if (side == Side.Left)
         {
             tester.ImitateAHuman();
-            //Dirty fix, but only want it activated once
-            //Tester should have a reaction time delay after spheres have spawned
-
-            //I take that back, only activating after spawner is terrible. Doesn't take into account that there are already other spheres active, don't necessarily need to react if you know where you want to go
-
-            //tester.ImitateAHuman();
         }
         GetRandomUnactivatedSphere().GetComponent<Sphere>().ActivateASphere(Sphere.Mood.Positive);
-        if (spawnNegativeAfterSpawns == 0)
+        if (variables.spawnNegativeAfterSpawns == 0)
         {
             return;
         }
         spawnerCount++;
-        if (spawnerCount % spawnNegativeAfterSpawns == 0)
+        if (spawnerCount % variables.spawnNegativeAfterSpawns == 0)
         {
             GetRandomUnactivatedSphere().GetComponent<Sphere>().ActivateASphere(Sphere.Mood.Negative);
         }

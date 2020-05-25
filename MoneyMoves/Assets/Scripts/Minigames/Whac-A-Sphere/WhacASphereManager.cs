@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class WhacASphereManager : MonoBehaviour
 {
     public WhacASphereVariables variables;
-    [SerializeField] public WhacASphere leftGame;
-    [SerializeField] public WhacASphere rightGame;
+    public WhacASphere leftGame;
+    public WhacASphere rightGame;
     public WhacASphereTester tester;
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI totalScoreText;
@@ -33,7 +33,6 @@ public class WhacASphereManager : MonoBehaviour
     }
     void Start()
     {
-
         timeText.text = remainingTime < 10 ? "00:0" + remainingTime : "00:" + remainingTime;
         StartCoroutine(CountdownTime());
         if (!isTesting)
@@ -65,18 +64,13 @@ public class WhacASphereManager : MonoBehaviour
     void AdjustDifficulty()
     {
         variables.testerSpeed += variables.skillGrowth * Mathf.Clamp(1f - (variables.iteration * 2f) / variables.iterationsToTest, 0f, 1f); //simulates player skill growing over time
-        Debug.Log("Adding " + Mathf.Clamp((variables.skillGrowth * 1f - (variables.iteration * 2f) / variables.iterationsToTest), 0f, 1f) + " to testerspeed");
 
         int finalScore = finalLeftScore + finalRightScore;
         float maximumPossibleScore = (totalTime / variables.timeBetweenActivation) * 10f * 2f; // 10 points per activation, times 2 because we use two sides
         float desiredPoints = maximumPossibleScore / 2f; //We want the player to obtain half of the obtainable points
         float absoluteDifference = Mathf.Abs(finalScore - desiredPoints);
         float tenPercent = maximumPossibleScore / 10f;
-        float multiplier = absoluteDifference / tenPercent;
-        if (multiplier < 1f)
-        {
-            multiplier = 1f + multiplier;
-        }
+        float multiplier = Mathf.Clamp(absoluteDifference / tenPercent, 1f, Mathf.Infinity);
         float scaler = absoluteDifference / desiredPoints / 10f;
         Debug.Log(
             "\nIteration = " + variables.iteration +
@@ -119,49 +113,47 @@ public class WhacASphereManager : MonoBehaviour
             }
 
         }
-        float combinedMaxLifeTime = leftGame.maxSphereLifetime + rightGame.maxSphereLifetime;
-        float combinedTotalLifetime = leftGame.totalSphereLifetime + rightGame.totalSphereLifetime;
         variables.iteration++;
         variables.totalIterations++;
-        string average = "";
-        if (isTesting)
-        {
-            if (variables.iteration == 1)
-            {
-                MyTools.DEV_AppendHeadersToReport();
-                variables.excelOffset++;
-                average += finalScore.ToString();
-            }
-            else
-            {
-                //average += "=AVERAGE($B$" + (variables.totalIterations + variables.skillLevelsDone) + ":$B$" + (variables.totalIterations + 1 + variables.skillLevelsDone) + ")";
-                average += "=AVERAGE($B$" + (variables.totalIterations + variables.excelOffset) + ":$B$" + (variables.totalIterations + 1 + variables.excelOffset) + ")";
-            }
+        LogPlayerData(finalScore);
 
-            MyTools.DEV_AppendSpecificsToReport(new string[5] { variables.iteration.ToString(), finalScore.ToString(), average, (variables.activeTime * variables.speedUpDivider).ToString("n3"), variables.playerSkill.ToString() });
-            if (variables.iteration >= variables.iterationsToTest)
+        if (variables.iteration >= variables.iterationsToTest)
+        {
+            if (WhacASphereSpawner.instance.fullTest)
             {
-                if (WhacASphereSpawner.instance.fullTest)
+                if (variables.playerSkill != WhacASphereVariables.PlayerSkill.Expert)
                 {
-                    if (variables.playerSkill != WhacASphereVariables.PlayerSkill.Expert)
-                    {
-                        variables.iteration = 0;
-                        variables.playerSkill += 1;
-                        variables.skillLevelsDone += 1;
-                        WhacASphereSpawner.instance.SetVariables();
-                    }
-                    else
-                    {
-                        UnityEditor.EditorApplication.isPlaying = false;
-                    }
+                    variables.iteration = 0;
+                    variables.playerSkill += 1;
+                    variables.skillLevelsDone += 1;
+                    WhacASphereSpawner.instance.SetVariables();
                 }
                 else
                 {
                     UnityEditor.EditorApplication.isPlaying = false;
                 }
-
+            }
+            else
+            {
+                UnityEditor.EditorApplication.isPlaying = false;
             }
         }
+    }
+
+    void LogPlayerData(int finalScore)
+    {
+        string average = "";
+        if (variables.iteration == 1)
+        {
+            MyTools.DEV_AppendHeadersToReport();
+            variables.excelOffset++;
+            average += finalScore.ToString();
+        }
+        else
+        {
+            average += "=AVERAGE($B$" + (variables.totalIterations + variables.excelOffset) + ":$B$" + (variables.totalIterations + 1 + variables.excelOffset) + ")";
+        }
+        MyTools.DEV_AppendSpecificsToReport(new string[5] { variables.iteration.ToString(), finalScore.ToString(), average, (variables.activeTime * variables.speedUpDivider).ToString("n3"), variables.playerSkill.ToString() });
     }
 
     void StartCalculatingFinalScore()

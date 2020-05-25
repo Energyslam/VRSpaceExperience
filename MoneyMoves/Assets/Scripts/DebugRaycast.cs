@@ -40,6 +40,11 @@ public class DebugRaycast : MonoBehaviour
                 {
                         hit.collider.GetComponentInParent<BeatSaberCube>().HitSecondCollider();
                 }
+                if (hit.collider.gameObject.name == "StartButton")
+                {
+                    GameManager.Instance.StartGame();
+                    Destroy(hit.collider);
+                }
             }
         }
     }

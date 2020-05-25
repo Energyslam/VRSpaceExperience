@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject capsulesParent;
     public GameObject minigame;
     public GameObject cam;
+    public GameObject beginScreen;
     public int timesToOpenCapsules;
     public int totalOpenTime;
     public bool rotateText;
@@ -104,6 +105,20 @@ public class GameManager : MonoBehaviour
             StartCoroutine(SendCapsule());
         }
         ManageDifficulty();
+    }
+
+    public void StartGame()
+    {
+        StartCoroutine(c_StartGame());
+    }
+    IEnumerator c_StartGame()
+    {
+        Debug.Log("trynna begin");
+        beginScreen.GetComponent<Animator>().SetTrigger("StartGame");
+        yield return new WaitForSeconds(1.5f);
+        platform.ChangeStateToSplit();
+        yield return new WaitForSeconds(1f);
+        Destroy(beginScreen);
     }
 
     IEnumerator SendCapsule()

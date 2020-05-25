@@ -35,6 +35,11 @@ public class WaveManager : MonoBehaviour
 
     public void GetNextWave()
     {
+        if (currentWave >= waves.Count)
+        {
+            //TODO: display highscore met mooie animatie ?
+            return;
+        }
         currentWave++;
         platform.dockingSpotA = waves[currentWave].a.dockingSpot;
         platform.dockingSpotB = waves[currentWave].b.dockingSpot;

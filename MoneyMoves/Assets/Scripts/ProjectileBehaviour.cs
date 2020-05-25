@@ -41,5 +41,9 @@ public class ProjectileBehaviour : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        if (other.gameObject.name == "StartButton")
+        {
+            GameManager.Instance.StartGame();
+        }
     }
 }

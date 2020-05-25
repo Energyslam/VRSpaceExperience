@@ -14,6 +14,7 @@ public class WhacASphereVariables : ScriptableObject
     public float testerSpeed;
     public int iteration;
     public int totalIterations;
+    public int excelOffset;
     public int skillLevelsDone;
     public float speedUpDivider;
     public float reactionTime;

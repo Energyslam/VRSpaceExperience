@@ -68,12 +68,16 @@ public class WhacASphereManager : MonoBehaviour
         Debug.Log("Adding " + Mathf.Clamp((variables.skillGrowth * 1f - (variables.iteration * 2f) / variables.iterationsToTest), 0f, 1f) + " to testerspeed");
 
         int finalScore = finalLeftScore + finalRightScore;
-        float maximumPossibleScore = (totalTime / variables.timeBetweenActivation) * 10 * 2f;
+        float maximumPossibleScore = (totalTime / variables.timeBetweenActivation) * 10f * 2f; // 10 points per activation, times 2 because we use two sides
         float desiredPoints = maximumPossibleScore / 2f; //We want the player to obtain half of the obtainable points
         float absoluteDifference = Mathf.Abs(finalScore - desiredPoints);
         float tenPercent = maximumPossibleScore / 10f;
-        float multiplier = Mathf.Clamp((absoluteDifference / tenPercent), 1f, Mathf.Infinity); //prevents multiplier from scaling something that's already being scaled down
-        float scalar = absoluteDifference / desiredPoints / 10f;
+        float multiplier = absoluteDifference / tenPercent;
+        if (multiplier < 1f)
+        {
+            multiplier = 1f + multiplier;
+        }
+        float scaler = absoluteDifference / desiredPoints / 10f;
         Debug.Log(
             "\nIteration = " + variables.iteration +
             "\nMaximum Possible Score = " + maximumPossibleScore +
@@ -84,35 +88,36 @@ public class WhacASphereManager : MonoBehaviour
         {
             if (WhacASphereSpawner.instance.justScalar)
             {
-                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scalar), 0.0000001f, variables.totalTime);
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scaler), 0.0000001f, variables.totalTime);
             }
             else if (WhacASphereSpawner.instance.scalarNmultiplier)
             {
-                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scalar * (multiplier)), 0.0000001f, variables.totalTime);
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scaler * (multiplier)), 0.0000001f, variables.totalTime);
             }
             else if (WhacASphereSpawner.instance.scalarMultiplierNOffset)
             {
-                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scalar * (multiplier + 1f)), 0.0000001f, variables.totalTime);
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scaler * (multiplier + 1f)), 0.0000001f, variables.totalTime);
+            }
+            else if (WhacASphereSpawner.instance.noScaling)
+            {
+
             }
         }
         else if (finalScore < desiredPoints)
         {
             if (WhacASphereSpawner.instance.justScalar)
             {
-                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scalar), 0.0000001f, variables.totalTime);
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scaler), 0.0000001f, variables.totalTime);
             }
             else if (WhacASphereSpawner.instance.scalarNmultiplier)
             {
-                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scalar * (multiplier)), 0.0000001f, variables.totalTime);
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scaler * (multiplier)), 0.0000001f, variables.totalTime);
             }
             else if (WhacASphereSpawner.instance.scalarMultiplierNOffset)
             {
-                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scalar * (multiplier + 1f)), 0.0000001f, variables.totalTime);
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scaler * (multiplier + 1f)), 0.0000001f, variables.totalTime);
             }
-            else if (WhacASphereSpawner.instance.noScaling)
-            {
 
-            }
         }
         float combinedMaxLifeTime = leftGame.maxSphereLifetime + rightGame.maxSphereLifetime;
         float combinedTotalLifetime = leftGame.totalSphereLifetime + rightGame.totalSphereLifetime;
@@ -124,11 +129,13 @@ public class WhacASphereManager : MonoBehaviour
             if (variables.iteration == 1)
             {
                 MyTools.DEV_AppendHeadersToReport();
+                variables.excelOffset++;
                 average += finalScore.ToString();
             }
             else
             {
-                average += "=AVERAGE($B$" + (variables.totalIterations + variables.skillLevelsDone) + ":$B$" + (variables.totalIterations + 1 + variables.skillLevelsDone) + ")";
+                //average += "=AVERAGE($B$" + (variables.totalIterations + variables.skillLevelsDone) + ":$B$" + (variables.totalIterations + 1 + variables.skillLevelsDone) + ")";
+                average += "=AVERAGE($B$" + (variables.totalIterations + variables.excelOffset) + ":$B$" + (variables.totalIterations + 1 + variables.excelOffset) + ")";
             }
 
             MyTools.DEV_AppendSpecificsToReport(new string[5] { variables.iteration.ToString(), finalScore.ToString(), average, (variables.activeTime * variables.speedUpDivider).ToString("n3"), variables.playerSkill.ToString() });
@@ -163,7 +170,10 @@ public class WhacASphereManager : MonoBehaviour
         rightGame.DeactivateAll();
         finalLeftScore = leftGame.score;
         finalRightScore = rightGame.score;
-        AdjustDifficulty();
+        if (isTesting)
+        {
+            AdjustDifficulty();
+        }
         totalScoreText.gameObject.SetActive(true);
         StartCoroutine(CalculateFinalScore());
     }

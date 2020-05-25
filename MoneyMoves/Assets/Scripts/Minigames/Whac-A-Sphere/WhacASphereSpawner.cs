@@ -6,9 +6,7 @@ public class WhacASphereSpawner : MonoBehaviour
     public GameObject WhacASphere;
     public static WhacASphereSpawner instance;
     public WhacASphereVariables variables;
-    //public bool ResetVariables;
-    //public bool SpeedUpVariables;
-
+    public bool resetIterationsOnStart;
     public bool SpeedupStart;
     public bool fullTest;
 
@@ -16,7 +14,7 @@ public class WhacASphereSpawner : MonoBehaviour
     public bool scalarNmultiplier;
     public bool scalarMultiplierNOffset;
     public bool noScaling;
-    // Start is called before the first frame update
+
     private void Awake()
     {
         if (instance == null)
@@ -28,8 +26,13 @@ public class WhacASphereSpawner : MonoBehaviour
             Destroy(this);
         }
         variables.iteration = 0;
-        variables.totalIterations = 0;
+        //variables.totalIterations = 0;
         variables.skillLevelsDone = 0;
+        if (resetIterationsOnStart)
+        {
+            variables.totalIterations = 0;
+            variables.excelOffset = 0;
+        }
         if (fullTest)
         {
             variables.playerSkill = WhacASphereVariables.PlayerSkill.Awful;
@@ -42,28 +45,6 @@ public class WhacASphereSpawner : MonoBehaviour
         GameObject go = Instantiate(WhacASphere);
 
     }
-    void Update()
-    {
-        //if (ResetVariables)
-        //{
-        //    variables.SetHumanDefaults();
-        //    ResetVariables = false;
-        //}
-        //if (SpeedUpVariables)
-        //{
-        //    variables.SpeedUp();
-        //    SpeedUpVariables = false;
-        //}
-    }
-    private void SetDefaultVariablesOnStart()
-    {
-    float activeTime = 4f;
-    float negativeActiveTime = 60f;
-    float timeBetweenActivation = 1f;
-    float totalTime = 15f;
-    int spawnNegativeAfterSpawn = 0; ;
-}
-
     public void SetVariables()
     {
         if (SpeedupStart)

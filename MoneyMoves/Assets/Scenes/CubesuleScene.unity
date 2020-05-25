@@ -1831,6 +1831,11 @@ PrefabInstance:
       propertyPath: isOpen
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 741717871596180561, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: m_PlaybackSpeed
+      value: 1.43
+      objectReference: {fileID: 0}
     - target: {fileID: 2709503910731663622, guid: 50d4f22a384834449b40a00cd1db1038,
         type: 3}
       propertyPath: m_Name

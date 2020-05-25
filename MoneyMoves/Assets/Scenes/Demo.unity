@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 554a223b657c82f4c9733ce80e121326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  variables: {fileID: 11400000, guid: 153805805d12bac4b9930ddbddab7b69, type: 2}
   deliverPoint: {fileID: 277420713}
   destinationsParent: {fileID: 242363449}
   capsulesParent: {fileID: 17013494}
@@ -3566,8 +3567,8 @@ MonoBehaviour:
   woop: {x: 0, y: 0, z: 0}
   currentIndex: 0
   resetSpeed: 20
-  immediateStart: 0
-  overrideSpeed: 1
+  immediateStart: 1
+  overrideSpeed: 0
   State: 0
 --- !u!4 &1639068276 stripped
 Transform:
@@ -3731,7 +3732,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -3889,7 +3890,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0

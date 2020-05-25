@@ -48,7 +48,7 @@ public class WhacASphere : MonoBehaviour
 
     public void ActivateRandomSphere()
     {
-        if (side == Side.Left)
+        if (side == Side.Left && tester.isTesting)
         {
             tester.ImitateAHuman();
         }

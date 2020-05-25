@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
-
+    [SerializeField] WhacASphereVariables variables;
     [SerializeField] GameObject deliverPoint;
     [SerializeField] GameObject destinationsParent;
     [SerializeField] GameObject capsulesParent;
@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
         {
             capsules.Add(t.GetComponentInChildren<PlaytestCapsule>());
         }
+        variables.SetHumanDefaults();
         //laserpointer.PointerClick += PointerClick;
     }
 

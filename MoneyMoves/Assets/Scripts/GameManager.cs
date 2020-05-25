@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
-
+    [SerializeField] WhacASphereVariables variables;
     [SerializeField] GameObject deliverPoint;
     [SerializeField] GameObject destinationsParent;
     [SerializeField] GameObject capsulesParent;
@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
         {
             capsules.Add(t.GetComponentInChildren<PlaytestCapsule>());
         }
+        variables.SetHumanDefaults();
         //laserpointer.PointerClick += PointerClick;
     }
 
@@ -186,6 +187,7 @@ public class GameManager : MonoBehaviour
         }
         catch(Exception e)
         {
+            Debug.LogError(e.Message);
             Debug.Log("Hands not found");
         }
 
@@ -204,6 +206,7 @@ public class GameManager : MonoBehaviour
             hapticAction.Execute(0, duration, frequency, amplitude, SteamVR_Input_Sources.RightHand);
         }catch(Exception e)
         {
+            Debug.LogError(e.Message);
             Debug.Log("Hands not found");
         }
     }

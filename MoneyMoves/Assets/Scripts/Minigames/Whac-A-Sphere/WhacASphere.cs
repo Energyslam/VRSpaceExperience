@@ -4,16 +4,21 @@ using UnityEngine;
 using TMPro;
 
 public class WhacASphere : MonoBehaviour
-{ 
+{
+    public WhacASphereManager manager;
     WhacASphereVariables variables;
+    WhacASphereTester tester;
+
     public List<GameObject> spheres = new List<GameObject>();
     public List<GameObject> activatedSpheres = new List<GameObject>();
+
     public TextMeshProUGUI scoreText;
+
     public int score = 0;
-    public float timeBetweenActivation = 1f;
-    public WhacASphereManager manager;
-    public int spawnNegativeAfterSpawns = 0;
     int spawnerCount = 0;
+
+    public float maxSphereLifetime;
+    public float totalSphereLifetime = 0f;
 
     public enum Side
     {
@@ -25,8 +30,8 @@ public class WhacASphere : MonoBehaviour
     void Start()
     {
         variables = manager.variables;
-        this.timeBetweenActivation = variables.timeBetweenActivation;
-        this.spawnNegativeAfterSpawns = variables.spawnNegativeAfterSpawns;
+        maxSphereLifetime = variables.totalTime / variables.timeBetweenActivation * variables.activeTime * 2f;
+        tester = manager.tester;
         foreach(GameObject go in spheres)
         {
             go.GetComponent<Sphere>().Initialize(this, variables);
@@ -37,19 +42,23 @@ public class WhacASphere : MonoBehaviour
     IEnumerator GameLoop()
     {
         ActivateRandomSphere();
-        yield return new WaitForSeconds(timeBetweenActivation);
+        yield return new WaitForSeconds(variables.timeBetweenActivation);
         StartCoroutine(GameLoop());
     }
 
     public void ActivateRandomSphere()
     {
+        if (side == Side.Left && tester.isTesting)
+        {
+            tester.ImitateAHuman();
+        }
         GetRandomUnactivatedSphere().GetComponent<Sphere>().ActivateASphere(Sphere.Mood.Positive);
-        if (spawnNegativeAfterSpawns == 0)
+        if (variables.spawnNegativeAfterSpawns == 0)
         {
             return;
         }
         spawnerCount++;
-        if (spawnerCount % spawnNegativeAfterSpawns == 0)
+        if (spawnerCount % variables.spawnNegativeAfterSpawns == 0)
         {
             GetRandomUnactivatedSphere().GetComponent<Sphere>().ActivateASphere(Sphere.Mood.Negative);
         }

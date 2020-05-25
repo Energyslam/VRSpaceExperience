@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Sphere : MonoBehaviour
 {
+    WhacASphereVariables variables;
     Renderer rend;
     public Material unlit, positiveLit, negativeLit;
     WhacASphere whacASphere;
     bool isActive;
-    float activeTime, negativeActiveTime;
+    float lifetime = 0f;
 
     public enum Mood
     {
@@ -21,30 +22,37 @@ public class Sphere : MonoBehaviour
     {
         rend = this.GetComponent<Renderer>();
     }
+    IEnumerator KeepTrackOfLifetime()
+    {
+        yield return new WaitForSeconds(0.1f);
+            lifetime += 0.1f;
+        StartCoroutine(KeepTrackOfLifetime());
+    }
 
     public void Initialize(WhacASphere whacASphere, WhacASphereVariables variables)
     {
         this.whacASphere = whacASphere;
-        this.activeTime = variables.activeTime;
-        this.negativeActiveTime = variables.negativeActiveTime;
+        this.variables = variables;
     }
 
     public void ActivateASphere(Mood mood)
     {
         this.mood = mood;
+        lifetime = 0f;
         StartCoroutine(c_ActivateSphere());
+        StartCoroutine(KeepTrackOfLifetime());
     }
     IEnumerator c_ActivateSphere()
     {
         if (this.mood == Mood.Positive)
         {
             ActivatePositiveSphere(); 
-            yield return new WaitForSeconds(activeTime);
+            yield return new WaitForSeconds(variables.activeTime);
         }
         else if (this.mood == Mood.Negative)
         {
             ActivateNegativeSphere();
-            yield return new WaitForSeconds(negativeActiveTime);
+            yield return new WaitForSeconds(variables.negativeActiveTime);
         }
         DeactivateSphere();
     }
@@ -66,6 +74,10 @@ public class Sphere : MonoBehaviour
     public void DeactivateSphere()
     {
         StopAllCoroutines();
+        if (mood == Mood.Positive)
+        {
+            whacASphere.totalSphereLifetime += lifetime;
+        }
         whacASphere.activatedSpheres.Remove(this.gameObject);
         rend.material = unlit;
         isActive = false;

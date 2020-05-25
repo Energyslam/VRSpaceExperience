@@ -2,47 +2,50 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System;
 
 public class WhacASphereManager : MonoBehaviour
 {
     public WhacASphereVariables variables;
-    [SerializeField] WhacASphere leftGame;
-    [SerializeField] WhacASphere rightGame;
-
+    public WhacASphere leftGame;
+    public WhacASphere rightGame;
+    public WhacASphereTester tester;
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI totalScoreText;
     [SerializeField] Image errorCross;
 
-    [SerializeField] int totalTime;
-    int remainingTime;
+    [SerializeField] float totalTime;
+    float remainingTime;
     int finalLeftScore;
     int finalRightScore;
     int totalScore = 0;
-    int totalPossibleScore;
+
     [Header("After minigame")]
     Platform platform;
     public GameObject explosion;
     public Vector3 destrucTorque;
     public bool isTesting;
 
-    void Start()
+    private void Awake()
     {
         platform = GameManager.Instance.platform;
         this.totalTime = variables.totalTime;
         remainingTime = totalTime;
+    }
+    void Start()
+    {
         timeText.text = remainingTime < 10 ? "00:0" + remainingTime : "00:" + remainingTime;
-        if (!isTesting){
+        StartCoroutine(CountdownTime());
+        if (!isTesting)
+        {
             this.transform.position = CalculateGamePosition();
             transform.LookAt(Camera.main.transform);
             transform.eulerAngles -= new Vector3(transform.localEulerAngles.x, 90, 0);
         }
-        StartCoroutine(CountdownTime());
-        totalPossibleScore = (int)Mathf.Round(totalTime / variables.timeBetweenActivation);
     }
 
+
     IEnumerator CountdownTime()
-    {     
+    {
         yield return new WaitForSeconds(1f);
 
         remainingTime--;
@@ -57,26 +60,148 @@ public class WhacASphereManager : MonoBehaviour
         }
     }
 
+    void AdjustDifficulty()
+    {
+        int finalScore = finalLeftScore + finalRightScore;
+        float maximumPossibleScore = (totalTime / variables.timeBetweenActivation) * 10f * 2f; // 10 points per activation, times 2 because we use two sides
+        float desiredPoints = maximumPossibleScore / 2f; //We want the player to obtain half of the obtainable points
+        float absoluteDifference = Mathf.Abs(finalScore - desiredPoints);
+        float tenPercent = maximumPossibleScore / 10f;
+        float multiplier = Mathf.Clamp(absoluteDifference / tenPercent, 1f, Mathf.Infinity);
+        float scaler = absoluteDifference / desiredPoints / 10f;
+
+        if (finalScore > desiredPoints)
+        {
+            if (!isTesting)
+            {
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scaler * (multiplier + 1f)), 0.0000001f, variables.totalTime);
+                return;
+            }
+            if (WhacASphereSpawner.instance.justScalar)
+            {
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scaler), 0.0000001f, variables.totalTime);
+            }
+            else if (WhacASphereSpawner.instance.scalarNmultiplier)
+            {
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scaler * (multiplier)), 0.0000001f, variables.totalTime);
+            }
+            else if (WhacASphereSpawner.instance.scalarMultiplierNOffset)
+            {
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f - scaler * (multiplier + 1f)), 0.0000001f, variables.totalTime);
+            }
+            else if (WhacASphereSpawner.instance.noScaling)
+            {
+            }
+        }
+        else if (finalScore < desiredPoints)
+        {
+            if (!isTesting)
+            {
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scaler * (multiplier + 1f)), 0.0000001f, variables.totalTime);
+                return;
+            }
+            if (WhacASphereSpawner.instance.justScalar)
+            {
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scaler), 0.0000001f, variables.totalTime);
+            }
+            else if (WhacASphereSpawner.instance.scalarNmultiplier)
+            {
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scaler * (multiplier)), 0.0000001f, variables.totalTime);
+            }
+            else if (WhacASphereSpawner.instance.scalarMultiplierNOffset)
+            {
+                variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scaler * (multiplier + 1f)), 0.0000001f, variables.totalTime);
+            }
+
+        }
+
+        if (isTesting)
+        {
+            Debug.Log(
+    "\nIteration = " + variables.iteration +
+    "\nMaximum Possible Score = " + maximumPossibleScore +
+    "\nDesired points  = " + desiredPoints +
+    "\nFinal Score = " + finalScore
+    );
+            variables.testerSpeed += variables.skillGrowth * Mathf.Clamp(1f - (variables.iteration * 2f) / variables.iterationsToTest, 0f, 1f); //simulates player skill growing over time
+            variables.iteration++;
+            variables.totalIterations++;
+            LogPlayerData(finalScore);
+            if (variables.iteration >= variables.iterationsToTest)
+            {
+                if (WhacASphereSpawner.instance.fullTest)
+                {
+                    if (variables.playerSkill != WhacASphereVariables.PlayerSkill.Expert)
+                    {
+                        variables.iteration = 0;
+                        variables.playerSkill += 1;
+                        variables.skillLevelsDone += 1;
+                        WhacASphereSpawner.instance.SetVariables();
+                    }
+                    else
+                    {
+                        UnityEditor.EditorApplication.isPlaying = false;
+                    }
+                }
+                else
+                {
+                    UnityEditor.EditorApplication.isPlaying = false;
+                }
+            }
+        }
+    }
+
+    void LogPlayerData(int finalScore)
+    {
+        string average = "";
+        if (variables.iteration == 1)
+        {
+            MyTools.DEV_AppendHeadersToReport();
+            variables.excelOffset++;
+            average += finalScore.ToString();
+        }
+        else
+        {
+            average += "=AVERAGE($B$" + (variables.totalIterations + variables.excelOffset) + ":$B$" + (variables.totalIterations + 1 + variables.excelOffset) + ")";
+        }
+        MyTools.DEV_AppendSpecificsToReport(new string[5] { variables.iteration.ToString(), finalScore.ToString(), average, (variables.activeTime * variables.speedUpDivider).ToString("n3"), variables.playerSkill.ToString() });
+    }
+
     void StartCalculatingFinalScore()
     {
         leftGame.DeactivateAll();
         rightGame.DeactivateAll();
         finalLeftScore = leftGame.score;
         finalRightScore = rightGame.score;
+        AdjustDifficulty();
         totalScoreText.gameObject.SetActive(true);
         StartCoroutine(CalculateFinalScore());
     }
     IEnumerator CalculateFinalScore()
     {
-        yield return new WaitForSeconds(0.1f);
+        if (isTesting)
+        {
+            yield return new WaitForSeconds(0.001f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
 
         DisplayErrorCross();
 
         totalScoreText.text = "Total score = " + totalScore;
 
-        if (leftGame.score - 10 < 0 && rightGame.score -10 < 0)
+        if (leftGame.score - 10 < 0 && rightGame.score - 10 < 0)
         {
-            yield return new WaitForSeconds(2f);
+            if (isTesting)
+            {
+                yield return new WaitForSeconds(0.001f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(2f);
+            }
             MoveAfterEnding();
         }
         else
@@ -97,7 +222,7 @@ public class WhacASphereManager : MonoBehaviour
             if (!errorCross.gameObject.activeInHierarchy)
             {
                 errorCross.gameObject.SetActive(true);
-                errorCross.transform.localPosition = new Vector3(3f, errorCross.transform.localPosition.y, errorCross.transform.localPosition.z);
+                errorCross.transform.localPosition = new Vector3(-3f, errorCross.transform.localPosition.y, errorCross.transform.localPosition.z);
             }
         }
         if (rightGame.score - 10 >= 0)
@@ -111,7 +236,7 @@ public class WhacASphereManager : MonoBehaviour
             if (!errorCross.gameObject.activeInHierarchy)
             {
                 errorCross.gameObject.SetActive(true);
-                errorCross.transform.localPosition = new Vector3(-3f, errorCross.transform.localPosition.y, errorCross.transform.localPosition.z);
+                errorCross.transform.localPosition = new Vector3(3f, errorCross.transform.localPosition.y, errorCross.transform.localPosition.z);
             }
         }
     }
@@ -163,7 +288,7 @@ public class WhacASphereManager : MonoBehaviour
 
     Vector3 CalculateGamePosition()
     {
-        //TODO: 
+        //TODO: playtest position, track can be rendered behind gamescreen at cost of performance. Should not have any noticeable impact during minigame-gameplay
         Vector3 trackLeftQuarter = Tracks.SplitToA[Tracks.SplitToA.Count / 4];
         Vector3 trackRightQuarter = Tracks.SplitToB[Tracks.SplitToB.Count / 4];
         Vector3 vectorFromLeftToRightQuarter = trackRightQuarter - trackLeftQuarter;

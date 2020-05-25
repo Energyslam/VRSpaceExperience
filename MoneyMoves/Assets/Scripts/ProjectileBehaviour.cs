@@ -35,5 +35,11 @@ public class ProjectileBehaviour : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        if (other.CompareTag("MinigameSphere"))
+        {
+            other.GetComponent<Sphere>().Hit();
+            Destroy(this.gameObject);
+        }
+
     }
 }

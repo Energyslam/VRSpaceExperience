@@ -8,7 +8,7 @@ public class DebugRaycast : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -44,6 +44,18 @@ public class DebugRaycast : MonoBehaviour
                 {
                     GameManager.Instance.StartGame();
                     Destroy(hit.collider);
+                }
+
+                if (hit.collider.CompareTag("Letter"))
+                {
+                    hit.collider.GetComponentInParent<NameInputHandler>().AddLetter(hit.collider.name);
+                    Debug.Log(hit.collider.name);
+                }
+
+                if (hit.collider.name == "FinishButton")
+                {
+                    hit.collider.GetComponentInParent<HighscoreContainer>().TurnOffObjects();
+                    hit.collider.GetComponentInParent<HighscoreContainer>().CreateHighscores();
                 }
             }
         }

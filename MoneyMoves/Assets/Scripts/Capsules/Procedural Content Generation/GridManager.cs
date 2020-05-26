@@ -49,7 +49,10 @@ public class GridManager : MonoBehaviour
     private List<GridCell> cells = new List<GridCell>();
 
     [SerializeField]
-    private GameObject objectsHolderPCG, insideContext, connectableBigObject, cornerConnectableBigObject, standaloneBigObject, mediumMultiObject, mediumSingleObject, topOfMediumMulti;
+    private GameObject objectsHolderPCG, insideContext;
+        
+    [SerializeField]
+    private List<GameObject> connectableBigObject, cornerConnectableBigObject, standaloneBigObject, mediumMultiObject, mediumSingleObject, topOfMediumMulti;
 
     [SerializeField]
     private Transform topWall, rightWall, botWall, leftWall;
@@ -264,16 +267,29 @@ public class GridManager : MonoBehaviour
                         if (grid[i, j].horizontal == 0 && grid[i, j].vertical == 0 || grid[i, j].horizontal == 0 && grid[i, j].vertical == rows - 1)
                             continue;
 
-                        SpawnObjectOnGridCell(i, j, standaloneBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 1, Vector3.zero, 0);
+                        int rand = Random.Range(0, standaloneBigObject.Count);
+
+                        if (standaloneBigObject.Count > 0)
+                            SpawnObjectOnGridCell(i, j, standaloneBigObject[rand], new Vector3(gridSizeX, 1, gridSizeZ), 1, Vector3.zero, 0);
                     }
 
                     else
                     {
                         if (grid[i, j].horizontal == 0 && grid[i, j].vertical == 0 || grid[i, j].horizontal == 0 && grid[i, j].vertical == rows - 1)
-                            SpawnObjectOnGridCell(i, j, cornerConnectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 0, Vector3.zero, 0);
+                        {
+                            int rand = Random.Range(0, cornerConnectableBigObject.Count);
+
+                            if (cornerConnectableBigObject.Count > 0)
+                                SpawnObjectOnGridCell(i, j, cornerConnectableBigObject[rand], new Vector3(gridSizeX, 1, gridSizeZ), 0, Vector3.zero, 0);
+                        }
 
                         else
-                            SpawnObjectOnGridCell(i, j, connectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 0, Vector3.zero, 0);
+                        {
+                            int rand = Random.Range(0, connectableBigObject.Count);
+
+                            if (connectableBigObject.Count > 0)
+                                SpawnObjectOnGridCell(i, j, connectableBigObject[rand], new Vector3(gridSizeX, 1, gridSizeZ), 0, Vector3.zero, 0);
+                        }
                     }
                 }
             }
@@ -326,12 +342,27 @@ public class GridManager : MonoBehaviour
 
                 if (grid[x, y].isAlive && !grid[x, y].hasSpawnedAnObject)
                 {
-                    SpawnObjectOnGridCell(x, y, mediumSingleObject, new Vector3(1.0f, 1.0f, 1.0f), 0, Vector3.zero, 0.05f);
+                    int rand = Random.Range(0, mediumSingleObject.Count);
+
+                    if (mediumSingleObject.Count > 0)
+                        SpawnObjectOnGridCell(x, y, mediumSingleObject[rand], new Vector3(1.0f, 1.0f, 1.0f), 0, Vector3.zero, 0.05f);
                 }
             }            
         }
 
-        PlaceRandomly(mediumMultiObject, 0, topOfMediumMulti, Random.Range(2, 4));
+        int randBig = Random.Range(0, mediumMultiObject.Count);
+        int randTopBig = Random.Range(0, topOfMediumMulti.Count);
+        if (mediumMultiObject.Count > 0)
+        {
+            if (topOfMediumMulti.Count > 0)
+            {
+                PlaceRandomly(mediumMultiObject[randBig], 0, topOfMediumMulti[randTopBig], Random.Range(2, 4));
+            }
+            else
+            {
+                PlaceRandomly(mediumMultiObject[randBig], 0, null, Random.Range(2, 4));
+            }
+        }
     }
 
     private void PlaceRandomly(GameObject toSpawn, int tries, GameObject onTop, float yOffset)

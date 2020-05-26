@@ -1004,17 +1004,17 @@ MonoBehaviour:
   aliveThresholdMedium: 0.55
   objectsHolderPCG: {fileID: 3508249374045290407}
   insideContext: {fileID: 8460527514010130168}
-  connectableBigObject: {fileID: 8199688303501405120, guid: 4621da1bbc3bbb346aa65a215781f03f,
-    type: 3}
-  cornerConnectableBigObject: {fileID: 570723254751743050, guid: a6a97946deb7a784b892f5ea2b08502b,
-    type: 3}
-  standaloneBigObject: {fileID: 0}
-  mediumMultiObject: {fileID: 6400114527889002806, guid: dc978173e883eb64c8ccd7dc79c6620f,
-    type: 3}
-  mediumSingleObject: {fileID: 6113310644154000927, guid: 30c4972e5623e2b42b40b969558ae181,
-    type: 3}
-  topOfMediumMulti: {fileID: 3964701215533469251, guid: e9270e0fb23aa1e48b1d3f06b4fac1f7,
-    type: 3}
+  connectableBigObject:
+  - {fileID: 8199688303501405120, guid: 4621da1bbc3bbb346aa65a215781f03f, type: 3}
+  cornerConnectableBigObject:
+  - {fileID: 570723254751743050, guid: a6a97946deb7a784b892f5ea2b08502b, type: 3}
+  standaloneBigObject: []
+  mediumMultiObject:
+  - {fileID: 6400114527889002806, guid: dc978173e883eb64c8ccd7dc79c6620f, type: 3}
+  mediumSingleObject:
+  - {fileID: 6113310644154000927, guid: 30c4972e5623e2b42b40b969558ae181, type: 3}
+  topOfMediumMulti:
+  - {fileID: 3964701215533469251, guid: e9270e0fb23aa1e48b1d3f06b4fac1f7, type: 3}
   topWall: {fileID: 2053855656207295976}
   rightWall: {fileID: 5426480762635319103}
   botWall: {fileID: 6783199479262349318}

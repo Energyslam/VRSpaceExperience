@@ -476,7 +476,8 @@ MonoBehaviour:
   cornerConnectableBigObject: []
   standaloneBigObject: []
   mediumMultiObject: []
-  mediumSingleObject: []
+  mediumSingleObject:
+  - {fileID: 316996821195584135, guid: b6c8105e40f9ee348809d6119a2d04d0, type: 3}
   topOfMediumMulti:
   - {fileID: 3857831388914342603, guid: 420ddc840cdc88747b58a3eea748c99e, type: 3}
   topWall: {fileID: 2053855656207295976}

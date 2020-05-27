@@ -180,6 +180,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves: []
   platform: {fileID: 1621345693}
+  highscoreContainer: {fileID: 935407076136474355, guid: 1bed3e7a27b07574b9f46436c22a3067,
+    type: 3}
 --- !u!1 &25811108
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +724,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wave 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6788705984294610443, guid: fa18534496e98ea43a715b795f0ed401,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7309831115966651581, guid: fa18534496e98ea43a715b795f0ed401,
         type: 3}
@@ -1373,6 +1380,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wave 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6788705984294610443, guid: fa18534496e98ea43a715b795f0ed401,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7309831115966651581, guid: fa18534496e98ea43a715b795f0ed401,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1532,6 +1544,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wave 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6788705984294610443, guid: fa18534496e98ea43a715b795f0ed401,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7309831115966651581, guid: fa18534496e98ea43a715b795f0ed401,
         type: 3}
@@ -2873,6 +2890,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wave 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6788705984294610443, guid: fa18534496e98ea43a715b795f0ed401,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7309831115966651581, guid: fa18534496e98ea43a715b795f0ed401,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4010,6 +4032,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wave 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6788705984294610443, guid: fa18534496e98ea43a715b795f0ed401,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7309831115966651581, guid: fa18534496e98ea43a715b795f0ed401,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4236,12 +4263,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f68cfcbb1302e894e91cb8af4bffc035, type: 3}
---- !u!1 &1299012059 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 95633029528300591, guid: 829107153fe8f254b8699a7bddef5fd6,
-    type: 3}
-  m_PrefabInstance: {fileID: 384143116}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1308560142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3655274185753058860, guid: f68cfcbb1302e894e91cb8af4bffc035,
@@ -4626,6 +4647,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wave 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6788705984294610443, guid: fa18534496e98ea43a715b795f0ed401,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7309831115966651581, guid: fa18534496e98ea43a715b795f0ed401,
         type: 3}
@@ -6013,14 +6039,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 215573640, guid: 1bed3e7a27b07574b9f46436c22a3067, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1299012059}
     - target: {fileID: 935407076136474355, guid: 1bed3e7a27b07574b9f46436c22a3067,
         type: 3}
       propertyPath: m_Name
       value: HighscoreContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 935407076136474355, guid: 1bed3e7a27b07574b9f46436c22a3067,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 935407076136474356, guid: 1bed3e7a27b07574b9f46436c22a3067,
         type: 3}

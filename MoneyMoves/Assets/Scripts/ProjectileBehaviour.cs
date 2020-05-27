@@ -45,5 +45,16 @@ public class ProjectileBehaviour : MonoBehaviour
         {
             GameManager.Instance.StartGame();
         }
+
+        if (other.CompareTag("Letter"))
+        {
+            other.GetComponentInParent<NameInputHandler>().AddLetter(other.name);
+        }
+
+        if (other.name == "FinishButton")
+        {
+            other.GetComponentInParent<HighscoreContainer>().TurnOffObjects();
+            other.GetComponentInParent<HighscoreContainer>().CreateHighscores();
+        }
     }
 }

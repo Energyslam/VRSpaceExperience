@@ -34,6 +34,10 @@ public class HighscoreContainer : MonoBehaviour
 
     string Recapitalize(string str)
     {
+        if (str.Length <= 0)
+        {
+            return null;
+        }
         string tmp = "";
         tmp = str.Substring(0, 1).ToUpper();
         if (str.Length > 1)
@@ -51,7 +55,13 @@ public class HighscoreContainer : MonoBehaviour
         highscores.highscores.Add(recentHighscoreEntry);
         List<HighscoreEntry> tmp = highscores.highscores.OrderByDescending(o => o.score).ToList();
         highscores.highscores = tmp;
-
+        WriteNewHighscoresEntry(highscores);
+        int totalEntries = 0;
+        foreach(HighscoreEntry entry in highscores.highscores)
+        {
+            totalEntries++;
+        }
+        Debug.Log("total entries: " + totalEntries);
         Vector3 direction = bottomOfContainer.position - topOfContainer.position;
         for (int i = 0; i < visibleEntries; i++)
         {
@@ -64,7 +74,7 @@ public class HighscoreContainer : MonoBehaviour
                 if (i == visibleEntries - 1)
                 {
 
-                    if (GameManager.Instance.score < highscores.highscores[i].score)
+                    if (GameManager.Instance.score <= highscores.highscores[i].score)
                     {
                         entryData.SetName(recentName);
                         entryData.SetScore(GameManager.Instance.score);
@@ -89,6 +99,13 @@ public class HighscoreContainer : MonoBehaviour
         }
     }
 
+    void WriteNewHighscoresEntry(Highscores highscores)
+    {
+        string highscoresJSON = JsonUtility.ToJson(highscores);
+        PlayerPrefs.SetString("highscores", highscoresJSON);
+        PlayerPrefs.Save();
+    }
+
 
     public void TurnOffObjects()
     {
@@ -101,6 +118,7 @@ public class HighscoreContainer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
+            TurnOffObjects();
             CreateHighscores();
         }
     }

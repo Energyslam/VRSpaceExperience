@@ -10,6 +10,8 @@ public class GridManager : MonoBehaviour
     public GridCell[,] grid;
 
     private float verticalCellSize, horizontalCellSize;
+
+    [Header("Grid information")]
     [Range(1.0f, 250)]
     public int columns = 10, rows = 10;
     [Range(1.0f, 250)]
@@ -28,6 +30,7 @@ public class GridManager : MonoBehaviour
     [SerializeField]
     private Vector2 perlinNoiseOffset;
 
+    [Header("Deploy objects")]
     [SerializeField]
     private GameObject gridCellPrefab;
 
@@ -38,26 +41,34 @@ public class GridManager : MonoBehaviour
 
     public enum SpawningPhase { BIG, MEDIUM, FINISHED };
 
+    [Header("Spawning information")]
     [SerializeField]
     private SpawningPhase currentSpawningPhase = SpawningPhase.BIG;
 
     private float aliveThreshold = 0.5f;
 
+    [Header("Spawning thresholds")]
     [SerializeField]
     private float aliveThresholdBig = 0.5f, aliveThresholdMedium = 0.55f;
 
     private List<GridCell> cells = new List<GridCell>();
 
+    [Header("Spawning objects")]
     [SerializeField]
     private GameObject objectsHolderPCG, insideContext;
         
     [SerializeField]
     private List<GameObject> connectableBigObject, cornerConnectableBigObject, standaloneBigObject, mediumMultiObject, mediumSingleObject, topOfMediumMulti;
 
+    [Header("Walls")]
     [SerializeField]
     private Transform topWall, rightWall, botWall, leftWall;
 
     private Quaternion originalRotation;
+
+    [Header("Spawning offsets")]
+    [SerializeField]
+    private int bigMediumAreaOffset = 3;
     #endregion
 
     private void OnEnable()
@@ -368,9 +379,10 @@ public class GridManager : MonoBehaviour
     private void PlaceRandomly(GameObject toSpawn, int tries, GameObject onTop, float yOffset)
     {
         // Spawn multi object, such as a table
-        int newX = Random.Range(3, columns - 3);
-        int newY = Random.Range(3, rows - 3);
+        int newX = Random.Range(bigMediumAreaOffset, columns - bigMediumAreaOffset);
+        int newY = Random.Range(bigMediumAreaOffset, rows - bigMediumAreaOffset);
 
+        // Random rotation
         float random = Random.Range(0, 3);
         random = Mathf.RoundToInt(random);
         Vector3 rotation = Vector3.zero;

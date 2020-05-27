@@ -2094,27 +2094,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1459975224, guid: b59db6b50727ec94c8dddfb320ad49b4, type: 3}
-      propertyPath: mediumMultiObject.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1459975224, guid: b59db6b50727ec94c8dddfb320ad49b4, type: 3}
-      propertyPath: topOfMediumMulti.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1459975224, guid: b59db6b50727ec94c8dddfb320ad49b4, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1459975224, guid: b59db6b50727ec94c8dddfb320ad49b4, type: 3}
-      propertyPath: mediumMultiObject.Array.data[0]
-      value: 
-      objectReference: {fileID: 1402144440494132217, guid: 417a70571e3040542af8d44bc328822b,
-        type: 3}
-    - target: {fileID: 1459975224, guid: b59db6b50727ec94c8dddfb320ad49b4, type: 3}
-      propertyPath: topOfMediumMulti.Array.data[0]
-      value: 
-      objectReference: {fileID: 3857831388914342603, guid: 420ddc840cdc88747b58a3eea748c99e,
-        type: 3}
     - target: {fileID: 2709503910731663622, guid: b59db6b50727ec94c8dddfb320ad49b4,
         type: 3}
       propertyPath: m_Name

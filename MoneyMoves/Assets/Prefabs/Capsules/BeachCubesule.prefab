@@ -547,23 +547,37 @@ MonoBehaviour:
   cellParent: {fileID: 6135928673509657149}
   currentSpawningPhase: 0
   aliveThresholdBig: 0.5
-  aliveThresholdMedium: 0.55
+  aliveThresholdMedium: 0.7
   objectsHolderPCG: {fileID: 6767730032681543636}
   insideContext: {fileID: 8460527514010130168}
   connectableBigObject:
   - {fileID: 8571632339161962858, guid: 7e2d1bbd293881e42a822100fe7990a1, type: 3}
   cornerConnectableBigObject: []
   standaloneBigObject: []
-  mediumMultiObject: []
+  mediumMultiObject:
+  - {fileID: 1402144440494132217, guid: 417a70571e3040542af8d44bc328822b, type: 3}
   mediumSingleObject:
+  - {fileID: 316996821195584135, guid: b6c8105e40f9ee348809d6119a2d04d0, type: 3}
+  - {fileID: 1322764622479451692, guid: 80185dc03c1857741beb3550021a8dca, type: 3}
   - {fileID: 316996821195584135, guid: b6c8105e40f9ee348809d6119a2d04d0, type: 3}
   topOfMediumMulti:
   - {fileID: 3857831388914342603, guid: 420ddc840cdc88747b58a3eea748c99e, type: 3}
+  miscellaneousObjects:
+  - {fileID: 471240640371834300, guid: a9ebe44cee7808c40b8d8cd48aac3ac8, type: 3}
+  - {fileID: 5517368479895078463, guid: c48a343f294c52f4ca20ac418d4fa646, type: 3}
+  - {fileID: 2814493694035094192, guid: 9a1b19a54cff11840bc2403811604294, type: 3}
+  - {fileID: 8165457205243670216, guid: 070294d4198d4694cbf4c51638ec0118, type: 3}
+  - {fileID: 3368865788959433080, guid: 28b7bc40d5f316446a0ff9dfc16d4aa8, type: 3}
+  - {fileID: 9205775559102152310, guid: 49e72b218e885154faccbf2b48da3f75, type: 3}
+  - {fileID: 5943477576773529601, guid: f92b5949e1c96964b9e119948abb4b7c, type: 3}
+  - {fileID: 9132545448993426738, guid: 60a021c8e9aa9e841b632a5068d91867, type: 3}
+  - {fileID: 9223174063209249873, guid: 3542dc0bb289e88448117325a3523b56, type: 3}
   topWall: {fileID: 2053855656207295976}
   rightWall: {fileID: 5426480762635319103}
   botWall: {fileID: 6783199479262349318}
   leftWall: {fileID: 1324961554061057529}
   bigMediumAreaOffset: 4
+  miscellaneousObjectPlacing: 0
 --- !u!1 &2933759526125491316
 GameObject:
   m_ObjectHideFlags: 0
@@ -2966,7 +2980,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: c206463cf21826a41bd68c5157e5d7f7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: c206463cf21826a41bd68c5157e5d7f7,
         type: 3}
@@ -3227,7 +3241,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: c206463cf21826a41bd68c5157e5d7f7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: c206463cf21826a41bd68c5157e5d7f7,
         type: 3}
@@ -3493,7 +3507,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: c206463cf21826a41bd68c5157e5d7f7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: c206463cf21826a41bd68c5157e5d7f7,
         type: 3}
@@ -3644,7 +3658,7 @@ PrefabInstance:
     - target: {fileID: -7916801961174349027, guid: 52bca083c53c4fb4ba272dad9fcb41d4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.494
+      value: -0.495
       objectReference: {fileID: 0}
     - target: {fileID: -7916801961174349027, guid: 52bca083c53c4fb4ba272dad9fcb41d4,
         type: 3}
@@ -4292,7 +4306,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: c206463cf21826a41bd68c5157e5d7f7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: c206463cf21826a41bd68c5157e5d7f7,
         type: 3}

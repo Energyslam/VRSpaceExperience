@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using UnityEngine.Rendering;
 
 public class StaticCapsule : MonoBehaviour
 {
@@ -54,6 +55,9 @@ public class StaticCapsule : MonoBehaviour
         Collectable
     }
     [SerializeField] GiftType giftType = GiftType.Destroyable;
+
+    [SerializeField]
+    private VolumeProfile postProcessingProfile;
 
     void Start()
     {
@@ -183,6 +187,7 @@ public class StaticCapsule : MonoBehaviour
         }
         cheatPrevention.SetActive(false);
         timeText.gameObject.SetActive(true);
+        GameManager.Instance.GetComponent<Volume>().profile = postProcessingProfile;
     }
 
     IEnumerator CloseCapsule()
@@ -198,6 +203,7 @@ public class StaticCapsule : MonoBehaviour
             StartCoroutine(StopMusic());
             GetComponent<GridManager>().Clean();
             WaveManager.Instance.GetNextWave();
+            GameManager.Instance.ResetPPX();
             yield break;
         }
 
@@ -339,7 +345,6 @@ public class StaticCapsule : MonoBehaviour
 
         distancesDoors.Clear();
         distancesPillars.Clear();
-        //doorsToOpenAtOnce = 1;
     }
 
     #region Music

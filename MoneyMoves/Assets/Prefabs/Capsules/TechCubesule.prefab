@@ -976,6 +976,8 @@ MonoBehaviour:
   textSpeed: 50
   rotateText: 1
   giftType: 0
+  postProcessingProfile: {fileID: 11400000, guid: 61144d6fd34d28740b81e4390922d68c,
+    type: 2}
 --- !u!114 &1459975224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1015,10 +1017,13 @@ MonoBehaviour:
   - {fileID: 6113310644154000927, guid: 30c4972e5623e2b42b40b969558ae181, type: 3}
   topOfMediumMulti:
   - {fileID: 3964701215533469251, guid: e9270e0fb23aa1e48b1d3f06b4fac1f7, type: 3}
+  miscellaneousObjects: []
   topWall: {fileID: 2053855656207295976}
   rightWall: {fileID: 5426480762635319103}
   botWall: {fileID: 6783199479262349318}
   leftWall: {fileID: 1324961554061057529}
+  bigMediumAreaOffset: 3
+  miscellaneousObjectPlacing: 0
 --- !u!1 &2803315235697919541
 GameObject:
   m_ObjectHideFlags: 0

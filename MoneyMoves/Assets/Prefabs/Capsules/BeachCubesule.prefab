@@ -522,6 +522,8 @@ MonoBehaviour:
   textSpeed: 50
   rotateText: 1
   giftType: 0
+  postProcessingProfile: {fileID: 11400000, guid: c873627f92437cc4f87d795dfa611b05,
+    type: 2}
 --- !u!114 &1459975224
 MonoBehaviour:
   m_ObjectHideFlags: 0

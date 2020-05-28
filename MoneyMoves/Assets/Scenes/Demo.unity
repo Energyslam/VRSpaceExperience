@@ -248,6 +248,7 @@ MonoBehaviour:
   difficultyRaiser: 3
   currentDifficulty: 1
   difficultyMax: 0
+  defaultProfile: {fileID: 11400000, guid: 169e507651be3f84780f419250b86ffd, type: 2}
   hapticAction:
     actionPath: 
     needsReinit: 0
@@ -296,7 +297,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 61144d6fd34d28740b81e4390922d68c, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 169e507651be3f84780f419250b86ffd, type: 2}
 --- !u!1001 &68769117
 PrefabInstance:
   m_ObjectHideFlags: 0

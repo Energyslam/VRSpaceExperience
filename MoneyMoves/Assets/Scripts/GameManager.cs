@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Valve.VR;
 using Valve.VR.Extras;
 using Valve.VR.InteractionSystem;
@@ -43,6 +44,10 @@ public class GameManager : MonoBehaviour
     public int difficultyRaiser = 2;
     public int currentDifficulty = 1;
     public int difficultyMax = 3;
+
+    [SerializeField]
+    private VolumeProfile defaultProfile;
+
     void Awake()
     {
         if (_instance == null)
@@ -64,6 +69,11 @@ public class GameManager : MonoBehaviour
         }
         variables.SetHumanDefaults();
         //laserpointer.PointerClick += PointerClick;
+    }
+
+    public void ResetPPX()
+    {
+        GetComponent<Volume>().profile = defaultProfile;
     }
 
     public void ActivateLaserPointer()

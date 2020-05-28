@@ -6,6 +6,6 @@ public class WallObject : MonoBehaviour
 {
     public virtual void NotifyWallChange(bool isOpen)
     {
-        GetComponent<MeshRenderer>().enabled = isOpen;
+
     }
 }

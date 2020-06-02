@@ -8,13 +8,14 @@ public static class CSVManager
     private static string reportDirectoryName = "Report";
     private static string reportFileName = "report.csv";
     private static string reportSeparator = ";";
-    private static string[] reportHeaders = new string[5]
+    private static string[] reportHeaders = new string[6]
     {
         "Iteration",
         "Final Score",
         "Average Score",
         "Active Sphere Time",
-        "Skill level"
+        "Skill level",
+        "Formula"
     };
     private static string timeStampHeader = "time stamp";
 

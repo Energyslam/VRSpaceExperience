@@ -2,6 +2,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
 
 public class WhacASphereManager : MonoBehaviour
 {
@@ -112,44 +113,71 @@ public class WhacASphereManager : MonoBehaviour
             {
                 variables.activeTime = Mathf.Clamp(variables.activeTime * (1f + scaler * (multiplier + 1f)), 0.0000001f, variables.totalTime);
             }
+            else if (WhacASphereSpawner.instance.noScaling)
+            {
+            }
 
         }
 
         if (isTesting)
         {
-            Debug.Log(
-    "\nIteration = " + variables.iteration +
-    "\nMaximum Possible Score = " + maximumPossibleScore +
-    "\nDesired points  = " + desiredPoints +
-    "\nFinal Score = " + finalScore
-    );
             variables.testerSpeed += variables.skillGrowth * Mathf.Clamp(1f - (variables.iteration * 2f) / variables.iterationsToTest, 0f, 1f); //simulates player skill growing over time
             variables.iteration++;
             variables.totalIterations++;
             LogPlayerData(finalScore);
+
+
+            /////////////////////////////////////////////////////////////////////////////////
             if (variables.iteration >= variables.iterationsToTest)
             {
+                //TODO make it work here for 1000000 test
                 if (WhacASphereSpawner.instance.fullTest)
                 {
-                    if (variables.playerSkill != WhacASphereVariables.PlayerSkill.Expert)
-                    {
-                        variables.iteration = 0;
-                        variables.playerSkill += 1;
-                        variables.skillLevelsDone += 1;
-                        WhacASphereSpawner.instance.SetVariables();
-                    }
-                    else
-                    {
-                        UnityEditor.EditorApplication.isPlaying = false;
-                    }
+                    variables.iteration = 0;
+                    IncreaseFrank();
+                    WhacASphereSpawner.instance.SetVariables();
                 }
                 else
                 {
                     UnityEditor.EditorApplication.isPlaying = false;
                 }
             }
+            ///////////////////////////////////////////////////////////////////////////////
         }
     }
+
+    void IncreaseFrank()
+    {
+        variables.FrankCurrent++;
+        if (variables.FrankCurrent >= variables.FrankToTest)
+        {
+            variables.FrankCurrent = 0;
+            IncreaseSkillLevel();
+        }
+    }
+
+    void IncreaseSkillLevel()
+    {
+        if (variables.playerSkill != WhacASphereVariables.PlayerSkill.Expert)
+        {
+            variables.playerSkill += 1;
+        }
+        else
+        {
+            variables.playerSkill = 0;
+            IncreaseFormula();
+        }
+        //else
+        //{
+        //    UnityEditor.EditorApplication.isPlaying = false;
+        //}
+    }
+
+    void IncreaseFormula()
+    {
+        WhacASphereSpawner.instance.SwitchMultiplier();
+    }
+
 
     void LogPlayerData(int finalScore)
     {
@@ -164,7 +192,29 @@ public class WhacASphereManager : MonoBehaviour
         {
             average += "=AVERAGE($B$" + (variables.totalIterations + variables.excelOffset) + ":$B$" + (variables.totalIterations + 1 + variables.excelOffset) + ")";
         }
-        MyTools.DEV_AppendSpecificsToReport(new string[5] { variables.iteration.ToString(), finalScore.ToString(), average, (variables.activeTime * variables.speedUpDivider).ToString("n3"), variables.playerSkill.ToString() });
+        MyTools.DEV_AppendSpecificsToReport(new string[6] { variables.iteration.ToString(), finalScore.ToString(), average, (variables.activeTime * variables.speedUpDivider).ToString("n3"), variables.playerSkill.ToString(), GetCurrentFormula() });
+    }
+
+    string GetCurrentFormula()
+    {
+        string tmp = null;
+        if (WhacASphereSpawner.instance.noScaling)
+        {
+            tmp = "NoScaling";
+        }
+        else if (WhacASphereSpawner.instance.justScalar)
+        {
+            tmp = "JustScalar";
+        }
+        else if (WhacASphereSpawner.instance.scalarNmultiplier)
+        {
+            tmp = "ScalarPlusMultiplier";
+        }
+        else if (WhacASphereSpawner.instance.scalarMultiplierNOffset)
+        {
+            tmp = "ScalarMultiplierAndOffset";
+        }
+        return tmp;
     }
 
     void StartCalculatingFinalScore()

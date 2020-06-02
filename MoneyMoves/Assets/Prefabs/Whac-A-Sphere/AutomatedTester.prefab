@@ -109,5 +109,5 @@ MonoBehaviour:
   manager: {fileID: 0}
   target: {fileID: 0}
   speed: 3
-  isTesting: 0
+  isTesting: 1
   canShoot: 0

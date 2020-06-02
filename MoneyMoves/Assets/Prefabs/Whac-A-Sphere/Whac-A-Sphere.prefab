@@ -3487,7 +3487,7 @@ MonoBehaviour:
   totalTime: 15
   explosion: {fileID: 100010, guid: 645413a00f7bd0242bbd6d0e5eb6f439, type: 3}
   destrucTorque: {x: 0, y: 50, z: 50}
-  isTesting: 0
+  isTesting: 1
 --- !u!1 &9038212394244764126
 GameObject:
   m_ObjectHideFlags: 0

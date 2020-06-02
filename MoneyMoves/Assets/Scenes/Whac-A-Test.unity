@@ -1488,12 +1488,12 @@ MonoBehaviour:
   WhacASphere: {fileID: 9038212394177635291, guid: 77ac0e6ab7ccee9479680afb1ed7e4e8,
     type: 3}
   variables: {fileID: 11400000, guid: 153805805d12bac4b9930ddbddab7b69, type: 2}
-  resetIterationsOnStart: 0
-  SpeedupStart: 0
-  fullTest: 0
+  resetIterationsOnStart: 1
+  speedTest: 1
+  fullTest: 1
   justScalar: 0
   scalarNmultiplier: 0
-  scalarMultiplierNOffset: 1
+  scalarMultiplierNOffset: 0
   noScaling: 0
 --- !u!4 &1842894093
 Transform:
@@ -1569,6 +1569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 554a223b657c82f4c9733ce80e121326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  variables: {fileID: 0}
   deliverPoint: {fileID: 1595578123}
   destinationsParent: {fileID: 0}
   capsulesParent: {fileID: 0}

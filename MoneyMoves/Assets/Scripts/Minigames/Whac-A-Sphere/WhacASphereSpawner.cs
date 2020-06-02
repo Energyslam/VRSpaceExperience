@@ -29,15 +29,48 @@ public class WhacASphereSpawner : MonoBehaviour
             Destroy(this);
         }
         variables.iteration = 0;
-        variables.skillLevelsDone = 0;
         if (resetIterationsOnStart)
         {
             variables.totalIterations = 0;
             variables.excelOffset = -1;
+            variables.FrankCurrent = 0;
         }
         if (fullTest)
         {
             variables.playerSkill = WhacASphereVariables.PlayerSkill.Awful;
+            noScaling = true;
+            justScalar = false;
+            scalarNmultiplier = false;
+            scalarMultiplierNOffset = false;
+        }
+    }
+
+    public void SwitchMultiplier()
+    {
+        if (noScaling)
+        {
+            noScaling = false;
+            justScalar = true;
+            return;
+        }
+        else if (justScalar)
+        {
+            justScalar = false;
+            scalarNmultiplier = true;
+            return;
+        }
+        else if (scalarNmultiplier)
+        {
+            scalarNmultiplier = false;
+            scalarMultiplierNOffset = true;
+            return;
+
+        }
+        else if (scalarMultiplierNOffset)
+        {
+            scalarMultiplierNOffset = false;
+            //TODO: is done here
+            Application.Quit();
         }
     }
 

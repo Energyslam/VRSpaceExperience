@@ -20,8 +20,9 @@ public class WhacASphereVariables : ScriptableObject
     public int iteration;
     public int totalIterations;
     public int excelOffset;
-    public int skillLevelsDone;
     public int iterationsToTest = 20;
+    public int FrankToTest = 50;
+    public int FrankCurrent = 0;
 
     public enum PlayerSkill
     {

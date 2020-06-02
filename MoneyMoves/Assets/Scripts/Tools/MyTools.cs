@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.IO;
+using System.Linq;
 
 public static class MyTools
 {
@@ -17,6 +19,35 @@ public static class MyTools
             });
         EditorApplication.Beep();
         Debug.Log("<color=green>Report updated succesfully!</color>");
+    }
+
+    [MenuItem("My Tools/Create-Text-File")]
+    static void CreateTextFile()
+    {
+        string path = Application.dataPath + "/Log.txt";
+        if (!File.Exists(path))
+        {
+            File.WriteAllText(path, "Excel codes");
+        }
+        string excelAverage = "";
+
+        for (int j = 0; j < 20; j++)
+        {
+            int k = 2 + (1050 * j);
+            for (int i = 0; i < 50; i++)
+            {
+                excelAverage += "C" + (k + (21 * i)) + ";";
+            }
+            excelAverage += "\n";
+        }
+        File.AppendAllText(path, excelAverage);
+        Debug.Log("Success!");
+    }
+    [MenuItem("My Tools/Reset-Text-File")]
+    static void ResetTextFile()
+    {
+        string path = Application.dataPath + "/Log.txt";
+        File.WriteAllText(path, "Excel codes");
     }
 
     public static void DEV_AppendSpecificsToReport(string[] strings)

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5723412967242176735}
   - component: {fileID: 2408403436871739909}
   - component: {fileID: 6999969869700552337}
+  - component: {fileID: 351462930669244224}
   m_Layer: 0
   m_Name: Rope5
   m_TagString: Untagged
@@ -80,6 +81,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &351462930669244224
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124667154235317817}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0028955936, y: 0.19999999, z: 0.0028955934}
+  m_Center: {x: 0.000000009022187, y: 0.000000018626451, z: -0.0000000069849193}
 --- !u!1 &1032534298889336870
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +107,7 @@ GameObject:
   - component: {fileID: 4517795711941105517}
   - component: {fileID: 71850111048400930}
   - component: {fileID: 4279824185638241550}
+  - component: {fileID: 3404995879668933199}
   m_Layer: 0
   m_Name: Seagull1
   m_TagString: Untagged
@@ -197,6 +212,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 71850111048400930}
   animationSpeed: 0.6
+--- !u!65 &3404995879668933199
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032534298889336870}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.13893881, y: 0.040699862, z: 0.08234422}
+  m_Center: {x: 0.00048636645, y: -0.0005920874, z: 0.0007967204}
 --- !u!1 &1754162060232937986
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,6 +268,7 @@ GameObject:
   - component: {fileID: 3802323849708519980}
   - component: {fileID: 3717201841783838628}
   - component: {fileID: 5001272671996646574}
+  - component: {fileID: 1928243559408167820}
   m_Layer: 0
   m_Name: CurveMedium
   m_TagString: Untagged
@@ -343,6 +372,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!64 &1928243559408167820
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888573463973154886}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8240464564564966536, guid: 00dd4577a3824094082c5d46a751270b, type: 3}
 --- !u!54 &7533025424188263233
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -387,6 +430,19 @@ MonoBehaviour:
   swingParent: {fileID: 1754162060232937986}
   lamp: {fileID: 8044089529678477791}
   addSwing: 0
+--- !u!65 &408382724793046748
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3042401404392145341}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.030857334, y: 0.4683558, z: 0.030857334}
+  m_Center: {x: 0, y: 0.234176, z: 0}
 --- !u!1 &3050380459038353406
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,6 +456,7 @@ GameObject:
   - component: {fileID: 7374753878265178783}
   - component: {fileID: 3586103300815324081}
   - component: {fileID: 2865416586034981970}
+  - component: {fileID: 7674477075667521410}
   m_Layer: 0
   m_Name: CurveSmall
   m_TagString: Untagged
@@ -503,6 +560,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!64 &7674477075667521410
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3050380459038353406}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -446506262137216105, guid: 00dd4577a3824094082c5d46a751270b, type: 3}
 --- !u!1 &3810829679517782749
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +585,7 @@ GameObject:
   - component: {fileID: 6927244906034419197}
   - component: {fileID: 6021668261902923680}
   - component: {fileID: 3977109576408056297}
+  - component: {fileID: 3841624116372001458}
   m_Layer: 0
   m_Name: Rope3
   m_TagString: Untagged
@@ -583,6 +655,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3841624116372001458
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3810829679517782749}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0028956174, y: 0.19999999, z: 0.0028955936}
+  m_Center: {x: 0.0000000021536835, y: 0.0000000037252903, z: 0.0000000035506673}
 --- !u!1 &3857831388914342603
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,6 +712,7 @@ GameObject:
   - component: {fileID: 5475693009828132906}
   - component: {fileID: 1205153936138735765}
   - component: {fileID: 7790763461964799928}
+  - component: {fileID: 43055504425931164}
   m_Layer: 0
   m_Name: Rope4
   m_TagString: Untagged
@@ -696,6 +782,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &43055504425931164
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4275638134400111891}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.002997732, y: 0.19999994, z: 0.002997744}
+  m_Center: {x: -0.0000000017462298, y: -0.000000007450581, z: 0}
 --- !u!1 &5094829121127138986
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,6 +806,7 @@ GameObject:
   - component: {fileID: 6847600566219462691}
   - component: {fileID: 4345863464702824140}
   - component: {fileID: 1575241021245170907}
+  - component: {fileID: 8810846620546546546}
   m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
@@ -776,6 +876,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &8810846620546546546
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5094829121127138986}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0028955936, y: 0.19999999, z: 0.0028955934}
+  m_Center: {x: -2.910383e-10, y: -0.0000000037252903, z: -0.0000000037252903}
 --- !u!1 &5172583343398811012
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,6 +902,7 @@ GameObject:
   - component: {fileID: 2021193225721214691}
   - component: {fileID: 2814900383651698488}
   - component: {fileID: 329805632830134282}
+  - component: {fileID: 3879769870541714981}
   m_Layer: 0
   m_Name: Sun
   m_TagString: Untagged
@@ -891,6 +1005,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 71850111048400930}
   animationSpeed: 0.6
+--- !u!65 &3879769870541714981
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5172583343398811012}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.07143898, y: 0.118851654, z: 0.10783723}
+  m_Center: {x: 0.0000000018626451, y: 0.000000022351742, z: 0}
 --- !u!1 &5392552108289727218
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,6 +1031,7 @@ GameObject:
   - component: {fileID: 624089201558141680}
   - component: {fileID: 7932808496463660301}
   - component: {fileID: 1151258206159761472}
+  - component: {fileID: 6251892748465059141}
   m_Layer: 0
   m_Name: Cloud
   m_TagString: Untagged
@@ -1005,6 +1133,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 71850111048400930}
   animationSpeed: 0.6
+--- !u!135 &6251892748465059141
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5392552108289727218}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.041676402
+  m_Center: {x: -0.0000000018626451, y: 0.0000000037252903, z: -0.000000011175871}
 --- !u!1 &6111491582658892850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,6 +1157,7 @@ GameObject:
   - component: {fileID: 6861763289804802018}
   - component: {fileID: 3073576180771424904}
   - component: {fileID: 1817001261729856197}
+  - component: {fileID: 2458673776885563027}
   m_Layer: 0
   m_Name: Rope1
   m_TagString: Untagged
@@ -1085,6 +1227,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2458673776885563027
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6111491582658892850}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.002997732, y: 0.19999999, z: 0.002997744}
+  m_Center: {x: 0.000000006868504, y: 0.000000014901161, z: 0}
 --- !u!1 &6477453801798462983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,6 +1253,7 @@ GameObject:
   - component: {fileID: 4228716776981381265}
   - component: {fileID: 6142375423162026524}
   - component: {fileID: 4483346886133787040}
+  - component: {fileID: 3344533681931043711}
   m_Layer: 0
   m_Name: Cloud1
   m_TagString: Untagged
@@ -1199,6 +1355,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 71850111048400930}
   animationSpeed: 0.6
+--- !u!135 &3344533681931043711
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6477453801798462983}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.044607818
+  m_Center: {x: 0.0000000055879354, y: 0.000000024214387, z: 0.00008532405}
 --- !u!1 &6644573979275534996
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,6 +1381,7 @@ GameObject:
   - component: {fileID: 7568607557110006540}
   - component: {fileID: 5906856534796567889}
   - component: {fileID: 1603460468353904413}
+  - component: {fileID: 4514125474136802492}
   m_Layer: 0
   m_Name: Cloud2
   m_TagString: Untagged
@@ -1313,6 +1483,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 71850111048400930}
   animationSpeed: 0.6
+--- !u!135 &4514125474136802492
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6644573979275534996}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.038596038
+  m_Center: {x: 0.000000007450581, y: -0.000000009313226, z: -0.000000018626451}
 --- !u!1 &7514066648772523995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1324,6 +1507,7 @@ GameObject:
   - component: {fileID: 7578765086389291191}
   - component: {fileID: 7734958093161255377}
   - component: {fileID: 6511292690930938075}
+  - component: {fileID: 8732675513753169251}
   m_Layer: 0
   m_Name: Rope2
   m_TagString: Untagged
@@ -1393,6 +1577,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &8732675513753169251
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7514066648772523995}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.002997732, y: 0.19999999, z: 0.002997732}
+  m_Center: {x: -0.0000000040745363, y: -0.000000022351742, z: 0.000000010593794}
 --- !u!1 &7866532658042928534
 GameObject:
   m_ObjectHideFlags: 0
@@ -1406,6 +1603,7 @@ GameObject:
   - component: {fileID: 2475027489543204258}
   - component: {fileID: 6179680439537320423}
   - component: {fileID: 4697513162989151734}
+  - component: {fileID: 5315842599480014616}
   m_Layer: 0
   m_Name: CurveBig
   m_TagString: Untagged
@@ -1509,6 +1707,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 6179680439537320423}
   animationSpeed: 0.1
+--- !u!64 &5315842599480014616
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7866532658042928534}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8059908429127423689, guid: 00dd4577a3824094082c5d46a751270b, type: 3}
 --- !u!1 &8044089529678477791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1575,6 +1787,7 @@ GameObject:
   - component: {fileID: 8643170364909516595}
   - component: {fileID: 3318001143164539412}
   - component: {fileID: 3747292497609334172}
+  - component: {fileID: 8290926343372305043}
   m_Layer: 0
   m_Name: Seagull
   m_TagString: Untagged
@@ -1679,6 +1892,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 71850111048400930}
   animationSpeed: 0.6
+--- !u!65 &8290926343372305043
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8306285727624914183}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.114533216, y: 0.040699862, z: 0.114533186}
+  m_Center: {x: -0.0006698258, y: -0.00059211534, z: -0.0006698314}
 --- !u!1001 &6420209899631728820
 PrefabInstance:
   m_ObjectHideFlags: 0

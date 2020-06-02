@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5306386229405158978}
   - component: {fileID: 3818793644894663796}
   - component: {fileID: 7476993516833130637}
+  - component: {fileID: 2678236339747085708}
   m_Layer: 0
   m_Name: Vuurtoren
   m_TagString: Untagged
@@ -82,3 +83,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2678236339747085708
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9223174063209249873}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.16482, y: 0.49768615, z: 0.16482008}
+  m_Center: {x: -0.00000001117587, y: 0.24899194, z: 0}

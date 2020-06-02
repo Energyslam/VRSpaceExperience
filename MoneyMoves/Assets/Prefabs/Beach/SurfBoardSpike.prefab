@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4464423294869049679}
   - component: {fileID: 7982727362916511158}
   - component: {fileID: 6817289653366377522}
+  - component: {fileID: 8674508857150730659}
   m_Layer: 0
   m_Name: SurfBoardSpike
   m_TagString: Untagged
@@ -98,3 +99,16 @@ MonoBehaviour:
   - {fileID: 2800000, guid: d69fe0f07a5e54649bbe0d64fb025df4, type: 3}
   - {fileID: 2800000, guid: 0c6af0e7219945d48a6b1de71ef5f289, type: 3}
   maxRotation: 6
+--- !u!65 &8674508857150730659
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8571632339161962858}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1008061, y: 0.34243232, z: 0.020930475}
+  m_Center: {x: 0, y: 0.1532675, z: 0}

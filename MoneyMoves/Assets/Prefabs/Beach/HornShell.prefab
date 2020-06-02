@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5303593018515213413}
   - component: {fileID: 3801358589836686931}
   - component: {fileID: 7493332359900793514}
+  - component: {fileID: 7043865347992928745}
   m_Layer: 0
   m_Name: HornShell
   m_TagString: Untagged
@@ -79,3 +80,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &7043865347992928745
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9205775559102152310}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.24807137, y: 0.219915, z: 0.49630636}
+  m_Center: {x: -0.0003139116, y: 0.1099657, z: -0.000000007450581}

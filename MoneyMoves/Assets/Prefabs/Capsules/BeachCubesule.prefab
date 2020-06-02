@@ -554,13 +554,13 @@ MonoBehaviour:
   insideContext: {fileID: 8460527514010130168}
   connectableBigObject:
   - {fileID: 8571632339161962858, guid: 7e2d1bbd293881e42a822100fe7990a1, type: 3}
-  cornerConnectableBigObject: []
+  cornerConnectableBigObject:
+  - {fileID: 1322764622479451692, guid: 80185dc03c1857741beb3550021a8dca, type: 3}
+  - {fileID: 8571632339161962858, guid: 7e2d1bbd293881e42a822100fe7990a1, type: 3}
   standaloneBigObject: []
   mediumMultiObject:
   - {fileID: 1402144440494132217, guid: 417a70571e3040542af8d44bc328822b, type: 3}
   mediumSingleObject:
-  - {fileID: 316996821195584135, guid: b6c8105e40f9ee348809d6119a2d04d0, type: 3}
-  - {fileID: 1322764622479451692, guid: 80185dc03c1857741beb3550021a8dca, type: 3}
   - {fileID: 316996821195584135, guid: b6c8105e40f9ee348809d6119a2d04d0, type: 3}
   topOfMediumMulti:
   - {fileID: 3857831388914342603, guid: 420ddc840cdc88747b58a3eea748c99e, type: 3}

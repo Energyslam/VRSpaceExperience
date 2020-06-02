@@ -548,7 +548,7 @@ MonoBehaviour:
     type: 3}
   cellParent: {fileID: 6135928673509657149}
   currentSpawningPhase: 0
-  aliveThresholdBig: 0.5
+  aliveThresholdBig: 0.4
   aliveThresholdMedium: 0.7
   objectsHolderPCG: {fileID: 6767730032681543636}
   insideContext: {fileID: 8460527514010130168}

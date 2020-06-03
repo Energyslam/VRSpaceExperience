@@ -177,6 +177,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves: []
   platform: {fileID: 1621345693}
+  highscoreContainer: {fileID: 935407076136474355, guid: 1bed3e7a27b07574b9f46436c22a3067,
+    type: 3}
 --- !u!1 &63019354
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,17 +219,18 @@ MonoBehaviour:
     type: 3}
   cam: {fileID: 1689244929}
   player: {fileID: 423450303}
-  platform: {fileID: 1621345693}
-  laserpointer: {fileID: 404619939}
-  scoreAndLifeText: {fileID: 0}
-  defaultProfile: {fileID: 11400000, guid: 169e507651be3f84780f419250b86ffd, type: 2}
-  rotateText: 0
-  hasShownInstruction: 0
+  beginScreen: {fileID: 0}
   timesToOpenCapsules: 2
   totalOpenTime: 15
   lives: 3
   score: 0
+  rotateText: 0
+  hasShownInstruction: 0
   respawnWaitTime: 2
+  platform: {fileID: 1621345693}
+  laserpointer: {fileID: 404619939}
+  scoreAndLifeText: {fileID: 0}
+  defaultProfile: {fileID: 11400000, guid: 169e507651be3f84780f419250b86ffd, type: 2}
   hapticAction:
     actionPath: 
     needsReinit: 0
@@ -1432,6 +1435,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wave 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4297381571469199282, guid: 2af549d88514aec41828864b53466111,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4509249200045793164, guid: 2af549d88514aec41828864b53466111,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -1867,6 +1875,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wave 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4297381571469199282, guid: 2af549d88514aec41828864b53466111,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4509249200045793164, guid: 2af549d88514aec41828864b53466111,
         type: 3}
@@ -2787,6 +2800,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wave 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4297381571469199282, guid: 2af549d88514aec41828864b53466111,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4509249200045793164, guid: 2af549d88514aec41828864b53466111,
         type: 3}

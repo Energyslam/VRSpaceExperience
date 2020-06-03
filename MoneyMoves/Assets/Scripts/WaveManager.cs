@@ -29,15 +29,15 @@ public class WaveManager : MonoBehaviour
             if (t.GetComponent<Wave>() != null)
             waves.Add(t.GetComponent<Wave>());
         }
-        platform.dockingSpotA = waves[0].a.dockingSpot;
-        platform.dockingSpotB = waves[0].b.dockingSpot;
+        platform.dockingSpotA = waves[0].leftCapsule.dockingSpot;
+        platform.dockingSpotB = waves[0].rightCapsule.dockingSpot;
     }
 
     public void GetNextWave()
     {
         currentWave++;
-        platform.dockingSpotA = waves[currentWave].a.dockingSpot;
-        platform.dockingSpotB = waves[currentWave].b.dockingSpot;
+        platform.dockingSpotA = waves[currentWave].leftCapsule.dockingSpot;
+        platform.dockingSpotB = waves[currentWave].rightCapsule.dockingSpot;
         MovePlatformToNextSplit();
     }
 

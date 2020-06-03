@@ -115,7 +115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbable: 0
-  speed: 5
+  speed: 3
+  wobbleMagnitude: 0.3
   fireworkGO: {fileID: 4424466681498197796}
   grabber: {fileID: 2842588472507958378}
   deliverPoint: {fileID: 0}
@@ -159,7 +160,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3782659753171893661}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 076759bac5b9cdf45bc62320eb63e769, type: 2}
   m_CullingMode: 0

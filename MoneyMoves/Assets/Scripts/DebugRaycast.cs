@@ -31,15 +31,6 @@ public class DebugRaycast : MonoBehaviour
                 {
                     hit.collider.GetComponent<Sphere>().Hit();
                 }
-
-                if (hit.collider.name == "FirstCollider")
-                {
-                    hit.collider.GetComponentInParent<BeatSaberCube>().HitFirstCollider();
-                }
-                else if (hit.collider.gameObject.name == "SecondCollider")
-                {
-                        hit.collider.GetComponentInParent<BeatSaberCube>().HitSecondCollider();
-                }
             }
         }
     }

@@ -20,8 +20,6 @@ public class PlaytestCapsule : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI timeText;
 
-    [SerializeField] LightFlicker light;
-
     [SerializeField] int totalTime = 15;
     int currentTime;
     int locationAmount;
@@ -188,14 +186,14 @@ public class PlaytestCapsule : MonoBehaviour
             {
                 GameObject giftGO = Instantiate(destroyableGift, go.transform.position, Quaternion.identity);
                 giftGO.transform.parent = this.transform;
-                giftGO.GetComponentInChildren<GiftBehaviour>().attachedCapsule = this;
+                //giftGO.GetComponentInChildren<GiftBehaviour>().attachedCapsule = this;
                 spawnedGifts.Add(giftGO);
             }
             else if (giftType == GiftType.Collectable)
             {
                 GameObject giftGO = Instantiate(grabbableGift, go.transform.position, Quaternion.identity);
                 giftGO.transform.parent = this.transform;
-                giftGO.GetComponentInChildren<GiftBehaviour>().attachedCapsule = this;
+                //giftGO.GetComponentInChildren<GiftBehaviour>().attachedCapsule = this;
                 spawnedGifts.Add(giftGO);
             }
         }
@@ -237,20 +235,11 @@ public class PlaytestCapsule : MonoBehaviour
             timeText.transform.position = new Vector3(timeText.transform.position.x, textStartingY, timeText.transform.position.z);
         }
         timeText.gameObject.SetActive(true);
-        if(!flickerLights)
-        {
-            light.TurnOnLight();
-        }
         yield return new WaitForSeconds(capsuleAnim.GetCurrentAnimatorStateInfo(0).length);
-        if (flickerLights)
-        {
-            light.FlickerLights();
-        }
     }
 
     IEnumerator CloseCapsule()
     {
-        light.TurnOffLight();
         timeText.gameObject.SetActive(false);
         capsuleAnim.SetFloat("Speed", -0.5f);
         capsuleAnim.SetTrigger("OpeningTrigger");

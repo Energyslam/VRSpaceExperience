@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class GiftBehaviour : ICollisionBehaviour
 {
-    [SerializeField] bool grabbable;
+    public bool isGrabbable;
     [SerializeField] float speed = 1f;
+    [SerializeField] float wobbleMagnitude = 1f;
     [SerializeField] GameObject fireworkGO, grabber, deliverPoint;
-    public PlaytestCapsule attachedCapsule;
     public StaticCapsule attachedStatic;
     bool canMove;
+    Vector3 startPos;
 
     [SerializeField]
     private AudioSource explodeSFX;
@@ -17,7 +18,8 @@ public class GiftBehaviour : ICollisionBehaviour
     void Start()
     {
         deliverPoint = GameManager.Instance.DeliverPoint;
-        this.GetComponent<Animator>().SetFloat("BobSpeed", Random.Range(0.5f, 1f));
+        startPos = this.transform.position;
+        //this.GetComponent<Animator>().SetFloat("BobSpeed", Random.Range(0.5f, 1f));
     }
 
     // Update is called once per frame
@@ -34,8 +36,13 @@ public class GiftBehaviour : ICollisionBehaviour
             this.GetComponent<Rigidbody>().useGravity = true;
             this.GetComponent<Rigidbody>().isKinematic = false;
         }
+        Wobble();
     }
 
+    public void Wobble()
+    {
+        this.transform.position = startPos + transform.up * Mathf.Sin(Time.time * speed) * wobbleMagnitude;
+    }
 
     public void StartMoving()
     {
@@ -43,34 +50,23 @@ public class GiftBehaviour : ICollisionBehaviour
     }
     public override void SolveCollision()
     {
-        if (!grabbable)
+        if (!isGrabbable)
         {
             fireworkGO.SetActive(true);
             fireworkGO.transform.parent = null;
-            Destroy(fireworkGO, 3f);
-            if(attachedCapsule != null)
-            {
-                attachedCapsule.UpdateGifts(transform.parent.gameObject);
-            }
-            else if (attachedStatic != null)
-            {
-                attachedStatic.UpdateGifts(transform.parent.gameObject);
-            }
+            Destroy(fireworkGO, 6f);
+            attachedStatic.UpdateGifts(this.gameObject);
             explodeSFX.Play();
             Destroy(this.gameObject);
             GameManager.Instance.AddScore(10);
         }
-        else if (grabbable)
+        else if (isGrabbable)
         {
             this.GetComponent<Animator>().enabled = false;
             grabber.SetActive(true);
-            if (attachedCapsule != null)
+            if (attachedStatic != null)
             {
-                attachedCapsule.UpdateGifts(transform.parent.gameObject);
-            }
-            else if (attachedStatic != null)
-            {
-                attachedStatic.UpdateGifts(transform.parent.gameObject);
+                attachedStatic.UpdateGifts(this.gameObject);
             }
             BoxCollider col = this.GetComponent<BoxCollider>();
             if (col != null)

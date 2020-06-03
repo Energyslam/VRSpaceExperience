@@ -4,22 +4,32 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    bool isMoving;
+
     [SerializeField] Vector3 target;
-    public float speed, rotationSpeed;
-    float maxSpeed;
-    public GameObject dockingSpotA, dockingSpotB, trackVisual, RotatorObjectBecauseMathIsTooHardForMe, arrow;
-    public Vector3 woop;
-    public int currentIndex = 0;
+
+    Quaternion targetRotation;
+
+    public GameObject dockingSpotA;
+    public GameObject dockingSpotB;
+    public GameObject trackVisual;
+    public GameObject RotatorObjectBecauseMathIsTooHardForMe;
     GameObject visualParent;
-    List<GameObject> arrows = new List<GameObject>();
-    int maxSpeedIndex;
+
     List<GameObject> splitToATracks = new List<GameObject>();
     List<GameObject> splitToBTracks = new List<GameObject>();
-    Quaternion targetRotation;
+
+    public int currentIndex = 0;
+    int maxSpeedIndex;
+
     public float resetSpeed;
+    public float speed; 
+    public float rotationSpeed;
+    float maxSpeed;
+
     public bool immediateStart;
     public bool overrideSpeed;
+    bool isMoving;
+
     public enum MovementState
     {
         Idle,
@@ -29,14 +39,6 @@ public class Platform : MonoBehaviour
         Rotating
     }
     public MovementState State = MovementState.Idle;
-
-    public void RemoveArrowColliders()
-    {
-        foreach(GameObject go in arrows)
-        {
-            go.GetComponent<BoxCollider>().enabled = false;
-        }
-    }
 
     private void Start()
     {
@@ -189,20 +191,9 @@ public class Platform : MonoBehaviour
         {
             Destroy(t.gameObject);
         }
-        foreach(GameObject go in arrows)
-        {
-            Destroy(go);
-        }
     }
     public void CreateVisuals()
     {
-        //GameObject splittoaparent = new GameObject();
-        //splittoaparent.name = "SplitToA";
-        //GameObject splittobparent = new GameObject();
-        //splittobparent.name = "SplitToB";
-        //GameObject origintosplitparent = new GameObject();
-        //origintosplitparent.name = "OriginToSplit";
-
         Tracks.GenerateSplitTracks(dockingSpotA.transform.position, dockingSpotB.transform.position, this.transform.position);
 
         splitToATracks.Clear();
@@ -236,7 +227,6 @@ public class Platform : MonoBehaviour
                 visualGO.transform.LookAt(Tracks.OriginToSplit[i + 1]);
             }
         }
-        //CreateTheNiceCursors();
     }
 
     public void ClearATrack()
@@ -253,23 +243,5 @@ public class Platform : MonoBehaviour
         {
             go.SetActive(false);
         }
-    }
-
-    void CreateTheNiceCursors()
-    {
-        GameObject arrowA = Instantiate(arrow, Tracks.SplitToA[Tracks.SplitToA.Count / 4], Quaternion.identity);
-        GameObject arrowB = Instantiate(arrow, Tracks.SplitToB[Tracks.SplitToB.Count / 4], Quaternion.identity);
-        arrowA.name = "arrowA";
-        arrowB.name = "arrowB";
-        arrowA.transform.LookAt(this.transform.position);
-        arrowB.transform.LookAt(this.transform.position);
-        arrowA.transform.position += new Vector3(0, 3f, 0);
-        arrowB.transform.position += new Vector3(0, 3f, 0);
-        arrowA.transform.localEulerAngles += new Vector3(0, 180f, 0);
-        arrowA.transform.localEulerAngles = new Vector3(arrowA.transform.localEulerAngles.x * -1f, arrowA.transform.localEulerAngles.y, arrowA.transform.localEulerAngles.z);
-
-        arrows.Clear();
-        arrows.Add(arrowA);
-        arrows.Add(arrowB);
     }
 }

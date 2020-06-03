@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRpta : MonoBehaviour
+public class LockPlayerRotation : MonoBehaviour
 {
     void LateUpdate()
     {

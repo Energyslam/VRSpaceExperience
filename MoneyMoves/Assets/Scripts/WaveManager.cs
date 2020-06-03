@@ -46,12 +46,4 @@ public class WaveManager : MonoBehaviour
         platform.CreateVisuals();
         platform.ChangeStateToSplit();
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            GetNextWave();
-        }
-    }
 }

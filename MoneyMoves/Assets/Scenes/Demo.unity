@@ -209,31 +209,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variables: {fileID: 11400000, guid: 153805805d12bac4b9930ddbddab7b69, type: 2}
+  destinations: []
   deliverPoint: {fileID: 277420713}
   destinationsParent: {fileID: 242363449}
   capsulesParent: {fileID: 17013494}
   minigame: {fileID: 9038212394177635291, guid: 77ac0e6ab7ccee9479680afb1ed7e4e8,
     type: 3}
   cam: {fileID: 1689244929}
-  timesToOpenCapsules: 2
-  totalOpenTime: 15
-  rotateText: 0
-  hasShownInstruction: 0
-  respawnWaitTime: 2
+  player: {fileID: 423450303}
   platform: {fileID: 1621345693}
   laserpointer: {fileID: 404619939}
-  destinations: []
-  capsules: []
-  player: {fileID: 423450303}
-  priority: 50
   scoreAndLifeText: {fileID: 0}
+  defaultProfile: {fileID: 11400000, guid: 169e507651be3f84780f419250b86ffd, type: 2}
+  rotateText: 0
+  hasShownInstruction: 0
+  timesToOpenCapsules: 2
+  totalOpenTime: 15
   lives: 3
   score: 0
-  sentCapsuleAmount: 0
-  difficultyRaiser: 3
-  currentDifficulty: 1
-  difficultyMax: 0
-  defaultProfile: {fileID: 11400000, guid: 169e507651be3f84780f419250b86ffd, type: 2}
+  respawnWaitTime: 2
   hapticAction:
     actionPath: 
     needsReinit: 0
@@ -502,17 +496,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
-  speed: 5
-  rotationSpeed: 0
   dockingSpotA: {fileID: 0}
   dockingSpotB: {fileID: 0}
   trackVisual: {fileID: 7480742132511350952, guid: 4d83d7969108e464180e5695556bb3c4,
     type: 3}
   RotatorObjectBecauseMathIsTooHardForMe: {fileID: 0}
-  arrow: {fileID: 0}
-  woop: {x: 0, y: 0, z: 0}
   currentIndex: 0
   resetSpeed: 0
+  speed: 5
+  rotationSpeed: 0
   immediateStart: 0
   overrideSpeed: 0
   State: 0
@@ -1807,7 +1799,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1113031677
 PrefabInstance:
@@ -2994,20 +2986,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
-  speed: 20
-  rotationSpeed: 15
   dockingSpotA: {fileID: 0}
   dockingSpotB: {fileID: 0}
   trackVisual: {fileID: 7480742132511350952, guid: 4d83d7969108e464180e5695556bb3c4,
     type: 3}
   RotatorObjectBecauseMathIsTooHardForMe: {fileID: 1381682645}
-  arrow: {fileID: 8305536434212282163, guid: 7fa9e1608b935324eb14432bfc076d96, type: 3}
-  woop: {x: 0, y: 0, z: 0}
   currentIndex: 0
   resetSpeed: 20
+  speed: 20
+  rotationSpeed: 15
   immediateStart: 1
   overrideSpeed: 0
-  State: 0
+  State: 3
 --- !u!4 &1639068276 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3655274185753058860, guid: f68cfcbb1302e894e91cb8af4bffc035,
@@ -3810,117 +3800,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6faf0e92a2af25438442baef3ff7a68, type: 3}
---- !u!1001 &3898458203138026004
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3898458202431885156, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458202431885156, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: rightCube
-      value: 
-      objectReference: {fileID: 4936797724736377086, guid: a2ba621ceda31fd49aa76494accda2f0,
-        type: 3}
-    - target: {fileID: 3898458202431885156, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: leftCube
-      value: 
-      objectReference: {fileID: 4936797724736377086, guid: 527aa5e34d12c5944aeb7638bc1b88d3,
-        type: 3}
-    - target: {fileID: 3898458202431885156, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: distanceBetweenPoints
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458202431885156, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: distanceDivision
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458202431885157, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458202431885157, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458202431885157, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458202431885157, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458202431885157, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458202431885157, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458202431885157, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458202431885157, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458202431885157, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458202431885157, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458202431885157, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458202431885179, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: m_Name
-      value: BeatSaberLite
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458202431885179, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458203802172746, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 19.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 3898458203802172746, guid: 16075efd7633ece47a9cad166eb310bc,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -34.7
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 16075efd7633ece47a9cad166eb310bc, type: 3}
 --- !u!1001 &9038212394923014312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4026,7 +3905,7 @@ PrefabInstance:
     - target: {fileID: 9038212394177635292, guid: 77ac0e6ab7ccee9479680afb1ed7e4e8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 9038212394177635292, guid: 77ac0e6ab7ccee9479680afb1ed7e4e8,
         type: 3}

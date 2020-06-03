@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GiftBehaviour : ICollisionBehaviour
+public class GiftBehaviour : MonoBehaviour
 {
     public bool isGrabbable;
     [SerializeField] float speed = 1f;
@@ -48,7 +48,7 @@ public class GiftBehaviour : ICollisionBehaviour
     {
         canMove = true;
     }
-    public override void SolveCollision()
+    public void SolveCollision()
     {
         if (!isGrabbable)
         {

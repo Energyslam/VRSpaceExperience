@@ -5,10 +5,8 @@ using TMPro;
 
 public class CapsuleParent : MonoBehaviour
 {
-    //public List<GameObject> capsules = new List<GameObject>();
     public GameObject dockingSpot;
     public TextMeshProUGUI timeText;
-    //public GameObject capsule;
     public StaticCapsule InstantiateCapsule(GameObject capsule)
     {
         GameObject capsuleGo = Instantiate(capsule, transform);

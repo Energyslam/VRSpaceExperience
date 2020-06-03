@@ -1,23 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-//[CustomEditor(typeof(Tracks))]
-//public class CustomTrackEditor : Editor
-//{
-//    public override void OnInspectorGUI()
-//    {
-//        base.OnInspectorGUI();
-//        Tracks tracks = (Tracks)target;
-//        //if (GUILayout.Button("Create Tracks"))
-//        //{
-//        //    tracks.CreateTracks();
-//        //}
-//        //if (GUILayout.Button("Delete track"))
-//        //{
-//        //    tracks.DeleteTrack();
-//        //}
-//    }
-//}
 [CustomEditor(typeof(Platform))]
 public class CustomPlaytestCapsule : Editor
 {

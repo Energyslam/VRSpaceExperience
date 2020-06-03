@@ -31,17 +31,12 @@ public class WaveManager : MonoBehaviour
             if (t.GetComponent<Wave>() != null)
             waves.Add(t.GetComponent<Wave>());
         }
-<<<<<<< HEAD
         platform.dockingSpotA = waves[0].leftCapsule.dockingSpot;
         platform.dockingSpotB = waves[0].rightCapsule.dockingSpot;
-=======
-        platform.dockingSpotA = waves[0].a.dockingSpot;
-        platform.dockingSpotB = waves[0].b.dockingSpot;
         foreach (Wave w in waves)
         {
             if (w.gameObject.activeInHierarchy) activeWaves++;
         }
->>>>>>> BeginAndEndScreen
     }
 
     public void GetNextWave()

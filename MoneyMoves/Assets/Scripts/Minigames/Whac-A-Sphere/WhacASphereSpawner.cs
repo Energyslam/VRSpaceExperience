@@ -18,6 +18,7 @@ public class WhacASphereSpawner : MonoBehaviour
     public bool scalarMultiplierNOffset;
     public bool noScaling;
 
+    public bool testHunnit;
     private void Awake()
     {
         if (instance == null)

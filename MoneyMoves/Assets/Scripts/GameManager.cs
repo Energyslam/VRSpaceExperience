@@ -24,6 +24,17 @@ public class GameManager : MonoBehaviour
     public GameObject cam;
     public GameObject DeliverPoint { get { return deliverPoint; } }
     public GameObject player;
+    public GameObject beginScreen;
+
+    public int timesToOpenCapsules;
+    public int totalOpenTime;
+    public int lives = 3;
+    public int score = 0;
+
+    public bool rotateText;
+    public bool hasShownInstruction;
+
+    public float respawnWaitTime;
 
     public Platform platform;
 
@@ -32,16 +43,6 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreAndLifeText;
 
     [SerializeField] private VolumeProfile defaultProfile;
-
-    public bool rotateText;
-    public bool hasShownInstruction;
-
-    public int timesToOpenCapsules;
-    public int totalOpenTime;
-    public int lives = 3;
-    public int score = 0;
-
-    public float respawnWaitTime;
 
     void Awake()
     {
@@ -77,6 +78,20 @@ public class GameManager : MonoBehaviour
     {
         laserpointer.DeactivatePointer();
         laserpointer.enabled = false;
+    }
+
+    public void StartGame()
+    {
+        StartCoroutine(c_StartGame());
+    }
+    IEnumerator c_StartGame()
+    {
+        Debug.Log("trynna begin");
+        beginScreen.GetComponent<Animator>().SetTrigger("StartGame");
+        yield return new WaitForSeconds(1.5f);
+        platform.ChangeStateToSplit();
+        yield return new WaitForSeconds(1f);
+        Destroy(beginScreen);
     }
 
     public void AddScore(int scoreValue)

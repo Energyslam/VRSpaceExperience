@@ -1494,13 +1494,35 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
+      propertyPath: cornerConnectableBigObject.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
+      propertyPath: cornerConnectableBigObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 6097579259065150999, guid: de4d80b96322a824ca4c64a9ab085af2,
+        type: 3}
+    - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
+      propertyPath: aliveThresholdMisc
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
+      propertyPath: aliveThresholdMedium
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2709503910731663622, guid: 2aa13a486aa9835428db5a495fdf3fab,
         type: 3}
       propertyPath: m_Name
       value: CatCafe
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017532750452955319, guid: 2aa13a486aa9835428db5a495fdf3fab,
+        type: 3}
+      propertyPath: m_Dering
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7572514319573298951, guid: 2aa13a486aa9835428db5a495fdf3fab,
         type: 3}
@@ -2171,10 +2193,20 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2324040142905532892, guid: b59db6b50727ec94c8dddfb320ad49b4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2709503910731663622, guid: b59db6b50727ec94c8dddfb320ad49b4,
         type: 3}
       propertyPath: m_Name
       value: BeachCubesule
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804514428527073368, guid: b59db6b50727ec94c8dddfb320ad49b4,
+        type: 3}
+      propertyPath: axis.y
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7572514319573298951, guid: b59db6b50727ec94c8dddfb320ad49b4,
         type: 3}

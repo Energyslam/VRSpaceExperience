@@ -49,7 +49,7 @@ public class GridManager : MonoBehaviour
 
     [Header("Spawning thresholds")]
     [SerializeField]
-    private float aliveThresholdBig = 0.5f, aliveThresholdMedium = 0.55f;
+    private float aliveThresholdBig = 0.5f, aliveThresholdMedium = 0.55f, aliveThresholdMisc = 0.55f;
 
     private List<GridCell> cells = new List<GridCell>();
 
@@ -494,6 +494,7 @@ public class GridManager : MonoBehaviour
                 break;
             case SpawningPhase.MEDIUM:
                 currentSpawningPhase = SpawningPhase.MISC;
+                aliveThreshold = aliveThresholdMisc;
                 break;
             case SpawningPhase.MISC:
                 transform.rotation = originalRotation;

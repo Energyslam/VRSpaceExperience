@@ -8,7 +8,7 @@ public class RandomScaleOnStartup : MonoBehaviour
     private Vector3 minScale, maxScale;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         transform.localScale = new Vector3(Random.Range(minScale.x, maxScale.x), Random.Range(minScale.y, maxScale.y), Random.Range(minScale.z, maxScale.z));
     }

@@ -10,12 +10,18 @@ public class Surfboard : MonoBehaviour
     [SerializeField]
     private float maxRotation;
 
+    [SerializeField]
+    bool randomTransform = true;
+
     // Start is called before the first frame update
     void Start()
     {
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, Random.Range(-maxRotation, maxRotation));
-        float newScale = Random.Range(0.8f, 1.2f);
-        transform.localScale *= newScale;
+        if (randomTransform)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, Random.Range(-maxRotation, maxRotation));
+            float newScale = Random.Range(0.8f, 1.2f);
+            transform.localScale *= newScale;
+        }
 
         int index = Random.Range(0, patterns.Count);
 

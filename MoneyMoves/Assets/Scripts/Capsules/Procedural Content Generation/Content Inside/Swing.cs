@@ -36,13 +36,13 @@ public class Swing : MonoBehaviour
             newRotation = transform.localEulerAngles;
 
             if (axis.x != 0)
-                newRotation.x = angle;
+                newRotation.x = angle * axis.x;
 
             if (axis.y != 0)
-                newRotation.y = angle;
+                newRotation.y = angle * axis.y;
 
             if (axis.z != 0)
-                newRotation.z = angle;
+                newRotation.z = angle * axis.z;
         }
         
         transform.localEulerAngles = newRotation;

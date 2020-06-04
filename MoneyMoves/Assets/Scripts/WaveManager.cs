@@ -11,7 +11,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] List<Wave> waves = new List<Wave>();
     [SerializeField] Platform platform;
     [SerializeField] GameObject highscoreContainer;
-    int currentWave = 1;
+    int currentWave = 0;
     int activeWaves = 0;
     private void Awake()
     {
@@ -41,7 +41,7 @@ public class WaveManager : MonoBehaviour
 
     public void GetNextWave()
     {
-        if (currentWave >= activeWaves)
+        if (currentWave + 1 >= activeWaves)
         {
             //TODO: display highscore met mooie animatie ?
             //Vector3 spawnSpot = GameManager.Instance.player.transform.position + (((platform.dockingSpotA != null ? platform.dockingSpotA.transform.position : platform.dockingSpotB.transform.position) - GameManager.Instance.player.transform.position) * 4f) + new Vector3(0f, 5f, 0f);

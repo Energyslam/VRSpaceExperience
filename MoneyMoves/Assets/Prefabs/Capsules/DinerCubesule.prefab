@@ -543,6 +543,7 @@ MonoBehaviour:
   currentSpawningPhase: 0
   aliveThresholdBig: 0.5
   aliveThresholdMedium: 0.55
+  aliveThresholdMisc: 0.55
   objectsHolderPCG: {fileID: 6767730032681543636}
   insideContext: {fileID: 8460527514010130168}
   connectableBigObject:
@@ -1211,7 +1212,7 @@ MonoBehaviour:
   animator: {fileID: 3904451791148835339}
   openOnStartUp: 0
   distancePivot: {fileID: 8866224421630512498}
-  isOpen: 1
+  isOpen: 0
   wallObjects: []
   animationSpeed: 5
   openDoors: {fileID: 687713408012211994}
@@ -1988,7 +1989,7 @@ MonoBehaviour:
   animator: {fileID: 3729340374872464287}
   openOnStartUp: 0
   distancePivot: {fileID: 6550348723250982101}
-  isOpen: 1
+  isOpen: 0
   wallObjects: []
   animationSpeed: 5
   openDoors: {fileID: 4800173791786548822}
@@ -2436,7 +2437,7 @@ MonoBehaviour:
   animator: {fileID: 2216870353368828454}
   openOnStartUp: 0
   distancePivot: {fileID: 2933759526125491316}
-  isOpen: 1
+  isOpen: 0
   wallObjects: []
   animationSpeed: 5
   openDoors: {fileID: 4665815997170268589}
@@ -2723,7 +2724,7 @@ MonoBehaviour:
   animator: {fileID: 6887458803622872658}
   openOnStartUp: 0
   distancePivot: {fileID: 5399271177569675550}
-  isOpen: 1
+  isOpen: 0
   wallObjects: []
   animationSpeed: 5
   openDoors: {fileID: 1913451413945911840}

@@ -49,6 +49,7 @@ MonoBehaviour:
   - {fileID: 2709503910731663622, guid: b59db6b50727ec94c8dddfb320ad49b4, type: 3}
   - {fileID: 2709503910731663622, guid: 555f918f53d309644af43f6747114316, type: 3}
   - {fileID: 2709503910731663622, guid: 50d4f22a384834449b40a00cd1db1038, type: 3}
+  - {fileID: 2709503910731663622, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
   leftCapsuleParent: {fileID: 5588558942938561889}
   rightCapsuleParent: {fileID: 1054009859393818231}
   leftCapsule: {fileID: 0}

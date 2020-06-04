@@ -416,10 +416,7 @@ MonoBehaviour:
   - {fileID: 4681760649772179645}
   - {fileID: 450001871519598011}
   - {fileID: 2661597882844179571}
-  destroyableGift: {fileID: 6552472749697675428, guid: 4f7f37883ce4392429fedd99fa03e6bb,
-    type: 3}
-  grabbableGift: {fileID: 3867877779875986633, guid: 870f817c359a168489b450f418ee2695,
-    type: 3}
+  giftPrefab: {fileID: 0}
   locationParent: {fileID: 0}
   cheatPrevention: {fileID: 463959689913426797}
   otherCapsuleInWave: {fileID: 0}
@@ -1740,7 +1737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3729340374872464287}
-  openOnStartUp: 1
+  openOnStartUp: 0
   distancePivot: {fileID: 6550348723250982101}
   isOpen: 0
   wallObjects:

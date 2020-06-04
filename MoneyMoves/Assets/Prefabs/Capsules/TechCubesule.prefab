@@ -1161,6 +1161,7 @@ MonoBehaviour:
   currentSpawningPhase: 0
   aliveThresholdBig: 0.5
   aliveThresholdMedium: 0.55
+  aliveThresholdMisc: 0.55
   objectsHolderPCG: {fileID: 3508249374045290407}
   insideContext: {fileID: 8460527514010130168}
   connectableBigObject:

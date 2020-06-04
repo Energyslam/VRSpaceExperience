@@ -489,9 +489,7 @@ MonoBehaviour:
   - {fileID: 4681760649772179645}
   - {fileID: 450001871519598011}
   - {fileID: 2661597882844179571}
-  destroyableGift: {fileID: 6552472749697675428, guid: 4f7f37883ce4392429fedd99fa03e6bb,
-    type: 3}
-  grabbableGift: {fileID: 3867877779875986633, guid: 870f817c359a168489b450f418ee2695,
+  giftPrefab: {fileID: 3782659753171893661, guid: 0498fcd84f16fde42a83eee76ebed1a9,
     type: 3}
   locationParent: {fileID: 6216850098239875066}
   cheatPrevention: {fileID: 463959689913426797}

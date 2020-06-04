@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR.InteractionSystem;
 
-[CreateAssetMenu(fileName = "WhacASphere Variables", menuName = "WhacASphere", order = 1)]
+[CreateAssetMenu(fileName = "WhacASphere Variables", menuName = "WhacASphere/Variables", order = 1)]
 public class WhacASphereVariables : ScriptableObject
 {
     public float activeTime;
@@ -38,7 +38,7 @@ public class WhacASphereVariables : ScriptableObject
         SetTesterSpeed();
         activeTime = 4;
         timeBetweenActivation = 2f;
-        totalTime = 20;
+        totalTime = 20f;
         reactionTime = 0.3f;
         shootingDelay = 0.8f;
         skillGrowth = testerSpeed / 20f;

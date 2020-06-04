@@ -11,8 +11,7 @@ public class StaticCapsule : MonoBehaviour
     List<GameObject> giftLocations = new List<GameObject>();
     List<GameObject> chosenLocations = new List<GameObject>();
     List<GameObject> spawnedGifts = new List<GameObject>();
-    [SerializeField] GameObject destroyableGift;
-    [SerializeField] GameObject grabbableGift;
+    [SerializeField] GameObject giftPrefab;
     [SerializeField] GameObject locationParent;
     [SerializeField] GameObject cheatPrevention;
     [SerializeField] GameObject otherCapsuleInWave;
@@ -27,7 +26,7 @@ public class StaticCapsule : MonoBehaviour
 
     [SerializeField] Animator capsuleAnim;
 
-    [SerializeField] TextMeshProUGUI timeText;
+    [SerializeField] public TextMeshProUGUI timeText;
 
     [SerializeField] int totalTime = 15;
     [SerializeField] int timesToOpen = 3;
@@ -52,7 +51,7 @@ public class StaticCapsule : MonoBehaviour
     enum GiftType
     {
         Destroyable,
-        Collectable
+        Grabbable
     }
     [SerializeField] GiftType giftType = GiftType.Destroyable;
 
@@ -67,7 +66,7 @@ public class StaticCapsule : MonoBehaviour
         respawnWaitTime = GameManager.Instance.respawnWaitTime;
 
         Wave wave = GetComponentInParent<Wave>();
-        otherCapsuleInWave = this.gameObject == wave.a.gameObject ? wave.b.gameObject : wave.a.gameObject;
+        otherCapsuleInWave = this.gameObject == wave.leftCapsule.gameObject ? wave.rightCapsule.gameObject : wave.leftCapsule.gameObject;
         float dockingSpotY = dockingSpot.transform.position.y;
         dockingSpot.transform.position = this.transform.position + (otherCapsuleInWave.transform.position - dockingSpot.transform.position).normalized * (dockingSpot.transform.position - this.transform.position).magnitude;
         dockingSpot.transform.position = new Vector3(dockingSpot.transform.position.x, dockingSpotY, dockingSpot.transform.position.z);
@@ -142,19 +141,14 @@ public class StaticCapsule : MonoBehaviour
         }
         foreach (GameObject go in chosenLocations)
         {
-            if (giftType == GiftType.Destroyable)
+
+            GameObject giftGO = Instantiate(giftPrefab, go.transform.position, Quaternion.identity);
+            giftGO.transform.parent = this.transform;
+            giftGO.GetComponentInChildren<GiftBehaviour>().attachedStatic = this;
+            spawnedGifts.Add(giftGO);
+            if (giftType == GiftType.Grabbable)
             {
-                GameObject giftGO = Instantiate(destroyableGift, go.transform.position, Quaternion.identity);
-                giftGO.transform.parent = this.transform;
-                giftGO.GetComponentInChildren<GiftBehaviour>().attachedStatic = this;
-                spawnedGifts.Add(giftGO);
-            }
-            else if (giftType == GiftType.Collectable)
-            {
-                GameObject giftGO = Instantiate(grabbableGift, go.transform.position, Quaternion.identity);
-                giftGO.transform.parent = this.transform;
-                giftGO.GetComponentInChildren<GiftBehaviour>().attachedStatic = this;
-                spawnedGifts.Add(giftGO);
+                giftGO.GetComponent<GiftBehaviour>().isGrabbable = true;
             }
         }
     }
@@ -167,6 +161,7 @@ public class StaticCapsule : MonoBehaviour
         {
             remainingGifts++;
         }
+        Debug.Log("Remaining gifts = " + remainingGifts);
         if (remainingGifts == 0)
         {
             timeText.color = Color.green;

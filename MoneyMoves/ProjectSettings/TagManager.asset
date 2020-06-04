@@ -12,6 +12,7 @@ TagManager:
   - Fire
   - MinigameTarget
   - MinigameSphere
+  - Letter
   layers:
   - Default
   - TransparentFX

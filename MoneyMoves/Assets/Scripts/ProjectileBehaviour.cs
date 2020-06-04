@@ -11,21 +11,9 @@ public class ProjectileBehaviour : MonoBehaviour
         Debug.Log("Colliding with " + other.gameObject.name);
         if (other.CompareTag("Collideable"))
         {
-            other.GetComponent<ICollisionBehaviour>().SolveCollision();
+            other.GetComponent<GiftBehaviour>().SolveCollision();
             GameObject explosion = Instantiate(explosionSound, this.transform.position, Quaternion.identity);
             Destroy(explosion, explosion.GetComponent<AudioSource>().clip.length);
-            Destroy(this.gameObject);
-        }
-        if (other.name == "arrowA")
-        {
-            GameManager.Instance.platform.RemoveArrowColliders();
-            GameManager.Instance.platform.ChangeStateToA();
-            Destroy(this.gameObject);
-        }
-        if (other.name == "arrowB")
-        {
-            GameManager.Instance.platform.RemoveArrowColliders();
-            GameManager.Instance.platform.ChangeStateToB();
             Destroy(this.gameObject);
         }
 
@@ -41,5 +29,20 @@ public class ProjectileBehaviour : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        if (other.gameObject.name == "StartButton")
+        {
+            GameManager.Instance.StartGame();
+        }
+
+        if (other.CompareTag("Letter"))
+        {
+            other.GetComponentInParent<NameInputHandler>().AddLetter(other.name);
+        }
+
+        if (other.name == "FinishButton")
+        {
+            other.GetComponentInParent<HighscoreContainer>().TurnOffObjects();
+            other.GetComponentInParent<HighscoreContainer>().CreateHighscores();
+        }
     }
 }

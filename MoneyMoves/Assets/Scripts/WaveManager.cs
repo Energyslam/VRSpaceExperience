@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -9,8 +10,9 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] List<Wave> waves = new List<Wave>();
     [SerializeField] Platform platform;
-    int currentWave = 0;
-
+    [SerializeField] GameObject highscoreContainer;
+    int currentWave = 1;
+    int activeWaves = 0;
     private void Awake()
     {
         if (_instance == null)
@@ -29,15 +31,33 @@ public class WaveManager : MonoBehaviour
             if (t.GetComponent<Wave>() != null)
             waves.Add(t.GetComponent<Wave>());
         }
-        platform.dockingSpotA = waves[0].a.dockingSpot;
-        platform.dockingSpotB = waves[0].b.dockingSpot;
+        platform.dockingSpotA = waves[0].leftCapsule.dockingSpot;
+        platform.dockingSpotB = waves[0].rightCapsule.dockingSpot;
+        foreach (Wave w in waves)
+        {
+            if (w.gameObject.activeInHierarchy) activeWaves++;
+        }
     }
 
     public void GetNextWave()
     {
+        if (currentWave >= activeWaves)
+        {
+            //TODO: display highscore met mooie animatie ?
+            //Vector3 spawnSpot = GameManager.Instance.player.transform.position + (((platform.dockingSpotA != null ? platform.dockingSpotA.transform.position : platform.dockingSpotB.transform.position) - GameManager.Instance.player.transform.position) * 4f) + new Vector3(0f, 5f, 0f);
+            //Vector3 highscoreTarget = GameManager.Instance.player.transform.position + (((platform.dockingSpotA != null ? platform.dockingSpotA.transform.position : platform.dockingSpotB.transform.position) - GameManager.Instance.player.transform.position) * 2f);
+            Vector3 spawnspot = GameManager.Instance.player.transform.position + GameManager.Instance.platform.gameObject.transform.forward * 40f;
+            Vector3 highscoreTarget = GameManager.Instance.player.transform.position + GameManager.Instance.platform.gameObject.transform.forward * 10f;
+            
+            GameObject highscoreObject = Instantiate(highscoreContainer, spawnspot, Quaternion.identity);
+            highscoreObject.GetComponent<LookAtPlayer>().target = highscoreTarget;
+            GameObject go = platform.dockingSpotA != null ? platform.dockingSpotA.transform.root.gameObject : platform.dockingSpotB.transform.root.gameObject;
+            go.AddComponent<Rigidbody>();
+            return;
+        }
         currentWave++;
-        platform.dockingSpotA = waves[currentWave].a.dockingSpot;
-        platform.dockingSpotB = waves[currentWave].b.dockingSpot;
+        platform.dockingSpotA = waves[currentWave].leftCapsule.dockingSpot;
+        platform.dockingSpotB = waves[currentWave].rightCapsule.dockingSpot;
         MovePlatformToNextSplit();
     }
 
@@ -45,13 +65,5 @@ public class WaveManager : MonoBehaviour
     {
         platform.CreateVisuals();
         platform.ChangeStateToSplit();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            GetNextWave();
-        }
     }
 }

@@ -152,7 +152,7 @@ public class GridManager : MonoBehaviour
         StartCoroutine(IterateGameOfLife(grid, columns, rows, currentSpawningPhase, 15));
     }
 
-    private void Reset()
+    public void Reset()
     {
         Clean();
         Initialize();

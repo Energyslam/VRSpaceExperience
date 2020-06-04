@@ -35,6 +35,7 @@ public class StaticCapsule : MonoBehaviour
     int locationAmount;
     int amountToSpawn;
     int timesOpened = 0;
+    public int remainingGifts = 0;
 
     [SerializeField] List<float> distancesDoors = new List<float>();
     List<float> distancesPillars = new List<float>();
@@ -81,6 +82,7 @@ public class StaticCapsule : MonoBehaviour
         }
         locationAmount = giftLocations.Count;
         amountToSpawn = locationAmount / 2;
+        remainingGifts = amountToSpawn;
     }
 
     public void OpenUp()
@@ -134,14 +136,15 @@ public class StaticCapsule : MonoBehaviour
 
     void SpawnGifts()
     {
-        for (int i = 0; i < amountToSpawn; i++)
+        int spawnAmount = remainingGifts == 0 ? amountToSpawn : remainingGifts;
+
+        for (int i = 0; i < spawnAmount; i++)
         {
             GameObject locationGO = PickGiftLocation();
             chosenLocations.Add(locationGO);
         }
         foreach (GameObject go in chosenLocations)
         {
-
             GameObject giftGO = Instantiate(giftPrefab, go.transform.position, Quaternion.identity);
             giftGO.transform.parent = this.transform;
             giftGO.GetComponentInChildren<GiftBehaviour>().attachedStatic = this;
@@ -151,18 +154,16 @@ public class StaticCapsule : MonoBehaviour
                 giftGO.GetComponent<GiftBehaviour>().isGrabbable = true;
             }
         }
+
+        remainingGifts = spawnAmount;
     }
 
     public void UpdateGifts(GameObject gift)
     {
         spawnedGifts.Remove(gift);
-        int remainingGifts = 0;
-        foreach (GameObject go in spawnedGifts)
-        {
-            remainingGifts++;
-        }
+        remainingGifts--;
         Debug.Log("Remaining gifts = " + remainingGifts);
-        if (remainingGifts == 0)
+        if (remainingGifts <= 0)
         {
             timeText.color = Color.green;
             timeText.text = "Good job!";
@@ -233,6 +234,9 @@ public class StaticCapsule : MonoBehaviour
         {
             newAngle = RepickAngle(angle);
         }
+
+        if (remainingGifts <= 0)
+            GetComponent<GridManager>().Reset();
 
         return newAngle;
     }

@@ -10,6 +10,8 @@ public class GridManager : MonoBehaviour
     public GridCell[,] grid;
 
     private float verticalCellSize, horizontalCellSize;
+
+    [Header("Grid information")]
     [Range(1.0f, 250)]
     public int columns = 10, rows = 10;
     [Range(1.0f, 250)]
@@ -28,6 +30,7 @@ public class GridManager : MonoBehaviour
     [SerializeField]
     private Vector2 perlinNoiseOffset;
 
+    [Header("Deploy objects")]
     [SerializeField]
     private GameObject gridCellPrefab;
 
@@ -36,25 +39,40 @@ public class GridManager : MonoBehaviour
 
     private int hasIterated = 0;
 
-    public enum SpawningPhase { BIG, MEDIUM, FINISHED };
+    public enum SpawningPhase { BIG, MEDIUM, MISC, FINISHED };
 
+    [Header("Spawning information")]
     [SerializeField]
     private SpawningPhase currentSpawningPhase = SpawningPhase.BIG;
 
     private float aliveThreshold = 0.5f;
 
+    [Header("Spawning thresholds")]
     [SerializeField]
-    private float aliveThresholdBig = 0.5f, aliveThresholdMedium = 0.55f;
+    private float aliveThresholdBig = 0.5f, aliveThresholdMedium = 0.55f, aliveThresholdMisc = 0.55f;
 
     private List<GridCell> cells = new List<GridCell>();
 
+    [Header("Spawning objects")]
     [SerializeField]
-    private GameObject objectsHolderPCG, insideContext, connectableBigObject, cornerConnectableBigObject, standaloneBigObject, mediumMultiObject, mediumSingleObject, topOfMediumMulti;
+    private GameObject objectsHolderPCG, insideContext;
+        
+    [SerializeField]
+    private List<GameObject> connectableBigObject, cornerConnectableBigObject, standaloneBigObject, mediumMultiObject, mediumSingleObject, topOfMediumMulti, miscellaneousObjects;
 
+    [Header("Walls")]
     [SerializeField]
     private Transform topWall, rightWall, botWall, leftWall;
 
     private Quaternion originalRotation;
+
+    [Header("Spawning offsets")]
+    [SerializeField]
+    private int bigMediumAreaOffset = 3;
+
+    public enum MiscPlacement { EDGES, MIDDLE, EVERYTHING };
+    [SerializeField]
+    private MiscPlacement miscellaneousObjectPlacing;
     #endregion
 
     private void OnEnable()
@@ -231,6 +249,11 @@ public class GridManager : MonoBehaviour
                 SpawnMediumObjects();
                 GoToNextPhase(currentSpawningPhase);
                 break;
+
+            case SpawningPhase.MISC:
+                SpawnMiscObjects();
+                GoToNextPhase(currentSpawningPhase);
+                break;
         }
     }
 
@@ -264,16 +287,29 @@ public class GridManager : MonoBehaviour
                         if (grid[i, j].horizontal == 0 && grid[i, j].vertical == 0 || grid[i, j].horizontal == 0 && grid[i, j].vertical == rows - 1)
                             continue;
 
-                        SpawnObjectOnGridCell(i, j, standaloneBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 1, Vector3.zero, 0);
+                        int rand = Random.Range(0, standaloneBigObject.Count);
+
+                        if (standaloneBigObject.Count > 0)
+                            SpawnObjectOnGridCell(i, j, standaloneBigObject[rand], new Vector3(gridSizeX, 1, gridSizeZ), 1, Vector3.zero, 0);
                     }
 
                     else
                     {
                         if (grid[i, j].horizontal == 0 && grid[i, j].vertical == 0 || grid[i, j].horizontal == 0 && grid[i, j].vertical == rows - 1)
-                            SpawnObjectOnGridCell(i, j, cornerConnectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 0, Vector3.zero, 0);
+                        {
+                            int rand = Random.Range(0, cornerConnectableBigObject.Count);
+
+                            if (cornerConnectableBigObject.Count > 0)
+                                SpawnObjectOnGridCell(i, j, cornerConnectableBigObject[rand], new Vector3(gridSizeX, 1, gridSizeZ), 0, Vector3.zero, 0);
+                        }
 
                         else
-                            SpawnObjectOnGridCell(i, j, connectableBigObject, new Vector3(gridSizeX, 1, gridSizeZ), 0, Vector3.zero, 0);
+                        {
+                            int rand = Random.Range(0, connectableBigObject.Count);
+
+                            if (connectableBigObject.Count > 0)
+                                SpawnObjectOnGridCell(i, j, connectableBigObject[rand], new Vector3(gridSizeX, 1, gridSizeZ), 0, Vector3.zero, 0);
+                        }
                     }
                 }
             }
@@ -326,20 +362,36 @@ public class GridManager : MonoBehaviour
 
                 if (grid[x, y].isAlive && !grid[x, y].hasSpawnedAnObject)
                 {
-                    SpawnObjectOnGridCell(x, y, mediumSingleObject, new Vector3(1.0f, 1.0f, 1.0f), 0, Vector3.zero, 0.05f);
+                    int rand = Random.Range(0, mediumSingleObject.Count);
+
+                    if (mediumSingleObject.Count > 0)
+                        SpawnObjectOnGridCell(x, y, mediumSingleObject[rand], new Vector3(1.0f, 1.0f, 1.0f), 0, Vector3.zero, 0.05f);
                 }
             }            
         }
 
-        PlaceRandomly(mediumMultiObject, 0, topOfMediumMulti, Random.Range(2, 4));
+        int randBig = Random.Range(0, mediumMultiObject.Count);
+        int randTopBig = Random.Range(0, topOfMediumMulti.Count);
+        if (mediumMultiObject.Count > 0)
+        {
+            if (topOfMediumMulti.Count > 0)
+            {
+                PlaceRandomly(mediumMultiObject[randBig], 0, topOfMediumMulti[randTopBig], Random.Range(2, 4));
+            }
+            else
+            {
+                PlaceRandomly(mediumMultiObject[randBig], 0, null, Random.Range(2, 4));
+            }
+        }
     }
 
     private void PlaceRandomly(GameObject toSpawn, int tries, GameObject onTop, float yOffset)
     {
         // Spawn multi object, such as a table
-        int newX = Random.Range(3, columns - 3);
-        int newY = Random.Range(3, rows - 3);
+        int newX = Random.Range(bigMediumAreaOffset, columns - bigMediumAreaOffset);
+        int newY = Random.Range(bigMediumAreaOffset, rows - bigMediumAreaOffset);
 
+        // Random rotation
         float random = Random.Range(0, 3);
         random = Mathf.RoundToInt(random);
         Vector3 rotation = Vector3.zero;
@@ -367,6 +419,68 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    private void SpawnMiscObjects()
+    {
+        List<GameObject> objects = new List<GameObject>(miscellaneousObjects);
+
+        for (int x = 0; x < columns; x++)
+        {
+            for (int y = 0; y < rows; y++)
+            {
+                if (ShouldSpawnAnObject(x, y, miscellaneousObjectPlacing))
+                {
+                    grid = FindNeighbours(grid, columns, rows);
+
+                    if (grid[x, y].isAlive && !grid[x, y].hasSpawnedAnObject)
+                    {
+                        int rand = Random.Range(0, objects.Count);
+
+                        if (objects.Count > 0)
+                        {
+                            SpawnObjectOnGridCell(x, y, objects[rand], new Vector3(1.0f, 1.0f, 1.0f), 0, Vector3.zero, 0.05f);
+                            objects.RemoveAt(rand);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private bool ShouldSpawnAnObject(int x, int y, MiscPlacement placementRules)
+    {
+        switch (placementRules)
+        {
+            case MiscPlacement.EVERYTHING:
+                return true;
+
+            case MiscPlacement.EDGES:
+                if (x == 0 || x == columns - 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    if (y == 0 || y == rows - 1)
+                    {
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+            case MiscPlacement.MIDDLE:
+                if (x > 0 && x < columns - 1)
+                {
+                    if (y > 0 && y < rows - 1)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+        }
+
+        return true;
+    }
+
     private void GoToNextPhase(SpawningPhase oldPhase)
     {
         hasIterated = 0;
@@ -379,7 +493,10 @@ public class GridManager : MonoBehaviour
                 aliveThreshold = aliveThresholdMedium;
                 break;
             case SpawningPhase.MEDIUM:
-                currentSpawningPhase = SpawningPhase.FINISHED;
+                currentSpawningPhase = SpawningPhase.MISC;
+                aliveThreshold = aliveThresholdMisc;
+                break;
+            case SpawningPhase.MISC:
                 transform.rotation = originalRotation;
                 insideContext.SetActive(true);
                 return;
@@ -515,7 +632,7 @@ public class GridManager : MonoBehaviour
     private GridCell[,] GameOfLifeMedium(int x, int y, GridCell[,] future)
     { 
         // Overpopulation
-        if (grid[x, y].isAlive && grid[x, y].aliveNeighbours > 0)
+        if (grid[x, y].isAlive && grid[x, y].aliveNeighbours > 1)
             future[x, y].isAlive = false;
 
         // Birth

@@ -9,6 +9,9 @@ public class GrowUntilHit : MonoBehaviour
     [SerializeField]
     GameObject swingParent, lamp;
 
+    [SerializeField]
+    private bool addSwing = false;
+
     private void FixedUpdate()
     {
         if (!stopGrowing)
@@ -23,9 +26,12 @@ public class GrowUntilHit : MonoBehaviour
             swingParent.transform.position = new Vector3(swingParent.transform.position.x, other.transform.position.y, swingParent.transform.position.z);
             transform.parent = swingParent.transform;
             lamp.transform.parent = swingParent.transform;
-            Swing swing = swingParent.AddComponent<Swing>();
-            swing.randomRotation = true;
-            swing.rotation = 5.0f;
+            if (addSwing)
+            {
+                Swing swing = swingParent.AddComponent<Swing>();
+                swing.randomRotation = true;
+                swing.rotation = 5.0f;
+            }
         }
     }
 }

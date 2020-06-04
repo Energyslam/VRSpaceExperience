@@ -20,6 +20,10 @@ public class RandomTexture : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            ChangeMaterial();
+        }
     }
 
     void ChangeMaterial()

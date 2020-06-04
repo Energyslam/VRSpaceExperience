@@ -142,7 +142,6 @@ public class HighscoreContainer : MonoBehaviour
         tempEntries.Add(new HighscoreEntry { name = "Energyslam", score = -45 });
         Highscores highscores = new Highscores { highscores = tempEntries };
         string highscoresJSON = JsonUtility.ToJson(highscores);
-        Debug.Log(highscoresJSON);
         PlayerPrefs.SetString("highscores", highscoresJSON);
         PlayerPrefs.Save();
     }

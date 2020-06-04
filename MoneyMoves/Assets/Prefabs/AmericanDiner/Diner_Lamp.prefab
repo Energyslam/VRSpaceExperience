@@ -327,6 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swingParent: {fileID: 5199330104669702448}
   lamp: {fileID: 7321297487439851779}
+  addSwing: 1
 --- !u!1 &8525032892332388615
 GameObject:
   m_ObjectHideFlags: 0

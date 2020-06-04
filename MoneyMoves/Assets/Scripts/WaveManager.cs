@@ -11,7 +11,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] List<Wave> waves = new List<Wave>();
     [SerializeField] Platform platform;
     [SerializeField] GameObject highscoreContainer;
-    int currentWave = 1;
+    int currentWave = 0;
     int activeWaves = 0;
     private void Awake()
     {
@@ -31,8 +31,8 @@ public class WaveManager : MonoBehaviour
             if (t.GetComponent<Wave>() != null)
             waves.Add(t.GetComponent<Wave>());
         }
-        platform.dockingSpotA = waves[0].a.dockingSpot;
-        platform.dockingSpotB = waves[0].b.dockingSpot;
+        platform.dockingSpotA = waves[0].leftCapsule.dockingSpot;
+        platform.dockingSpotB = waves[0].rightCapsule.dockingSpot;
         foreach (Wave w in waves)
         {
             if (w.gameObject.activeInHierarchy) activeWaves++;
@@ -41,7 +41,7 @@ public class WaveManager : MonoBehaviour
 
     public void GetNextWave()
     {
-        if (currentWave >= activeWaves)
+        if (currentWave + 1 >= activeWaves)
         {
             //TODO: display highscore met mooie animatie ?
             //Vector3 spawnSpot = GameManager.Instance.player.transform.position + (((platform.dockingSpotA != null ? platform.dockingSpotA.transform.position : platform.dockingSpotB.transform.position) - GameManager.Instance.player.transform.position) * 4f) + new Vector3(0f, 5f, 0f);
@@ -56,8 +56,8 @@ public class WaveManager : MonoBehaviour
             return;
         }
         currentWave++;
-        platform.dockingSpotA = waves[currentWave].a.dockingSpot;
-        platform.dockingSpotB = waves[currentWave].b.dockingSpot;
+        platform.dockingSpotA = waves[currentWave].leftCapsule.dockingSpot;
+        platform.dockingSpotB = waves[currentWave].rightCapsule.dockingSpot;
         MovePlatformToNextSplit();
     }
 
@@ -65,13 +65,5 @@ public class WaveManager : MonoBehaviour
     {
         platform.CreateVisuals();
         platform.ChangeStateToSplit();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            GetNextWave();
-        }
     }
 }

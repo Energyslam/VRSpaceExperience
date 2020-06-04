@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 1931248610668409813}
   - component: {fileID: -3763676400943318854}
   m_Layer: 0
-  m_Name: Pillow
+  m_Name: PillowBank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

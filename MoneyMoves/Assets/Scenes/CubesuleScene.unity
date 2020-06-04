@@ -1498,6 +1498,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
+      propertyPath: mediumMultiObject.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -1514,6 +1518,11 @@ PrefabInstance:
       propertyPath: aliveThresholdMedium
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
+      propertyPath: mediumMultiObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 7880977531832473562, guid: 010f832f259a28c429d965f916c5223b,
+        type: 3}
     - target: {fileID: 2709503910731663622, guid: 2aa13a486aa9835428db5a495fdf3fab,
         type: 3}
       propertyPath: m_Name

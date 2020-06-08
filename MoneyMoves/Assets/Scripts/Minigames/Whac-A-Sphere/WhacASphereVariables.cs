@@ -38,7 +38,7 @@ public class WhacASphereVariables : ScriptableObject
         SetTesterSpeed();
         activeTime = 4;
         timeBetweenActivation = 2f;
-        totalTime = 20f;
+        totalTime = 5f;
         reactionTime = 0.3f;
         shootingDelay = 0.8f;
         skillGrowth = testerSpeed / 20f;

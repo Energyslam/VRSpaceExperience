@@ -221,7 +221,7 @@ MonoBehaviour:
   cam: {fileID: 1689244929}
   player: {fileID: 423450303}
   beginScreen: {fileID: 1888862848}
-  timesToOpenCapsules: 2
+  timesToOpenCapsules: 0
   totalOpenTime: 15
   lives: 3
   score: 0
@@ -2732,6 +2732,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894754309081931902, guid: ddc1fa5bdd08e5148853990056038c45,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddc1fa5bdd08e5148853990056038c45, type: 3}

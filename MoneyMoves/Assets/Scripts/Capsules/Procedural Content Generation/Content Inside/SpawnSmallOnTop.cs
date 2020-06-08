@@ -60,7 +60,6 @@ public class SpawnSmallOnTop : MonoBehaviour
     private void Fall()
     {
         spawnedObj.GetComponent<Rigidbody>().isKinematic = false;
-        Invoke("MakeStatic", 3);
     }
 
     private void MakeStatic()

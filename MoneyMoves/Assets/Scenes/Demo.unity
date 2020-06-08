@@ -222,7 +222,7 @@ MonoBehaviour:
   player: {fileID: 423450303}
   beginScreen: {fileID: 1888862848}
   timesToOpenCapsules: 0
-  totalOpenTime: 15
+  totalOpenTime: 10000
   lives: 3
   score: 0
   rotateText: 0
@@ -1576,7 +1576,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1847
+    m_Bits: 14135
   m_RenderingLayerMask: 1
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
@@ -1595,13 +1595,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838872077}
-  m_LocalRotation: {x: 0.6632553, y: -0.25708622, z: 0.029901784, w: 0.70221436}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.6516978, y: -0.15131827, z: 0.12685263, w: 0.73232585}
+  m_LocalPosition: {x: 11.3, y: 28.4, z: 1.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 71.239006, y: -92.13901, z: -68.4}
+  m_LocalEulerAnglesHint: {x: 83.16901, y: -28.244001, z: -5.5160003}
 --- !u!1001 &844792874
 PrefabInstance:
   m_ObjectHideFlags: 0

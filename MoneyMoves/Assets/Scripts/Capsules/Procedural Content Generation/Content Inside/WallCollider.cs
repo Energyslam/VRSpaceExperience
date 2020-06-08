@@ -6,6 +6,6 @@ public class WallCollider : WallObject
 {
     public override void NotifyWallChange(bool isOpen)
     {
-        gameObject.SetActive(isOpen);
+        GetComponent<BoxCollider>().enabled = !isOpen;
     }
 }

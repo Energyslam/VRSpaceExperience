@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     public bool hasShownInstruction;
 
     public float respawnWaitTime;
+    public float birdFadeoutSpeed;
 
     public Platform platform;
 
@@ -88,10 +89,27 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("trynna begin");
         beginScreen.GetComponent<Animator>().SetTrigger("StartGame");
+        StartCoroutine(FadoutBirdSFX());
         yield return new WaitForSeconds(1.5f);
         platform.ChangeStateToSplit();
         yield return new WaitForSeconds(1f);
         Destroy(beginScreen);
+    }
+
+    IEnumerator FadoutBirdSFX()
+    {
+        while (true)
+        {
+            if (beginScreen.activeInHierarchy)
+            {
+                yield return new WaitForSeconds(0.01f);
+                beginScreen.GetComponent<AudioSource>().volume -= birdFadeoutSpeed;
+            }
+            else
+            {
+                break;
+            }
+        }
     }
 
     public void AddScore(int scoreValue)

@@ -52,6 +52,14 @@ public class WaveManager : MonoBehaviour
             GameObject highscoreObject = Instantiate(highscoreContainer, spawnspot, Quaternion.identity);
             highscoreObject.GetComponent<LookAtPlayer>().target = highscoreTarget;
             GameObject go = platform.dockingSpotA != null ? platform.dockingSpotA.transform.root.gameObject : platform.dockingSpotB.transform.root.gameObject;
+            if (waves[currentWave].leftCapsule.gameObject.activeInHierarchy)
+            {
+                waves[currentWave].leftCapsule.ClearListsForRespawn();
+            }
+            else if (waves[currentWave].rightCapsule.gameObject.activeInHierarchy)
+            {
+                waves[currentWave].rightCapsule.ClearListsForRespawn();
+            }
             go.AddComponent<Rigidbody>();
             return;
         }

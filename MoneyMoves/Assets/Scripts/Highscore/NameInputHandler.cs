@@ -15,7 +15,7 @@ public class NameInputHandler : MonoBehaviour
 
     public void AddLetter(string letter)
     {
-        if (nameField.text.Length < 15)
+        if (nameField.text.Length < 7)
         {
             nameField.text += letter;
         }

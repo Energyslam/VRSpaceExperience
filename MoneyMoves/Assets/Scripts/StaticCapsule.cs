@@ -251,7 +251,7 @@ public class StaticCapsule : MonoBehaviour
     }
     #endregion
 
-    void ClearListsForRespawn()
+    public void ClearListsForRespawn()
     {
         foreach (GameObject go in spawnedGifts)
         {

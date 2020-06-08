@@ -5,22 +5,21 @@ using UnityEngine;
 public class LED : WallObject
 {
     [SerializeField]
-    List<Material> ledMaterials = new List<Material>();
-
-    MeshRenderer rend;
+    private List<Material> ledMaterials = new List<Material>();
 
     [SerializeField]
-    Material targetMaterial;
+    private MeshRenderer rend;
+
+    [SerializeField]
+    private Material targetMaterial;
 
     [SerializeField]
     [ColorUsage(true, true)]
-    Color col1, col2;
+    private Color col1, col2;
 
     // Start is called before the first frame update
     void Start()
     {
-        rend = GetComponent<MeshRenderer>();
-
         for (int i = 0; i < rend.materials.Length - 1; i++)
         {
             ledMaterials.Add(rend.materials[i]);

@@ -32,6 +32,7 @@ public class ProjectileBehaviour : MonoBehaviour
         if (other.gameObject.name == "StartButton")
         {
             GameManager.Instance.StartGame();
+            Destroy(other.gameObject);
         }
 
         if (other.CompareTag("Letter"))

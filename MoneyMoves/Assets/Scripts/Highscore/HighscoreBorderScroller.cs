@@ -14,7 +14,7 @@ public class HighscoreBorderScroller : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float xOffset = Time.time * ScrollX;
         float yOffset = Time.time * ScrollY;

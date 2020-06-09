@@ -46,8 +46,8 @@ public class WaveManager : MonoBehaviour
             //TODO: display highscore met mooie animatie ?
             //Vector3 spawnSpot = GameManager.Instance.player.transform.position + (((platform.dockingSpotA != null ? platform.dockingSpotA.transform.position : platform.dockingSpotB.transform.position) - GameManager.Instance.player.transform.position) * 4f) + new Vector3(0f, 5f, 0f);
             //Vector3 highscoreTarget = GameManager.Instance.player.transform.position + (((platform.dockingSpotA != null ? platform.dockingSpotA.transform.position : platform.dockingSpotB.transform.position) - GameManager.Instance.player.transform.position) * 2f);
-            Vector3 spawnspot = GameManager.Instance.player.transform.position + GameManager.Instance.platform.gameObject.transform.forward * 40f;
-            Vector3 highscoreTarget = GameManager.Instance.player.transform.position + GameManager.Instance.platform.gameObject.transform.forward * 10f;
+            Vector3 spawnspot = GameManager.Instance.platform.transform.position + GameManager.Instance.platform.gameObject.transform.forward * 40f;
+            Vector3 highscoreTarget = GameManager.Instance.platform.transform.position + GameManager.Instance.platform.gameObject.transform.forward * 10f;
             
             GameObject highscoreObject = Instantiate(highscoreContainer, spawnspot, Quaternion.identity);
             highscoreObject.GetComponent<LookAtPlayer>().target = highscoreTarget;

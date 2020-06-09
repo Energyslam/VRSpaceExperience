@@ -1469,7 +1469,7 @@ PrefabInstance:
     - target: {fileID: 4297381571469199282, guid: 2af549d88514aec41828864b53466111,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4509249200045793164, guid: 2af549d88514aec41828864b53466111,
         type: 3}
@@ -1910,7 +1910,7 @@ PrefabInstance:
     - target: {fileID: 4297381571469199282, guid: 2af549d88514aec41828864b53466111,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4509249200045793164, guid: 2af549d88514aec41828864b53466111,
         type: 3}
@@ -2049,7 +2049,7 @@ PrefabInstance:
     - target: {fileID: 4297381571469199282, guid: 2af549d88514aec41828864b53466111,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4509249200045793164, guid: 2af549d88514aec41828864b53466111,
         type: 3}
@@ -3079,7 +3079,7 @@ PrefabInstance:
     - target: {fileID: 4297381571469199282, guid: 2af549d88514aec41828864b53466111,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4509249200045793164, guid: 2af549d88514aec41828864b53466111,
         type: 3}
@@ -3743,6 +3743,7 @@ MonoBehaviour:
   - {fileID: 1856821960}
   dissolveSpeed: 0.003
   birdFadeoutSpeed: 0.001
+  TurnOnToSkipDissolve: 0
 --- !u!1001 &1902818975
 PrefabInstance:
   m_ObjectHideFlags: 0

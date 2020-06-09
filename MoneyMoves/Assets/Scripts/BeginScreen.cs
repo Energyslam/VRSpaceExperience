@@ -10,6 +10,7 @@ public class BeginScreen : MonoBehaviour
     AudioSource audio;
     bool isDissolving;
     float transparancy = 0f;
+    public bool TurnOnToSkipDissolve;
 
     private void Start()
     {
@@ -17,6 +18,11 @@ public class BeginScreen : MonoBehaviour
     }
     public void BeginGame()
     {
+        if (TurnOnToSkipDissolve)
+        {
+            GameManager.Instance.platform.ChangeStateToSplit();
+            Destroy(this.gameObject);
+        }
         isDissolving = true;
     }
     void FixedUpdate()

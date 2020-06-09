@@ -5,15 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Radius))]
 public class Event : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Event information")]
+    [SerializeField]
+    protected float eventTime = 5.0f, pointMultiplier = 2.0f;
 }

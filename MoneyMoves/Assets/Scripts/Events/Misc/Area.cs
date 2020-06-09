@@ -67,4 +67,13 @@ public class Area : MonoBehaviour
         minZ = tempMinZ;
         maxZ = tempMaxZ;
     }
+
+    public Vector3 RandomInsideArea()
+    {
+        float randomX = Random.Range(minX, maxX);
+        float randomY = Random.Range(minY, maxY);
+        float randomZ = Random.Range(minZ, maxZ);
+
+        return new Vector3(randomX, randomY, randomZ);
+    }
 }

@@ -6,7 +6,10 @@ using UnityEngine;
 public class MeteorMovement : MonoBehaviour
 {
     [SerializeField]
-    private float movementSpeed = 1.0f;
+    private float minMovementSpeed = 1.0f, maxMovementSpeed = 1.0f;
+
+    [SerializeField]
+    private Vector3 directionOffset;
 
     private Vector3 direction;
 
@@ -16,12 +19,15 @@ public class MeteorMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        direction = Random.onUnitSphere * movementSpeed;
+        direction = Random.onUnitSphere;
+        direction = new Vector3(direction.x, -Mathf.Abs(direction.y), direction.z) + directionOffset;
+        direction *= Random.Range(minMovementSpeed, maxMovementSpeed);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         rb.velocity = direction;
+        rb.AddTorque(Random.onUnitSphere * Random.Range(minMovementSpeed, maxMovementSpeed));
     }
 }

@@ -11,6 +11,11 @@ public class Meteor : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Explode();
+    }
+
+    public void Explode()
+    {
         GameObject spawned = Instantiate(brokenMeteor, transform.position, transform.rotation, transform.parent);
         spawned.transform.localScale = transform.localScale;
         Destroy(gameObject);

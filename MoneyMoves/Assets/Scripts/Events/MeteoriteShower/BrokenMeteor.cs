@@ -9,13 +9,14 @@ public class BrokenMeteor : MonoBehaviour
     private List<Rigidbody> rigidbodies;
 
     [SerializeField]
-    private float explosionStrength, explosionRadius, rotationSpeed;
+    private float explosionStrength, explosionStrengthOffset, explosionRadius, rotationSpeed;
 
     private void Awake()
     {
         for (int i = 0; i < rigidbodies.Count; i++)
         {
-            rigidbodies[i].AddExplosionForce(explosionStrength, transform.position, explosionRadius);
+            float offset = Random.Range(-explosionStrengthOffset, explosionStrengthOffset);
+            rigidbodies[i].AddExplosionForce(explosionStrength + offset, transform.position, explosionRadius);
             rigidbodies[i].AddTorque(Random.onUnitSphere * rotationSpeed);
         }
 

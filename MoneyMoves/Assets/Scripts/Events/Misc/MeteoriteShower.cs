@@ -5,8 +5,7 @@ using UnityEngine;
 public class MeteoriteShower : Event
 {
     [Header("Setup objects")]
-    [SerializeField]
-    private Area area;
+    public Area area;
 
     [SerializeField]
     private Transform objectHolder;
@@ -16,7 +15,7 @@ public class MeteoriteShower : Event
     private List<GameObject> meteorites;
 
     [SerializeField]
-    private float spawnRate = 1.0f;
+    private float spawnRate = 1.0f, ySpawnOffset = 1.0f;
 
     private void Start()
     {
@@ -27,6 +26,8 @@ public class MeteoriteShower : Event
     {
         // Determine object details
         Vector3 position = area.RandomInsideArea();
+        position = new Vector3(position.x, Random.Range(area.maxY - ySpawnOffset, area.maxY), position.z);
+
         GameObject meteorModel = meteorites[Random.Range(0, meteorites.Count)];
 
         GameObject spawnedMeteor = Instantiate(meteorModel, position, Quaternion.identity, objectHolder);

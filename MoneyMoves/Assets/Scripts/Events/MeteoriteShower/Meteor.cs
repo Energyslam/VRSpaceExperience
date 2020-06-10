@@ -18,6 +18,7 @@ public class Meteor : MonoBehaviour
     {
         GameObject spawned = Instantiate(brokenMeteor, transform.position, transform.rotation, transform.parent);
         spawned.transform.localScale = transform.localScale;
+        GetComponentInParent<MeteoriteShower>().UpdateMeteorCount(1);
         Destroy(gameObject);
     }
 }

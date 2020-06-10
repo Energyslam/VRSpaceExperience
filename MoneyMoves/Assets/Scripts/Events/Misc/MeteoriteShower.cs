@@ -17,6 +17,10 @@ public class MeteoriteShower : Event
     [SerializeField]
     private float spawnRate = 1.0f, ySpawnOffset = 1.0f;
 
+    [SerializeField]
+    [Range(1, 1000)]
+    private int maxAmountOfMeteorites = 250, currentAmountofMeteorites = 0;
+
     private void Start()
     {
         StartCoroutine(SpawnObjects());
@@ -24,16 +28,24 @@ public class MeteoriteShower : Event
 
     private IEnumerator SpawnObjects()
     {
-        // Determine object details
-        Vector3 position = area.RandomInsideArea();
-        position = new Vector3(position.x, Random.Range(area.maxY - ySpawnOffset, area.maxY), position.z);
+        if (currentAmountofMeteorites < maxAmountOfMeteorites)
+        {
+            // Determine object details
+            Vector3 position = area.RandomInsideArea();
+            position = new Vector3(position.x, Random.Range(area.maxY - ySpawnOffset, area.maxY), position.z);
 
-        GameObject meteorModel = meteorites[Random.Range(0, meteorites.Count)];
+            GameObject meteorModel = meteorites[Random.Range(0, meteorites.Count)];
 
-        GameObject spawnedMeteor = Instantiate(meteorModel, position, Quaternion.identity, objectHolder);
-
+            GameObject spawnedMeteor = Instantiate(meteorModel, position, Quaternion.identity, objectHolder);
+            currentAmountofMeteorites++;
+        }
         // Recursively call spawning method
         yield return new WaitForSeconds(1 / spawnRate);
         StartCoroutine(SpawnObjects());
+    }
+
+    public void UpdateMeteorCount(int addition)
+    {
+        currentAmountofMeteorites += addition;
     }
 }

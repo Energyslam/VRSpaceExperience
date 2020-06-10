@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
     public int lives = 3;
     public int score = 0;
 
-    public bool rotateText;
     public bool hasShownInstruction;
 
     public float respawnWaitTime;

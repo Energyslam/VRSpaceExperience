@@ -26,7 +26,8 @@ public class StaticCapsule : MonoBehaviour
 
     [SerializeField] Animator capsuleAnim;
 
-    [SerializeField] public TextMeshProUGUI timeText;
+    [SerializeField] public TextMeshProUGUI[] timeText;
+    public GameObject timetextHolder;
 
     [SerializeField] int totalTime = 15;
     [SerializeField] int timesToOpen = 3;
@@ -46,7 +47,6 @@ public class StaticCapsule : MonoBehaviour
     float newRotation;
     float textStartingY;
 
-    public bool rotateText = true;
     bool rotating;
 
     enum GiftType
@@ -63,9 +63,8 @@ public class StaticCapsule : MonoBehaviour
     {
         timesToOpen = GameManager.Instance.timesToOpenCapsules;
         totalTime = GameManager.Instance.totalOpenTime;
-        rotateText = GameManager.Instance.rotateText;
         respawnWaitTime = GameManager.Instance.respawnWaitTime;
-
+        timeText = timetextHolder.GetComponentsInChildren<TextMeshProUGUI>();
         Wave wave = GetComponentInParent<Wave>();
         otherCapsuleInWave = this.gameObject == wave.leftCapsule.gameObject ? wave.rightCapsule.gameObject : wave.leftCapsule.gameObject;
         float dockingSpotY = dockingSpot.transform.position.y;
@@ -74,7 +73,7 @@ public class StaticCapsule : MonoBehaviour
         this.transform.LookAt(dockingSpot.transform);
         this.transform.localEulerAngles = new Vector3(0, this.transform.localEulerAngles.y, 0);
 
-        textStartingY = timeText.transform.position.y;
+        //textStartingY = timeText.transform.position.y;
 
         foreach (Transform t in locationParent.transform)
         {
@@ -103,29 +102,47 @@ public class StaticCapsule : MonoBehaviour
         {
             RotateCapsule();
         }
-        if (rotateText)
-        {
-            timeText.transform.RotateAround(this.transform.position, Vector3.up, textSpeed * Time.deltaTime);
-        }
     }
 
     void ManageTime()
     {
         currentTime = totalTime;
-        timeText.color = Color.white;
+        timetextHolder.gameObject.SetActive(true);
+        timetextHolder.transform.rotation = this.transform.rotation;
+        foreach (TextMeshProUGUI text in timeText)
+        {
+            text.color = Color.white;
+            text.GetComponentInParent<MaskedText>().enabled = true;
+        }
         StartCoroutine(CountdownTime());
     }
 
     IEnumerator CountdownTime()
     {
-        timeText.text = "Time Left: " + currentTime;
+        string tmpTime = "" + (currentTime >= 10 ? currentTime.ToString() : "0" + currentTime);
+
+        foreach (TextMeshProUGUI text in timeText)
+        {
+            text.text = "          Time: " + tmpTime + "          Time: " + tmpTime + "          Time: " + tmpTime;
+        }
+
+
+
         yield return new WaitForSeconds(1f);
         currentTime--;
-        timeText.text = "Time Left: " + currentTime;
+        foreach (TextMeshProUGUI text in timeText)
+        {
+            text.text = "          Time: " + tmpTime + "          Time: " + tmpTime + "          Time: " + tmpTime;
+        };
         if (currentTime <= 0)
         {
-            timeText.color = Color.red;
-            timeText.text = "Fail ! You didn't get all gifts";
+            foreach (TextMeshProUGUI text in timeText)
+            {
+                text.color = Color.red;
+                text.text = "Fail ! You didn't get all the gifts";
+                text.transform.localPosition = Vector3.zero;
+                text.GetComponentInParent<MaskedText>().enabled = false;
+            }
             StartCoroutine(CloseCapsule());
         }
         else if (currentTime > 0)
@@ -162,27 +179,28 @@ public class StaticCapsule : MonoBehaviour
     {
         spawnedGifts.Remove(gift);
         remainingGifts--;
-        Debug.Log("Remaining gifts = " + remainingGifts);
         if (remainingGifts <= 0)
         {
-            timeText.color = Color.green;
-            timeText.text = "Good job!";
+            foreach(TextMeshProUGUI text in timeText)
+            {
+                text.color = Color.green;
+                text.text = "Good job!";
+                text.transform.localPosition = Vector3.zero;
+                text.GetComponentInParent<MaskedText>().enabled = false;
+            }
             StopAllCoroutines();
             StartCoroutine(CloseCapsule());
         }
     }
     void OpenCapsule()
     {
+
         timesOpened++;
         CalculateNearestDoors();
         PlayMusic();
 
-        if (!rotateText)
-        {
-            CalculateVisibleTextPosition();
-        }
+        CalculateVisibleTextPosition();
         cheatPrevention.SetActive(false);
-        timeText.gameObject.SetActive(true);
         GameManager.Instance.GetComponent<Volume>().profile = postProcessingProfile;
     }
 
@@ -190,7 +208,7 @@ public class StaticCapsule : MonoBehaviour
     {
         cheatPrevention.SetActive(true);
         yield return new WaitForSeconds(respawnWaitTime);
-        timeText.gameObject.SetActive(false);
+        timetextHolder.gameObject.SetActive(false);
         CalculateNearestDoors();
         //yield return new WaitForSeconds(capsuleAnim.GetCurrentAnimatorStateInfo(0).length);
 
@@ -234,10 +252,6 @@ public class StaticCapsule : MonoBehaviour
         {
             newAngle = RepickAngle(angle);
         }
-
-        if (remainingGifts <= 0)
-            GetComponent<GridManager>().Reset();
-
         return newAngle;
     }
     void RotateCapsule()
@@ -246,6 +260,10 @@ public class StaticCapsule : MonoBehaviour
         if (HelperFunctions.FastApproximately(this.transform.localEulerAngles.y, newRotation, 4f))
         {
             rotating = false;
+            if (remainingGifts <= 0)
+            {
+                GetComponent<GridManager>().Reset();
+            }
             OpenFreshCapsule();
         }
     }
@@ -272,13 +290,16 @@ public class StaticCapsule : MonoBehaviour
     }
     void CalculateVisibleTextPosition()
     {
-        Vector3 textToCapsule = this.transform.position - timeText.transform.position;
-        float textDistance = textToCapsule.magnitude;
-        Vector3 playerToCapsule = this.transform.position - GameManager.Instance.player.transform.position;
-        timeText.transform.position = this.transform.position + (playerToCapsule.normalized * textDistance);
-        timeText.transform.LookAt(GameManager.Instance.player.transform);
-        timeText.transform.localEulerAngles += new Vector3(0f, 180f, 0f);
-        timeText.transform.position = new Vector3(timeText.transform.position.x, textStartingY, timeText.transform.position.z);
+        //TODO: Not needed with the 4 static textfields
+        return;
+
+        //Vector3 textToCapsule = this.transform.position - timeText.transform.parent.position;
+        //float textDistance = textToCapsule.magnitude;
+        //Vector3 playerToCapsule = this.transform.position - GameManager.Instance.player.transform.position;
+        //timeText.transform.parent.position = this.transform.position + (playerToCapsule.normalized * textDistance);
+        //timeText.transform.parent.LookAt(GameManager.Instance.player.transform);
+        //timeText.transform.parent.localEulerAngles += new Vector3(0f, 180f, 0f);
+        //timeText.transform.parent.position = new Vector3(timeText.transform.parent.position.x, textStartingY, timeText.transform.parent.position.z);
     }
 
     private void CalculateNearestDoors()

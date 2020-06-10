@@ -15,6 +15,18 @@ public class HelperFunctions : MonoBehaviour
             return false;
         }
     }
+
+    public static bool FastQuaternionApproximately(Quaternion a, Quaternion b, float threshold)
+    {
+        if (FastApproximately(a.x, b.x, threshold) && FastApproximately(a.y, b.y, threshold) && FastApproximately(a.z, b.z, threshold) && FastApproximately(a.w, a.w, threshold))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     public static bool FastApproximately(float a, float b, float threshold)
     {
         if (threshold > 0f)

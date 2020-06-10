@@ -80,11 +80,6 @@ public class GridManager : MonoBehaviour
         Initialize();
     }
 
-    public void DoTheGameOfLifeThing()
-    {
-        Initialize();
-    }
-
     // Sets up grid and spawns objects using game of life
     public void Initialize()
     {

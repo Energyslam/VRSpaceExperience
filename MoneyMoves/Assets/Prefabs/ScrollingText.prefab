@@ -97,7 +97,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 36
   m_textAlignment: 513
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.20392157}
+  m_Color: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 0.3254902}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -357,4 +357,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textObject: {fileID: 6951167061188534816}
   scrollSpeed: -0.25
-  resetPoint: -33
+  resetPoint: -32

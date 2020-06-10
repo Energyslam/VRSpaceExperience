@@ -23,6 +23,8 @@ public class WhacASphereVariables : ScriptableObject
     public int skillLevelsDone;
     public int iterationsToTest = 20;
 
+    public bool Testing;
+
     public enum PlayerSkill
     {
         Awful,
@@ -39,6 +41,7 @@ public class WhacASphereVariables : ScriptableObject
         activeTime = 4;
         timeBetweenActivation = 2f;
         totalTime = 20f;
+        if (Testing) totalTime = 1f;
         reactionTime = 0.3f;
         shootingDelay = 0.8f;
         skillGrowth = testerSpeed / 20f;

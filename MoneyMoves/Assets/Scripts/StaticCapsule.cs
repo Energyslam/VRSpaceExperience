@@ -139,7 +139,7 @@ public class StaticCapsule : MonoBehaviour
             foreach (TextMeshProUGUI text in timeText)
             {
                 text.color = Color.red;
-                text.text = "Fail ! You didn't get all the gifts";
+                text.text = "Failed!";
                 text.transform.localPosition = Vector3.zero;
                 text.GetComponentInParent<MaskedText>().enabled = false;
             }
@@ -199,7 +199,7 @@ public class StaticCapsule : MonoBehaviour
         CalculateNearestDoors();
         PlayMusic();
 
-        CalculateVisibleTextPosition();
+        //CalculateVisibleTextPosition();
         cheatPrevention.SetActive(false);
         GameManager.Instance.GetComponent<Volume>().profile = postProcessingProfile;
     }
@@ -210,6 +210,7 @@ public class StaticCapsule : MonoBehaviour
         yield return new WaitForSeconds(respawnWaitTime);
         timetextHolder.gameObject.SetActive(false);
         CalculateNearestDoors();
+
         //yield return new WaitForSeconds(capsuleAnim.GetCurrentAnimatorStateInfo(0).length);
 
         if (timesOpened >= timesToOpen)
@@ -252,6 +253,12 @@ public class StaticCapsule : MonoBehaviour
         {
             newAngle = RepickAngle(angle);
         }
+
+        //TODO: Mister Tycho-chan, als deze wordt aangeroepen, dan gaat er iets fout bij het draaien van de capsule maar ik weet niet precies hoe je code dit voor elkaar krijgt. Ik heb geprobeerd voor draaien, na draaien, zodra die klaar is met draaien etc. dus je moet even in jouw code kijken.
+        //if (remainingGifts <= 0)
+        //{
+        //    GetComponent<GridManager>().Reset();
+        //}
         return newAngle;
     }
     void RotateCapsule()
@@ -260,10 +267,6 @@ public class StaticCapsule : MonoBehaviour
         if (HelperFunctions.FastApproximately(this.transform.localEulerAngles.y, newRotation, 4f))
         {
             rotating = false;
-            if (remainingGifts <= 0)
-            {
-                GetComponent<GridManager>().Reset();
-            }
             OpenFreshCapsule();
         }
     }
@@ -290,8 +293,7 @@ public class StaticCapsule : MonoBehaviour
     }
     void CalculateVisibleTextPosition()
     {
-        //TODO: Not needed with the 4 static textfields
-        return;
+        //Not needed with the timetext array. These have static positions
 
         //Vector3 textToCapsule = this.transform.position - timeText.transform.parent.position;
         //float textDistance = textToCapsule.magnitude;

@@ -11,8 +11,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] List<Wave> waves = new List<Wave>();
     [SerializeField] Platform platform;
     [SerializeField] GameObject highscoreContainer;
-    int currentWave = 0;
-    int activeWaves = 0;
+    [SerializeField]int currentWave = 0;
+    [SerializeField]int activeWaves = 0;
     private void Awake()
     {
         if (_instance == null)
@@ -52,11 +52,11 @@ public class WaveManager : MonoBehaviour
             GameObject highscoreObject = Instantiate(highscoreContainer, spawnspot, Quaternion.identity);
             highscoreObject.GetComponent<LookAtPlayer>().target = highscoreTarget;
             GameObject go = platform.dockingSpotA != null ? platform.dockingSpotA.transform.root.gameObject : platform.dockingSpotB.transform.root.gameObject;
-            if (waves[currentWave].leftCapsule.gameObject.activeInHierarchy)
+            if (waves[currentWave].leftCapsule != null)
             {
                 waves[currentWave].leftCapsule.ClearListsForRespawn();
             }
-            else if (waves[currentWave].rightCapsule.gameObject.activeInHierarchy)
+            else if (waves[currentWave].rightCapsule != null)
             {
                 waves[currentWave].rightCapsule.ClearListsForRespawn();
             }

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b5c74f62c6af34e93a19988771e890, type: 3}
   m_Name: DefaulVariables
   m_EditorClassIdentifier: 
-  activeTime: 0.8853926
+  activeTime: 0.00000016
   negativeActiveTime: 60
   timeBetweenActivation: 2
-  totalTime: 20
+  totalTime: 1
   testerSpeed: 0.5
   speedUpDivider: 20
   reactionTime: 0.3
@@ -27,4 +27,5 @@ MonoBehaviour:
   excelOffset: 5
   skillLevelsDone: 0
   iterationsToTest: 20
+  Testing: 0
   playerSkill: 0

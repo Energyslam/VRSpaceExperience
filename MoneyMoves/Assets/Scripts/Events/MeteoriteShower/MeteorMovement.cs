@@ -8,6 +8,8 @@ public class MeteorMovement : MonoBehaviour
     [SerializeField]
     private float minMovementSpeed = 1.0f, maxMovementSpeed = 1.0f;
 
+    public float moveSpeed = 1.0f;
+
     [SerializeField]
     private Vector3 directionOffset;
 
@@ -21,7 +23,8 @@ public class MeteorMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         direction = Random.onUnitSphere;
         direction = new Vector3(direction.x, -Mathf.Abs(direction.y), direction.z) + directionOffset;
-        direction *= Random.Range(minMovementSpeed, maxMovementSpeed);
+        moveSpeed = Random.Range(minMovementSpeed, maxMovementSpeed);
+        direction *= moveSpeed;
     }
 
     // Update is called once per frame

@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brokenMeteor: {fileID: 3888825404464418524, guid: bcff180861dcd754da7f7f65002b9a44,
     type: 3}
+  pointMultiplier: 100
 --- !u!114 &4805867037221481468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minMovementSpeed: 1
   maxMovementSpeed: 3
+  moveSpeed: 1
   directionOffset: {x: 0, y: -0.75, z: 0}
 --- !u!54 &4471319543947452657
 Rigidbody:

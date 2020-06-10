@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class RandomScaleOnStartup : MonoBehaviour
 {
-    [SerializeField]
-    private Vector3 minScale, maxScale;
+    public Vector3 minScale, maxScale;
 
     public enum ScaleMode { STATIC, DYNAMIC };
 

@@ -571,7 +571,7 @@ MonoBehaviour:
   objectHolder: {fileID: 664840439}
   meteorites:
   - {fileID: 5048324892556539868, guid: a78de08b7ed8c1f4fb2d2f260e948b77, type: 3}
-  spawnRate: 5
+  spawnRate: 8
   ySpawnOffset: 1
   maxAmountOfMeteorites: 250
   currentAmountofMeteorites: 0
@@ -947,8 +947,8 @@ MonoBehaviour:
   - {fileID: 586466378}
   minX: -363.5
   maxX: 36.09999
-  minY: -46.8
-  maxY: 61.399998
+  minY: -51.8
+  maxY: 56.399998
   minZ: -180.6
   maxZ: 110
 --- !u!4 &535635153
@@ -2843,6 +2843,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BeginScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 4894754308961677281, guid: ddc1fa5bdd08e5148853990056038c45,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4894754309040510005, guid: ddc1fa5bdd08e5148853990056038c45,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -3444,6 +3449,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Event
       objectReference: {fileID: 0}
+    - target: {fileID: 1561589203435261197, guid: 6c13ee293138c7e42b4d7fdced3bade3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1561589203435261198, guid: 6c13ee293138c7e42b4d7fdced3bade3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3452,7 +3462,7 @@ PrefabInstance:
     - target: {fileID: 1561589203435261198, guid: 6c13ee293138c7e42b4d7fdced3bade3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.3
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 1561589203435261198, guid: 6c13ee293138c7e42b4d7fdced3bade3,
         type: 3}
@@ -3940,6 +3950,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 241380547492097293, guid: efe237a9dff66134d84f817264ff308a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.73
+      objectReference: {fileID: 0}
     - target: {fileID: 241380547859554514, guid: efe237a9dff66134d84f817264ff308a,
         type: 3}
       propertyPath: m_Name

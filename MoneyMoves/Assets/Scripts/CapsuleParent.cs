@@ -6,12 +6,12 @@ using TMPro;
 public class CapsuleParent : MonoBehaviour
 {
     public GameObject dockingSpot;
-    public TextMeshProUGUI timeText;
+    public GameObject timetextHolder;
     public StaticCapsule InstantiateCapsule(GameObject capsule)
     {
         GameObject capsuleGo = Instantiate(capsule, transform);
         capsuleGo.GetComponent<StaticCapsule>().dockingSpot = dockingSpot;
-        capsuleGo.GetComponent<StaticCapsule>().timeText = timeText;
+        capsuleGo.GetComponent<StaticCapsule>().timetextHolder = timetextHolder;
         return capsuleGo.GetComponent<StaticCapsule>();
     }
 }

@@ -11,8 +11,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] List<Wave> waves = new List<Wave>();
     [SerializeField] Platform platform;
     [SerializeField] GameObject highscoreContainer;
-    int currentWave = 0;
-    int activeWaves = 0;
+    [SerializeField]int currentWave = 0;
+    [SerializeField]int activeWaves = 0;
     private void Awake()
     {
         if (_instance == null)
@@ -46,12 +46,20 @@ public class WaveManager : MonoBehaviour
             //TODO: display highscore met mooie animatie ?
             //Vector3 spawnSpot = GameManager.Instance.player.transform.position + (((platform.dockingSpotA != null ? platform.dockingSpotA.transform.position : platform.dockingSpotB.transform.position) - GameManager.Instance.player.transform.position) * 4f) + new Vector3(0f, 5f, 0f);
             //Vector3 highscoreTarget = GameManager.Instance.player.transform.position + (((platform.dockingSpotA != null ? platform.dockingSpotA.transform.position : platform.dockingSpotB.transform.position) - GameManager.Instance.player.transform.position) * 2f);
-            Vector3 spawnspot = GameManager.Instance.player.transform.position + GameManager.Instance.platform.gameObject.transform.forward * 40f;
-            Vector3 highscoreTarget = GameManager.Instance.player.transform.position + GameManager.Instance.platform.gameObject.transform.forward * 10f;
+            Vector3 spawnspot = GameManager.Instance.platform.transform.position + GameManager.Instance.platform.gameObject.transform.forward * 40f;
+            Vector3 highscoreTarget = GameManager.Instance.platform.transform.position + GameManager.Instance.platform.gameObject.transform.forward * 10f;
             
             GameObject highscoreObject = Instantiate(highscoreContainer, spawnspot, Quaternion.identity);
             highscoreObject.GetComponent<LookAtPlayer>().target = highscoreTarget;
             GameObject go = platform.dockingSpotA != null ? platform.dockingSpotA.transform.root.gameObject : platform.dockingSpotB.transform.root.gameObject;
+            if (waves[currentWave].leftCapsule != null)
+            {
+                waves[currentWave].leftCapsule.ClearListsForRespawn();
+            }
+            else if (waves[currentWave].rightCapsule != null)
+            {
+                waves[currentWave].rightCapsule.ClearListsForRespawn();
+            }
             go.AddComponent<Rigidbody>();
             return;
         }

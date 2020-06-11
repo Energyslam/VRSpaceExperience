@@ -34,7 +34,7 @@ public class DebugRaycast : MonoBehaviour
                 if (hit.collider.gameObject.name == "StartButton")
                 {
                     GameManager.Instance.StartGame();
-                    Destroy(hit.collider);
+                    Destroy(hit.collider.gameObject);
                 }
 
                 if (hit.collider.CompareTag("Letter"))

@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
     public int lives = 3;
     public int score = 0;
 
-    public bool rotateText;
     public bool hasShownInstruction;
 
     public float respawnWaitTime;
@@ -82,16 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        StartCoroutine(c_StartGame());
-    }
-    IEnumerator c_StartGame()
-    {
-        Debug.Log("trynna begin");
-        beginScreen.GetComponent<Animator>().SetTrigger("StartGame");
-        yield return new WaitForSeconds(1.5f);
-        platform.ChangeStateToSplit();
-        yield return new WaitForSeconds(1f);
-        Destroy(beginScreen);
+        beginScreen.GetComponent<BeginScreen>().BeginGame();
     }
 
     public void AddScore(int scoreValue)

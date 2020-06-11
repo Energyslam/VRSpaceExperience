@@ -20,6 +20,6 @@ public class BrokenMeteor : MonoBehaviour
             rigidbodies[i].AddTorque(Random.onUnitSphere * rotationSpeed);
         }
 
-        Destroy(gameObject, 2.0f);
+        Destroy(gameObject, 4.0f);
     }
 }

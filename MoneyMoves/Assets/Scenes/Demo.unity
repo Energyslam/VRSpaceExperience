@@ -570,10 +570,10 @@ MonoBehaviour:
   area: {fileID: 535635152}
   objectHolder: {fileID: 664840439}
   meteorites:
-  - {fileID: 5048324892556539868, guid: a78de08b7ed8c1f4fb2d2f260e948b77, type: 3}
+  - {fileID: 990765849599485761, guid: 89d0c944c61993340baa4a5944107b75, type: 3}
   spawnRate: 8
   ySpawnOffset: 1
-  maxAmountOfMeteorites: 250
+  maxAmountOfMeteorites: 175
   currentAmountofMeteorites: 0
 --- !u!4 &333616771 stripped
 Transform:

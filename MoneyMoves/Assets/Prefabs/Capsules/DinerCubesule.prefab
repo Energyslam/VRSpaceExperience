@@ -367,7 +367,9 @@ MonoBehaviour:
   - {fileID: 8475856563663774524}
   jukeBox: {fileID: 4204647003447984991}
   capsuleAnim: {fileID: 0}
-  timeText: {fileID: 0}
+  timeText:
+  - {fileID: 0}
+  timetextHolder: {fileID: 0}
   totalTime: 15
   timesToOpen: 2
   doorsToOpenAtOnce: 1
@@ -377,7 +379,6 @@ MonoBehaviour:
   respawnWaitTime: 1
   audioLerpSpeed: 0.001
   textSpeed: 50
-  rotateText: 1
   giftType: 0
   postProcessingProfile: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c,
     type: 2}
@@ -1288,7 +1289,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 123
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9161831854246538738
 Transform:
   m_ObjectHideFlags: 0

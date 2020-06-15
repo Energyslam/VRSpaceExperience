@@ -132,7 +132,7 @@ public class StaticCapsule : MonoBehaviour
 
         foreach (TextMeshProUGUI text in timeText)
         {
-            text.text = "              Time: " + tmpTime + "              Time: " + tmpTime + "              Time: " + tmpTime;
+            text.text = "                Time: " + tmpTime + "                Time: " + tmpTime + "                Time: " + tmpTime;
         }
 
 
@@ -141,7 +141,7 @@ public class StaticCapsule : MonoBehaviour
         currentTime--;
         foreach (TextMeshProUGUI text in timeText)
         {
-            text.text = "              Time: " + tmpTime + "              Time: " + tmpTime + "              Time: " + tmpTime;
+            text.text = "                Time: " + tmpTime + "                Time: " + tmpTime + "                Time: " + tmpTime;
         };
         if (currentTime <= 0)
         {
@@ -162,7 +162,7 @@ public class StaticCapsule : MonoBehaviour
 
     void SpawnGifts()
     {
-        int spawnAmount = remainingGifts == 0 ? amountToSpawn : remainingGifts;
+        int spawnAmount = amountToSpawn; // remainingGifts == 0 ? amountToSpawn : remainingGifts;
 
         for (int i = 0; i < spawnAmount; i++)
         {
@@ -230,7 +230,7 @@ public class StaticCapsule : MonoBehaviour
             GameManager.Instance.ResetPPX();
             yield break;
         }
-
+        ClearListsForRespawn();
         SetNewRotation();
     }
 
@@ -285,7 +285,7 @@ public class StaticCapsule : MonoBehaviour
     {
         foreach (GameObject go in spawnedGifts)
         {
-            GameManager.Instance.AddScore(-10);
+            //GameManager.Instance.AddScore(-10);
             Destroy(go);
         }
         chosenLocations.Clear();

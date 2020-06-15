@@ -196,7 +196,7 @@ public class WhacASphereManager : MonoBehaviour
 
         DisplayErrorCross();
 
-        totalScoreText.text = "Total score = " + totalScore;
+        totalScoreText.text = "Total score = " + totalScore + "\nTotal added point: " + totalScore / 10;
 
         if (leftGame.score - 10 < 0 && rightGame.score - 10 < 0)
         {
@@ -208,6 +208,8 @@ public class WhacASphereManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(2f);
             }
+            GameManager.Instance.AddScore(totalScore/10);
+            GameManager.Instance.UpdateText();
             MoveAfterEnding();
         }
         else

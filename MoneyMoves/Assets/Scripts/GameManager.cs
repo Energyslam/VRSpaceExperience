@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using TMPro.Examples;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Valve.VR;
@@ -94,7 +95,11 @@ public class GameManager : MonoBehaviour
     public void UpdateText()
     {
         if (scoreAndLifeText != null)
-        scoreAndLifeText.text = "Total score: " + score;
+        {
+            scoreAndLifeText.text = "Total score: " + score;
+            scoreAndLifeText.GetComponent<WarpTextExample>().RewrapText();
+        }
+
     }
     //public void PointerClick(object sender, PointerEventArgs e)
     //{

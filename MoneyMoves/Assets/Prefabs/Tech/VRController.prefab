@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6799911152290840227}
   - component: {fileID: 2523464490076079253}
   - component: {fileID: 8086684813824096364}
-  - component: {fileID: 3110466572490652345}
   - component: {fileID: 2341972525110602053}
+  - component: {fileID: 1298859504918246820}
   m_Layer: 0
   m_Name: VRController
   m_TagString: Untagged
@@ -82,19 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3110466572490652345
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7495532337029303472}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.012524769, y: 0.008866992, z: 0.03483542}
-  m_Center: {x: 0, y: 0.0044552516, z: 0.000052535906}
 --- !u!54 &2341972525110602053
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -111,3 +98,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1298859504918246820
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495532337029303472}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.12524769, y: 0.08866991, z: 0.3483542}
+  m_Center: {x: 0, y: 0.044552512, z: 0.00052535534}

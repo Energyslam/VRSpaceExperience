@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8743387263667747459}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: MediumBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7469784378278336014}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SuperFarFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8244215516617551223}
   - component: {fileID: 5936318273330481470}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 526422481178471510}
   - component: {fileID: 904111907131480103}
   - component: {fileID: 3688130853271063511}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Highlighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 6017574659253133666}
   - component: {fileID: 1021354262652231191}
   - component: {fileID: 4776212660846214849}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 2202354534780264965}
   - component: {fileID: 7190933009011529779}
   - component: {fileID: 3528528611311658186}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SmallSlingShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -437,7 +437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8062480253179446264}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FarBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,7 +467,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2355989948521553185}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CloseBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,7 +497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 836590086879589928}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SuperCloseFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -527,7 +527,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4237411788520582374}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: InvisiblePlanes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +565,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7906779872835339677}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FarFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +595,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4839419654382057065}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: MediumFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -625,7 +625,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7860339596256437269}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SuperCloseBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -657,7 +657,7 @@ GameObject:
   - component: {fileID: 6785055901127239243}
   - component: {fileID: 3878787948281658883}
   - component: {fileID: 7900815554796967807}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -797,7 +797,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7469538715943729559}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CloseFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -827,7 +827,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2636238635957884110}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Swings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -874,7 +874,7 @@ GameObject:
   - component: {fileID: 3681255744856130779}
   - component: {fileID: 2454615637614204893}
   - component: {fileID: 3773473485024981530}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PullPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1025,7 +1025,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!114 &3681255744856130779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1320,6 +1320,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoundPlaneLT
       objectReference: {fileID: 0}
+    - target: {fileID: 8842594166124352869, guid: cc888ea9647caf348ad8031f8e5f3321,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc888ea9647caf348ad8031f8e5f3321, type: 3}
 --- !u!4 &5908381827693299650 stripped
@@ -1414,6 +1419,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RoundPlaneRB
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842594166124352869, guid: cc888ea9647caf348ad8031f8e5f3321,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc888ea9647caf348ad8031f8e5f3321, type: 3}
@@ -1510,6 +1520,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoundPlaneBB
       objectReference: {fileID: 0}
+    - target: {fileID: 8842594166124352869, guid: cc888ea9647caf348ad8031f8e5f3321,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc888ea9647caf348ad8031f8e5f3321, type: 3}
 --- !u!4 &8658524507866700268 stripped
@@ -1604,6 +1619,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RoundPlaneMT
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842594166124352869, guid: cc888ea9647caf348ad8031f8e5f3321,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc888ea9647caf348ad8031f8e5f3321, type: 3}
@@ -1700,6 +1720,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoundPlaneRT
       objectReference: {fileID: 0}
+    - target: {fileID: 8842594166124352869, guid: cc888ea9647caf348ad8031f8e5f3321,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc888ea9647caf348ad8031f8e5f3321, type: 3}
 --- !u!4 &495296551462732191 stripped
@@ -1794,6 +1819,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RoundPlaneMB
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842594166124352869, guid: cc888ea9647caf348ad8031f8e5f3321,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc888ea9647caf348ad8031f8e5f3321, type: 3}
@@ -1890,6 +1920,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoundPlaneLB
       objectReference: {fileID: 0}
+    - target: {fileID: 8842594166124352869, guid: cc888ea9647caf348ad8031f8e5f3321,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc888ea9647caf348ad8031f8e5f3321, type: 3}
 --- !u!4 &3054898768267338623 stripped
@@ -1984,6 +2019,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RoundPlaneBT
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842594166124352869, guid: cc888ea9647caf348ad8031f8e5f3321,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc888ea9647caf348ad8031f8e5f3321, type: 3}

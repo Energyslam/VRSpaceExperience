@@ -42,7 +42,7 @@ public class WhacASphereManager : MonoBehaviour
         {
             //this.transform.position = CalculateGamePosition();
             this.transform.position = GameManager.Instance.platform.transform.position + (GameManager.Instance.platform.transform.forward * 10f); //TODO: make better after demo
-            this.transform.position += new Vector3(0, 2f, 0);
+            this.transform.position += new Vector3(0, 4f, 0);
             transform.LookAt(Camera.main.transform);
             transform.eulerAngles -= new Vector3(transform.localEulerAngles.x, 90, 0);
         }

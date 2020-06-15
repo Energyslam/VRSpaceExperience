@@ -59,20 +59,29 @@ public class StaticCapsule : MonoBehaviour
     [SerializeField]
     private VolumeProfile postProcessingProfile;
 
-    void Start()
+    private void Start()
     {
         timesToOpen = GameManager.Instance.timesToOpenCapsules;
         totalTime = GameManager.Instance.totalOpenTime;
         respawnWaitTime = GameManager.Instance.respawnWaitTime;
-        timeText = timetextHolder.GetComponentsInChildren<TextMeshProUGUI>();
+        if (timetextHolder != null)
+        {
+            timeText = timetextHolder.GetComponentsInChildren<TextMeshProUGUI>();
+        }
         Wave wave = GetComponentInParent<Wave>();
-        otherCapsuleInWave = this.gameObject == wave.leftCapsule.gameObject ? wave.rightCapsule.gameObject : wave.leftCapsule.gameObject;
-        float dockingSpotY = dockingSpot.transform.position.y;
-        dockingSpot.transform.position = this.transform.position + (otherCapsuleInWave.transform.position - dockingSpot.transform.position).normalized * (dockingSpot.transform.position - this.transform.position).magnitude;
-        dockingSpot.transform.position = new Vector3(dockingSpot.transform.position.x, dockingSpotY, dockingSpot.transform.position.z);
-        this.transform.LookAt(dockingSpot.transform);
-        this.transform.localEulerAngles = new Vector3(0, this.transform.localEulerAngles.y, 0);
+        if (wave != null)
+        {
+            otherCapsuleInWave = this.gameObject == wave.leftCapsule.gameObject ? wave.rightCapsule.gameObject : wave.leftCapsule.gameObject;
+        }
 
+        if (dockingSpot != null)
+        {
+            float dockingSpotY = dockingSpot.transform.position.y;
+            dockingSpot.transform.position = this.transform.position + (otherCapsuleInWave.transform.position - dockingSpot.transform.position).normalized * (dockingSpot.transform.position - this.transform.position).magnitude;
+            dockingSpot.transform.position = new Vector3(dockingSpot.transform.position.x, dockingSpotY, dockingSpot.transform.position.z);
+            this.transform.LookAt(dockingSpot.transform);
+            this.transform.localEulerAngles = new Vector3(0, this.transform.localEulerAngles.y, 0);
+        }
         //textStartingY = timeText.transform.position.y;
 
         foreach (Transform t in locationParent.transform)

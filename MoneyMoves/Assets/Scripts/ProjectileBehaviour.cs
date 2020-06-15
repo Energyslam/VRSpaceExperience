@@ -7,6 +7,8 @@ public class ProjectileBehaviour : MonoBehaviour
     [SerializeField] GameObject explosionSound;
     [SerializeField] GameObject floatingPoints;
 
+    private Vector3 direction, oldPosition;
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Colliding with " + other.gameObject.name);

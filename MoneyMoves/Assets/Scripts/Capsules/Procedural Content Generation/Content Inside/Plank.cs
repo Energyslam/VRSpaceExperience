@@ -20,5 +20,7 @@ public class Plank : WallObject
         {
             rend[i].enabled = !isOpen;
         }
+
+        GetComponent<BoxCollider>().enabled = !isOpen;
     }
 }

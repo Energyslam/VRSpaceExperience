@@ -9,9 +9,11 @@ public class CapsuleParent : MonoBehaviour
     public GameObject timetextHolder;
     public StaticCapsule InstantiateCapsule(GameObject capsule)
     {
-        GameObject capsuleGo = Instantiate(capsule, transform);
-        capsuleGo.GetComponent<StaticCapsule>().dockingSpot = dockingSpot;
-        capsuleGo.GetComponent<StaticCapsule>().timetextHolder = timetextHolder;
-        return capsuleGo.GetComponent<StaticCapsule>();
+        capsule.transform.parent = transform;
+        capsule.transform.localPosition = Vector3.zero;
+        capsule.GetComponent<GridManager>().insideContext.SetActive(false);
+        capsule.GetComponent<StaticCapsule>().dockingSpot = dockingSpot;
+        capsule.GetComponent<StaticCapsule>().timetextHolder = timetextHolder;
+        return capsule.GetComponent<StaticCapsule>();
     }
 }

@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
     public void UpdateText()
     {
         if (scoreAndLifeText != null)
-        scoreAndLifeText.text = "Score: " + score + "\nLives: " + lives;
+        scoreAndLifeText.text = "Total score: " + score;
     }
     //public void PointerClick(object sender, PointerEventArgs e)
     //{

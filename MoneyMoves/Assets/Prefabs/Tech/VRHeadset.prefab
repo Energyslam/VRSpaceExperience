@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 920807852610077708}
   - component: {fileID: 8186518699519901242}
   - component: {fileID: 2495225131189797571}
-  - component: {fileID: 8590554779082492855}
   - component: {fileID: 7271606357313760595}
+  - component: {fileID: 8420925657595043825}
   m_Layer: 0
   m_Name: VRHeadset
   m_TagString: Untagged
@@ -81,19 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &8590554779082492855
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4223254974091507231}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0015781797, y: 0.0013912052, z: 0.002253128}
-  m_Center: {x: -0.000002156623, y: 0.00070408534, z: -0.00035374262}
 --- !u!54 &7271606357313760595
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -110,3 +97,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &8420925657595043825
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4223254974091507231}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.23672694, y: 0.20868078, z: 0.33796918}
+  m_Center: {x: -0.00032349303, y: 0.1056128, z: -0.053061392}

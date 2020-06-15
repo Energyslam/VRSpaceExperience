@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ledMaterials: []
+  rend: {fileID: 4537482145977789586}
   targetMaterial: {fileID: 2100000, guid: b7f41eb37e1fbe54b88885eceafdd148, type: 2}
   col1: {r: 2, g: 0, b: 0, a: 0}
   col2: {r: 0.36525774, g: 0, b: 1, a: 0}

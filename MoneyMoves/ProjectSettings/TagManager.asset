@@ -26,8 +26,8 @@ TagManager:
   - PostProcessing
   - GridCell
   - NoDirectionalLight
-  - 
-  - 
+  - Player
+  - Projectile
   - 
   - 
   - 

@@ -59,7 +59,7 @@ public class StaticCapsule : MonoBehaviour
     [SerializeField]
     private VolumeProfile postProcessingProfile;
 
-    void Start()
+    private void Start()
     {
         timesToOpen = GameManager.Instance.timesToOpenCapsules;
         totalTime = GameManager.Instance.totalOpenTime;

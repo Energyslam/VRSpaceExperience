@@ -25,12 +25,12 @@ public class MeteorMovement : MonoBehaviour
         direction = new Vector3(direction.x, -Mathf.Abs(direction.y), direction.z) + directionOffset;
         moveSpeed = Random.Range(minMovementSpeed, maxMovementSpeed);
         direction *= moveSpeed;
+        rb.AddTorque(Random.onUnitSphere * Random.Range(minMovementSpeed, maxMovementSpeed), ForceMode.Impulse);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         rb.velocity = direction;
-        rb.AddTorque(Random.onUnitSphere * Random.Range(minMovementSpeed, maxMovementSpeed));
     }
 }

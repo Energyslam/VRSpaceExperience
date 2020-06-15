@@ -54,8 +54,7 @@ public class GridManager : MonoBehaviour
     private List<GridCell> cells = new List<GridCell>();
 
     [Header("Spawning objects")]
-    [SerializeField]
-    private GameObject objectsHolderPCG, insideContext;
+    public GameObject objectsHolderPCG, insideContext;
         
     [SerializeField]
     private List<GameObject> connectableBigObject, cornerConnectableBigObject, standaloneBigObject, mediumMultiObject, mediumSingleObject, topOfMediumMulti, miscellaneousObjects;

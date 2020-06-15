@@ -11,13 +11,14 @@ public class Wave : MonoBehaviour
 
     private void Awake()
     {
-        List<GameObject> tempList = capsuleTypes;
-        GameObject randomCapsuleLeft = tempList[Random.Range(0, capsuleTypes.Count)];
-        tempList.Remove(randomCapsuleLeft);
-        GameObject randomCapsuleRight = tempList[Random.Range(0, capsuleTypes.Count)];
+        GameObject leftObj, rightObj;
+        leftObj = LightBaker._instance.GetRandomCapsule();
+        LightBaker._instance.MoveCapsule(leftObj);
+        rightObj = LightBaker._instance.GetRandomCapsule();
+        LightBaker._instance.MoveCapsule(rightObj);
 
-        leftCapsule = leftCapsuleParent.GetComponent<CapsuleParent>().InstantiateCapsule(randomCapsuleLeft);
-        rightCapsule = rightCapsuleParent.GetComponent<CapsuleParent>().InstantiateCapsule(randomCapsuleRight);
+        leftCapsule = leftCapsuleParent.GetComponent<CapsuleParent>().InstantiateCapsule(leftObj);
+        rightCapsule = rightCapsuleParent.GetComponent<CapsuleParent>().InstantiateCapsule(rightObj);
         leftDockingSpot.capsule = leftCapsule;
         rightDockingSpot.capsule = rightCapsule;
     }

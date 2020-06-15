@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Valve.VR.InteractionSystem;
+using System.Threading;
 
 public class WhacASphereManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class WhacASphereManager : MonoBehaviour
     [SerializeField] Image errorCross;
 
     [SerializeField] float totalTime;
+    [SerializeField] Image timerIcon;
     float remainingTime;
     int finalLeftScore;
     int finalRightScore;
@@ -34,7 +36,7 @@ public class WhacASphereManager : MonoBehaviour
     }
     void Start()
     {
-        timeText.text = remainingTime < 10 ? "00:0" + remainingTime : "00:" + remainingTime;
+        //timeText.text = remainingTime < 10 ? "00:0" + remainingTime : "00:" + remainingTime;
         StartCoroutine(CountdownTime());
         if (!isTesting)
         {
@@ -52,7 +54,8 @@ public class WhacASphereManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         remainingTime--;
-        timeText.text = remainingTime < 10 ? "00:0" + remainingTime : "00:" + remainingTime;
+        //timeText.text = remainingTime < 10 ? "00:0" + remainingTime : "00:" + remainingTime;
+        timerIcon.fillAmount = remainingTime / totalTime;
         if (remainingTime > 0)
         {
             StartCoroutine(CountdownTime());

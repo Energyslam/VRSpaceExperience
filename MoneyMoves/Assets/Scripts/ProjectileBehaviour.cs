@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileBehaviour : MonoBehaviour
 {
     [SerializeField] GameObject explosionSound;
+    [SerializeField] GameObject floatingPoints;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,6 +14,7 @@ public class ProjectileBehaviour : MonoBehaviour
         {
             other.GetComponent<GiftBehaviour>().SolveCollision();
             GameObject explosion = Instantiate(explosionSound, this.transform.position, Quaternion.identity);
+            //GameObject floatyPoints = Instantiate(floatingPoints, this.transform.position, Quaternion.identity);
             Destroy(explosion, explosion.GetComponent<AudioSource>().clip.length);
             Destroy(this.gameObject);
         }

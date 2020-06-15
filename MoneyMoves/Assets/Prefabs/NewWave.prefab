@@ -206,6 +206,21 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1133171715699479784, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629144377289652003, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: resetPoint
+      value: -38
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629144378491985598, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
+      objectReference: {fileID: 0}
     - target: {fileID: 2953931561574461479, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -265,6 +280,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LeftCapsuleParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672360754227320602, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: resetPoint
+      value: -38
+      objectReference: {fileID: 0}
+    - target: {fileID: 6672360755424165511, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763291831779944753, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: resetPoint
+      value: -38
+      objectReference: {fileID: 0}
+    - target: {fileID: 7763291833245171884, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970762153974201409, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: resetPoint
+      value: -38
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970762154102494684, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 514
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da2c755055310f247a90226e2abecad0, type: 3}

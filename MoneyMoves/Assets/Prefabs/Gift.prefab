@@ -31,7 +31,7 @@ GameObject:
   - component: {fileID: 2866644743414076550}
   - component: {fileID: 1819033766655004013}
   m_Layer: 0
-  m_Name: DestroyableGift
+  m_Name: Gift
   m_TagString: Collideable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,13 +114,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf052267c319d14fa6d631c5064441b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabbable: 0
+  isGrabbable: 0
   speed: 3
   wobbleMagnitude: 0.3
   fireworkGO: {fileID: 4424466681498197796}
   grabber: {fileID: 2842588472507958378}
   deliverPoint: {fileID: 0}
-  attachedCapsule: {fileID: 0}
+  floatingPoints: {fileID: 3243958227661790550, guid: 39331e2c26aebe849b28209e6cf1c069,
+    type: 3}
   attachedStatic: {fileID: 0}
   explodeSFX: {fileID: 1819033766655004013}
 --- !u!65 &706674950290498676

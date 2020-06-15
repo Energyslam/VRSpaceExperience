@@ -4849,3 +4849,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionSound: {fileID: 902367978681699252, guid: 169e42cfb994df84e91ab3f6f129b632,
     type: 3}
+  floatingPoints: {fileID: 3243958227661790550, guid: 39331e2c26aebe849b28209e6cf1c069,
+    type: 3}

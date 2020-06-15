@@ -123,7 +123,7 @@ public class StaticCapsule : MonoBehaviour
 
         foreach (TextMeshProUGUI text in timeText)
         {
-            text.text = "          Time: " + tmpTime + "          Time: " + tmpTime + "          Time: " + tmpTime;
+            text.text = "              Time: " + tmpTime + "              Time: " + tmpTime + "              Time: " + tmpTime;
         }
 
 
@@ -132,7 +132,7 @@ public class StaticCapsule : MonoBehaviour
         currentTime--;
         foreach (TextMeshProUGUI text in timeText)
         {
-            text.text = "          Time: " + tmpTime + "          Time: " + tmpTime + "          Time: " + tmpTime;
+            text.text = "              Time: " + tmpTime + "              Time: " + tmpTime + "              Time: " + tmpTime;
         };
         if (currentTime <= 0)
         {

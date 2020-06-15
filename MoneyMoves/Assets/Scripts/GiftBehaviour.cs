@@ -7,7 +7,8 @@ public class GiftBehaviour : MonoBehaviour
     public bool isGrabbable;
     [SerializeField] float speed = 1f;
     [SerializeField] float wobbleMagnitude = 1f;
-    [SerializeField] GameObject fireworkGO, grabber, deliverPoint;
+    [SerializeField] GameObject fireworkGO, grabber, deliverPoint, floatingPoints;
+
     public StaticCapsule attachedStatic;
     bool canMove;
     Vector3 startPos;
@@ -57,6 +58,7 @@ public class GiftBehaviour : MonoBehaviour
             Destroy(fireworkGO, 6f);
             attachedStatic.UpdateGifts(this.gameObject);
             explodeSFX.Play();
+            Instantiate(floatingPoints, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject);
             GameManager.Instance.AddScore(10);
         }

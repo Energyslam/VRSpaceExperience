@@ -15,9 +15,7 @@ public class ProjectileBehaviour : MonoBehaviour
         if (other.CompareTag("Collideable"))
         {
             other.GetComponent<GiftBehaviour>().SolveCollision();
-            GameObject explosion = Instantiate(explosionSound, this.transform.position, Quaternion.identity);
             //GameObject floatyPoints = Instantiate(floatingPoints, this.transform.position, Quaternion.identity);
-            Destroy(explosion, explosion.GetComponent<AudioSource>().clip.length);
             Destroy(this.gameObject);
         }
 

@@ -44,6 +44,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private VolumeProfile defaultProfile;
 
+    [SerializeField]
+    private List<AudioClip> orchestra;
+
+    private int currentOrchestraClip = 0;
+
     void Awake()
     {
         if (_instance == null)
@@ -99,7 +104,22 @@ public class GameManager : MonoBehaviour
             scoreAndLifeText.text = "Total score: " + score;
             scoreAndLifeText.GetComponent<WarpTextExample>().RewrapText();
         }
+    }
 
+    public void ResetOrchestra()
+    {
+        currentOrchestraClip = 0;
+    }
+
+    public void UpdateOrchestra()
+    {
+        if (currentOrchestraClip < orchestra.Count)
+            currentOrchestraClip++;
+    }
+
+    public AudioClip GetOrchestraClip()
+    {
+        return orchestra[currentOrchestraClip];
     }
     //public void PointerClick(object sender, PointerEventArgs e)
     //{

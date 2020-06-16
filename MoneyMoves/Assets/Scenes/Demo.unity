@@ -314,6 +314,11 @@ MonoBehaviour:
   laserpointer: {fileID: 1072743581}
   scoreAndLifeText: {fileID: 650796014}
   defaultProfile: {fileID: 11400000, guid: 169e507651be3f84780f419250b86ffd, type: 2}
+  orchestra:
+  - {fileID: 8300000, guid: 7746bf74b23e9a34c976865b1e47f80f, type: 3}
+  - {fileID: 8300000, guid: 6c8338930134665408a7da8df2ae0dc1, type: 3}
+  - {fileID: 8300000, guid: 2392b1c4990951143bf0a10d6a3ddba1, type: 3}
+  - {fileID: 8300000, guid: f8f1977b81acf1448a9b51d8758ff7dc, type: 3}
   hapticAction:
     actionPath: 
     needsReinit: 0

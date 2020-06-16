@@ -2656,12 +2656,14 @@ MonoBehaviour:
   pointMultiplier: 2
   area: {fileID: 1633844814}
   objectHolder: {fileID: 704638022}
-  meteorites:
-  - {fileID: 990765849599485761, guid: 89d0c944c61993340baa4a5944107b75, type: 3}
   spawnRate: 10
   ySpawnOffset: 1
-  maxAmountOfMeteorites: 175
   currentAmountofMeteorites: 0
+  maxAmountofMeteorites: 175
+  pool:
+    tag: Meteor
+    prefab: {fileID: 990765849599485761, guid: 89d0c944c61993340baa4a5944107b75, type: 3}
+    size: 250
 --- !u!4 &704638022 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2534725529225061030, guid: 6c13ee293138c7e42b4d7fdced3bade3,

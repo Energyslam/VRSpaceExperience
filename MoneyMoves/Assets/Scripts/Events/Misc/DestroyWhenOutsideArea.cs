@@ -18,7 +18,7 @@ public class DestroyWhenOutsideArea : MonoBehaviour
         if (transform.position.x < area.minX || transform.position.x > area.maxX || transform.position.y < area.minY || transform.position.y > area.maxY || transform.position.z < area.minZ || transform.position.z > area.maxZ)
         {
             shower.UpdateMeteorCount(-1);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

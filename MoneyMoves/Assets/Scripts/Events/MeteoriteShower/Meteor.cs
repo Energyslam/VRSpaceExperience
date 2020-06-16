@@ -7,7 +7,7 @@ using UnityEngine;
 public class Meteor : MonoBehaviour
 {
     [SerializeField]
-    private GameObject brokenMeteor;
+    private GameObject brokenMeteor, floatingPoints;
 
     private int value = 1;
 
@@ -25,6 +25,8 @@ public class Meteor : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<ProjectileBehaviour>() != null)
         {
+            FloatingPoints pts = Instantiate(floatingPoints, this.transform.position, Quaternion.identity).GetComponent<FloatingPoints>();
+            pts.points = value;
             GameManager.Instance.AddScore(value);
         }
 

@@ -8,7 +8,7 @@ public class FloatingPoints : MonoBehaviour
 {
     [SerializeField] float speed = 1;
     [SerializeField] float fadeDuration = 2;
-    [SerializeField] int points = 10;
+    public int points = 10;
     [SerializeField] TextMeshProUGUI text;
     // Start is called before the first frame update
     void Start()

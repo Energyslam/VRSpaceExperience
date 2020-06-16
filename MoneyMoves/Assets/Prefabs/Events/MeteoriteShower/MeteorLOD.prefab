@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5502386302513375491}
   - component: {fileID: 4062462954349430987}
   - component: {fileID: 410109203191699293}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: MeteorLOD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.14
+  m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7636693975470037430
 Rigidbody:
@@ -111,7 +111,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brokenMeteor: {fileID: 3888825404464418524, guid: bcff180861dcd754da7f7f65002b9a44,
     type: 3}
-  pointMultiplier: 100
+  floatingPoints: {fileID: 3243958227661790550, guid: 39331e2c26aebe849b28209e6cf1c069,
+    type: 3}
+  pointMultiplier: 500
 --- !u!114 &2745178105309386249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +190,7 @@ GameObject:
   - component: {fileID: 4346847690937336167}
   - component: {fileID: 5650089591678141396}
   - component: {fileID: 7684394928786972783}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Meteor_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +269,7 @@ GameObject:
   - component: {fileID: 2158328264256974647}
   - component: {fileID: 6648767461569421848}
   - component: {fileID: 7614739208252504312}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Meteor_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +348,7 @@ GameObject:
   - component: {fileID: 2078650210713951480}
   - component: {fileID: 5073418857352752500}
   - component: {fileID: 8163811451519828029}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Meteor_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

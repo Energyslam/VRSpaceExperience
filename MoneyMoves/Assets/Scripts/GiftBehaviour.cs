@@ -60,10 +60,11 @@ public class GiftBehaviour : MonoBehaviour
             explodeSFX.clip = GameManager.Instance.GetOrchestraClip();
             explodeSFX.Play();
             GameManager.Instance.UpdateOrchestra();
-            Instantiate(floatingPoints, this.transform.position, Quaternion.identity);
+            FloatingPoints pts = Instantiate(floatingPoints, this.transform.position, Quaternion.identity).GetComponent<FloatingPoints>();
+            pts.points = 1500;
             GetComponent<MeshRenderer>().enabled = false;
             Destroy(this.gameObject, explodeSFX.clip.length);
-            GameManager.Instance.AddScore(100);
+            GameManager.Instance.AddScore(1500);
         }
         else if (isGrabbable)
         {
@@ -78,7 +79,7 @@ public class GiftBehaviour : MonoBehaviour
             {
                 col.enabled = false;
             }
-            GameManager.Instance.AddScore(10);
+            GameManager.Instance.AddScore(1500);
             Destroy(this.gameObject, 10f);
         }
     }

@@ -208,7 +208,7 @@ public class WhacASphereManager : MonoBehaviour
             {
                 yield return new WaitForSeconds(2f);
             }
-            GameManager.Instance.AddScore(totalScore/10);
+            GameManager.Instance.AddScore(totalScore * 100);
             GameManager.Instance.UpdateText();
             MoveAfterEnding();
         }

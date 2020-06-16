@@ -97,7 +97,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 0.03
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &402199812954466506
 MonoBehaviour:
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brokenMeteor: {fileID: 3888825404464418524, guid: bcff180861dcd754da7f7f65002b9a44,
     type: 3}
+  floatingPoints: {fileID: 0}
   pointMultiplier: 100
 --- !u!114 &4805867037221481468
 MonoBehaviour:

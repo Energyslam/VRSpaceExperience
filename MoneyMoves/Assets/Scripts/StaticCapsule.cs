@@ -219,6 +219,7 @@ public class StaticCapsule : MonoBehaviour
         yield return new WaitForSeconds(respawnWaitTime);
         timetextHolder.gameObject.SetActive(false);
         CalculateNearestDoors();
+        GameManager.Instance.ResetOrchestra();
 
         //yield return new WaitForSeconds(capsuleAnim.GetCurrentAnimatorStateInfo(0).length);
 

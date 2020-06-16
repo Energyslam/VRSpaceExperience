@@ -57,10 +57,13 @@ public class GiftBehaviour : MonoBehaviour
             fireworkGO.transform.parent = null;
             Destroy(fireworkGO, 6f);
             attachedStatic.UpdateGifts(this.gameObject);
+            explodeSFX.clip = GameManager.Instance.GetOrchestraClip();
             explodeSFX.Play();
+            GameManager.Instance.UpdateOrchestra();
             Instantiate(floatingPoints, this.transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
-            GameManager.Instance.AddScore(10);
+            GetComponent<MeshRenderer>().enabled = false;
+            Destroy(this.gameObject, explodeSFX.clip.length);
+            GameManager.Instance.AddScore(100);
         }
         else if (isGrabbable)
         {

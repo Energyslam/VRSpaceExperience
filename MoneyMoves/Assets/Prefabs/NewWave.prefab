@@ -103,6 +103,17 @@ PrefabInstance:
       propertyPath: m_textAlignment
       value: 514
       objectReference: {fileID: 0}
+    - target: {fileID: 2629144378491985598, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 72c70d489032c2549a6b75522aa46053,
+        type: 2}
+    - target: {fileID: 2629144378491985598, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2953931561574461479, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -178,6 +189,17 @@ PrefabInstance:
       propertyPath: m_textAlignment
       value: 514
       objectReference: {fileID: 0}
+    - target: {fileID: 6672360755424165511, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 72c70d489032c2549a6b75522aa46053,
+        type: 2}
+    - target: {fileID: 6672360755424165511, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7763291831779944753, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
       propertyPath: resetPoint
@@ -193,6 +215,17 @@ PrefabInstance:
       propertyPath: m_textAlignment
       value: 514
       objectReference: {fileID: 0}
+    - target: {fileID: 7763291833245171884, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 72c70d489032c2549a6b75522aa46053,
+        type: 2}
+    - target: {fileID: 7763291833245171884, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7970762153974201409, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
       propertyPath: resetPoint
@@ -207,6 +240,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textAlignment
       value: 514
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970762154102494684, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 72c70d489032c2549a6b75522aa46053,
+        type: 2}
+    - target: {fileID: 7970762154102494684, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da2c755055310f247a90226e2abecad0, type: 3}
@@ -286,6 +330,17 @@ PrefabInstance:
       propertyPath: m_textAlignment
       value: 514
       objectReference: {fileID: 0}
+    - target: {fileID: 2629144378491985598, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 72c70d489032c2549a6b75522aa46053,
+        type: 2}
+    - target: {fileID: 2629144378491985598, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2953931561574461479, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -361,6 +416,17 @@ PrefabInstance:
       propertyPath: m_textAlignment
       value: 514
       objectReference: {fileID: 0}
+    - target: {fileID: 6672360755424165511, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 72c70d489032c2549a6b75522aa46053,
+        type: 2}
+    - target: {fileID: 6672360755424165511, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7763291831779944753, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
       propertyPath: resetPoint
@@ -376,6 +442,17 @@ PrefabInstance:
       propertyPath: m_textAlignment
       value: 514
       objectReference: {fileID: 0}
+    - target: {fileID: 7763291833245171884, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 72c70d489032c2549a6b75522aa46053,
+        type: 2}
+    - target: {fileID: 7763291833245171884, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7970762153974201409, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
       propertyPath: resetPoint
@@ -390,6 +467,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textAlignment
       value: 514
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970762154102494684, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 72c70d489032c2549a6b75522aa46053,
+        type: 2}
+    - target: {fileID: 7970762154102494684, guid: da2c755055310f247a90226e2abecad0,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da2c755055310f247a90226e2abecad0, type: 3}

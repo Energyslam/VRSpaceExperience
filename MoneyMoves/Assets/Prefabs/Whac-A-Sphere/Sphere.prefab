@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8905630796278818344}
   - component: {fileID: 8905630796278818347}
   - component: {fileID: 8905630796278818342}
+  - component: {fileID: 3354122196966478840}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: MinigameSphere
@@ -109,3 +110,17 @@ MonoBehaviour:
   unlit: {fileID: 2100000, guid: dc62ce37f5d35d043bb39dd6fcb6e53a, type: 2}
   positiveLit: {fileID: 2100000, guid: 0db8dd3624fef3f4282718399ef4b654, type: 2}
   negativeLit: {fileID: 2100000, guid: 0d60cb158fe071e43a18338eaf993793, type: 2}
+--- !u!114 &3354122196966478840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8905630796278818349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ff45fd099f79c4581ea1c39c814dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScrollX: 0.1
+  ScrollY: 0.1

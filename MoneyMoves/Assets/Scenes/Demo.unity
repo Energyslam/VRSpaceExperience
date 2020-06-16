@@ -3306,7 +3306,7 @@ PrefabInstance:
     - target: {fileID: 3617405768819341218, guid: 70eaca63b3340c045aad6772d4d219f5,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3617405768819341218, guid: 70eaca63b3340c045aad6772d4d219f5,
         type: 3}
@@ -3328,6 +3328,18 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Total score: 0'
       objectReference: {fileID: 0}
+    - target: {fileID: 3617405768819341218, guid: 70eaca63b3340c045aad6772d4d219f5,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 72c70d489032c2549a6b75522aa46053,
+        type: 2}
+    - target: {fileID: 3617405768819341218, guid: 70eaca63b3340c045aad6772d4d219f5,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -5268758411071030382, guid: 72c70d489032c2549a6b75522aa46053,
+        type: 2}
     - target: {fileID: 3617405768819341219, guid: 70eaca63b3340c045aad6772d4d219f5,
         type: 3}
       propertyPath: m_SizeDelta.x

@@ -91,7 +91,7 @@ PrefabInstance:
     - target: {fileID: 2629144377289652003, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
       propertyPath: resetPoint
-      value: -40.9
+      value: -40.8
       objectReference: {fileID: 0}
     - target: {fileID: 2629144377289652003, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
@@ -177,7 +177,7 @@ PrefabInstance:
     - target: {fileID: 6672360754227320602, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
       propertyPath: resetPoint
-      value: -40.9
+      value: -40.8
       objectReference: {fileID: 0}
     - target: {fileID: 6672360754227320602, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
@@ -203,7 +203,7 @@ PrefabInstance:
     - target: {fileID: 7763291831779944753, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
       propertyPath: resetPoint
-      value: -40.9
+      value: -40.8
       objectReference: {fileID: 0}
     - target: {fileID: 7763291831779944753, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
@@ -229,7 +229,7 @@ PrefabInstance:
     - target: {fileID: 7970762153974201409, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
       propertyPath: resetPoint
-      value: -40.9
+      value: -40.8
       objectReference: {fileID: 0}
     - target: {fileID: 7970762153974201409, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
@@ -318,7 +318,7 @@ PrefabInstance:
     - target: {fileID: 2629144377289652003, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
       propertyPath: resetPoint
-      value: -40.9
+      value: -40.8
       objectReference: {fileID: 0}
     - target: {fileID: 2629144377289652003, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
@@ -404,7 +404,7 @@ PrefabInstance:
     - target: {fileID: 6672360754227320602, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
       propertyPath: resetPoint
-      value: -40.9
+      value: -40.8
       objectReference: {fileID: 0}
     - target: {fileID: 6672360754227320602, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
@@ -430,7 +430,7 @@ PrefabInstance:
     - target: {fileID: 7763291831779944753, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
       propertyPath: resetPoint
-      value: -40.9
+      value: -40.8
       objectReference: {fileID: 0}
     - target: {fileID: 7763291831779944753, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
@@ -456,7 +456,7 @@ PrefabInstance:
     - target: {fileID: 7970762153974201409, guid: da2c755055310f247a90226e2abecad0,
         type: 3}
       propertyPath: resetPoint
-      value: -40.9
+      value: -40.8
       objectReference: {fileID: 0}
     - target: {fileID: 7970762153974201409, guid: da2c755055310f247a90226e2abecad0,
         type: 3}

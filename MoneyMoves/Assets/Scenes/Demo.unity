@@ -1989,6 +1989,36 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 541415764}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &588152527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 588152528}
+  m_Layer: 0
+  m_Name: ObjectHolderRubble
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &588152528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588152527}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 704638020}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &632010089
 GameObject:
   m_ObjectHideFlags: 0
@@ -2626,6 +2656,11 @@ PrefabInstance:
       propertyPath: yRadius
       value: 3.88
       objectReference: {fileID: 0}
+    - target: {fileID: 5973161654430436325, guid: 6c13ee293138c7e42b4d7fdced3bade3,
+        type: 3}
+      propertyPath: m_Name
+      value: ObjectHolderMeteor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c13ee293138c7e42b4d7fdced3bade3, type: 3}
 --- !u!1 &704638019 stripped
@@ -2670,6 +2705,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 704638018}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &704638023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704638019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3cc3a2b5c1b3c94c8d0c8286e11742a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventTime: 5
+  pointMultiplier: 2
+  area: {fileID: 1633844814}
+  objectHolder: {fileID: 588152528}
+  spawnRate: 10
+  ySpawnOffset: 1
+  currentAmountofMeteorites: 0
+  maxAmountofMeteorites: 33
+  pool:
+    tag: Rubble
+    prefabs:
+    - {fileID: 8748847319409160926, guid: 25070c5167484c543b002351c96eb45b, type: 3}
+    - {fileID: 3840804612548870723, guid: 7fc4ca1e05e52a949a2e5065d464f335, type: 3}
+    - {fileID: 5171891545677593939, guid: b4d65aff8febafd44b79065883317b68, type: 3}
+    size: 11
 --- !u!1 &720164163
 GameObject:
   m_ObjectHideFlags: 0
@@ -6046,7 +6108,7 @@ Transform:
   - {fileID: 1571911906}
   - {fileID: 364500637}
   m_Father: {fileID: 704638020}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1633844814
 MonoBehaviour:

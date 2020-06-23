@@ -5,12 +5,13 @@ using UnityEngine;
 public class DestroyWhenOutsideArea : MonoBehaviour
 {
     private Area area;
-    private MeteoriteShower shower;
+    private SpawnEvent shower;
 
     private void Start()
     {
-        shower = GetComponentInParent<MeteoriteShower>();
-        area = shower.area;
+        shower = GetComponentInParent<SpawnEvent>();
+
+        area = shower.GetArea();
     }
 
     private void FixedUpdate()

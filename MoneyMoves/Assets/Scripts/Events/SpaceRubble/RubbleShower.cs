@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeteoriteShower : Event
+public class RubbleShower : SpawnEvent
 {
-    [Header("Setup objects")]
-    public Area area;
-
     [SerializeField]
     private Transform objectHolder;
 
@@ -21,7 +18,7 @@ public class MeteoriteShower : Event
     public class Pool
     {
         public string tag;
-        public GameObject prefab;
+        public List<GameObject> prefabs;
         public int size;
     }
 
@@ -34,12 +31,15 @@ public class MeteoriteShower : Event
 
         Queue<GameObject> objectPool = new Queue<GameObject>();
 
-        for (int i = 0; i < pool.size; i++)
+        for (int i = 0; i < pool.prefabs.Count; i++)
         {
-            GameObject obj = Instantiate(pool.prefab);
-            obj.transform.parent = objectHolder;
-            obj.SetActive(false);
-            objectPool.Enqueue(obj);
+            for (int j = 0; j < pool.size; j++)
+            {
+                GameObject obj = Instantiate(pool.prefabs[i]);
+                obj.transform.parent = objectHolder;
+                obj.SetActive(false);
+                objectPool.Enqueue(obj);
+            }
         }
 
         poolDictionary.Add(pool.tag, objectPool);
@@ -55,7 +55,7 @@ public class MeteoriteShower : Event
             Vector3 position = area.RandomInsideArea();
             position = new Vector3(position.x, Random.Range(area.maxY - ySpawnOffset, area.maxY), position.z);
 
-            GameObject spawnedMeteor = SpawnFromPool("Meteor", position, Quaternion.identity);
+            GameObject spawnedMeteor = SpawnFromPool("Rubble", position, Quaternion.identity);
         }
 
         // Recursively call spawning method
@@ -63,7 +63,7 @@ public class MeteoriteShower : Event
         StartCoroutine(SpawnObjects());
     }
 
-    public void UpdateMeteorCount(int addition)
+    public override void UpdateMeteorCount(int addition)
     {
         currentAmountofMeteorites += addition;
     }
@@ -86,5 +86,10 @@ public class MeteoriteShower : Event
         poolDictionary[tag].Enqueue(objectToSpawn);
 
         return objectToSpawn;
+    }
+
+    public override Area GetArea()
+    {
+        return area;
     }
 }

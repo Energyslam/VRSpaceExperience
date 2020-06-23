@@ -5,20 +5,30 @@ using UnityEngine;
 public class DestroyWhenOutsideArea : MonoBehaviour
 {
     private Area area;
-    private SpawnEvent shower;
+    private MeteoriteShower showerMeteorites;
+    private RubbleShower showerRubble;
 
     private void Start()
     {
-        shower = GetComponentInParent<SpawnEvent>();
+        showerMeteorites = GetComponentInParent<MeteoriteShower>();
+        showerRubble = GetComponentInParent<RubbleShower>();
 
-        area = shower.GetArea();
+        area = showerMeteorites.GetArea();
+        area = showerRubble.GetArea();
     }
 
     private void FixedUpdate()
     {
         if (transform.position.x < area.minX || transform.position.x > area.maxX || transform.position.y < area.minY || transform.position.y > area.maxY || transform.position.z < area.minZ || transform.position.z > area.maxZ)
         {
-            shower.UpdateMeteorCount(-1);
+            if (GetComponent<Meteor>())
+            {
+                showerMeteorites.UpdateSpawnAmount(-1);
+            }
+            else if (GetComponent<SpaceRubble>())
+            {
+                showerRubble.UpdateSpawnAmount(-1);
+            }
             gameObject.SetActive(false);
         }
     }

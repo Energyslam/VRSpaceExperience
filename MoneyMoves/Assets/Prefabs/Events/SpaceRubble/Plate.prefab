@@ -145,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatingPoints: {fileID: 3243958227661790550, guid: 39331e2c26aebe849b28209e6cf1c069,
     type: 3}
-  pointMultiplier: 2
+  pointMultiplier: 50
 --- !u!114 &-4548392233237874225
 MonoBehaviour:
   m_ObjectHideFlags: 0

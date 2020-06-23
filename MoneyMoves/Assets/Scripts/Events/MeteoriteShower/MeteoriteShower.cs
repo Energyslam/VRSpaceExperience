@@ -60,7 +60,7 @@ public class MeteoriteShower : SpawnEvent
         StartCoroutine(SpawnObjects());
     }
 
-    public override void UpdateMeteorCount(int addition)
+    public override void UpdateSpawnAmount(int addition)
     {
         currentAmountofMeteorites += addition;
     }
@@ -78,7 +78,7 @@ public class MeteoriteShower : SpawnEvent
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
-        UpdateMeteorCount(1);
+        UpdateSpawnAmount(1);
 
         poolDictionary[tag].Enqueue(objectToSpawn);
 

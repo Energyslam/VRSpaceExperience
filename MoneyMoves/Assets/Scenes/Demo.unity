@@ -2723,15 +2723,15 @@ MonoBehaviour:
   objectHolder: {fileID: 588152528}
   spawnRate: 10
   ySpawnOffset: 1
-  currentAmountofMeteorites: 0
-  maxAmountofMeteorites: 33
+  currentAmountofRubble: 0
+  maxAmountofRubble: 40
   pool:
     tag: Rubble
     prefabs:
     - {fileID: 8748847319409160926, guid: 25070c5167484c543b002351c96eb45b, type: 3}
     - {fileID: 3840804612548870723, guid: 7fc4ca1e05e52a949a2e5065d464f335, type: 3}
     - {fileID: 5171891545677593939, guid: b4d65aff8febafd44b79065883317b68, type: 3}
-    size: 11
+    size: 75
 --- !u!1 &720164163
 GameObject:
   m_ObjectHideFlags: 0

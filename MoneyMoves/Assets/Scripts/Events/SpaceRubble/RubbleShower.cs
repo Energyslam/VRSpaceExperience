@@ -12,7 +12,7 @@ public class RubbleShower : SpawnEvent
 
     [SerializeField]
     [Range(1, 1000)]
-    private int currentAmountofMeteorites = 0, maxAmountofMeteorites = 175;
+    private int currentAmountofRubble = 0, maxAmountofRubble = 175;
 
     [System.Serializable]
     public class Pool
@@ -31,15 +31,12 @@ public class RubbleShower : SpawnEvent
 
         Queue<GameObject> objectPool = new Queue<GameObject>();
 
-        for (int i = 0; i < pool.prefabs.Count; i++)
+        for (int i = 0; i < pool.size * pool.prefabs.Count; i++)
         {
-            for (int j = 0; j < pool.size; j++)
-            {
-                GameObject obj = Instantiate(pool.prefabs[i]);
-                obj.transform.parent = objectHolder;
-                obj.SetActive(false);
-                objectPool.Enqueue(obj);
-            }
+            GameObject obj = Instantiate(pool.prefabs[Random.Range(0, pool.prefabs.Count)]);
+            obj.transform.parent = objectHolder;
+            obj.SetActive(false);
+            objectPool.Enqueue(obj);
         }
 
         poolDictionary.Add(pool.tag, objectPool);
@@ -49,13 +46,13 @@ public class RubbleShower : SpawnEvent
 
     private IEnumerator SpawnObjects()
     {
-        if (currentAmountofMeteorites < maxAmountofMeteorites)
+        if (currentAmountofRubble < maxAmountofRubble)
         {
             // Determine object details
             Vector3 position = area.RandomInsideArea();
             position = new Vector3(position.x, Random.Range(area.maxY - ySpawnOffset, area.maxY), position.z);
 
-            GameObject spawnedMeteor = SpawnFromPool("Rubble", position, Quaternion.identity);
+            GameObject spawnedRubble = SpawnFromPool("Rubble", position, Quaternion.identity);
         }
 
         // Recursively call spawning method
@@ -63,9 +60,9 @@ public class RubbleShower : SpawnEvent
         StartCoroutine(SpawnObjects());
     }
 
-    public override void UpdateMeteorCount(int addition)
+    public override void UpdateSpawnAmount(int addition)
     {
-        currentAmountofMeteorites += addition;
+        currentAmountofRubble += addition;
     }
 
     public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
@@ -81,7 +78,7 @@ public class RubbleShower : SpawnEvent
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
-        UpdateMeteorCount(1);
+        UpdateSpawnAmount(1);
 
         poolDictionary[tag].Enqueue(objectToSpawn);
 

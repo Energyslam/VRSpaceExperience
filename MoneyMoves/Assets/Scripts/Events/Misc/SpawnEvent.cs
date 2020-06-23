@@ -9,7 +9,7 @@ public class SpawnEvent : Event
         return null;
     }
 
-    public virtual void UpdateMeteorCount(int addition)
+    public virtual void UpdateSpawnAmount(int addition)
     {
 
     }

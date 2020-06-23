@@ -12,6 +12,8 @@ public class SpaceRubble : MonoBehaviour
     [SerializeField]
     private float pointMultiplier = 1.0f;
 
+    private bool grantedPoints = false;
+
     private void Start()
     {
         float scaleMultiplier = GetComponent<RandomScaleOnStartup>().maxScale.x / transform.localScale.x;
@@ -23,9 +25,21 @@ public class SpaceRubble : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<ProjectileBehaviour>() != null)
         {
-            FloatingPoints pts = Instantiate(floatingPoints, this.transform.position, Quaternion.identity).GetComponent<FloatingPoints>();
-            pts.points = value;
-            GameManager.Instance.AddScore(value);
+            if (grantedPoints == false)
+            {
+                FloatingPoints pts = Instantiate(floatingPoints, this.transform.position, Quaternion.identity).GetComponent<FloatingPoints>();
+                pts.points = value;
+                GameManager.Instance.AddScore(value);
+                ResetPointValue();
+                Invoke("ResetPointValue", 1.0f);
+            }
+
+            GetComponent<Rigidbody>().AddExplosionForce(150, collision.transform.position, 1);
         }
+    }
+
+    private void ResetPointValue()
+    {
+        grantedPoints = !grantedPoints;
     }
 }

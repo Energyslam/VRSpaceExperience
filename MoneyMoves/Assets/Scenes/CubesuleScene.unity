@@ -165,13 +165,13 @@ MonoBehaviour:
   totalOpenTime: 0
   lives: 3
   score: 0
-  rotateText: 0
   hasShownInstruction: 0
   respawnWaitTime: 0
   platform: {fileID: 0}
   laserpointer: {fileID: 0}
   scoreAndLifeText: {fileID: 0}
   defaultProfile: {fileID: 0}
+  orchestra: []
   hapticAction:
     actionPath: 
     needsReinit: 0
@@ -868,10 +868,19 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1459975224, guid: 50d4f22a384834449b40a00cd1db1038, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2709503910731663622, guid: 50d4f22a384834449b40a00cd1db1038,
         type: 3}
       propertyPath: m_Name
       value: TechCubesule
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218176774716914385, guid: 50d4f22a384834449b40a00cd1db1038,
+        type: 3}
+      propertyPath: openOnStartUp
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7572514319573298951, guid: 50d4f22a384834449b40a00cd1db1038,
         type: 3}

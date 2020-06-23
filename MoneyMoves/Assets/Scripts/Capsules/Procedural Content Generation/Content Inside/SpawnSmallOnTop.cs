@@ -21,9 +21,15 @@ public class SpawnSmallOnTop : MonoBehaviour
     [SerializeField]
     private bool randomRotation = true;
 
+    private Quaternion ogRotation;
+
     // Start is called before the first frame update
     void Start()
     {
+        ogRotation = transform.rotation;
+
+        transform.rotation = Quaternion.identity;
+
         int toSpawn = Random.Range(0, maxAmountToSpawn + 1);
 
         for (int i = 0; i < toSpawn; i++)
@@ -55,6 +61,8 @@ public class SpawnSmallOnTop : MonoBehaviour
                 Invoke("Fall", 3);
             }
         }
+
+        transform.rotation = ogRotation;
     }
 
     private void Fall()

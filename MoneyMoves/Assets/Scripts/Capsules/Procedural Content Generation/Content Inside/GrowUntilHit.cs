@@ -12,6 +12,9 @@ public class GrowUntilHit : MonoBehaviour
     [SerializeField]
     private bool addSwing = false;
 
+    [SerializeField]
+    private float swingAmount = 5.0f;
+
     private void FixedUpdate()
     {
         if (!stopGrowing)
@@ -30,7 +33,7 @@ public class GrowUntilHit : MonoBehaviour
             {
                 Swing swing = swingParent.AddComponent<Swing>();
                 swing.randomRotation = true;
-                swing.rotation = 5.0f;
+                swing.rotation = swingAmount;
             }
         }
     }

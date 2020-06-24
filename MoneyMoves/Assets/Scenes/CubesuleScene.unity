@@ -667,6 +667,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 941925318607669414, guid: 2aa13a486aa9835428db5a495fdf3fab,
         type: 3}
       propertyPath: openOnStartUp
@@ -677,10 +681,30 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 2.26
       objectReference: {fileID: 0}
+    - target: {fileID: 1198855144733011035, guid: 2aa13a486aa9835428db5a495fdf3fab,
+        type: 3}
+      propertyPath: swingAmount
+      value: 7.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2709503910731663622, guid: 2aa13a486aa9835428db5a495fdf3fab,
         type: 3}
       propertyPath: m_Name
       value: CatCafe
+      objectReference: {fileID: 0}
+    - target: {fileID: 2789180819694151040, guid: 2aa13a486aa9835428db5a495fdf3fab,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.5250703
+      objectReference: {fileID: 0}
+    - target: {fileID: 2789180819694151040, guid: 2aa13a486aa9835428db5a495fdf3fab,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.07058823
+      objectReference: {fileID: 0}
+    - target: {fileID: 2789180819694151040, guid: 2aa13a486aa9835428db5a495fdf3fab,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2941264218269331505, guid: 2aa13a486aa9835428db5a495fdf3fab,
         type: 3}
@@ -750,7 +774,7 @@ PrefabInstance:
     - target: {fileID: 8460527514010130168, guid: 2aa13a486aa9835428db5a495fdf3fab,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
@@ -820,7 +844,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1847
+    m_Bits: 63287
   m_RenderingLayerMask: 1
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0

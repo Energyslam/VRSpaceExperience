@@ -439,7 +439,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2709503910731663622}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 236b2b2635b687a428e485abb18a3361, type: 3}
   m_Name: 
@@ -450,20 +450,21 @@ MonoBehaviour:
   gridSizeZ: 4.3
   perlinScale: 1
   DEBUGGING: 0
-  gridCellsOffset: {x: -2.15, y: -2.8938, z: -1.85}
+  gridCellsOffset: {x: -2.13, y: -2.8938, z: -1.85}
   perlinNoiseOffset: {x: 0, y: 0}
   gridCellPrefab: {fileID: 6593446899856398828, guid: 85d39e92cfa0e024680ef8e8ad853ef7,
     type: 3}
   cellParent: {fileID: 6135928673509657149}
   currentSpawningPhase: 0
   aliveThresholdBig: 0.4
-  aliveThresholdMedium: 0
-  aliveThresholdMisc: 0.55
+  aliveThresholdMedium: 0.7
+  aliveThresholdMisc: 0.75
   objectsHolderPCG: {fileID: 6767730032681543636}
   insideContext: {fileID: 8460527514010130168}
   connectableBigObject:
   - {fileID: 4185804605636552760, guid: 2cfd59f2cbd942741ac1d86d8cacbe8d, type: 3}
-  cornerConnectableBigObject: []
+  cornerConnectableBigObject:
+  - {fileID: 6097579259065150999, guid: de4d80b96322a824ca4c64a9ab085af2, type: 3}
   standaloneBigObject: []
   mediumMultiObject:
   - {fileID: 7880977531832473562, guid: 010f832f259a28c429d965f916c5223b, type: 3}

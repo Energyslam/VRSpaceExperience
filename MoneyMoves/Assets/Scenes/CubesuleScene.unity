@@ -667,36 +667,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
-      propertyPath: cornerConnectableBigObject.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
-      propertyPath: mediumMultiObject.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
-      propertyPath: cornerConnectableBigObject.Array.data[0]
-      value: 
-      objectReference: {fileID: 6097579259065150999, guid: de4d80b96322a824ca4c64a9ab085af2,
-        type: 3}
-    - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
-      propertyPath: aliveThresholdMisc
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
-      propertyPath: aliveThresholdMedium
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1459975224, guid: 2aa13a486aa9835428db5a495fdf3fab, type: 3}
-      propertyPath: mediumMultiObject.Array.data[0]
-      value: 
-      objectReference: {fileID: 7880977531832473562, guid: 010f832f259a28c429d965f916c5223b,
-        type: 3}
     - target: {fileID: 941925318607669414, guid: 2aa13a486aa9835428db5a495fdf3fab,
         type: 3}
       propertyPath: openOnStartUp

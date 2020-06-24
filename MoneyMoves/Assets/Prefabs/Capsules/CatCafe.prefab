@@ -430,7 +430,7 @@ MonoBehaviour:
   audioLerpSpeed: 0.001
   textSpeed: 50
   giftType: 0
-  postProcessingProfile: {fileID: 11400000, guid: c873627f92437cc4f87d795dfa611b05,
+  postProcessingProfile: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c,
     type: 2}
 --- !u!114 &1459975224
 MonoBehaviour:
@@ -439,7 +439,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2709503910731663622}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 236b2b2635b687a428e485abb18a3361, type: 3}
   m_Name: 
@@ -1026,7 +1026,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 123
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9161831854246538738
 Transform:
   m_ObjectHideFlags: 0

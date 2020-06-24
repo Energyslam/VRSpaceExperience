@@ -702,10 +702,20 @@ PrefabInstance:
       propertyPath: openOnStartUp
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1158874155646317237, guid: 2aa13a486aa9835428db5a495fdf3fab,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.26
+      objectReference: {fileID: 0}
     - target: {fileID: 2709503910731663622, guid: 2aa13a486aa9835428db5a495fdf3fab,
         type: 3}
       propertyPath: m_Name
       value: CatCafe
+      objectReference: {fileID: 0}
+    - target: {fileID: 2941264218269331505, guid: 2aa13a486aa9835428db5a495fdf3fab,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4017532750452955319, guid: 2aa13a486aa9835428db5a495fdf3fab,
         type: 3}
@@ -765,6 +775,11 @@ PrefabInstance:
     - target: {fileID: 7572514319573298951, guid: 2aa13a486aa9835428db5a495fdf3fab,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8460527514010130168, guid: 2aa13a486aa9835428db5a495fdf3fab,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

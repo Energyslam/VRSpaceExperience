@@ -68,6 +68,9 @@ public class SpawnSmallOnTop : MonoBehaviour
     private void Fall()
     {
         spawnedObj.GetComponent<Rigidbody>().isKinematic = false;
+
+        if (GetComponent<MeshRenderer>() != null)
+            spawnedObj.SetActive(GetComponent<MeshRenderer>().enabled);
     }
 
     private void MakeStatic()

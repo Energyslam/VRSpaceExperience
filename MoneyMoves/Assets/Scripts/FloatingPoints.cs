@@ -10,6 +10,7 @@ public class FloatingPoints : MonoBehaviour
     [SerializeField] float fadeDuration = 2;
     public int points = 10;
     [SerializeField] TextMeshProUGUI text;
+
     // Start is called before the first frame update
     void Start()
     {

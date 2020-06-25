@@ -33,8 +33,6 @@ public class SpaceRubble : MonoBehaviour
                 ResetPointValue();
                 Invoke("ResetPointValue", 1.0f);
             }
-
-            GetComponent<Rigidbody>().AddExplosionForce(150, collision.transform.position, 1);
         }
     }
 

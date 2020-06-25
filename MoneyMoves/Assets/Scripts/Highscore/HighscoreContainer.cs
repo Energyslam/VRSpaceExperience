@@ -126,20 +126,20 @@ public class HighscoreContainer : MonoBehaviour
     {
 
         List<HighscoreEntry> tempEntries = new List<HighscoreEntry>();
-        tempEntries.Add(new HighscoreEntry { name = "Max", score = 500 });
-        tempEntries.Add(new HighscoreEntry { name = "Tycho", score = 2 });
-        tempEntries.Add(new HighscoreEntry { name = "Wasili", score = 101 });
-        tempEntries.Add(new HighscoreEntry { name = "Dzeneta", score = -73 });
-        tempEntries.Add(new HighscoreEntry { name = "Sander", score = 7 });
-        tempEntries.Add(new HighscoreEntry { name = "Donut", score = 45 });
-        tempEntries.Add(new HighscoreEntry { name = "Lena", score = 25 });
-        tempEntries.Add(new HighscoreEntry { name = "Frank", score = 65 });
-        tempEntries.Add(new HighscoreEntry { name = "Patat", score = -34 });
-        tempEntries.Add(new HighscoreEntry { name = "Sergio", score = 54 });
-        tempEntries.Add(new HighscoreEntry { name = "Margrietje", score = -67 });
-        tempEntries.Add(new HighscoreEntry { name = "Inna", score = -80 });
-        tempEntries.Add(new HighscoreEntry { name = "Fangirl", score = -46 });
-        tempEntries.Add(new HighscoreEntry { name = "Energyslam", score = -45 });
+        tempEntries.Add(new HighscoreEntry { name = "Max", score = 20000 });
+        tempEntries.Add(new HighscoreEntry { name = "Tycho", score = 20000 });
+        tempEntries.Add(new HighscoreEntry { name = "Wasili", score = 10100 });
+        tempEntries.Add(new HighscoreEntry { name = "Dzeneta", score = 7300 });
+        tempEntries.Add(new HighscoreEntry { name = "Sander", score = 7000 });
+        tempEntries.Add(new HighscoreEntry { name = "Donut", score = 4500 });
+        tempEntries.Add(new HighscoreEntry { name = "Lena", score = 2500 });
+        tempEntries.Add(new HighscoreEntry { name = "Frank", score = 6500 });
+        tempEntries.Add(new HighscoreEntry { name = "Patat", score = 3400 });
+        tempEntries.Add(new HighscoreEntry { name = "Sergio", score = 5400 });
+        tempEntries.Add(new HighscoreEntry { name = "Margrietje", score = 6700 });
+        tempEntries.Add(new HighscoreEntry { name = "Inna", score = 18000 });
+        tempEntries.Add(new HighscoreEntry { name = "Fangirl", score = 4600 });
+        tempEntries.Add(new HighscoreEntry { name = "Energyslam", score = 4500 });
         Highscores highscores = new Highscores { highscores = tempEntries };
         string highscoresJSON = JsonUtility.ToJson(highscores);
         PlayerPrefs.SetString("highscores", highscoresJSON);

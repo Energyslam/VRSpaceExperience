@@ -23975,4 +23975,4 @@ MonoBehaviour:
   - {fileID: 5263260868351613170}
   - {fileID: 789753776460792827}
   - {fileID: 6906448133165838534}
-  rewriteDefaultsToPref: 1
+  rewriteDefaultsToPref: 0
